@@ -1,10 +1,96 @@
 :root {
-  --background: #fdfdfd;
-
+	--mainheader: #1959b0;
+	--btnborder: #d9d9d9;
+	--white: #fdfdfd;
+	--black: #000;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: "Quan-Thin", sans-serif;
+	src: url("/font/TTF/Quan-Thin.ttf") format("truetype"),
+		url("/font/WOFF2/Quan-Thin.woff2") format("woff2");
+
+	font-family: "Quan-ExtraLight", sans-serif;
+	src: url("/font/TTF/Quan-ExtraLight.ttf") format("truetype"),
+		url("/font/WOFF2/Quan-ExtraLight.woff2") format("woff2");
+
+	font-family: "Quan-SemiLight", sans-serif;
+	src: url("/font/TTF/Quan-SemiLight.ttf") format("truetype"),
+		url("/font/WOFF2/Quan-SemiLight.woff2") format("woff2");
+
+	font-family: "Quan-Light", sans-serif;
+	src: url("/font/TTF/Quan-Light.ttf") format("truetype"),
+		url("/font/WOFF2/Quan-Light.woff2") format("woff2");
+
+	font-family: "Quan-Regular", sans-serif;
+	src: url("/font/TTF/Quan-Regular.ttf") format("truetype"),
+		url("/font/WOFF2/Quan-Regular.woff2") format("woff2");
+
+	font-family: "Quan-Bold", sans-serif;
+	src: url("/font/TTF/Quan-Bold.ttf") format("truetype"),
+		url("/font/WOFF2/Quan-Bold.woff2") format("woff2");
+
+	font-family: "Quan-ExtraBold", sans-serif;
+	src: url("/font/TTF/Quan-ExtraBold.ttf") format("truetype"),
+		url("/font/WOFF2/Quan-ExtraBold.woff2") format("woff2");
+
+	font-family: "Quan-Black", sans-serif;
+	src: url("/font/TTF/Quan-Black.ttf") format("truetype"),
+		url("/font/WOFF2/Quan-Black.woff2") format("woff2");
+
+	font-family: "QuanRounded-Thin", sans-serif;
+	src: url("/font/TTF/QuanRounded-Thin.ttf") format("truetype"),
+		url("/font/WOFF2/QuanRounded-Thin.woff2") format("woff2");
+
+	font-family: "QuanRounded-ExtraLight", sans-serif;
+	src: url("/font/TTF/QuanRounded-ExtraLight.ttf") format("truetype"),
+		url("/font/WOFF2/QuanRounded-ExtraLight.woff2") format("woff2");
+
+	font-family: "QuanRounded-SemiLight", sans-serif;
+	src: url("/font/TTF/QuanRounded-SemiLight.ttf") format("truetype"),
+		url("/font/WOFF2/QuanRounded-SemiLight.woff2") format("woff2");
+
+	font-family: "QuanRounded-Light", sans-serif;
+	src: url("/font/TTF/QuanRounded-Light.ttf") format("truetype"),
+		url("/font/WOFF2/QuanRounded-Light.woff2") format("woff2");
+
+	font-family: "QuanRounded-Regular", sans-serif;
+	src: url("/font/TTF/QuanRounded-Regular.ttf") format("truetype"),
+		url("/font/WOFF2/QuanRounded-Regular.woff2") format("woff2");
+
+	font-family: "QuanRounded-Bold", sans-serif;
+	src: url("/font/TTF/QuanRounded-Bold.ttf") format("truetype"),
+		url("/font/WOFF2/QuanRounded-Bold.woff2") format("woff2");
+
+	font-family: "QuanRounded-ExtraBold", sans-serif;
+	src: url("/font/TTF/QuanRounded-ExtraBold.ttf") format("truetype"),
+		url("/font/WOFF2/QuanRounded-ExtraBold.woff2") format("woff2");
+
+	font-family: "QuanRounded-Black", sans-serif;
+	src: url("/font/TTF/QuanRounded-Black.ttf") format("truetype"),
+		url("/font/WOFF2/QuanRounded-Black.woff2") format("woff2");
+}
+
+header {
+	height: 300px;
+	width: 100%;
+	background-image: url("/assets/images/header.webp");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	position: absolute;
+	top: 0;
+}
+.copyright {
+	font-family: "QuanRounded-Light", sans-serif;
+	font-size: 0.8rem;
+	color: var(--white);
+	text-align: center;
+	margin: 2rem 0 0 0;
 }
