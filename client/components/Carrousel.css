@@ -1,0 +1,46 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+	justify-content: center;
+	max-width: 100vw;
+	width: 100%;
+}
+
+.status {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+	padding: 15px 25px;
+	background: var(--secondary-control-color);
+	border-radius: 10px;
+	border: 1px solid var(--border);
+}
+
+.status span {
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--text);
+}
+
+.countdown {
+	color: var(--hue-4) !important;
+	font-weight: 600 !important;
+}
+
+.ticker-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: auto;
+	width: 100%;
+}
+
+.item {
+	width: 100vw;
+	height: fit-content;
+	overflow: hidden;
+	outline-offset: 2px;
+}

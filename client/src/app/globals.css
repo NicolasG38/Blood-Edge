@@ -8,6 +8,10 @@
 	--linear-login: linear-gradient(90deg, #ccff33, #7a991f);
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -83,6 +87,7 @@ a {
 	text-decoration: none;
 	color: var(--white);
 }
+
 header {
 	height: 300px;
 	width: 100%;
@@ -90,8 +95,7 @@ header {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	position: absolute;
-	top: 0;
+	position: relative;
 }
 
 footer {
@@ -101,7 +105,7 @@ footer {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	position: absolute;
+	position: relative;
 	bottom: 0;
 }
 #copyrightHeader {

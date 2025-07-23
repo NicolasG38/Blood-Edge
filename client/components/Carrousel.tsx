@@ -1,0 +1,69 @@
+"use client";
+import "./Carrousel.css";
+import { motion, AnimatePresence } from "motion/react";
+import { useState, useEffect } from "react";
+
+function Box({ src, title }: { src: string; title: string }) {
+	return (
+		<motion.div
+			className="item"
+			initial={{ opacity: 0, x: 100 }}
+			animate={{ opacity: 1, x: 0 }}
+			exit={{ opacity: 0, x: -100 }}
+			transition={{ duration: 0.5 }}
+		>
+			<img
+				style={{ width: "100%", height: "100%" }}
+				src={`/assets/images/${src}.jpg`}
+				alt={`${title}`}
+			/>
+		</motion.div>
+	);
+}
+
+export default function Carrousel() {
+	const [currentIndex, setCurrentIndex] = useState(0);
+	const [countdown, setCountdown] = useState(5);
+
+	const items = [
+		{ src: "carrousel_01", title: "carrousel_1" },
+		{ src: "carrousel_02", title: "carrousel_2" },
+		{ src: "carrousel_03", title: "carrousel_3" },
+		{ src: "carrousel_04", title: "carrousel_4" },
+		{ src: "carrousel_05", title: "carrousel_5" },
+		{ src: "carrousel_06", title: "carrousel_6" },
+		{ src: "carrousel_07", title: "carrousel_7" },
+		{ src: "carrousel_08", title: "carrousel_8" },
+		{ src: "carrousel_09", title: "carrousel_9" },
+		{ src: "carrousel_10", title: "carrousel_10" },
+	];
+
+	useEffect(() => {
+		const timer = setInterval(() => {
+			setCountdown((prev) => {
+				if (prev <= 1) {
+					// Move to next item with infinite loop
+					setCurrentIndex((current) => (current + 1) % items.length);
+					return 5; // Reset countdown
+				}
+				return prev - 1;
+			});
+		}, 1000);
+
+		return () => clearInterval(timer);
+	}, []);
+
+	return (
+		<div className="container">
+			<div className="ticker-container">
+				<AnimatePresence mode="wait">
+					<Box
+						key={currentIndex}
+						src={items[currentIndex].src}
+						title={items[currentIndex].title}
+					/>
+				</AnimatePresence>
+			</div>
+		</div>
+	);
+}

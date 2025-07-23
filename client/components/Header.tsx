@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Header() {
 	return (
-		<header className="header">
+		<header id="header">
 			<p id="copyrightHeader">
 				STELLAR BLADE© 2024 SHIFT UP Corporation. All right reserved. Published
 				by Sony Interactive Entertainment
