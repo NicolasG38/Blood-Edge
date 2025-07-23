@@ -7,7 +7,7 @@ export default function SignUpLogin() {
 	return (
 		<>
 			<Header />
-			<main id="mainSignUpLogin">
+			<main className="parameter">
 				<Login />
 				<Signup />
 			</main>

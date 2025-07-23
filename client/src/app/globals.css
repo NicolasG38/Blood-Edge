@@ -3,6 +3,7 @@
 	--btnborder: #d9d9d9;
 	--white: #fdfdfd;
 	--black: #000;
+	--blackLight: #4d4d4d;
 	--denimDark: #1a5cb7;
 	--denim: #1959b0;
 	--denimhalf: #2473e0;
@@ -127,11 +128,24 @@ form {
 hr {
 	border: none;
 	height: 1px;
-	background: var(--denim); /* ou une couleur de ton choix */
-
+	background: var(--denim);
 	width: 90%;
 	opacity: 1;
 }
+input {
+	font-family: "Quan-Regular", sans-serif;
+	font-size: 1.5rem;
+	padding: 1rem;
+}
+
+ul,
+li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	color: var(--black);
+}
+
 header {
 	height: 300px;
 	width: 100%;
@@ -159,7 +173,7 @@ footer {
 	text-align: center;
 	margin: 2rem 0 0 0;
 }
-#mainSignUpLogin {
+.parameter {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
