@@ -2,3 +2,9 @@
 	display: flex;
 	margin: auto;
 }
+#containerSignUplogin {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	margin: 0 2rem 0 0;
+}
