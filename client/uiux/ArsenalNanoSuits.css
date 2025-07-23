@@ -1,0 +1,69 @@
+#sectionNanoSuits {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	text-align: start;
+	width: 240px;
+	height: 30px;
+	border-radius: 0 5px 5px 0;
+	border: 1px solid var(--lightgrey);
+	font-family: "QuanRounded-SemiLight", sans-serif;
+	margin: 6rem auto;
+	overflow: hidden;
+	transition: .35s ease-in-out;
+	&:hover {
+		background: var(--lightdenim);
+	}
+}
+
+#btnNanoSuits {
+	width: 100%;
+}
+
+#nanoSuitsIcon {
+	width: 24px;
+	height: 24px;
+	transition: .35s ease-in-out;
+	opacity: 0.5;
+	margin: auto 1.5rem;
+	z-index: 1;
+}
+
+#nanoSuitsdeco {
+	position: relative;
+	width: 120px;
+	height: 120px;
+}
+
+#nanoSuitsdeco_0 {
+	position: absolute;
+	top: 50%;
+	left: 10%;
+	transform: translate(-50%, -50%);
+	margin: 0; /* retire le margin: auto; */
+	width: 5px;
+	height: 26px;
+	transition: background 0.3s;
+	z-index: 1;
+}
+
+#nanoSuitsdeco_1,
+#nanoSuitsdeco_2 {
+	position: absolute;
+	width: 40px;
+	height: 120px;
+	background: var(--lightgrey50);
+	transition: background 0.3s;
+}
+
+#nanoSuitsdeco_1 {
+	transform: rotate(50deg);
+}
+#nanoSuitsdeco_2 {
+	transform: rotate(-50deg);
+}
+
+#sectionNanoSuits:hover #nanoSuitsdeco_1,
+#sectionNanoSuits:hover #nanoSuitsdeco_2 {
+	background: var(--lightblack50);
+}
