@@ -1,6 +1,6 @@
 import "./Header.css";
 
-//import SignupLoginLanguageBtn from "../uiux/SignUpLoginLanguageBtn";
+import SignupLoginBtn from "../uiux/SignUpLoginBtn";
 import Image from "next/image";
 
 export default function Header() {
@@ -17,6 +17,7 @@ export default function Header() {
 				width={188}
 				height={150}
 			/>
+			<SignupLoginBtn />
 		</header>
 	);
 }
