@@ -1,0 +1,112 @@
+#containerLogin {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	width: 100%;
+	justify-content: center;
+}
+
+#loginLogo {
+	position: absolute;
+	top: 46vh;
+	left: 46vw;
+}
+
+#loginForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: 550px;
+	width: 400px;
+	border-radius: 35px;
+	background-color: var(--white);
+	box-shadow: 0 0 10px var(--lightblack50);
+}
+#loginDeco {
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-content: center;
+	height: 2rem;
+	margin: 6rem 0 1rem 1rem;
+}
+#loginTitle {
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 2.5rem;
+	margin-right: .5rem;
+}
+#wavingHand {
+	margin: .5rem 0;
+}
+
+#loginInputs {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+}
+
+#loginText {
+	font-family: "Quan-SemiLight", sans-serif;
+	font-size: 1.5rem;
+	color: var(--black);
+	margin: 1rem 0;
+	text-align: center;
+}
+
+.loginLabel {
+	font-family: "Quan-Regular", sans-serif;
+	font-size: 1rem;
+	color: var(--black);
+	margin-left: 2.5rem;
+}
+.loginInput {
+	width: 355px;
+	height: 50px;
+	margin: 0 auto 1rem auto;
+	border-radius: 35px;
+}
+.loginAndsignUpFunctionnal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 355px;
+	height: 40px;
+	font-family: "Quan-Bold", sans-serif;
+	font-size: 1.5rem;
+	border-radius: 35px;
+	border: none;
+	margin: 0 auto 1.5rem auto;
+	gap: 1rem;
+	color: var(--white);
+	transition: 0.35s ease-in-out;
+}
+.connection {
+	background-color: var(--lightdenim);
+	&:hover {
+		background-color: var(--denimhalf);
+	}
+	&:active {
+		background-color: var(--denimDark);
+	}
+}
+.signup {
+	border: var(--denim) 1px solid;
+	background: var(--white);
+	color: var(--black);
+	&:hover {
+		background: var(--linear-login);
+	}
+}
+.signup:active {
+	background: var(--linear-loginDark);
+}
+#loginText2 {
+	font-family: "Quan-Regular", sans-serif;
+	font-size: 1rem;
+	color: var(--black);
+	margin: 1rem 0;
+	text-align: center;
+}
