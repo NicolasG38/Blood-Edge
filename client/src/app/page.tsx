@@ -8,9 +8,11 @@ export default function Homepage() {
 	return (
 		<>
 			<Header />
-			<Carrousel />
-			<SectionArsenalBtn />
-			<ArsenalNanoSuits />
+			<main>
+				<Carrousel />
+				<SectionArsenalBtn />
+				<ArsenalNanoSuits />
+			</main>
 			<Footer />
 		</>
 	);
