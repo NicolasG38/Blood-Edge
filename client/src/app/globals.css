@@ -4,8 +4,27 @@
 	--white: #fdfdfd;
 	--black: #000;
 	--denim: #1959b0;
+	--lightdenim: #508fe6;
+	--lightgrey: #d9d9d9;
+
+	--lightgrey50: #d9d9d950;
+	--lightblack: #333333;
+	--lightblack50: #33333350;
 
 	--linear-login: linear-gradient(90deg, #ccff33, #7a991f);
+	--linear-section: linear-gradient(90deg, #ffffff, #508fe6);
+	--linear-internal: linear-gradient(
+		90deg,
+		#508fe6 20%,
+		#508fe600 20%,
+		#508fe600 100%
+	);
+	--linear-internal-hover: linear-gradient(
+		90deg,
+		#fdfdfd 20%,
+		#fdfdfd00 20%,
+		#fdfdfd00 100%
+	);
 }
 
 html {
