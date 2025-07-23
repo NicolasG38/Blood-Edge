@@ -1,21 +1,28 @@
-#containerLogin {
+#containerSignup {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-
 	justify-content: center;
+	align-items: start;
+	height: 550px;
+	width: 800px;
+	background: url("/assets/images/signup.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: end;
+	border-radius: 35px;
+	box-shadow: 0 0 10px var(--lightblack50);
 }
 
-#loginLogo {
+#signupLogo {
 	display: block;
 	margin: 0 auto;
 	position: relative;
 	top: -5rem;
 	left: 0;
-	margin-bottom: -3rem;
+	margin-bottom: -8rem;
 }
 
-#loginForm {
+#signupForm {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -24,17 +31,16 @@
 	width: 400px;
 	border-radius: 35px;
 	background-color: var(--white);
-	box-shadow: 0 0 10px var(--lightblack50);
 }
-#loginDeco {
+#signupDeco {
 	display: flex;
 	flex-direction: row;
 	justify-content: start;
 	align-content: center;
 	height: 2rem;
-	margin: 0rem 0 1rem 1rem;
+	margin: 6rem 0 1rem 1rem;
 }
-#loginTitle {
+#signupTitle {
 	font-family: "QuanRounded-Bold", sans-serif;
 	font-size: 2.5rem;
 	margin-right: .5rem;
@@ -43,14 +49,14 @@
 	margin: .5rem 0;
 }
 
-#loginInputs {
+#signupInputs {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: start;
 }
 
-#loginText {
+#signupText {
 	font-family: "Quan-SemiLight", sans-serif;
 	font-size: 1.5rem;
 	color: var(--black);
@@ -58,13 +64,13 @@
 	text-align: center;
 }
 
-.loginLabel {
+.signupLabel {
 	font-family: "Quan-Regular", sans-serif;
 	font-size: 1rem;
 	color: var(--black);
 	margin-left: 2.5rem;
 }
-.loginInput {
+.signupInput {
 	width: 355px;
 	height: 50px;
 	margin: 0 auto 1rem auto;
@@ -113,4 +119,25 @@
 	color: var(--black);
 	margin: 1rem 0;
 	text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+	#containerSignup {
+		background: none;
+		height: 550px;
+		width: 400px;
+		margin-top: 8rem;
+	}
+	#signupForm {
+		width: 100%;
+	}
+	#signupInputs {
+		width: 100%;
+	}
+	.signupInput {
+		width: 90%;
+	}
+	.loginAndsignUpFunctionnal {
+		width: 90%;
+	}
 }
