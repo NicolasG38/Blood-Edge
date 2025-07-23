@@ -76,7 +76,10 @@
 	src: url("/font/TTF/QuanRounded-Black.ttf") format("truetype"),
 		url("/font/WOFF2/QuanRounded-Black.woff2") format("woff2");
 }
-
+a {
+	text-decoration: none;
+	color: var(--white);
+}
 header {
 	height: 300px;
 	width: 100%;
@@ -87,7 +90,18 @@ header {
 	position: absolute;
 	top: 0;
 }
-.copyright {
+
+footer {
+	height: fit-content;
+	width: 100%;
+	background-image: url("/assets/images/footer.webp");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	position: absolute;
+	bottom: 0;
+}
+#copyrightHeader {
 	font-family: "QuanRounded-Light", sans-serif;
 	font-size: 0.8rem;
 	color: var(--white);

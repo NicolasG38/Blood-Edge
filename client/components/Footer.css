@@ -1,0 +1,88 @@
+#Footer {
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+#ContainerLinks {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: start;
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
+}
+#Shiftup,
+#SIE,
+#Steam,
+#PSStore {
+	margin: 2rem 3rem;
+}
+#ShiftupTitle,
+#SIETitle,
+#SteamTitle,
+#PSStoreTitle {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 2rem;
+	color: var(--white);
+}
+#ShiftupLinks,
+#SIELinks,
+#SteamLinks,
+#PSStoreLinks {
+	display: flex;
+	justify-content: space-between;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 1rem;
+	width: 100%;
+	margin: .5rem 0;
+}
+
+#copyrightFooter {
+	text-align: center;
+	font-family: "QuanRounded-Light", sans-serif;
+	font-size: 0.8rem;
+	color: var(--white);
+	width: 100%;
+}
+
+#shiftupCopyrightFooter {
+	text-align: center;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 0.8rem;
+	color: var(--white);
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	#copyrightFooter {
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		position: absolute;
+		bottom: 0;
+	}
+
+	#shiftupCopyrightFooter {
+		display: flex;
+		justify-content: end;
+		align-items: end;
+		font-family: "QuanRounded-Bold", sans-serif;
+		font-size: 0.8rem;
+		color: var(--white);
+	}
+}
+
+@media (min-width: 1400px) {
+	#ContainerLinks {
+		flex-direction: row;
+	}
+}
