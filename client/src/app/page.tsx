@@ -1,9 +1,8 @@
-import Image from "next/image";
-import styles from "./page.module.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Carrousel from "../../components/Carrousel";
 import SectionArsenalBtn from "../../uiux/SectionArsenalBtn";
+import ArsenalNanoSuits from "../../uiux/ArsenalNanoSuits";
 
 export default function Homepage() {
 	return (
@@ -11,6 +10,7 @@ export default function Homepage() {
 			<Header />
 			<Carrousel />
 			<SectionArsenalBtn />
+			<ArsenalNanoSuits />
 			<Footer />
 		</>
 	);
