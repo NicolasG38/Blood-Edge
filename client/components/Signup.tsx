@@ -1,3 +1,4 @@
+"use client";
 import "./Signup.css";
 import Image from "next/image";
 
@@ -55,6 +56,17 @@ export default function Signup() {
 							className="signupInput"
 							required
 						/>
+						<div id="signupTerms">
+							<p id="signupLink">
+								J'accepte les{" "}
+								<a href="/terms" id="signupLink">
+									conditions d'utilisation
+								</a>
+							</p>
+							<label htmlFor="terms" className="signupLabelCheckbox">
+								<input type="checkbox" required />
+							</label>
+						</div>
 						<button type="submit" className="loginAndsignUpFunctionnal signup">
 							INSCRIPTION
 							<Image
