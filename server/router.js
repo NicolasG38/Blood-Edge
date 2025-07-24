@@ -18,5 +18,5 @@ router.get("/api/nanosuits", nanoSuitsActions.browse);
 router.get("/test", (req, res) => {
 	res.send("c'est cassé");
 });
-console.log("DB_NAME:", process.env.DB_NAME);
+
 export default router;
