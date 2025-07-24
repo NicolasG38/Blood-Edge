@@ -5,7 +5,7 @@
 	margin: 5rem;
 }
 
-.nanoSuitlistUl {
+.nanoSuitlistLi {
 	display: flex;
 	justify-content: start;
 	align-items: center;
@@ -14,7 +14,6 @@
 	height: 70px;
 	width: 300px;
 	border-top: var(--btnborder) 1px solid;
-	margin: auto;
 	transition: 0.3s ease-in-out;
 	overflow: hidden;
 	&:hover {
@@ -23,10 +22,7 @@
 	}
 }
 
-.nanoSuitlistUl li:last-child {
-	border-bottom: 1px solid var(--btnborder);
-}
-#apparelIcon {
+.apparelIcon {
 	width: 70px;
 	height: 70px;
 	display: block;
@@ -35,7 +31,7 @@
 	opacity: 0.5;
 }
 
-#nanoSuitDeco_1 {
+.nanoSuitDeco_1 {
 	width: 35px;
 	height: 70px;
 	position: absolute;
@@ -43,7 +39,7 @@
 	border-radius: 5px 0 0 5px;
 	z-index: -1;
 }
-#nanoSuitName {
+.nanoSuitName {
 	width: 100%;
 	position: relative;
 	left: -30px;

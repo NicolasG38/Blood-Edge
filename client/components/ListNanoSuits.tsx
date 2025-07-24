@@ -1,7 +1,6 @@
 "use client";
 import "./ListNanoSuits.css";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 
 export default function ListNanoSuits() {
@@ -35,23 +34,23 @@ export default function ListNanoSuits() {
 	const [hoveredId, setHoveredId] = useState<number | null>(null);
 	return (
 		<div id="containerListNanoSuits">
-			<li id="nanoSuitsListLi">
+			<ul id="nanoSuitsListUl">
 				{nanoSuits.map((suit) => (
-					<ul
+					<li
 						key={suit.id}
-						className="nanoSuitlistUl"
+						className="nanoSuitlistLi"
 						onMouseEnter={() => setHoveredId(suit.id)}
 						onMouseLeave={() => setHoveredId(null)}
 					>
 						<span
-							id="nanoSuitDeco_1"
+							className="nanoSuitDeco_1"
 							style={{
 								background:
 									hoveredId === suit.id ? "var(--lightdenim)" : "var(--white)",
 							}}
 						/>
 						<Image
-							id="apparelIcon"
+							className="apparelIcon"
 							src={
 								hoveredId === suit.id
 									? "/assets/icons/apparel_black.svg"
@@ -61,10 +60,10 @@ export default function ListNanoSuits() {
 							width={70}
 							height={70}
 						/>
-						<p id="nanoSuitName">{suit.name}</p>
-					</ul>
+						<p className="nanoSuitName">{suit.name}</p>
+					</li>
 				))}
-			</li>
+			</ul>
 		</div>
 	);
 }

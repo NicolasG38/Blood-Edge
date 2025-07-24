@@ -23,7 +23,7 @@ export default function Login() {
 							height={24}
 						/>
 					</div>
-					<p id="loginText">Se connecter via son adresse email</p>
+					<p id="loginText">Se connecter via son nom d'utilisateur</p>
 					<div id="loginInputs">
 						<label htmlFor="username" className="loginLabel">
 							Nom d'utilisateur :

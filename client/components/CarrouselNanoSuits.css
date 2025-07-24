@@ -1,0 +1,51 @@
+#containerCarrouselNanoSuits {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#nanoSuitCarrouselCard {
+	display: flex;
+	width: 1005px;
+	height: 623px;
+	margin: 0 5rem;
+}
+.nanoSuitCarrouselDetails {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+#nanoSuitCarrouselName {
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 3rem;
+	color: var(--black);
+	margin: 0.5rem 0;
+}
+
+#nanoSuitCarrouselWhere {
+	display: flex;
+	justify-self: start;
+	margin-top: auto;
+	font-family: "Quan-Regular", sans-serif;
+	font-size: 1.5rem;
+	color: var(--black);
+}
+
+#nanoSuitCarrouselPlace {
+	margin-bottom: 1rem;
+}
+
+#nanoSuitCarrouselText1,
+#nanoSuitCarrouselText2,
+#nanoSuitCarrouselPlace {
+	font-family: "Quan-light", sans-serif;
+	font-size: 1.5rem;
+	color: var(--black);
+}
+#nanoSuitCarrouselText1 {
+	margin: 3rem 0 1rem 0;
+}
+#nanoSuitCarrouselImage {
+	width: 50%;
+	height: 100%;
+	object-fit: cover;
+}
