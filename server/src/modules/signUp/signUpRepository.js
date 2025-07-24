@@ -17,7 +17,7 @@ class signUpRepository {
 	}
 	async readAll() {
 		const [rows] = await databaseClient.query("SELECT * FROM User");
-		return rows;
+		return { id: rows.insertId, pseudo };
 	}
 }
 

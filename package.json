@@ -35,8 +35,10 @@
     "dotenv-cli": "^9.0.0"
   },
   "dependencies": {
+    "argon2": "^0.43.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
+    "jsonwebtoken": "^9.0.2",
     "motion": "^12.23.7",
     "mysql2": "^3.14.2",
     "router": "^2.2.0",

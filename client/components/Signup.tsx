@@ -11,7 +11,7 @@ export default function Signup() {
 		const formData = {
 			email: form.get("email") as string,
 			pseudo: form.get("username") as string,
-			hashed_password: form.get("password") as string,
+			password: form.get("password") as string,
 			is_accept_cgu: form.get("terms") === "on", // ou récupère la valeur de la checkbox
 			type_account: 1, // ou une valeur par défaut
 		};
