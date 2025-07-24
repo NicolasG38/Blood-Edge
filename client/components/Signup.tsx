@@ -3,10 +3,33 @@ import "./Signup.css";
 import Image from "next/image";
 
 export default function Signup() {
+	const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const form = new FormData(event.currentTarget);
+		const formData = {
+			email: form.get("email") as string,
+			pseudo: form.get("username") as string,
+			hashed_password: form.get("password") as string,
+			is_accept_cgu: form.get("terms") === "on", // ou récupère la valeur de la checkbox
+			type_account: 1, // ou une valeur par défaut
+		};
+
+		const response = await fetch(`${baseURL}/api/users`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formData),
+		});
+		const data = await response.json();
+		console.log(data);
+	};
 	return (
 		<div id="containerSignup">
 			<section id="signupForm">
-				<form>
+				<form onSubmit={handleSubmit}>
 					<Image
 						id="signupLogo"
 						src="/assets/logo/Blood-Edge_V1.webp"
@@ -64,7 +87,7 @@ export default function Signup() {
 								</a>
 							</p>
 							<label htmlFor="terms" className="signupLabelCheckbox">
-								<input type="checkbox" required />
+								<input type="checkbox" name="terms" required />
 							</label>
 						</div>
 						<button type="submit" className="loginAndsignUpFunctionnal signup">
