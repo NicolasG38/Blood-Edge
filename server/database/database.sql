@@ -4,8 +4,8 @@ CREATE DATABASE IF NOT EXISTS BLOOD_EDGE;
 USE BLOOD_EDGE;
 create table User (
     User_id  int unsigned primary key auto_increment not null,
-    User_email varchar(100) not null UNIQUE,
     User_pseudo varchar(50) not null UNIQUE,
+    User_email varchar(100) not null UNIQUE,
     User_hashed_password varchar(255) not null,
     User_is_accept_cgu boolean default true,
     User_Type_account int unsigned not null
@@ -41,9 +41,9 @@ values
     (7, "Combinaison de plongée planétaire (2)", "Permet de modifier l'apparence d'EVE", "« Enfant né par une nuit étoilée. Accomplis ta mission. Garde à jamais la tête haute. Notre futur est entre tes mains,»", "Où la trouver ?", "Dans la boutique Tetrastar C&T", "/images/nano_suits/Combinaison_de_plongee_planetaire_(2).webp"),
     (8, "Combinaison de plongée planétaire (2) V2", "Permet de modifier l'apparence d'EVE", "« Enfant né par une nuit étoilée. Accomplis ta mission. Garde à jamais la tête haute. Notre futur est entre tes mains,»", "Où la trouver ?", "Dans la boutique Tetrastar C&T", "/images/nano_suits/Combinaison_de_plongee_planetaire_(2)_V2.webp"),
     (9, "Combinaison de plongée planétaire (3)", "Permet de modifier l'apparence d'EVE", "« Enfant né par une nuit étoilée. Accomplis ta mission. Garde à jamais la tête haute. Notre futur est entre tes mains,»", "Où la trouver ?", "Dans la boutique Tetrastar C&T", "/images/nano_suits/Combinaison_de_plongee_planetaire_(3).webp"),
-    (10, "Combinaison de plongée planétaire (3) V2", "Permet de modifier l'apparence d'EVE", "« Enfant né par une nuit étoilée. Accomplis ta mission. Garde à jamais la tête haute. Notre futur est entre tes mains,»", "Où la trouver ?", "Dans la boutique Tetrastar C&T", "/nano_suits/Combinaison_de_plongee_planetaire_(3)_V2.webp");
+    (10, "Combinaison de plongée planétaire (3) V2", "Permet de modifier l'apparence d'EVE", "« Enfant né par une nuit étoilée. Accomplis ta mission. Garde à jamais la tête haute. Notre futur est entre tes mains,»", "Où la trouver ?", "Dans la boutique Tetrastar C&T", "/images/nano_suits/Combinaison_de_plongee_planetaire_(3)_V2.webp");
 
 
-insert into User (User_email, User_pseudo, User_hashed_password, User_is_accept_cgu, User_Type_account)
+insert into User ( User_pseudo, User_email, User_hashed_password, User_is_accept_cgu, User_Type_account)
 values
-("test@test.com", "testuser", "test123nohash", true, 9);
+("NicolasG38", "NG38@outlook.fr", "N@scar08", true, 9);

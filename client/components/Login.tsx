@@ -1,11 +1,41 @@
 import "./Login.css";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+	const baseURL = process.env.NEXT_PUBLIC_API_URL;
+	const router = useRouter();
+
+	const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const form = new FormData(event.currentTarget);
+		const formData = {
+			pseudo: form.get("username") as string,
+			password: form.get("password") as string,
+		};
+
+		const response = await fetch(`${baseURL}/api/login`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formData),
+		});
+		const data = await response.json();
+		if (!data.error) {
+			router.push("/"); // Redirige vers la page souhaitée
+		} else {
+		}
+		if (data.token) {
+			localStorage.setItem("token", data.token);
+			// Redirige l'utilisateur ou mets à jour l'état
+		}
+	};
+
 	return (
 		<div id="containerLogin">
 			<section id="loginForm">
-				<form>
+				<form onSubmit={handleLogin}>
 					<Image
 						id="loginLogo"
 						src="/assets/logo/Blood-Edge_V1.webp"
