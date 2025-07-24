@@ -5,7 +5,9 @@ const browse = async (req, res, next) => {
 		const nanoSuits = await nanoSuitsRepository.readAll();
 		res.json(nanoSuits);
 	} catch (error) {
-		next(error);
+		console.error("Erreur API /api/nanosuits :", error);
+		res.status(500).json({ error: error.message });
+		next(error); // Affiche l’erreur dans la console serveur
 	}
 };
 
