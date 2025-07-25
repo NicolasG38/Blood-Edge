@@ -1,0 +1,20 @@
+.add-favorite {
+	display: flex;
+	justify-content: end;
+	align-items: start;
+	width: 50%;
+	height: 100%;
+}
+
+#add-favorite-button {
+	color: var(--white);
+	background: transparent;
+	margin: 0.5rem;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#add-favorite-button:hover {
+	background-color: var(--primary-color-hover);
+}

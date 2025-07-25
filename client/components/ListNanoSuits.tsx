@@ -2,6 +2,7 @@
 import "./ListNanoSuits.css";
 import Image from "next/image";
 import { useState } from "react";
+import AddFavorite from "../uiux/AddFavorite";
 
 export default function ListNanoSuits() {
 	const nanoSuits = [
@@ -61,6 +62,7 @@ export default function ListNanoSuits() {
 							height={70}
 						/>
 						<p className="nanoSuitName">{suit.name}</p>
+						<AddFavorite />
 					</li>
 				))}
 			</ul>
