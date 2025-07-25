@@ -23,7 +23,7 @@
     "dev:server": "npm run dev --workspace=server",
     "prepare": "git config core.hooksPath .git-hooks || true",
     "start": "npm run start --workspace=server",
-    "test": "npm run test --workspaces --if-present"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Nicolas G.",
@@ -32,7 +32,8 @@
     "@biomejs/biome": "1.9.4",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
-    "dotenv-cli": "^9.0.0"
+    "dotenv-cli": "^9.0.0",
+    "jest": "^30.0.5"
   },
   "dependencies": {
     "argon2": "^0.43.1",

@@ -62,7 +62,7 @@ export default function ListNanoSuits() {
 							height={70}
 						/>
 						<p className="nanoSuitName">{suit.name}</p>
-						<AddFavorite />
+						<AddFavorite nanoSuitId={suit.id.toString()} />
 					</li>
 				))}
 			</ul>
