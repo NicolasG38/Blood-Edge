@@ -28,7 +28,12 @@ export default function Login() {
 		}
 		if (data.token) {
 			localStorage.setItem("token", data.token);
-			// Redirige l'utilisateur ou mets à jour l'état
+		}
+
+		if (!data.error && data.user) {
+			localStorage.setItem("token", data.token);
+			localStorage.setItem("pseudoStorage", data.user.User_pseudo);
+			router.push("/"); // Redirige vers la page souhaitée
 		}
 	};
 
