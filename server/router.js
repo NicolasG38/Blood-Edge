@@ -8,19 +8,13 @@ dotenv.config();
 
 const router = express.Router();
 
-const pool = mysql.createPool({
-	host: process.env.DB_HOST,
-	user: process.env.DB_USER,
-	password: process.env.DB_PASSWORD,
-	database: process.env.DB_NAME,
-});
-
 router.get("/api/nanosuits", nanoSuitsActions.browse);
 router.get("/test", (req, res) => {
 	res.send("c'est cassé");
 });
 
 router.post("/api/users", signUpActions.create);
+router.get("/api/users", signUpActions.browse);
 router.post("/api/login", loginActions.login);
 
 export default router;
