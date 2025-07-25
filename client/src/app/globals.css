@@ -181,8 +181,24 @@ footer {
 	align-items: center;
 	height: 100%;
 	width: 100%;
-	margin: 8rem 0;
+	margin: 5rem 0;
 }
+
+#containerListNanoSuits::-webkit-scrollbar {
+	width: 8px; /* largeur de l’ascenseur */
+	background: #eee; /* couleur du fond */
+	border-radius: 4px;
+}
+
+#containerListNanoSuits::-webkit-scrollbar-thumb {
+	background: var(--lightdenim); /* couleur du curseur */
+	border-radius: 4px;
+}
+
+#containerListNanoSuits::-webkit-scrollbar-thumb:hover {
+	background: var(--denimhalf); /* couleur au survol */
+}
+
 @media screen and (max-width: 1024px) {
 	#mainSignUpLogin {
 		flex-direction: column;

@@ -3,59 +3,54 @@
 import "./CarrouselNanoSuits.css";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import type { JSX } from "react";
 
-export default function CarrouselNanoSuits() {
-	const [currentIndex, setCurrentIndex] = useState(0);
+interface NanoSuitProps {
+	id: number;
+	NS_id: number;
+	NS_title: string;
+	NS_text: string;
+	NS_text_2: string;
+	NS_Where_title: string;
+	NS_Where_text: string;
+	NS_picture: string;
+}
 
-	interface NanoSuitProps {
-		id: number;
-		NS_title: string;
-		NS_text: string;
-		NS_text_2: string;
-		NS_Where_title: string;
-		NS_Where_text: string;
-		NS_picture: string;
-	}
+interface CarrouselNanoSuitsProps {
+	selectedId: number | null;
+}
 
+export default function CarrouselNanoSuits({
+	selectedId,
+}: CarrouselNanoSuitsProps) {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const [nanoSuitsServer, setNanoSuitsServer] = useState<NanoSuitProps[]>([]);
+
 	useEffect(() => {
 		fetch(`${baseURL}/api/nanosuits`)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log("Données reçues du serveur :", data);
-				setNanoSuitsServer(data);
+				const mapped = data.map((suit: NanoSuitProps) => ({
+					...suit,
+					id: suit.id ?? suit.NS_id,
+				}));
+				setNanoSuitsServer(mapped);
 			})
 			.catch((err) => {
 				console.error("Erreur côté client :", err);
 			});
 	}, [baseURL]);
-
-	const suit = nanoSuitsServer[currentIndex];
+	console.log("nanoSuitsServer:", nanoSuitsServer);
+	console.log("selectedId:", selectedId);
+	const suit =
+		nanoSuitsServer.find((s) => s.id === Number(selectedId)) ||
+		nanoSuitsServer[0];
 	if (!suit) {
 		return <div>Chargement des données...</div>;
 	}
 
 	return (
 		<div id="containerCarrouselNanoSuits">
-			<div>
-				<button
-					type="button"
-					onClick={() =>
-						setCurrentIndex((i) => (i > 0 ? i - 1 : nanoSuitsServer.length - 1))
-					}
-				>
-					Précédent
-				</button>
-				<button
-					type="button"
-					onClick={() =>
-						setCurrentIndex((i) => (i < nanoSuitsServer.length - 1 ? i + 1 : 0))
-					}
-				>
-					Suivant
-				</button>
-			</div>
 			<div id="nanoSuitCarrouselCard" key={suit.id}>
 				<div className="nanoSuitCarrouselDetails">
 					<p id="nanoSuitCarrouselName">{suit.NS_title}</p>
