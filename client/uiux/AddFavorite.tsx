@@ -7,9 +7,12 @@ export default function AddFavorite({ nanoSuitId }: { nanoSuitId: string }) {
 	const [step, setStep] = useState<0 | 1 | 2 | 3>(0);
 	// 0: favorite, 1: heart_check, 2: favorite_fill, 3:heart_minus
 	const [isFavorite, setIsFavorite] = useState(false);
+	const [userId, setUserId] = useState<string | null>(null);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-	const userId = localStorage.getItem("userId");
+	useEffect(() => {
+		setUserId(localStorage.getItem("userId"));
+	}, []);
 
 	// Logique d'ajout aux favoris dans la base de données selon l'utilisateur et la nanoSuits
 	const handleAddFavorite = () => {
@@ -19,7 +22,7 @@ export default function AddFavorite({ nanoSuitId }: { nanoSuitId: string }) {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
-					userId: storedUserId,
+					userId,
 					nanoSuitId,
 				}),
 			}).then(() => {
