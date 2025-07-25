@@ -36,6 +36,14 @@ class AddFavoriteRepository {
 		);
 		return rows;
 	}
+
+	async isFavorite(userId, nanoSuitId) {
+		const [rows] = await databaseClient.query(
+			"SELECT * FROM Favorite WHERE Favorite_user_id = ? AND Favorite_NS_id = ?",
+			[userId, nanoSuitId],
+		);
+		return rows.length > 0;
+	}
 }
 
 export default new AddFavoriteRepository();

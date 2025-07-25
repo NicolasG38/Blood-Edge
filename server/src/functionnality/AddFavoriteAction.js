@@ -24,4 +24,14 @@ const removeFavorite = async (userId, nanoSuitId) => {
 	}
 };
 
-export default { addFavorite, removeFavorite };
+const isFavorite = async (req, res) => {
+	const { userId, nanoSuitId } = req.body;
+	try {
+		const result = await AddFavoriteRepository.isFavorite(userId, nanoSuitId);
+		res.json({ isFavorite: result });
+	} catch (error) {
+		console.error("Erreur lors de la vérification du favori :", error);
+		res.status(500).json({ error: "Erreur lors de la vérification du favori" });
+	}
+};
+export default { addFavorite, removeFavorite, isFavorite };
