@@ -11,6 +11,7 @@ export default function AddFavorite({ nanoSuitId }: { nanoSuitId: string }) {
 
 	const userId = localStorage.getItem("userId");
 
+	// Logique d'ajout aux favoris dans la base de données selon l'utilisateur et la nanoSuits
 	const handleAddFavorite = () => {
 		if (!isFavorite) {
 			const storedUserId = localStorage.getItem("userId") || "";
@@ -43,6 +44,19 @@ export default function AddFavorite({ nanoSuitId }: { nanoSuitId: string }) {
 			});
 		}
 	};
+
+	useEffect(() => {
+		fetch(`${baseURL}/api/favorites/status`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ userId, nanoSuitId }),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setIsFavorite(data.isFavorite);
+				setStep(data.isFavorite ? 2 : 0);
+			});
+	}, [userId, nanoSuitId, baseURL]);
 
 	const getIcon = () => {
 		if (step === 0) return "/assets/icons/favorite.svg";

@@ -10,6 +10,7 @@ dotenv.config();
 const router = express.Router();
 
 router.get("/api/nanosuits", nanoSuitsActions.browse);
+// ajout au favoris avec controle des données
 router.post("/api/favorites", async (req, res) => {
 	const { userId, nanoSuitId } = req.body;
 	try {
@@ -28,6 +29,7 @@ router.delete("/api/favorites", async (req, res) => {
 		res.status(500).json({ error: "Erreur lors de la suppression du favori" });
 	}
 });
+router.post("/api/favorites/status", AddFavoriteAction.isFavorite);
 router.get("/test", (req, res) => {
 	res.send("c'est cassé");
 });
