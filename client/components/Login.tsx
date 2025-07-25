@@ -33,6 +33,7 @@ export default function Login() {
 		if (!data.error && data.user) {
 			localStorage.setItem("token", data.token);
 			localStorage.setItem("pseudoStorage", data.user.User_pseudo);
+			localStorage.setItem("userId", data.user.User_id);
 			router.push("/"); // Redirige vers la page souhaitée
 		}
 	};

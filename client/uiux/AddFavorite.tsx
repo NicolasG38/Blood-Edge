@@ -1,25 +1,46 @@
-import { s } from "motion/react-client";
 import "./AddFavorite.css";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-export default function AddFavorite() {
-	const [add, setAdd] = useState(false);
+export default function AddFavorite({ nanoSuitId }: { nanoSuitId: string }) {
 	const [isLogged, setIsLogged] = useState(false);
-	const [step, setStep] = useState<0 | 1 | 2 | 3>(0); // 0: favorite, 1: heart_check, 2: favorite_fill, 3:heart_minus
+	const [step, setStep] = useState<0 | 1 | 2 | 3>(0);
+	// 0: favorite, 1: heart_check, 2: favorite_fill, 3:heart_minus
 	const [isFavorite, setIsFavorite] = useState(false);
+	const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+	const userId = localStorage.getItem("userId");
 
 	const handleAddFavorite = () => {
 		if (!isFavorite) {
-			setStep(1);
-			setTimeout(() => setStep(2), 700);
-			setIsFavorite(true);
+			const storedUserId = localStorage.getItem("userId") || "";
+			fetch(`${baseURL}/api/favorites`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					userId: storedUserId,
+					nanoSuitId,
+				}),
+			}).then(() => {
+				setStep(1);
+				setTimeout(() => setStep(2), 700);
+				setIsFavorite(true);
+			});
 		} else {
-			setStep(3);
-			setTimeout(() => {
-				setStep(0);
-				setIsFavorite(false);
-			}, 700);
+			fetch(`${baseURL}/api/favorites`, {
+				method: "DELETE",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					userId,
+					nanoSuitId,
+				}),
+			}).then(() => {
+				setStep(3);
+				setTimeout(() => {
+					setStep(0);
+					setIsFavorite(false);
+				}, 700);
+			});
 		}
 	};
 
