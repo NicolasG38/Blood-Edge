@@ -5,6 +5,9 @@ import nanoSuitsActions from "./action/nanoSuitsActions.js";
 import signUpActions from "./action/signUpActions.js";
 import loginActions from "./action/loginActions.js";
 import FavoriteAction from "./action/FavoriteAction.js";
+import pkg from "jsonwebtoken";
+
+const { sign } = pkg;
 
 dotenv.config();
 
@@ -36,7 +39,7 @@ router.get("/test", (req, res) => {
 	res.send("c'est cassé");
 });
 
-router.post("/api/users", signUpActions.create);
+router.post("/api/users", signUpActions.create, signUpActions.messageSuccess);
 router.get("/api/users", signUpActions.browse);
 router.post("/api/login", loginActions.login);
 

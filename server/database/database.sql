@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS `blood-edge`;
 CREATE DATABASE IF NOT EXISTS BLOOD_EDGE;
 USE BLOOD_EDGE;
 create table User (
-    User_id  int unsigned primary key auto_increment not null,
+    User_id int unsigned primary key auto_increment not null,
     User_pseudo varchar(50) not null UNIQUE,
     User_email varchar(100) not null UNIQUE,
     User_hashed_password varchar(255) not null,
@@ -12,19 +12,19 @@ create table User (
 );
 
 create table Nano_suits (
-NS_id int unsigned primary key auto_increment not null,
-NS_title varchar(80) not null,
-NS_text varchar(255) not null,
-NS_text_2 varchar(1000) not null,
-NS_Where_title varchar(20) not null,
-NS_Where_text varchar(255) not null,
-NS_picture varchar(255) not null
+    NS_id int unsigned primary key auto_increment not null,
+    NS_title varchar(80) not null,
+    NS_text varchar(255) not null,
+    NS_text_2 varchar(1000) not null,
+    NS_Where_title varchar(20) not null,
+    NS_Where_text varchar(255) not null,
+    NS_picture varchar(255) not null
 );
 
 create table Favorite (
     Favorite_id int unsigned primary key auto_increment not null,
-    Favorite_user_id  int  unsigned not null,
-    Favorite_NS_id  int  unsigned not null,
+    Favorite_user_id int unsigned not null,
+    Favorite_NS_id int unsigned not null,
     foreign key (Favorite_user_id) REFERENCES User(User_id),
     foreign key (Favorite_NS_id) REFERENCES Nano_suits(NS_id)
 );
