@@ -3,9 +3,9 @@ import argon2 from "argon2";
 
 const hashingpassword = {
 	type: argon2.argon2id,
-	memoryCost: 5 * 18 ** 5,
-	timeCost: 1,
-	parallelism: 3,
+	memoryCost: 2 * 16 ** 5,
+	timeCost: 3,
+	parallelism: 1,
 };
 
 const browse = async (req, res, next) => {
@@ -40,4 +40,9 @@ const create = async (req, res, next) => {
 	}
 };
 
-export default { browse, create };
+const messageSuccess = async (formData) => {
+	const result = await signUpAction(formData);
+	setMessage(result.message);
+};
+
+export default { browse, create, messageSuccess };

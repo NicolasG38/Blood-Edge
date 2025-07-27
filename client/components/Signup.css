@@ -1,16 +1,67 @@
 #containerSignup {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: end;
 	align-items: start;
-	height: 550px;
+	height: 500px;
+	max-height: 620px;
 	width: 800px;
-	background: url("/assets/images/signup.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: end;
+	/* background: aqua; */
 	border-radius: 35px;
 	box-shadow: 0 0 10px var(--lightblack50);
+}
+#containerSignup.showSuccess {
+	height: auto;
+}
+#containerSignup.showSuccess .loginSuccessMessage {
+	opacity: 1;
+	max-height: 1200px; /* doit être plus grand que le contenu réel */
+	min-height: 620px; /* pour la mise en page, mais ne sera pas animé */
+}
+.loginSuccessMessage {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	font-family: "Quan-Regular", sans-serif;
+	font-size: 1rem;
+	color: var(--black);
+	background: var(--linear-login);
+	padding: 1rem 0;
+	border-radius: 35px;
+	box-shadow: 0 0 10px var(--greenLight);
+	opacity: 0;
+	max-height: 0;
+	transition: opacity 1.5s ease, max-height 1.5s ease, transform 1.5s ease,
+		box-shadow 1.5s ease;
+	overflow: hidden;
+	width: 100%;
+	position: relative;
+	z-index: -2;
+}
+#loginSuccessText_1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: "Quan-Bold", sans-serif;
+	font-size: 1.5rem;
+	margin-left: auto;
+	margin-right: 8rem;
+}
+#loginSuccessImage {
+	margin: 0 0 0rem 0rem;
+}
+#loginSuccessText_2 {
+	margin-left: auto;
+	margin-right: 2rem;
+}
+#signupBackground {
+	object-fit: cover;
+	height: 550px;
+	width: 800px;
+	border-radius: 35px;
+	position: absolute;
+	z-index: -1;
 }
 
 #signupLogo {
@@ -31,6 +82,8 @@
 	width: 400px;
 	border-radius: 35px;
 	background-color: var(--white);
+	position: fixed;
+	z-index: 1;
 }
 #signupDeco {
 	display: flex;

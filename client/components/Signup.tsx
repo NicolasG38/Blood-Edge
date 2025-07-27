@@ -1,8 +1,14 @@
 "use client";
 import "./Signup.css";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Signup() {
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [showSuccess, setShowSuccess] = useState(false);
+	const [isFailed, setIsFailed] = useState(false);
+	const [showFail, setShowFail] = useState(false);
+
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,11 +29,40 @@ export default function Signup() {
 			},
 			body: JSON.stringify(formData),
 		});
-		const data = await response.json();
-		console.log(data);
+		if (response.ok) {
+			setShowSuccess(true);
+			setIsSuccess(true);
+		} else {
+			setShowFail(true);
+			setIsFailed(true);
+		}
 	};
 	return (
-		<div id="containerSignup">
+		<div id="containerSignup" className={showSuccess ? "showSuccess" : ""}>
+			<div className="loginSuccessMessage">
+				<div id="loginSuccessText_1">
+					<p>Félicitations ! Votre compte a bien été créé</p>
+					<Image
+						id="loginSuccessImage"
+						src="/assets/icons/celebration.svg"
+						alt="Success"
+						width={24}
+						height={24}
+					/>
+				</div>
+				<p id="loginSuccessText_2">
+					Vous êtes désormais connecté et allez être automatiquement redirigé
+					vers le Dashboard
+				</p>
+			</div>
+			{isFailed && <p>Une erreur est survenue lors de l'inscription</p>}
+			<Image
+				id="signupBackground"
+				src="/assets/images/signup.jpg"
+				alt="Background"
+				width={1920}
+				height={1080}
+			/>
 			<section id="signupForm">
 				<form onSubmit={handleSubmit}>
 					<Image
