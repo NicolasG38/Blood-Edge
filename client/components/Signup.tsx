@@ -4,10 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Signup() {
-	const [isSuccess, setIsSuccess] = useState(false);
 	const [showSuccess, setShowSuccess] = useState(false);
-	const [isFailed, setIsFailed] = useState(false);
-	const [showFail, setShowFail] = useState(false);
 
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -31,31 +28,43 @@ export default function Signup() {
 		});
 		if (response.ok) {
 			setShowSuccess(true);
-			setIsSuccess(true);
 		} else {
-			setShowFail(true);
-			setIsFailed(true);
+			setShowSuccess(false);
 		}
 	};
 	return (
 		<div id="containerSignup" className={showSuccess ? "showSuccess" : ""}>
-			<div className="loginSuccessMessage">
-				<div id="loginSuccessText_1">
+			<div className="signupSuccessMessage">
+				<div id="signupSuccessText_1">
 					<p>Félicitations ! Votre compte a bien été créé</p>
 					<Image
-						id="loginSuccessImage"
+						id="signupSuccessImage"
 						src="/assets/icons/celebration.svg"
 						alt="Success"
 						width={24}
 						height={24}
 					/>
 				</div>
-				<p id="loginSuccessText_2">
+				<p id="signupSuccessText_2">
 					Vous êtes désormais connecté et allez être automatiquement redirigé
 					vers le Dashboard
 				</p>
 			</div>
-			{isFailed && <p>Une erreur est survenue lors de l'inscription</p>}
+			{/* <div className="signupFailMessage">
+				<div id="signupFailText_1">
+					<p>Une erreur est survenue lors de l'inscription !</p>
+					<Image
+						id="signupFailImage"
+						src="/assets/icons/celebration.svg"
+						alt="Success"
+						width={24}
+						height={24}
+					/>
+				</div>
+				<p id="signupFailText_2">
+					Les mots de passe doivent contenir au moins 8 caractères.
+				</p>
+			</div> */}
 			<Image
 				id="signupBackground"
 				src="/assets/images/signup.jpg"
