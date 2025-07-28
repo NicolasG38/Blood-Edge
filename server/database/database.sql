@@ -11,6 +11,20 @@ create table User (
     User_Type_account int unsigned not null
 );
 
+create table Section (
+    Section_id int unsigned primary key auto_increment not null,
+    Section_title varchar(20) not null,
+    Section_icons_gray varchar(50) not null,
+    Section_icons_black varchar(50) not null
+);
+
+create table Arsenal(
+    Arsenal_id int unsigned primary key auto_increment not null,
+    Arsenal_title varchar(30) not null,
+    Arsenal_icons_gray varchar(50) not null,
+    Arsenal_icons_black varchar(50) not null
+);
+
 create table Nano_suits (
     NS_id int unsigned primary key auto_increment not null,
     NS_title varchar(80) not null,
@@ -44,6 +58,22 @@ values
     (10, "Combinaison de plongée planétaire (3) V2", "Permet de modifier l'apparence d'EVE", "« Enfant né par une nuit étoilée. Accomplis ta mission. Garde à jamais la tête haute. Notre futur est entre tes mains,»", "Où la trouver ?", "Dans la boutique Tetrastar C&T", "/images/nano_suits/Combinaison_de_plongee_planetaire_(3)_V2.webp");
 
 
-insert into User ( User_pseudo, User_email, User_hashed_password, User_is_accept_cgu, User_Type_account)
+insert into Section (Section_id, Section_title, Section_icons_gray, Section_icons_black)
 values
-("NicolasG38", "NG38@outlook.fr", "N@scar08", true, 9);
+(1, "ARSENAL", "/images/icons/manufacturing_gray.svg", "/images/icons/manufacturing_black.svg"),
+(2, "MISSIONS", "/images/icons/rocket_launch_gray.svg", "/images/icons/rocket_launch_black.svg"),
+(3, "CARTES", "/images/icons/map_search_gray.svg", "/images/icons/map_search_black.svg"),
+(4, "COMPÉTENCES", "/images/icons/person_celebrate_gray.svg", "/images/icons/person_celebrate_black.svg"),
+(5, "BASE DE DONNÉES", "/images/icons/database_gray.svg", "/images/icons/database_black.svg");
+
+insert into Arsenal (Arsenal_id, Arsenal_title, Arsenal_icons_gray, Arsenal_icons_black)
+values
+(1, "Exospine", "/images/icons/orthopedics_gray.svg", "/images/icons/orthopedics_black.svg"),
+(2, "Équipement", "/images/icons/engineering_gray.svg", "/images/icons/engineering_black.svg"),
+(3, "Nano-combinaison", "/images/icons/apparel_gray.svg", "/images/icons/apparel_black.svg"),
+(4, "Lunettes", "/images/icons/eyeglasses_gray.svg", "/images/icons/eyeglasses_black.svg"),
+(5, "Boucles d'oreilles", "/images/icons/diamond_shine_gray.svg", "/images/icons/diamond_shine_black.svg"),
+(6, "Coiffures", "/images/icons/self_care_gray.svg", "/images/icons/self_care_black.svg"),
+(7, "Drones", "/images/icons/helicopter_gray.svg", "/images/icons/helicopter_black.svg"),
+(8, "Nano-combinaison - Lily", "/images/icons/apparel_gray.svg", "/images/icons/apparel_black.svg"),
+(9, "Nano-combinaison - Adam", "/images/icons/apparel_gray.svg", "/images/icons/apparel_black.svg");
