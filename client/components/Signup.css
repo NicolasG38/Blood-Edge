@@ -9,6 +9,7 @@
 	/* background: aqua; */
 	border-radius: 35px;
 	box-shadow: 0 0 10px var(--lightblack50);
+	margin-top: 2rem;
 }
 #containerSignup.showSuccess {
 	height: 620px;
