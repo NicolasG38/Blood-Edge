@@ -3,7 +3,6 @@ import "./ListNanoSuits.css";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import AddFavorite from "../uiux/AddFavorite";
-import Link from "next/link";
 
 interface NanoSuitProps {
 	id: number;
@@ -32,49 +31,71 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 
 	const [hoveredId, setHoveredId] = useState<number | null>(null);
 	return (
-		<div id="containerListNanoSuits">
-			<ul id="nanoSuitsListUl">
-				{nanoSuits.map((suit) => (
-					<li
-						key={suit.id}
-						className="nanoSuitlistLi"
-						onMouseEnter={() => setHoveredId(suit.id)}
-						onMouseLeave={() => setHoveredId(null)}
-					>
-						<button
-							type="button"
-							className="nanoSuitButton"
-							onClick={() => {
-								console.log("Selected id:", suit.id);
-								onSelect(suit.id);
-							}}
+		<div>
+			<p className="titleSubSection">
+				NANO-COMBINAISON <span>&gt;</span>
+			</p>
+			<div id="containerListNanoSuits">
+				<ul id="nanoSuitsListUl">
+					{nanoSuits.map((suit) => (
+						<li
+							key={suit.id}
+							className="nanoSuitlistLi"
+							onMouseEnter={() => setHoveredId(suit.id)}
+							onMouseLeave={() => setHoveredId(null)}
 						>
-							<span
-								className="nanoSuitDeco_1"
-								style={{
-									background:
-										hoveredId === suit.id
-											? "var(--lightdenim)"
-											: "var(--white)",
+							<button
+								type="button"
+								className="nanoSuitButton"
+								onClick={() => {
+									console.log("Selected id:", suit.id);
+									onSelect(suit.id);
 								}}
-							/>
-							<Image
-								className="apparelIcon"
-								src={
-									hoveredId === suit.id
-										? "/assets/icons/apparel_black.svg"
-										: "/assets/icons/apparel.svg"
-								}
-								alt="Arsenal Icon"
-								width={70}
-								height={70}
-							/>
-							<p className="nanoSuitName">{suit.NS_title}</p>
-						</button>
-						<AddFavorite nanoSuitId={suit.id.toString()} />
-					</li>
-				))}
-			</ul>
+							>
+								<span
+									className="nanoSuitDeco_1"
+									style={{
+										background:
+											hoveredId === suit.id
+												? "var(--lightdenim)"
+												: "var(--white)",
+									}}
+								/>
+								<Image
+									className="apparelIcon"
+									src={
+										hoveredId === suit.id
+											? "/assets/icons/apparel_black.svg"
+											: "/assets/icons/apparel.svg"
+									}
+									alt="Arsenal Icon"
+									width={70}
+									height={70}
+								/>
+								<p className="nanoSuitName">{suit.NS_title}</p>
+							</button>
+							<AddFavorite nanoSuitId={suit.id.toString()} />
+						</li>
+					))}
+				</ul>
+				<div id="nanoSuitsListArrow">
+					<Image
+						id="nanoSuitsListArrowTop"
+						src="/assets/icons/stat_2_blue.svg"
+						alt="Nano suits list arrow top"
+						width={300}
+						height={300}
+					/>
+
+					<Image
+						id="nanoSuitsListArrowBottom"
+						src="/assets/icons/stat_minus_2_blue.svg"
+						alt="Nano suits list arrow bottom"
+						width={300}
+						height={300}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 }

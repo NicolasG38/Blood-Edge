@@ -185,20 +185,37 @@ footer {
 	width: 100%;
 	margin: 5rem 0;
 }
-
+/*=== SCROLLBAR NANO SUITS INVISIBLE===*/
 #containerListNanoSuits::-webkit-scrollbar {
 	width: 8px; /* largeur de l’ascenseur */
-	background: #eee; /* couleur du fond */
+	background: none; /* couleur du fond */
 	border-radius: 4px;
 }
 
 #containerListNanoSuits::-webkit-scrollbar-thumb {
-	background: var(--lightdenim); /* couleur du curseur */
+	background: none; /* couleur du curseur */
 	border-radius: 4px;
 }
 
 #containerListNanoSuits::-webkit-scrollbar-thumb:hover {
-	background: var(--denimhalf); /* couleur au survol */
+	background: none; /* couleur au survol */
+}
+/*=== SCROLLBAR NANO SUITS INVISIBLE===*/
+
+.titleSubSection {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 2rem;
+	color: var(--black);
+	& span {
+		color: var(--denim);
+		margin-left: 1rem;
+	}
 }
 
 @media screen and (max-width: 1024px) {

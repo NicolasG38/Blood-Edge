@@ -2,7 +2,7 @@
 	display: flex;
 	width: fit-content;
 	height: 500px;
-	margin: 2rem 0rem 6rem 6rem;
+	margin: 5rem 0rem 6rem 6rem;
 	overflow: scroll;
 	overflow-x: hidden;
 }
@@ -63,4 +63,18 @@
 	border: none;
 	cursor: pointer;
 	color: var(--black);
+}
+
+#nanoSuitsListArrow {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 700px;
+	width: 300px;
+	opacity: 0.15;
+	position: absolute;
+	margin-top: -100px;
+	margin-left: 20px;
+	z-index: -3;
 }

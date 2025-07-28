@@ -7,7 +7,7 @@ class AddFavoriteRepository {
 			"INSERT INTO Favorite (Favorite_user_id, Favorite_NS_id) VALUES (?, ?)",
 			[userId, nanoSuitId],
 		);
-		console.log("userId:", userId, "nanoSuitId:", nanoSuitId);
+		return result;
 	}
 
 	async getFavoritesWithUsers(userId, nanoSuitId) {
