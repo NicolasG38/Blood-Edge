@@ -126,7 +126,7 @@ export default function Signup() {
 						<div id="signupTerms">
 							<p id="signupLink">
 								J'accepte les{" "}
-								<a href="/terms" id="signupLink">
+								<a href="/terms" id="signupLink_2">
 									conditions d'utilisation
 								</a>
 							</p>

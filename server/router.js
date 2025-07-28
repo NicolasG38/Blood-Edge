@@ -43,4 +43,11 @@ router.post("/api/users", signUpActions.create, signUpActions.messageSuccess);
 router.get("/api/users", signUpActions.browse);
 router.post("/api/login", loginActions.login);
 
+//===
+
+// Route pour récupérer les sections
+import sectionActions from "./action/sectionActions.js";
+// Cette route permet de récupérer toutes les sections disponibles
+router.get("/api/sections", sectionActions.browse);
+
 export default router;

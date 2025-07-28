@@ -60,20 +60,20 @@ values
 
 insert into Section (Section_id, Section_title, Section_icons_gray, Section_icons_black)
 values
-(1, "ARSENAL", "/images/icons/manufacturing_gray.svg", "/images/icons/manufacturing_black.svg"),
-(2, "MISSIONS", "/images/icons/rocket_launch_gray.svg", "/images/icons/rocket_launch_black.svg"),
-(3, "CARTES", "/images/icons/map_search_gray.svg", "/images/icons/map_search_black.svg"),
-(4, "COMPÉTENCES", "/images/icons/person_celebrate_gray.svg", "/images/icons/person_celebrate_black.svg"),
-(5, "BASE DE DONNÉES", "/images/icons/database_gray.svg", "/images/icons/database_black.svg");
+(1, "ARSENAL", "/icons/manufacturing_gray.svg", "/icons/manufacturing_black.svg"),
+(2, "MISSIONS", "/icons/rocket_launch_gray.svg", "/icons/rocket_launch_black.svg"),
+(3, "CARTES", "/icons/map_search_gray.svg", "/icons/map_search_black.svg"),
+(4, "COMPÉTENCES", "/icons/person_celebrate_gray.svg", "/icons/person_celebrate_black.svg"),
+(5, "BASE DE DONNÉES", "/icons/database_gray.svg", "/icons/database_black.svg");
 
 insert into Arsenal (Arsenal_id, Arsenal_title, Arsenal_icons_gray, Arsenal_icons_black)
 values
-(1, "Exospine", "/images/icons/orthopedics_gray.svg", "/images/icons/orthopedics_black.svg"),
-(2, "Équipement", "/images/icons/engineering_gray.svg", "/images/icons/engineering_black.svg"),
-(3, "Nano-combinaison", "/images/icons/apparel_gray.svg", "/images/icons/apparel_black.svg"),
-(4, "Lunettes", "/images/icons/eyeglasses_gray.svg", "/images/icons/eyeglasses_black.svg"),
-(5, "Boucles d'oreilles", "/images/icons/diamond_shine_gray.svg", "/images/icons/diamond_shine_black.svg"),
-(6, "Coiffures", "/images/icons/self_care_gray.svg", "/images/icons/self_care_black.svg"),
-(7, "Drones", "/images/icons/helicopter_gray.svg", "/images/icons/helicopter_black.svg"),
-(8, "Nano-combinaison - Lily", "/images/icons/apparel_gray.svg", "/images/icons/apparel_black.svg"),
-(9, "Nano-combinaison - Adam", "/images/icons/apparel_gray.svg", "/images/icons/apparel_black.svg");
+(1, "Exospine", "/icons/orthopedics_gray.svg", "/icons/orthopedics_black.svg"),
+(2, "Équipement", "/icons/engineering_gray.svg", "/icons/engineering_black.svg"),
+(3, "Nano-combinaison", "/icons/apparel_gray.svg", "/icons/apparel_black.svg"),
+(4, "Lunettes", "/icons/eyeglasses_gray.svg", "/icons/eyeglasses_black.svg"),
+(5, "Boucles d'oreilles", "/icons/diamond_shine_gray.svg", "/icons/diamond_shine_black.svg"),
+(6, "Coiffures", "/icons/self_care_gray.svg", "/icons/self_care_black.svg"),
+(7, "Drones", "/icons/helicopter_gray.svg", "/icons/helicopter_black.svg"),
+(8, "Nano-combinaison - Lily", "/icons/apparel_gray.svg", "/icons/apparel_black.svg"),
+(9, "Nano-combinaison - Adam", "/icons/apparel_gray.svg", "/icons/apparel_black.svg");
