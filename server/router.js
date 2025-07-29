@@ -37,4 +37,8 @@ router.get("/api/sections", sectionActions.browse);
 import subSectionActions from "./action/subSectionActions.js";
 router.get("/api/subsections", subSectionActions.browseArsenal);
 
+import storesActions from "./action/storesActions.js";
+// Route pour récupérer les magasins
+router.get("/api/stores", storesActions.browse);
+
 export default router;
