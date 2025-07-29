@@ -2,6 +2,7 @@ import "./Header.css";
 import Link from "next/link";
 import SignupLoginBtn from "../uiux/SignUpLoginBtn";
 import Image from "next/image";
+import StoresBtn from "../uiux/StoresBtn";
 
 export default function Header() {
 	return (
@@ -10,6 +11,7 @@ export default function Header() {
 				STELLAR BLADE© 2024 SHIFT UP Corporation. All right reserved. Published
 				by Sony Interactive Entertainment
 			</p>
+			<StoresBtn />
 			<Link href="/">
 				<Image
 					id="logo"

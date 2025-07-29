@@ -44,6 +44,15 @@ create table Favorite (
     foreign key (Favorite_NS_id) REFERENCES Nano_suits(NS_id)
 );
 
+create table Stores(
+    Stores_id int unsigned primary key auto_increment not null,
+    Stores_title varchar(50) not null,
+    Stores_text varchar(20) not null,
+    Stores_text_2 varchar(50) not null,
+    Stores_picture varchar(50) not null,
+    Stores_picture_2 varchar(50) not null,
+    Store_link varchar(60) not null
+);
 
 insert into Nano_suits (NS_id, NS_title, NS_text, NS_text_2, NS_Where_title, NS_Where_text, NS_picture)
 values
@@ -78,3 +87,8 @@ values
 (7, "Drones", "/icons/helicopter_gray.svg", "/icons/helicopter_black.svg", "drone"),
 (8, "Nano-combinaison - Lily", "/icons/apparel_gray.svg", "/icons/apparel_black.svg", "nano-suits-lily"),
 (9, "Nano-combinaison - Adam", "/icons/apparel_gray.svg", "/icons/apparel_black.svg", "nano-suits-adam");
+
+insert into Stores (Stores_id, Stores_title, Stores_text, Stores_text_2, Stores_picture, Stores_picture_2, Store_link)
+values
+(1, "Playstation Store", "BUY", "The game", "/icons/playstation_store_bag_white.svg", "/icons/playstation_store_bag_blue.svg", "https://store.playstation.com/fr-fr/concept/10006891"),
+(2, "Steam", "BUY", "The game", "/icons/steam_play-here_white.svg", "/icons/steam_play-here_white.svg", "https://store.steampowered.com/app/3489700/Stellar_Blade/");

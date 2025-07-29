@@ -1,5 +1,4 @@
 "use client";
-import { section } from "motion/react-client";
 import "./SubSection.css";
 import Image from "next/image";
 import Link from "next/link";
