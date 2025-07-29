@@ -50,4 +50,7 @@ import sectionActions from "./action/sectionActions.js";
 // Cette route permet de récupérer toutes les sections disponibles
 router.get("/api/sections", sectionActions.browse);
 
+import subSectionActions from "./action/subSectionActions.js";
+router.get("/api/subsections", subSectionActions.browseArsenal);
+
 export default router;

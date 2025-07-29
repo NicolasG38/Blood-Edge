@@ -1,14 +1,24 @@
-#sectionNanoSuits {
+#containerSubSection {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+	grid-template-rows: repeat(3, 1fr); /* 3 lignes */
+	grid-auto-flow: column;
+	gap: 4rem; /* espace entre les cases */
+	justify-items: center; /* centre horizontalement chaque case */
+	align-items: center; /* centre verticalement chaque case */
+	margin: 3rem;
+}
+
+.subSection {
 	display: flex;
 	justify-content: start;
 	align-items: center;
-	text-align: start;
 	width: 240px;
-	height: 30px;
+	height: 40px;
 	border-radius: 0 5px 5px 0;
 	border: 1px solid var(--lightgrey);
 	font-family: "QuanRounded-SemiLight", sans-serif;
-	margin: 6rem auto;
+	margin: 0rem;
 	overflow: hidden;
 	transition: .35s ease-in-out;
 	&:hover {
@@ -16,26 +26,36 @@
 	}
 }
 
-#btnNanoSuits {
-	width: 100%;
+.sectionNanoSuits {
+	display: flex;
+	align-items: center;
 }
 
-#nanoSuitsIcon {
+.btnNanoSuits {
+	width: 100%;
+	display: flex;
+	align-items: center; /* centre verticalement */
+	justify-content: flex-start; /* aligne à gauche */
+	padding-left: 8px;
+	height: 100%;
+}
+
+.nanoSuitsIcon {
 	width: 24px;
 	height: 24px;
 	transition: .35s ease-in-out;
 	opacity: 0.5;
-	margin: auto 1.5rem;
+	margin: auto 0;
 	z-index: 1;
 }
 
-#nanoSuitsdeco {
+.nanoSuitsdeco {
 	position: relative;
 	width: 120px;
 	height: 120px;
 }
 
-#nanoSuitsdeco_0 {
+.nanoSuitsdeco_0 {
 	position: absolute;
 	top: 50%;
 	left: 10%;
@@ -47,8 +67,8 @@
 	z-index: 1;
 }
 
-#nanoSuitsdeco_1,
-#nanoSuitsdeco_2 {
+.nanoSuitsdeco_1,
+.nanoSuitsdeco_2 {
 	position: absolute;
 	width: 40px;
 	height: 120px;
@@ -56,14 +76,14 @@
 	transition: background 0.3s;
 }
 
-#nanoSuitsdeco_1 {
+.nanoSuitsdeco_1 {
 	transform: rotate(50deg);
 }
-#nanoSuitsdeco_2 {
+.nanoSuitsdeco_2 {
 	transform: rotate(-50deg);
 }
 
-#sectionNanoSuits:hover #nanoSuitsdeco_1,
-#sectionNanoSuits:hover #nanoSuitsdeco_2 {
+.sectionNanoSuits:hover .nanoSuitsdeco_1,
+.sectionNanoSuits:hover .nanoSuitsdeco_2 {
 	background: var(--lightblack50);
 }
