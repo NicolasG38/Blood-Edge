@@ -1,4 +1,4 @@
-import FavoriteRepository from "../repository/FavoriteRepository.js";
+import FavoriteRepository from "../repository/favoriteRepository.js";
 
 const addFavorite = async (userId, nanoSuitId) => {
 	try {
@@ -21,14 +21,12 @@ const removeFavorite = async (userId, nanoSuitId) => {
 	}
 };
 
-const isFavorite = async (req, res) => {
-	const { userId, nanoSuitId } = req.body;
+const isFavorite = async (userId, nanoSuitId) => {
 	try {
-		const result = await FavoriteRepository.isFavorite(userId, nanoSuitId);
-		res.json({ isFavorite: result });
+		return await FavoriteRepository.isFavorite(userId, nanoSuitId);
 	} catch (error) {
 		console.error("Erreur lors de la vérification du favori :", error);
-		res.status(500).json({ error: "Erreur lors de la vérification du favori" });
+		throw error;
 	}
 };
 export default { addFavorite, removeFavorite, isFavorite };

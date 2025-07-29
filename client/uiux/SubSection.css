@@ -1,11 +1,11 @@
 #containerSubSection {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
-	grid-template-rows: repeat(3, 1fr); /* 3 lignes */
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 	grid-auto-flow: column;
-	gap: 4rem; /* espace entre les cases */
-	justify-items: center; /* centre horizontalement chaque case */
-	align-items: center; /* centre verticalement chaque case */
+	gap: 4rem;
+	justify-items: center;
+	align-items: center;
 	margin: 3rem;
 }
 
@@ -34,8 +34,8 @@
 .btnNanoSuits {
 	width: 100%;
 	display: flex;
-	align-items: center; /* centre verticalement */
-	justify-content: flex-start; /* aligne à gauche */
+	align-items: center;
+	justify-content: flex-start;
 	padding-left: 8px;
 	height: 100%;
 }
