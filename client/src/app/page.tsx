@@ -2,7 +2,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Carrousel from "../../components/Carrousel";
 import SectionBtn from "../../uiux/SectionBtn";
-import ArsenalNanoSuits from "../../uiux/ArsenalNanoSuits";
+import SubSection from "../../uiux/SubSection";
 
 export default function Homepage() {
 	return (
@@ -11,7 +11,7 @@ export default function Homepage() {
 			<main>
 				<Carrousel />
 				<SectionBtn />
-				<ArsenalNanoSuits />
+				<SubSection />
 			</main>
 			<Footer />
 		</>

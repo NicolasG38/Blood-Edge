@@ -22,7 +22,8 @@ create table Arsenal(
     Arsenal_id int unsigned primary key auto_increment not null,
     Arsenal_title varchar(30) not null,
     Arsenal_icons_gray varchar(50) not null,
-    Arsenal_icons_black varchar(50) not null
+    Arsenal_icons_black varchar(50) not null,
+    Arsenal_link varchar(50) not null
 );
 
 create table Nano_suits (
@@ -66,14 +67,14 @@ values
 (4, "COMPÉTENCES", "/icons/person_celebrate_gray.svg", "/icons/person_celebrate_black.svg"),
 (5, "BASE DE DONNÉES", "/icons/database_gray.svg", "/icons/database_black.svg");
 
-insert into Arsenal (Arsenal_id, Arsenal_title, Arsenal_icons_gray, Arsenal_icons_black)
+insert into Arsenal (Arsenal_id, Arsenal_title, Arsenal_icons_gray, Arsenal_icons_black, Arsenal_link)
 values
-(1, "Exospine", "/icons/orthopedics_gray.svg", "/icons/orthopedics_black.svg"),
-(2, "Équipement", "/icons/engineering_gray.svg", "/icons/engineering_black.svg"),
-(3, "Nano-combinaison", "/icons/apparel_gray.svg", "/icons/apparel_black.svg"),
-(4, "Lunettes", "/icons/eyeglasses_gray.svg", "/icons/eyeglasses_black.svg"),
-(5, "Boucles d'oreilles", "/icons/diamond_shine_gray.svg", "/icons/diamond_shine_black.svg"),
-(6, "Coiffures", "/icons/self_care_gray.svg", "/icons/self_care_black.svg"),
-(7, "Drones", "/icons/helicopter_gray.svg", "/icons/helicopter_black.svg"),
-(8, "Nano-combinaison - Lily", "/icons/apparel_gray.svg", "/icons/apparel_black.svg"),
-(9, "Nano-combinaison - Adam", "/icons/apparel_gray.svg", "/icons/apparel_black.svg");
+(1, "Exospine", "/icons/orthopedics_gray.svg", "/icons/orthopedics_black.svg", "exospine"),
+(2, "Équipement", "/icons/engineering_gray.svg", "/icons/engineering_black.svg", "equipment"),
+(3, "Nano-combinaison", "/icons/apparel_gray.svg", "/icons/apparel_black.svg", "nano-suits"),
+(4, "Lunettes", "/icons/eyeglasses_gray.svg", "/icons/eyeglasses_black.svg", "glasses"),
+(5, "Boucles d'oreilles", "/icons/diamond_shine_gray.svg", "/icons/diamond_shine_black.svg", "earrings"),
+(6, "Coiffures", "/icons/self_care_gray.svg", "/icons/self_care_black.svg", "hair-styles"),
+(7, "Drones", "/icons/helicopter_gray.svg", "/icons/helicopter_black.svg", "drone"),
+(8, "Nano-combinaison - Lily", "/icons/apparel_gray.svg", "/icons/apparel_black.svg", "nano-suits-lily"),
+(9, "Nano-combinaison - Adam", "/icons/apparel_gray.svg", "/icons/apparel_black.svg", "nano-suits-adam");
