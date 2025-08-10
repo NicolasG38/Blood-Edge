@@ -12,6 +12,8 @@
 	border: 1px solid var(--btnborder);
 	border-radius: 25px;
 	transition: 0.35s ease-in-out;
+	background-color: transparent;
+	cursor: pointer;
 }
 
 #btnSignup {
@@ -25,6 +27,10 @@
 	cursor: pointer;
 	margin: 3px;
 	transition: 0.35s ease-in-out;
+	background-color: transparent;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 1.5rem;
+	color: var(--white);
 }
 
 #btnLogin {

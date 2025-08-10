@@ -1,8 +1,16 @@
 import "./Login.css";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import Signup from "./Signup";
 
-export default function Login() {
+type LoginProps = {
+	onSuccess?: () => void;
+	onSwitch: () => void;
+};
+
+import { useState } from "react";
+
+export default function Login({ onSuccess, onSwitch }: LoginProps) {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const router = useRouter();
 
@@ -23,7 +31,9 @@ export default function Login() {
 		});
 		const data = await response.json();
 		if (!data.error) {
-			router.push("/"); // Redirige vers la page souhaitée
+			router.refresh(); // force re-render côté app router
+
+			onSuccess?.();
 		} else {
 		}
 		if (data.token) {
@@ -34,7 +44,11 @@ export default function Login() {
 			localStorage.setItem("token", data.token);
 			localStorage.setItem("pseudoStorage", data.user.User_pseudo);
 			localStorage.setItem("userId", data.user.User_id);
-			router.push("/"); // Redirige vers la page souhaitée
+			router.refresh(); // force re-render côté app router
+
+			onSuccess?.();
+
+			setTimeout(() => window.location.reload(), 50);
 		}
 	};
 
@@ -98,10 +112,18 @@ export default function Login() {
 				</form>
 				<hr />
 				<p id="loginText2">Vous n'avez pas de compte ?</p>
-				<a href="/signup&login" className="loginLink">
-					S'inscrire
-				</a>
-				<button type="button" className="loginAndsignUpFunctionnal signup">
+
+				<button
+					type="button"
+					className="loginAndsignUpFunctionnal signup"
+					onClick={onSwitch}
+					onKeyDown={(e) => {
+						if (e.key === "Enter" || e.key === " ") {
+							e.preventDefault();
+							onSwitch();
+						}
+					}}
+				>
 					INSCRIPTION
 					<Image
 						id="loginIcon"
