@@ -9,6 +9,7 @@ import loginActions from "./action/loginActions.js";
 import sectionActions from "./action/sectionActions.js";
 import subSectionActions from "./action/subSectionActions.js";
 import storesActions from "./action/storesActions.js";
+import { requireAuth, requireAdmin } from "./middleware/auth.js";
 
 dotenv.config();
 const router = express.Router();
@@ -23,7 +24,6 @@ router.delete("/api/favorites", favoriteController.removeFavorite);
 router.post("/api/favorites/status", favoriteController.isFavorite);
 
 // Auth
-router.get("/api/users", signUpActions.browse);
 router.post("/api/users", validateSignup, signUpActions.create); // suppression messageSuccess
 router.post("/api/login", loginActions.login);
 
@@ -33,5 +33,8 @@ router.get("/api/subsections", subSectionActions.browseArsenal);
 
 // Stores
 router.get("/api/stores", storesActions.browse);
+
+// Users
+router.get("/api/users", requireAuth, requireAdmin, signUpActions.browse);
 
 export default router;

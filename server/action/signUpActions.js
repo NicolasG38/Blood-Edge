@@ -8,13 +8,12 @@ const hashingPassword = {
 	parallelism: 1,
 };
 
-const browse = async (req, res, next) => {
+const browse = async (req, res) => {
 	try {
-		const signUp = await signUpRepository.readAll();
-		res.json(signUp);
-	} catch (error) {
-		console.error("Erreur API /api/signUp :", error);
-		res.status(500).json({ error: error.message });
+		const users = await signUpRepository.readAllPublic(); // nouvelle méthode
+		res.json(users);
+	} catch (e) {
+		res.status(500).json({ error: "INTERNAL_ERROR" });
 	}
 };
 
