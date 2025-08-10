@@ -19,6 +19,13 @@ class signUpRepository {
 		const [rows] = await databaseClient.query("SELECT * FROM User");
 		return rows;
 	}
+	async findByEmailOrPseudo(email, pseudo) {
+		const [rows] = await databaseClient.query(
+			"SELECT User_id, User_email, User_pseudo FROM User WHERE User_email = ? OR User_pseudo = ? LIMIT 1",
+			[email, pseudo],
+		);
+		return rows[0] || null;
+	}
 }
 
 export default new signUpRepository();
