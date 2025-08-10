@@ -3,9 +3,12 @@ import "./Signup.css";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Signup() {
-	const [showSuccess, setShowSuccess] = useState(false);
+type SignupProps = {
+	onSuccess?: () => void;
+};
 
+export default function Signup({ onSuccess }: SignupProps) {
+	const [showSuccess, setShowSuccess] = useState(false);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -26,10 +29,9 @@ export default function Signup() {
 			},
 			body: JSON.stringify(formData),
 		});
+		setShowSuccess(true);
 		if (response.ok) {
-			setShowSuccess(true);
-		} else {
-			setShowSuccess(false);
+			setTimeout(() => onSuccess?.(), 4000);
 		}
 	};
 	return (

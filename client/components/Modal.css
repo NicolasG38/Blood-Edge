@@ -1,0 +1,34 @@
+.modalOverlay {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(10, 14, 20, 0.6);
+	backdrop-filter: blur(4px);
+	z-index: 2000;
+	animation: fadeIn .28s ease-in-out;
+}
+
+.modalContent {
+	position: relative;
+
+	/* background-color: aqua; */
+
+	box-shadow: 0 12px 48px -12px rgba(0, 0, 0, 0.55);
+	animation: fadeIn .28s ease-in-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+dialog {
+	all: unset;
+}

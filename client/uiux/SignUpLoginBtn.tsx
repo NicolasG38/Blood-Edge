@@ -4,10 +4,19 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-export default function SignUpLoginBtn() {
+interface SignUpLoginBtnProps {
+	onSignupClick?: () => void;
+	onLoginClick?: () => void;
+}
+
+export default function SignUpLoginBtn({
+	onSignupClick,
+	onLoginClick,
+}: SignUpLoginBtnProps) {
 	const [hovered, setHovered] = useState(false);
 	const [isLogged, setIsLogged] = useState(false);
 	const router = useRouter();
+	const openLogin = () => (onLoginClick ?? onSignupClick)?.(); // fallback si onLoginClick pas fourni
 
 	useEffect(() => {
 		setIsLogged(!!localStorage.getItem("token"));
@@ -21,8 +30,31 @@ export default function SignUpLoginBtn() {
 
 	return (
 		<section id="containerSignUplogin">
-			<div id="signuplogin">
-				<div id="btnSignup">
+			<button
+				type="button"
+				id="signuplogin"
+				onClick={() => {
+					if (!isLogged) openLogin();
+					else handleLogout();
+				}}
+				tabIndex={0}
+			>
+				<div
+					id="btnSignup"
+					onClick={(e) => {
+						e.stopPropagation();
+						if (!isLogged) openLogin(); // garde login par défaut
+					}}
+					onKeyDown={(e) => {
+						if (e.key === "Enter" || e.key === " ") {
+							e.preventDefault();
+							if (!isLogged) openLogin();
+						}
+					}}
+					aria-label={
+						isLogged ? "Se déconnecter" : "Ouvrir la fenêtre de connexion"
+					}
+				>
 					<p>{isLogged ? "se déconnecter" : "S'inscrire"}</p>
 				</div>
 				<div
@@ -31,8 +63,10 @@ export default function SignUpLoginBtn() {
 					onMouseLeave={() => setHovered(false)}
 					onClick={isLogged ? handleLogout : undefined}
 					onKeyDown={(e) => {
-						if ((e.key === "Enter" || e.key === " ") && isLogged) {
-							handleLogout();
+						if (e.key === "Enter" || e.key === " ") {
+							e.preventDefault();
+							if (isLogged) handleLogout();
+							else openLogin();
 						}
 					}}
 					style={{
@@ -69,7 +103,7 @@ export default function SignUpLoginBtn() {
 						}}
 					/>
 				</div>
-			</div>
+			</button>
 		</section>
 	);
 }

@@ -1,10 +1,19 @@
+"use client";
 import "./Header.css";
+import "./Modal.css";
 import Link from "next/link";
 import SignupLoginBtn from "../uiux/SignUpLoginBtn";
 import Image from "next/image";
 import StoresBtn from "../uiux/StoresBtn";
+import Modal from "./Modal";
+import Signup from "./Signup";
+import Login from "./Login";
+
+import { useState } from "react";
 
 export default function Header() {
+	const [openAuth, setOpenAuth] = useState(false);
+	const [authView, setAuthView] = useState<"login" | "signup">("login");
 	return (
 		<header id="header">
 			<p id="copyrightHeader">
@@ -21,9 +30,20 @@ export default function Header() {
 					height={150}
 				/>
 			</Link>
-			<Link href="/signup&login">
-				<SignupLoginBtn />
-			</Link>
+			<SignupLoginBtn
+				onLoginClick={() => setOpenAuth(true)}
+				onSignupClick={() => setOpenAuth(true)}
+			/>
+			<Modal open={openAuth} onClose={() => setOpenAuth(false)}>
+				{authView === "login" ? (
+					<Login
+						onSuccess={() => setOpenAuth(false)}
+						onSwitch={() => setAuthView("signup")}
+					/>
+				) : (
+					<Signup onSuccess={() => setOpenAuth(false)} />
+				)}
+			</Modal>
 		</header>
 	);
 }

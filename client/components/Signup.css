@@ -10,6 +10,20 @@
 	border-radius: 35px;
 	box-shadow: 0 0 10px var(--lightblack50);
 	margin-top: 2rem;
+	animation: fadeIn .5s ease-in-out;
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+dialog {
+	all: unset;
 }
 #containerSignup.showSuccess {
 	height: 620px;
@@ -195,6 +209,13 @@
 	color: var(--black);
 	margin: 1rem 0;
 	text-align: center;
+}
+#signupLink_2 {
+	color: var(--black);
+	font-family: "QuanRounded-Regular", sans-serif;
+	font-size: 1rem;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
