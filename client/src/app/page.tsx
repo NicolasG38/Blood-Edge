@@ -14,7 +14,7 @@ export default function Homepage() {
 	return (
 		<>
 			<Header />
-			<main>
+			<main className="parameter">
 				<Modal open={openLogin} onClose={() => setOpenLogin(false)}>
 					<Login
 						onSuccess={() => setOpenLogin(false)}
