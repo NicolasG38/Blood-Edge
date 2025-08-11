@@ -52,7 +52,7 @@ export default function Signup({ onSuccess }: SignupProps) {
 		const password = (form.get("password") as string) || "";
 		const pwErrs = buildPasswordErrors(password);
 		if (pwErrs.length) {
-			setError("Mot de passe invalide, il doit contenir: " + pwErrs.join(", "));
+			setError(`Mot de passe invalide, il doit contenir: ${pwErrs.join(", ")}`);
 			setShowFail(true);
 			return;
 		}
@@ -99,10 +99,12 @@ export default function Signup({ onSuccess }: SignupProps) {
 			} else {
 				console.log("Signup validation details:", data);
 				const serverMsg =
-					data?.message ||
-					data?.error ||
+					data?.details?.is_accept_cgu?._errors?.[0] || // <-- PRIORITÉ 1
 					data?.details?.email_confirm?._errors?.[0] ||
 					data?.details?.password?._errors?.[0] ||
+					data?.details?.pseudo?._errors?.[0] ||
+					data?.message ||
+					(data?.error !== "VALIDATION_ERROR" && data?.error) || // ignore le code générique
 					(data?.details && "Validation distante échouée") ||
 					"Erreur lors de l'inscription";
 				setError(serverMsg);
@@ -199,7 +201,6 @@ export default function Signup({ onSuccess }: SignupProps) {
 									name="username"
 									className="signupInput"
 									autoComplete="username"
-									required
 								/>
 								<label htmlFor="email" className="signupLabel">
 									Email :
@@ -210,7 +211,6 @@ export default function Signup({ onSuccess }: SignupProps) {
 									name="email"
 									className="signupInput"
 									autoComplete="email"
-									required
 								/>
 								<label htmlFor="email_confirm" className="signupLabel">
 									Confirmation d'email :
@@ -221,7 +221,6 @@ export default function Signup({ onSuccess }: SignupProps) {
 									name="email_confirm"
 									className="signupInput"
 									autoComplete="email"
-									required
 								/>
 								<label htmlFor="password" className="signupLabel">
 									Mot de passe :
@@ -232,7 +231,6 @@ export default function Signup({ onSuccess }: SignupProps) {
 									name="password"
 									className="signupInput"
 									autoComplete="new-password"
-									required
 								/>
 								<div id="signupTerms">
 									<p id="signupLink">
@@ -242,7 +240,7 @@ export default function Signup({ onSuccess }: SignupProps) {
 										</a>
 									</p>
 									<label htmlFor="terms" className="signupLabelCheckbox">
-										<input type="checkbox" name="terms" id="terms" required />{" "}
+										<input type="checkbox" name="terms" id="terms" />{" "}
 										<span>Obligatoire</span>
 									</label>
 								</div>
