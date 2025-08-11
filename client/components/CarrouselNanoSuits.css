@@ -15,9 +15,11 @@
 	flex: 1;
 }
 #nanoSuitCarrouselName {
+	display: inline-block;
 	font-family: "QuanRounded-Bold", sans-serif;
 	font-size: 3rem;
-	color: var(--black);
+	color: var(--lightblack90);
+	text-shadow: 1px 1px 0 var(--light2denim), 0 0 4px var(--light2denim);
 	margin: 0.5rem 0;
 }
 
@@ -48,4 +50,8 @@
 	width: 50%;
 	height: 100%;
 	object-fit: cover;
+}
+
+.nanoSuitCarrouselStars {
+	display: flex;
 }

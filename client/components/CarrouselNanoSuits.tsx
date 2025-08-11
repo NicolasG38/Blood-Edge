@@ -14,6 +14,7 @@ interface NanoSuitProps {
 	NS_Where_title: string;
 	NS_Where_text: string;
 	NS_picture: string;
+	NS_stars: string;
 }
 
 interface CarrouselNanoSuitsProps {
@@ -53,6 +54,29 @@ export default function CarrouselNanoSuits({
 		<div id="containerCarrouselNanoSuits">
 			<div id="nanoSuitCarrouselCard" key={suit.id}>
 				<div className="nanoSuitCarrouselDetails">
+					<div className="nanoSuitCarrouselStars">
+						<Image
+							id="nanoSuitCarrouselStars"
+							src={baseURL + suit.NS_stars}
+							alt={`Étoiles pour ${suit.NS_title}`}
+							width={30}
+							height={30}
+						/>
+						<Image
+							id="nanoSuitCarrouselStars"
+							src={baseURL + suit.NS_stars}
+							alt={`Étoiles pour ${suit.NS_title}`}
+							width={30}
+							height={30}
+						/>
+						<Image
+							id="nanoSuitCarrouselStars"
+							src={baseURL + suit.NS_stars}
+							alt={`Étoiles pour ${suit.NS_title}`}
+							width={30}
+							height={30}
+						/>
+					</div>
 					<p id="nanoSuitCarrouselName">{suit.NS_title}</p>
 					<p id="nanoSuitCarrouselText1">{suit.NS_text}</p>
 					<p id="nanoSuitCarrouselText2">{suit.NS_text_2}</p>
