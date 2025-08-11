@@ -21,9 +21,18 @@ const signUpSchema = z
 			.regex(/[A-Z]/, "1 majuscule requise")
 			.regex(/[0-9]/, "1 chiffre requis")
 			.regex(/[^A-Za-z0-9]/, "1 caractère spécial requis"),
-		is_accept_cgu: z.literal(true, {
-			errorMap: () => ({ message: "Vous devez accepter les CGU" }),
-		}),
+		is_accept_cgu: z.preprocess(
+			(v) => {
+				// Normaliser toutes les formes valides vers true
+				if (v === true || v === "on" || v === "true" || v === 1 || v === "1")
+					return true;
+				// Toute autre valeur => false (échec ensuite)
+				return false;
+			},
+			z.boolean().refine((val) => val === true, {
+				message: "Vous devez accepter les CGU",
+			}),
+		),
 		type_account: z
 			.number()
 			.int()
@@ -33,24 +42,34 @@ const signUpSchema = z
 		path: ["email_confirm"],
 		message: "Les emails ne correspondent pas",
 	});
-
 function validateSignup(req, res, next) {
-	// Debug temporaire
-	// console.log("BODY AVANT PARSE:", req.body);
-	// Convertit type_account string -> number si besoin
 	if (req.body?.type_account && typeof req.body.type_account === "string") {
 		req.body.type_account = Number(req.body.type_account);
 	}
+
 	const parsed = signUpSchema.safeParse(req.body);
+
 	if (!parsed.success) {
+		const details = parsed.error.format();
+		let firstMsg;
+		for (const k of Object.keys(details)) {
+			if (k === "_errors") continue;
+			const entry = details[k];
+			if (entry?._errors?.length) {
+				firstMsg = entry._errors[0];
+				break;
+			}
+		}
 		return res.status(400).json({
 			error: "VALIDATION_ERROR",
-			details: parsed.error.format(),
+			message: firstMsg || "Erreur de validation",
+			details,
 		});
 	}
+
 	const { email_confirm, ...clean } = parsed.data;
 	req.body = clean;
-	next();
+	return next();
 }
 
 export { signUpSchema, validateSignup };
