@@ -151,6 +151,16 @@ li {
 	margin: 0;
 	color: var(--black);
 }
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "QuanRounded-Bold", sans-serif;
+	color: var(--black);
+}
 
 header {
 	height: 300px;
@@ -181,12 +191,21 @@ footer {
 }
 .parameter {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
+	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
 	height: 100%;
 	width: 100%;
-	margin: 5rem 0;
+	margin: 0rem 0;
+}
+
+#row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	margin: 10rem 0 0;
 }
 /*=== SCROLLBAR NANO SUITS INVISIBLE===*/
 #containerListNanoSuits::-webkit-scrollbar {
