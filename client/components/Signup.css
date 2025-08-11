@@ -70,6 +70,16 @@
 	/* margin-right: 5rem; */
 }
 
+#containerSignup.showFail {
+	height: 730px;
+}
+#containerSignup.showFail .signupFailMessage {
+	opacity: 1;
+	max-height: 1200px; /* doit être plus grand que le contenu réel */
+	min-height: 730px; /* pour la mise en page, mais ne sera pas animé */
+	min-width: 850px;
+}
+
 .signupFailMessage {
 	display: flex;
 	flex-direction: column;
@@ -89,8 +99,45 @@
 	overflow: hidden;
 	width: 100%;
 	position: relative;
+	animation: fadeIn .25s ease;
 	z-index: -2;
 }
+/* ===== */
+#signupErrorContainer {
+	margin-left: 10rem;
+}
+#signupErrorIconContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.signupError_1 {
+	margin: 0 0.5rem 0 0;
+	font-family: "Quan-Bold", sans-serif;
+	font-size: 2rem;
+	color: var(--white);
+}
+
+.signupError_2 {
+	margin: 0 0;
+	font-family: "Quan-Bold", sans-serif;
+	font-size: 1rem;
+	color: var(--white);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ====== */
+
 #signupBackground {
 	object-fit: cover;
 	height: 650px;

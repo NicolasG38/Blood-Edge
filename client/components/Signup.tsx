@@ -8,6 +8,7 @@ type SignupProps = { onSuccess?: () => void };
 
 export default function Signup({ onSuccess }: SignupProps) {
 	const [showSuccess, setShowSuccess] = useState(false);
+	const [showFail, setShowFail] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
@@ -29,18 +30,39 @@ export default function Signup({ onSuccess }: SignupProps) {
 		token?: string;
 	}
 
+	function buildPasswordErrors(pw: string): string[] {
+		const errs: string[] = [];
+		if (pw.length < 8) errs.push("≥8 car.");
+		if (!/[a-z]/.test(pw)) errs.push("1 minuscule");
+		if (!/[A-Z]/.test(pw)) errs.push("1 majuscule");
+		if (!/[0-9]/.test(pw)) errs.push("1 chiffre");
+		if (!/[^A-Za-z0-9]/.test(pw)) errs.push("1 spécial");
+		return errs;
+	}
+
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		if (loading) return;
-		setError(null);
 		setShowSuccess(false);
+		setError(null);
+		setShowFail(false);
 
 		const form = new FormData(event.currentTarget);
+
+		const password = (form.get("password") as string) || "";
+		const pwErrs = buildPasswordErrors(password);
+		if (pwErrs.length) {
+			setError("Mot de passe invalide, il doit contenir: " + pwErrs.join(", "));
+			setShowFail(true);
+			return;
+		}
+
 		const email = (form.get("email") as string)?.trim();
 		const emailConfirm = (form.get("email_confirm") as string)?.trim();
 
 		if (email !== emailConfirm) {
 			setError("Les emails ne correspondent pas");
+			setShowFail(true);
 			return;
 		}
 
@@ -84,9 +106,11 @@ export default function Signup({ onSuccess }: SignupProps) {
 					(data?.details && "Validation distante échouée") ||
 					"Erreur lors de l'inscription";
 				setError(serverMsg);
+				setShowFail(true);
 			}
 		} catch {
 			setError("Erreur réseau");
+			setShowFail(true);
 		} finally {
 			setLoading(false);
 		}
@@ -114,6 +138,27 @@ export default function Signup({ onSuccess }: SignupProps) {
 						<p id="signupSuccessText_2">
 							Vous allez être redirigé automatiquement vers le tableau de bord.
 						</p>
+					</div>
+				)}
+				{showFail && !showSuccess && (
+					<div className="signupFailMessage" role="alert">
+						{error && (
+							<div id="signupErrorContainer">
+								<div id="signupErrorIconContainer">
+									<p className="signupError_1">Une erreur est survenue !</p>
+									<Image
+										id="signupErrorIcon"
+										src="/assets/icons/sentiment_dissatisfied.svg"
+										alt="Erreur"
+										width={24}
+										height={24}
+									/>
+								</div>
+								<p className="signupError_2" role="alert">
+									{error}
+								</p>
+							</div>
+						)}
 					</div>
 				)}
 				<Image
@@ -201,11 +246,7 @@ export default function Signup({ onSuccess }: SignupProps) {
 										<span>Obligatoire</span>
 									</label>
 								</div>
-								{error && (
-									<p className="signupError" role="alert">
-										{error}
-									</p>
-								)}
+
 								<button
 									type="submit"
 									className="loginAndsignUpFunctionnal signup"

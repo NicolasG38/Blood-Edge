@@ -16,9 +16,10 @@
 	--lightblack50: #33333350;
 
 	--greenLight: #ccff33;
+	--redLight: #da1e37;
 
 	--linear-login: linear-gradient(90deg, #ccff33, #7a991f);
-	--linear-loginDark: linear-gradient(90deg, #99cc00, #4d6600);
+	--linear-loginDark: linear-gradient(90deg, #641220, #ff4d6d);
 	--linear-section: linear-gradient(90deg, #ffffff, #508fe6);
 	--linear-internal: linear-gradient(
 		90deg,
