@@ -1,9 +1,26 @@
 #containerLogin {
 	display: flex;
 	flex-direction: column;
+	justify-content: end;
 	align-items: center;
-
-	justify-content: center;
+	height: 500px;
+	max-height: 850px;
+	width: 400px;
+	border-radius: 35px;
+	box-shadow: 0 0 10px var(--lightblack50);
+	margin-top: 2rem;
+	animation: fadeIn .5s ease-in-out;
+	/* background-color: aqua; */
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 #loginLogo {
@@ -18,8 +35,8 @@
 #loginForm {
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+	justify-content: end;
+	text-align: center;
 	height: 550px;
 	width: 400px;
 	border-radius: 35px;
@@ -104,7 +121,7 @@
 	}
 }
 .signup:active {
-	background: var(--linear-loginDark);
+	background: var(--linear-loginDark); /*A MODIFIER*/
 	color: var(--white);
 }
 #loginText2 {
@@ -113,4 +130,74 @@
 	color: var(--black);
 	margin: 1rem 0;
 	text-align: center;
+}
+
+/* RESET propre */
+#loginMessageContainer {
+	position: absolute;
+	z-index: -2;
+	height: 650px;
+	transition: height .5s ease;
+}
+
+.loginMessage {
+	display: flex;
+	justify-content: center;
+	width: 400px;
+	height: 650px;
+	border-radius: 35px;
+	font-family: "Quan-Regular", sans-serif;
+	font-size: 1.5rem;
+	color: var(--white);
+	opacity: 0;
+	padding: 1rem;
+}
+
+.loginMessage.show {
+	opacity: 1;
+}
+
+/* Variantes */
+.loginMessage.success {
+	background: var(--linear-login);
+	box-shadow: 0 6px 18px -4px var(--greenLight);
+	color: var(--black);
+}
+
+.loginMessage.fail {
+	background: var(--linear-loginDark);
+	box-shadow: 0 6px 18px -4px var(--redLight);
+}
+
+/* Container hauteur étendue seulement si message présent */
+#containerLogin.showFail,
+#containerLogin.showSuccess {
+	height: 650px;
+	transition: height .5s ease;
+}
+
+/* Option (légère sur‑impulsion) */
+.loginMessage.show.success {
+	animation: msgPulseSuccess 1.4s ease 0.15s 1;
+}
+@keyframes msgPulseSuccess {
+	0% {
+		box-shadow: 0 0 0 0 rgba(63, 181, 108, 0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 18px rgba(63, 181, 108, 0);
+	}
+}
+
+/* Option (légère sur‑impulsion) */
+.loginMessage.show.fail {
+	animation: msgPulseFail 1.4s ease 0.15s 1;
+}
+@keyframes msgPulseFail {
+	0% {
+		box-shadow: 0 0 0 0 var(--redLight);
+	}
+	100% {
+		box-shadow: 0 0 0 18px rgba(63, 181, 108, 0);
+	}
 }

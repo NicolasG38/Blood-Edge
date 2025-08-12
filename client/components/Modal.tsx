@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 
 interface ModalProps {
 	open: boolean;
