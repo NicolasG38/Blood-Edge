@@ -1,60 +1,132 @@
 import "./Login.css";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
-import Signup from "./Signup";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+export type Payload = {
+	token: string;
+	user: {
+		User_id: string | number;
+		User_pseudo: string;
+	};
+};
 
 type LoginProps = {
-	onSuccess?: () => void;
+	onSuccess?: (payload: Payload) => void; // changé
 	onSwitch: () => void;
 };
 
-import { useState } from "react";
-
 export default function Login({ onSuccess, onSwitch }: LoginProps) {
-	const baseURL = process.env.NEXT_PUBLIC_API_URL;
+	const baseURL = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
+	const [loading, setLoading] = useState(false);
+	const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+	const [message, setMessage] = useState<string | null>(null);
+	const [showSuccess, setShowSuccess] = useState(false);
+	const [showFail, setShowFail] = useState(false);
 	const router = useRouter();
 
 	const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		if (loading) return;
+
+		setLoading(true);
+		setStatus("idle");
+		setMessage(null);
+		setShowSuccess(false);
+		setShowFail(false);
+
 		const form = new FormData(event.currentTarget);
-		const formData = {
-			pseudo: form.get("username") as string,
+		const payload = {
+			pseudo: (form.get("username") as string)?.trim(),
 			password: form.get("password") as string,
 		};
 
-		const response = await fetch(`${baseURL}/api/login`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(formData),
-		});
-		const data = await response.json();
-		if (!data.error) {
-			router.refresh(); // force re-render côté app router
+		try {
+			const response = await fetch(`${baseURL}/api/login`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			});
 
-			onSuccess?.();
-		} else {
-		}
-		if (data.token) {
-			localStorage.setItem("token", data.token);
-		}
+			type LoginResponse = {
+				error?: string;
+				message?: string;
+				token?: string;
+				user?: {
+					User_pseudo: string;
+					User_id: string;
+					// add other user fields if needed
+				};
+			};
+			let data: LoginResponse | null = null;
+			try {
+				data = await response.json();
+			} catch {
+				/* ignore */
+			}
 
-		if (!data.error && data.user) {
-			localStorage.setItem("token", data.token);
-			localStorage.setItem("pseudoStorage", data.user.User_pseudo);
-			localStorage.setItem("userId", data.user.User_id);
-			router.refresh(); // force re-render côté app router
+			if (response.ok && data?.token && data.user) {
+				localStorage.setItem("token", data.token);
+				localStorage.setItem("pseudoStorage", data.user.User_pseudo);
+				localStorage.setItem("userId", String(data.user.User_id));
 
-			onSuccess?.();
+				const payload: Payload = {
+					token: data.token,
+					user: {
+						User_id: data.user.User_id,
+						User_pseudo: data.user.User_pseudo,
+					},
+				};
 
-			setTimeout(() => window.location.reload(), 50);
+				setStatus("success");
+				setMessage(data?.message || "Connexion réussie");
+
+				setShowSuccess(true);
+				setShowFail(false);
+
+				setTimeout(() => {
+					onSuccess?.(payload);
+					window.location.reload();
+				}, 2000);
+			} else {
+				const msg =
+					data?.message ||
+					data?.error ||
+					(!response.ok && `Erreur ${response.status}`) ||
+					"Identifiants/Mot de passe incorrects";
+				setStatus("error");
+				setMessage(msg);
+				setShowFail(true);
+				setShowSuccess(false);
+			}
+		} catch {
+			setStatus("error");
+			setMessage("Erreur réseau");
+			setShowFail(true);
+			setShowSuccess(false);
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	return (
-		<div id="containerLogin">
+		<div
+			id="containerLogin"
+			aria-live="polite"
+			className={`${showSuccess ? "showSuccess" : ""} ${showFail ? "showFail" : ""}`}
+		>
 			<section id="loginForm">
+				{status !== "idle" && (
+					<div id="loginMessageContainer">
+						<div
+							className={`loginMessage ${status === "success" ? "success" : "fail"} show`}
+							role={status === "success" ? "success" : "fail"}
+						>
+							{message}
+						</div>
+					</div>
+				)}
+
 				<form onSubmit={handleLogin}>
 					<Image
 						id="loginLogo"
@@ -64,7 +136,7 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 						height={150}
 					/>
 					<div id="loginDeco">
-						<h1 id="loginTitle">CONNEXION</h1>{" "}
+						<h1 id="loginTitle">CONNEXION</h1>
 						<Image
 							id="wavingHand"
 							src="/assets/icons/waving_hand.svg"
@@ -84,6 +156,7 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 							name="username"
 							className="loginInput"
 							required
+							disabled={loading || status === "success"}
 						/>
 						<label htmlFor="password" className="loginLabel">
 							Mot de passe :
@@ -94,16 +167,18 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 							name="password"
 							className="loginInput"
 							required
+							disabled={loading || status === "success"}
 						/>
 						<button
 							type="submit"
 							className="loginAndsignUpFunctionnal connection"
+							disabled={loading || status === "success"}
 						>
-							CONNEXION
+							{loading ? "..." : "CONNEXION"}
 							<Image
 								id="loginIcon"
 								src="/assets/icons/login.svg"
-								alt="Logo"
+								alt=""
 								width={24}
 								height={24}
 							/>
@@ -112,23 +187,17 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 				</form>
 				<hr />
 				<p id="loginText2">Vous n'avez pas de compte ?</p>
-
 				<button
 					type="button"
 					className="loginAndsignUpFunctionnal signup"
 					onClick={onSwitch}
-					onKeyDown={(e) => {
-						if (e.key === "Enter" || e.key === " ") {
-							e.preventDefault();
-							onSwitch();
-						}
-					}}
+					disabled={loading || status === "success"}
 				>
 					INSCRIPTION
 					<Image
 						id="loginIcon"
 						src="/assets/icons/arrow_circle_right_black.svg"
-						alt="Logo"
+						alt=""
 						width={24}
 						height={24}
 					/>

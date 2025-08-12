@@ -6,14 +6,12 @@ import SignupLoginBtn from "../uiux/SignUpLoginBtn";
 import Image from "next/image";
 import StoresBtn from "../uiux/StoresBtn";
 import Modal from "./Modal";
-import Signup from "./Signup";
-import Login from "./Login";
-
 import { useState } from "react";
+import LoginWrapper from "./LoginWrapper";
 
 export default function Header() {
 	const [openAuth, setOpenAuth] = useState(false);
-	const [authView, setAuthView] = useState<"login" | "signup">("login");
+
 	return (
 		<header id="header">
 			<p id="copyrightHeader">
@@ -34,15 +32,16 @@ export default function Header() {
 				onLoginClick={() => setOpenAuth(true)}
 				onSignupClick={() => setOpenAuth(true)}
 			/>
+
 			<Modal open={openAuth} onClose={() => setOpenAuth(false)}>
-				{authView === "login" ? (
-					<Login
-						onSuccess={() => setOpenAuth(false)}
-						onSwitch={() => setAuthView("signup")}
-					/>
-				) : (
-					<Signup onSuccess={() => setOpenAuth(false)} />
-				)}
+				<LoginWrapper
+					initialView="login"
+					delayMs={4000}
+					onAuthenticated={() => {
+						/* ici tu peux déclencher un refresh ou charger des données */
+					}}
+					onClose={() => setOpenAuth(false)}
+				/>
 			</Modal>
 		</header>
 	);
