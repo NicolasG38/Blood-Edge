@@ -1,7 +1,9 @@
+"use client";
 import "./Login.css";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Signup from "./Signup";
 
 export type Payload = {
 	token: string;
@@ -23,7 +25,12 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 	const [message, setMessage] = useState<string | null>(null);
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [showFail, setShowFail] = useState(false);
+	const [internalMode, setInternalMode] = useState<"login" | "signup">("login");
 	const router = useRouter();
+
+	const effectiveSwitch =
+		onSwitch ??
+		(() => setInternalMode((m) => (m === "login" ? "signup" : "login")));
 
 	const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -109,6 +116,16 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 		}
 	};
 
+	if (internalMode === "signup" && !onSwitch) {
+		return (
+			<Signup
+				onSwitch={() => {
+					setInternalMode("login");
+				}}
+			/>
+		);
+	}
+
 	return (
 		<div
 			id="containerLogin"
@@ -190,7 +207,10 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 				<button
 					type="button"
 					className="loginAndsignUpFunctionnal signup"
-					onClick={onSwitch}
+					onClick={() => {
+						console.info("[CLICK SIGNUP]");
+						effectiveSwitch();
+					}}
 					disabled={loading || status === "success"}
 				>
 					INSCRIPTION
