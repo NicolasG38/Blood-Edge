@@ -13,7 +13,7 @@ export type Payload = {
 
 type LoginProps = {
 	onSuccess?: (payload: Payload) => void; // changé
-	onSwitch: () => void;
+	onSwitch?: () => void;
 };
 
 export default function Login({ onSuccess, onSwitch }: LoginProps) {
