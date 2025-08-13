@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-type SignupProps = { onSuccess?: () => void };
+type SignupProps = { onSuccess?: () => void; onSwitch: () => void };
 
-export default function Signup({ onSuccess }: SignupProps) {
+export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [showFail, setShowFail] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -232,6 +232,15 @@ export default function Signup({ onSuccess }: SignupProps) {
 									className="signupInput"
 									autoComplete="new-password"
 								/>
+								<p id="signupPasswordHint">
+									Le mot de passe doit contenir au moins 8 caractères dont:
+									<span>
+										1 MAJUSCULE
+										<br />1 minuscule
+										<br />1 chiffre
+										<br />1 caractères spécial
+									</span>
+								</p>
 								<div id="signupTerms">
 									<p id="signupLink">
 										J'accepte les{" "}
@@ -241,7 +250,6 @@ export default function Signup({ onSuccess }: SignupProps) {
 									</p>
 									<label htmlFor="terms" className="signupLabelCheckbox">
 										<input type="checkbox" name="terms" id="terms" />{" "}
-										<span>Obligatoire</span>
 									</label>
 								</div>
 
@@ -261,6 +269,19 @@ export default function Signup({ onSuccess }: SignupProps) {
 									/>
 								</button>
 							</div>
+							<button
+								id="signupSwitch"
+								type="button"
+								onClick={onSwitch}
+								onKeyDown={(e) => {
+									if (e.key === "Enter" || e.key === " ") {
+										e.preventDefault();
+										onSwitch();
+									}
+								}}
+							>
+								Déjà un compte ? Se connecter
+							</button>
 						</form>
 					)}
 				</section>

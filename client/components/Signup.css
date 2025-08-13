@@ -3,8 +3,8 @@
 	flex-direction: column;
 	justify-content: end;
 	align-items: start;
-	height: 500px;
-	max-height: 650px;
+	height: 750px;
+	max-height: 750px;
 	width: 800px;
 	/* background: aqua; */
 	border-radius: 35px;
@@ -24,13 +24,13 @@
 }
 
 #containerSignup.showSuccess {
-	height: 730px;
+	height: 830px;
 }
 #containerSignup.showSuccess .signupSuccessMessage {
 	opacity: 1;
 	max-height: 1200px; /* doit être plus grand que le contenu réel */
-	min-height: 730px; /* pour la mise en page, mais ne sera pas animé */
-	min-width: 850px;
+	min-height: 830px; /* pour la mise en page, mais ne sera pas animé */
+	min-width: 900px;
 }
 .signupSuccessMessage {
 	display: flex;
@@ -71,13 +71,13 @@
 }
 
 #containerSignup.showFail {
-	height: 730px;
+	height: 830px;
 }
 #containerSignup.showFail .signupFailMessage {
 	opacity: 1;
 	max-height: 1200px; /* doit être plus grand que le contenu réel */
-	min-height: 730px; /* pour la mise en page, mais ne sera pas animé */
-	min-width: 850px;
+	min-height: 830px; /* pour la mise en page, mais ne sera pas animé */
+	min-width: 900px;
 }
 
 .signupFailMessage {
@@ -140,8 +140,8 @@
 
 #signupBackground {
 	object-fit: cover;
-	height: 650px;
-	width: 850px;
+	height: 750px;
+	width: 900px;
 	border-radius: 35px;
 	position: absolute;
 	z-index: -1;
@@ -159,9 +159,7 @@
 #signupForm {
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	height: 650px;
+	height: 750px;
 	width: 400px;
 	border-radius: 35px;
 	background-color: var(--white);
@@ -171,10 +169,8 @@
 #signupDeco {
 	display: flex;
 	flex-direction: row;
-	justify-content: start;
-	align-content: center;
 	height: 2rem;
-	margin: 6rem 0 1rem 1rem;
+	margin: 4rem 0 1rem 1rem;
 }
 #signupTitle {
 	font-family: "QuanRounded-Bold", sans-serif;
@@ -222,7 +218,7 @@
 	font-size: 1.5rem;
 	border-radius: 35px;
 	border: none;
-	margin: 0 auto 1.5rem auto;
+	margin: 0 auto 1rem auto;
 	gap: 1rem;
 	color: var(--white);
 	transition: 0.35s ease-in-out;
@@ -262,6 +258,36 @@
 	font-size: 1rem;
 	text-decoration: underline;
 	cursor: pointer;
+}
+#signupPasswordHint {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 1rem;
+	color: var(--redLight);
+	margin: 0 auto 1rem;
+	padding: .5rem;
+	text-align: center;
+	background-color: var(--redLight90);
+	border-radius: 25px;
+
+	& > span {
+		text-align: start;
+	}
+}
+
+#signupSwitch {
+	height: 25px;
+	width: 200px;
+	font-family: "QuanRounded-Regular", sans-serif;
+	font-size: 1rem;
+	background-color: transparent;
+	border: 1px solid var(--denim);
+	border-radius: 25px;
+	justify-content: center;
+	margin: 0 6rem;
 }
 
 @media screen and (max-width: 1024px) {
