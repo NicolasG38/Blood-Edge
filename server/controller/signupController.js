@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { signupAndAuth } from "../action/signupActions.js";
 
 const signUpSchema = z
 	.object({
@@ -73,3 +74,33 @@ function validateSignup(req, res, next) {
 }
 
 export { signUpSchema, validateSignup };
+
+export async function signup(req, res) {
+	try {
+		const { pseudo, email, password } = req.body || {};
+		const result = await signupAndAuth({ pseudo, email, password });
+
+		if (!result.ok) {
+			if (result.code === "PSEUDO_TAKEN")
+				return res.status(409).json({ error: "Pseudo déjà utilisé" });
+			if (result.code === "CONFIG_ERROR")
+				return res.status(500).json({ error: "CONFIG_ERROR" });
+			return res.status(400).json({ error: "Requête invalide" });
+		}
+
+		res.cookie("auth", result.token, {
+			httpOnly: true,
+			sameSite: "lax",
+			maxAge: 3600000,
+		});
+
+		return res.json({
+			user: result.user,
+			token: result.token,
+			message: "Compte créé et connecté",
+		});
+	} catch (e) {
+		console.error("SIGNUP ERROR:", e);
+		return res.status(500).json({ error: "INTERNAL_ERROR" });
+	}
+}

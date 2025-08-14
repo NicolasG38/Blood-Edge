@@ -3,6 +3,7 @@ import "./Signup.css";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 type SignupProps = { onSuccess?: () => void; onSwitch: () => void };
 
@@ -12,6 +13,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
+	const { setAuth } = useAuth(); // au lieu de const { auth } = useAuth();
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const apiUrl = baseURL ? `${baseURL}/api/users` : "/api/users";
 
@@ -23,11 +25,18 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 		password?: FieldValidation;
 		[key: string]: FieldValidation | undefined;
 	}
+	interface SignupUser {
+		User_id: number;
+		User_pseudo: string;
+		// Add other user fields if needed
+	}
+
 	interface SignupResponse {
 		message?: string;
 		error?: string;
 		details?: SignupErrorDetails;
 		token?: string;
+		user?: SignupUser;
 	}
 
 	function buildPasswordErrors(pw: string): string[] {
@@ -77,40 +86,59 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 
 		setLoading(true);
 		try {
+			console.log("[SIGNUP] POST", apiUrl, formData);
 			const response = await fetch(apiUrl, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
+				credentials: "include",
 				body: JSON.stringify(formData),
 			});
+			console.log("[SIGNUP] status", response.status);
+			const data: SignupResponse = await response.json();
+			if (response.ok && data?.token && data.user) {
+				// Mise à jour locale (si ton UI lit localStorage / contexte)
+				localStorage.setItem("token", data.token);
+				const user = data.user;
+				localStorage.setItem("pseudoStorage", user.User_pseudo);
+				localStorage.setItem("userId", String(user.User_id));
+				setAuth({
+					token: data.token,
+					userId: String(user.User_id),
+					pseudo: user.User_pseudo,
+				});
+				localStorage.setItem("pseudoStorage", user.User_pseudo);
+				localStorage.setItem("userId", String(user.User_id));
+				setAuth({
+					token: data.token,
+					userId: String(user.User_id),
+					pseudo: user.User_pseudo,
+				});
 
-			let data: SignupResponse | null = null;
-			try {
-				data = (await response.json()) as SignupResponse;
-			} catch {
-				/* pas de body JSON */
-			}
-
-			if (response.ok) {
 				setShowSuccess(true);
+				// Rediriger plus vite (500 ms) si tu veux
 				setTimeout(() => {
 					onSuccess?.();
-					router.push("/dashboard");
-				}, 5000);
+					// Évite push si déjà sur dashboard
+					if (window.location.pathname !== "/dashboard") {
+						router.push("/dashboard");
+					}
+				}, 800);
 			} else {
-				console.log("Signup validation details:", data);
+				// ...existing erreur serverMsg...
 				const serverMsg =
-					data?.details?.is_accept_cgu?._errors?.[0] || // <-- PRIORITÉ 1
+					data?.details?.is_accept_cgu?._errors?.[0] ||
 					data?.details?.email_confirm?._errors?.[0] ||
 					data?.details?.password?._errors?.[0] ||
 					data?.details?.pseudo?._errors?.[0] ||
 					data?.message ||
-					(data?.error !== "VALIDATION_ERROR" && data?.error) || // ignore le code générique
+					(data?.error !== "VALIDATION_ERROR" && data?.error) ||
 					(data?.details && "Validation distante échouée") ||
 					"Erreur lors de l'inscription";
 				setError(serverMsg);
 				setShowFail(true);
 			}
-		} catch {
+		} catch (e) {
+			console.error("[SIGNUP] fetch error", e);
 			setError("Erreur réseau");
 			setShowFail(true);
 		} finally {

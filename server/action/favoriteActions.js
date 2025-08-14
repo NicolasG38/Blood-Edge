@@ -1,4 +1,4 @@
-import FavoriteRepository from "../repository/favoriteRepository.js";
+import FavoriteRepository from "../repository/FavoriteRepository.js"; // corrige la casse
 
 const addFavorite = async (userId, nanoSuitId) => {
 	try {
