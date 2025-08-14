@@ -14,7 +14,7 @@
 
 	--lightgrey50: #d9d9d950;
 	--lightblack: #333333;
-	--lightblack90: rgba(33, 33, 33, 0.9);
+	--lightblack90: #33333310;
 	--lightblack50: rgba(33, 33, 33, 0.5);
 	--lightblack25: rgba(33, 33, 33, 0.25);
 
@@ -37,6 +37,7 @@
 		#fdfdfd00 20%,
 		#fdfdfd00 100%
 	);
+	--linear-search: linear-gradient(90deg, #56cfe1, #5e60ce);
 }
 * {
 	margin: 0;

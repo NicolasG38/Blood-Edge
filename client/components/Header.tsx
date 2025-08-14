@@ -1,12 +1,16 @@
 "use client";
 import "./Header.css";
 import "./Modal.css";
-import Link from "next/link";
-import SignupLoginBtn from "../uiux/SignUpLoginBtn";
-import Image from "next/image";
-import StoresBtn from "../uiux/StoresBtn";
-import Modal from "./Modal";
+
 import Login from "./Login";
+import Modal from "./Modal";
+import SearchBar from "./SearchBar";
+import SignupLoginBtn from "../uiux/SignUpLoginBtn";
+import StoresBtn from "../uiux/StoresBtn";
+
+import Link from "next/link";
+import Image from "next/image";
+
 import { useState } from "react";
 
 export default function Header() {
@@ -36,6 +40,7 @@ export default function Header() {
 			<Modal open={openAuth} onClose={() => setOpenAuth(false)}>
 				<Login />
 			</Modal>
+			<SearchBar />
 		</header>
 	);
 }

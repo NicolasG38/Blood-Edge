@@ -12,6 +12,11 @@
 	right: 2rem;
 	bottom: 5rem;
 }
+#search-bar-main {
+	position: absolute;
+	bottom: 1rem;
+	right: 2rem;
+}
 #containerStores {
 	position: absolute;
 	left: 2rem;
