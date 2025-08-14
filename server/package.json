@@ -8,7 +8,7 @@
 	"main": "app.js",
 	"scripts": {
 		"start": "node app.js",
-		"dev": "nodemon main.js",
+		"dev": "nodemon app.js",
 		"db:migrate": "dotenv -e .env -- sh -c 'mysql -u${DB_USER} -p${DB_PASSWORD} < ./database/database.sql'",
 		"test": "jest"
 	},
