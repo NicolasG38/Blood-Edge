@@ -18,7 +18,7 @@
 	display: inline-block;
 	font-family: "QuanRounded-Bold", sans-serif;
 	font-size: 3rem;
-	color: var(--lightblack90);
+	color: var(--lightblack10);
 	text-shadow: 1px 1px 0 var(--light2denim), 0 0 4px var(--light2denim);
 	margin: 0.5rem 0;
 }
