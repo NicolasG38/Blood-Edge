@@ -1,10 +1,9 @@
 import express from "express";
 
+import exospineActions from "./action/exospineActions.js";
 import nanoSuitsActions from "./action/nanoSuitsActions.js";
 import favoriteController from "./controller/favoriteController.js";
-import signupActions from "./action/signUpActions.js"; // si vous gardez le fichier signUpActions.js
-// RECOMMANDÉ : renommer physiquement signUpActions.js -> signupActions.js puis :
-//import signupActions from "./action/signupActions.js";
+import signupActions from "./action/signupActions.js";
 import { validateSignup, signup } from "./controller/signupController.js";
 import loginController from "./action/loginActions.js";
 import sectionActions from "./action/sectionActions.js";
@@ -21,6 +20,10 @@ router.use(express.urlencoded({ extended: true }));
 
 // Healthcheck
 router.get("/health", (req, res) => res.json({ status: "ok" }));
+
+//Exospine
+router.get("/api/exospine", exospineActions.browse);
+router.get("/api/exospine/id-title", exospineActions.getIdAndTitle);
 
 // Nano suits
 router.get("/api/nanosuits", nanoSuitsActions.browse);

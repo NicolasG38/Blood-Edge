@@ -20,7 +20,6 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 		fetch(`${baseURL}/api/nanosuits/id-title`)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log("nanoSuits data:", data);
 				setNanoSuits(data);
 			})
 			.catch((error) => {
@@ -32,7 +31,7 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 	const [hoveredId, setHoveredId] = useState<number | null>(null);
 	return (
 		<div>
-			<p className="titleSubSection">
+			<p className="titleSubSection_1">
 				NANO-COMBINAISON <span>&gt;</span>
 			</p>
 			<div id="containerListNanoSuits">
@@ -48,7 +47,6 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 								type="button"
 								className="nanoSuitButton"
 								onClick={() => {
-									console.log("Selected id:", suit.id);
 									onSelect(suit.id);
 								}}
 							>

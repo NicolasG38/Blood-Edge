@@ -1,0 +1,79 @@
+#containerListExospine {
+	display: flex;
+	width: fit-content;
+	height: 500px;
+	margin: 5rem 0rem 6rem 6rem;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+.exospineListLi {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	overflow: scroll;
+	height: 80px;
+	width: 380px;
+	border-top: var(--btnborder) 1px solid;
+	transition: 0.3s ease-in-out;
+	overflow: hidden;
+
+	&:hover {
+		border: var(--lightblack) 1px solid;
+		border-radius: 5px;
+	}
+}
+
+.exospineButton {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	font-family: "Quan-Bold", sans-serif;
+	font-size: 1.5rem;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	color: var(--black);
+}
+.exospineDeco_1 {
+	width: 45px;
+	height: 80px;
+	position: relative;
+	border-radius: 5px 0 0 5px;
+	z-index: -1;
+	align-self: flex-start;
+}
+.apparelIcon {
+	width: 70px;
+	height: 70px;
+	display: block;
+	position: relative;
+	left: -70px;
+	opacity: 0.8;
+}
+
+.exospineName {
+	display: flex;
+	align-content: center;
+	justify-content: flex-start;
+	width: 100%;
+	position: relative;
+	left: -30px;
+	line-height: 1.2rem;
+	text-align: left;
+}
+#exospineListArrow {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 700px;
+	width: 300px;
+	opacity: 0.15;
+	position: absolute;
+	margin-top: -100px;
+	margin-left: 20px;
+	z-index: -3;
+}
