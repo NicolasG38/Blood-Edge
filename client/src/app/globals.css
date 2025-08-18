@@ -1,16 +1,16 @@
 :root {
 	--mainheader: #1959b0;
-	--btnborder: #d9d9d9;
-	--white: #fdfdfd;
-	--black: #000;
-	--blackLight: #4d4d4d;
-	--denimDark: #1a5cb7;
 	--denim: #1959b0;
+	--denimDark: #1a5cb7;
 	--denimhalf: #2473e0;
 	--lightdenim: #508fe6;
 	--light2denim: #79a9ec;
 	--denimUltraLight: #f3f7fd;
+	--btnborder: #d9d9d9;
 	--lightgrey: #d9d9d9;
+	--white: #fdfdfd;
+	--black: #000;
+	--blackLight: #4d4d4d;
 
 	--orange: #ff9e00;
 
@@ -26,6 +26,7 @@
 	--redLight90: #da1e3715;
 
 	--linear-login: linear-gradient(90deg, #ccff33, #7a991f);
+	--linear-loginActive: linear-gradient(90deg, #99cc00, #4d6600);
 	--linear-loginDark: linear-gradient(90deg, #641220, #ff4d6d);
 	--linear-section: linear-gradient(90deg, #ffffff, #508fe6);
 	--linear-internal: linear-gradient(

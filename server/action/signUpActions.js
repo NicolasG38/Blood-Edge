@@ -66,13 +66,13 @@ const create = async (req, res) => {
 };
 
 // Génère maintenant user + token
-export const signupAndAuth = async ({
+export async function signupAndAuth({
 	email,
 	pseudo,
 	password,
 	is_accept_cgu = 1,
 	type_account = 1,
-}) => {
+}) {
 	if (!email || !pseudo || !password)
 		return { ok: false, code: "INVALID_PAYLOAD" };
 	if (password.length < 8) return { ok: false, code: "WEAK_PASSWORD" };
@@ -108,6 +108,6 @@ export const signupAndAuth = async ({
 		},
 		token,
 	};
-};
+}
 
 export default { browse, create, signupAndAuth };

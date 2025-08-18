@@ -12,6 +12,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 	const [showFail, setShowFail] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
+
 	const router = useRouter();
 	const { setAuth } = useAuth(); // au lieu de const { auth } = useAuth();
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -34,6 +35,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 	interface SignupResponse {
 		message?: string;
 		error?: string;
+		code?: string;
 		details?: SignupErrorDetails;
 		token?: string;
 		user?: SignupUser;
@@ -68,7 +70,6 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 
 		const email = (form.get("email") as string)?.trim();
 		const emailConfirm = (form.get("email_confirm") as string)?.trim();
-
 		if (email !== emailConfirm) {
 			setError("Les emails ne correspondent pas");
 			setShowFail(true);
@@ -78,7 +79,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 		const formData = {
 			email,
 			email_confirm: emailConfirm,
-			pseudo: (form.get("username") as string)?.trim(),
+			pseudo: (form.get("pseudo") as string)?.trim(),
 			password: form.get("password") as string,
 			is_accept_cgu: form.get("terms") === "on",
 			type_account: 1,
@@ -86,45 +87,49 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 
 		setLoading(true);
 		try {
-			console.log("[SIGNUP] POST", apiUrl, formData);
 			const response = await fetch(apiUrl, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				credentials: "include",
 				body: JSON.stringify(formData),
 			});
-			console.log("[SIGNUP] status", response.status);
 			const data: SignupResponse = await response.json();
+
+			// Gestion explicite des conflits (409)
+			if (response.status === 409) {
+				const map: Record<string, string> = {
+					PSEUDO_TAKEN: "Pseudo déjà utilisé",
+					EMAIL_TAKEN: "Email déjà utilisé",
+					PSEUDO_OR_EMAIL_TAKEN: "Pseudo ou email déjà utilisé",
+					UNIQUE_VIOLATION: "Valeur déjà utilisée",
+				};
+
+				const code = data?.code ?? "";
+				const errKey = data?.error ?? "";
+
+				setError(data?.message || map[code] || map[errKey] || "Conflit");
+				setShowFail(true);
+				return;
+			}
+
 			if (response.ok && data?.token && data.user) {
-				// Mise à jour locale (si ton UI lit localStorage / contexte)
 				localStorage.setItem("token", data.token);
-				const user = data.user;
-				localStorage.setItem("pseudoStorage", user.User_pseudo);
-				localStorage.setItem("userId", String(user.User_id));
+				localStorage.setItem("pseudoStorage", data.user.User_pseudo);
+				localStorage.setItem("userId", String(data.user.User_id));
 				setAuth({
 					token: data.token,
-					userId: String(user.User_id),
-					pseudo: user.User_pseudo,
-				});
-				localStorage.setItem("pseudoStorage", user.User_pseudo);
-				localStorage.setItem("userId", String(user.User_id));
-				setAuth({
-					token: data.token,
-					userId: String(user.User_id),
-					pseudo: user.User_pseudo,
+					userId: String(data.user.User_id),
+					pseudo: data.user.User_pseudo,
 				});
 
 				setShowSuccess(true);
-				// Rediriger plus vite (500 ms) si tu veux
 				setTimeout(() => {
 					onSuccess?.();
-					// Évite push si déjà sur dashboard
 					if (window.location.pathname !== "/dashboard") {
 						router.push("/dashboard");
 					}
 				}, 800);
 			} else {
-				// ...existing erreur serverMsg...
 				const serverMsg =
 					data?.details?.is_accept_cgu?._errors?.[0] ||
 					data?.details?.email_confirm?._errors?.[0] ||
@@ -220,13 +225,13 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 							</div>
 							<p id="signupText">Créer un compte avec votre adresse email</p>
 							<div id="signupInputs">
-								<label htmlFor="username" className="signupLabel">
+								<label htmlFor="pseudo" className="signupLabel">
 									Nom d'utilisateur :
 								</label>
 								<input
 									type="text"
-									id="username"
-									name="username"
+									id="pseudo"
+									name="pseudo"
 									className="signupInput"
 									autoComplete="username"
 								/>
