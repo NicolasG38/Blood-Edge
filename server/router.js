@@ -4,7 +4,6 @@ import exospineActions from "./action/exospineActions.js";
 import nanoSuitsActions from "./action/nanoSuitsActions.js";
 import favoriteController from "./controller/favoriteController.js";
 import signupActions from "./action/signupActions.js";
-import { validateSignup, signup } from "./controller/signupController.js";
 import loginController from "./action/loginActions.js";
 import sectionActions from "./action/sectionActions.js";
 import subSectionActions from "./action/subSectionActions.js";
@@ -35,7 +34,7 @@ router.delete("/api/favorites", favoriteController.removeFavorite);
 router.post("/api/favorites/status", favoriteController.isFavorite);
 
 // Auth
-router.post("/api/users", validateSignup, signup);
+router.post("/api/users", signupActions.create);
 router.post("/api/login", loginLimiter, loginController.login);
 
 // Sections

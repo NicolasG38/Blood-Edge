@@ -229,7 +229,7 @@
 		background-color: var(--denimhalf);
 	}
 	&:active {
-		background-color: var(--denimDark);
+		background-color: var(--linear-loginActive);
 	}
 }
 .signup {
@@ -242,9 +242,21 @@
 	}
 }
 .signup:active {
-	background: var(--linear-loginDark);
+	background: var(--linear-loginActive);
 	color: var(--white);
 }
+
+#signupIcon {
+	transition: transform 0.35s ease-in-out, filter 0.35s ease-in-out;
+	transform: translateX(0);
+}
+
+/* au survol du bouton d’inscription */
+.loginAndsignUpFunctionnal.signup:hover #signupIcon {
+	transform: translateX(4px);
+	filter: invert(1);
+}
+
 #signupText2 {
 	font-family: "Quan-Regular", sans-serif;
 	font-size: 1rem;

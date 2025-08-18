@@ -1,21 +1,18 @@
 #containerLogin {
 	display: flex;
 	flex-direction: column;
-	justify-content: end;
+	justify-content: center;
 	align-items: center;
 	height: 500px;
-	max-height: 850px;
 	width: 400px;
 	border-radius: 35px;
-	box-shadow: 0 0 10px var(--lightblack50);
 	margin-top: 2rem;
 	animation: fadeIn .5s ease-in-out;
-	/* background-color: aqua; */
 }
 @keyframes fadeIn {
 	from {
 		opacity: 0;
-		transform: translateY(10px);
+		transform: translateY(0);
 	}
 	to {
 		opacity: 1;
@@ -111,19 +108,7 @@
 		background-color: var(--denimDark);
 	}
 }
-.signup {
-	border: var(--denim) 1px solid;
-	background: var(--white);
-	color: var(--black);
-	&:hover {
-		background: var(--linear-login);
-		color: var(--white);
-	}
-}
-.signup:active {
-	background: var(--linear-loginDark); /*A MODIFIER*/
-	color: var(--white);
-}
+
 #loginText2 {
 	font-family: "Quan-Regular", sans-serif;
 	font-size: 1rem;
@@ -132,19 +117,28 @@
 	text-align: center;
 }
 
-/* RESET propre */
+#loginIcon {
+	transition: transform 0.35s ease-in-out, filter 0.35s ease-in-out;
+}
+
+.loginAndsignUpFunctionnal.signup:hover #loginIcon {
+	transform: translateX(4px);
+	filter: invert(1);
+}
+
 #loginMessageContainer {
 	position: absolute;
 	z-index: -2;
-	height: 650px;
-	transition: height .5s ease;
+	height: 630px;
+	transition: .5s ease-in-out;
+	animation: fadeIn .35s ease-in-out;
 }
 
 .loginMessage {
 	display: flex;
 	justify-content: center;
 	width: 400px;
-	height: 650px;
+	height: 630px;
 	border-radius: 35px;
 	font-family: "Quan-Regular", sans-serif;
 	font-size: 1.5rem;
@@ -172,8 +166,8 @@
 /* Container hauteur étendue seulement si message présent */
 #containerLogin.showFail,
 #containerLogin.showSuccess {
-	height: 650px;
-	transition: height .5s ease;
+	height: 500px;
+	transition: .5s ease;
 }
 
 /* Option (légère sur‑impulsion) */

@@ -172,7 +172,6 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 							id="username"
 							name="username"
 							className="loginInput"
-							required
 							disabled={loading || status === "success"}
 						/>
 						<label htmlFor="password" className="loginLabel">
@@ -183,7 +182,6 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 							id="password"
 							name="password"
 							className="loginInput"
-							required
 							disabled={loading || status === "success"}
 						/>
 						<button
