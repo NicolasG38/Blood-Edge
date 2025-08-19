@@ -105,6 +105,16 @@ CREATE TABLE `User` (
     User_Type_account INT UNSIGNED NOT NULL
 );
 
+CREATE TABLE Locations (
+    Locations_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    Locations_name_fr VARCHAR(30) NOT NULL,
+    Locations_name_en VARCHAR(30) NOT NULL,
+    Locations_country VARCHAR(20) NOT NULL,
+    Locations_color VARCHAR(30) NOT NULL,
+    Locations_icon_black VARCHAR(50) NOT NULL,
+    Locations_icon_white VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE Favorite (
     Favorite_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     Favorite_user_id INT UNSIGNED NOT NULL,
@@ -191,11 +201,23 @@ values
     (19, TRUE, TRUE, TRUE, "Exospine de type suppression", NULL, "Augmente de 18 % la pénétration de bouclier.", NULL, "Les ennemis restent à terre plus longtemps.", NULL, "Augmente de 18 % les dégâts infligés aux ennemis à terre.", NULL, NULL, NULL, NULL, "Exospine spécialisée dans les capacités de mise à terre.", NULL, "Lorsque les plaintes portant sur les défaillances de la dernière exospine ont commencé à pleuvoir, le sujet a rapidement fait débat. Nombre d'utilisateurs affirmaient entendre la voix de la Matri-Arche. La voix d'une magnifique jeune fille gracile, qui murmurait des milliers de mots. Ce n'était bien évidemment qu'un bug qui a été rapidement corrigé grâce à une mise à jour. En tout cas, c'est la version officielle des faits.", NULL, "Exospine_bar", "/icons/network_intelligence_white.svg", "/icons/network_intelligence_orange.svg", NULL, NULL, 1),
     (20, TRUE, TRUE, TRUE, "Exospine Mk2 de type suppression", NULL, "Augmente de 24 % la pénétration de bouclier.", NULL, "Les ennemis restent à terre beaucoup plus longtemps.", NULL, "Augmente de 27% les dégâts infligés aux ennemis à terre.", NULL, 18, NULL, 18, "Exospine spécialisée dans les capacités de mise à terre.", NULL, "Lorsque les plaintes portant sur les défaillances de la dernière exospine ont commencé à pleuvoir, le sujet a rapidement fait débat. Nombre d'utilisateurs affirmaient entendre la voix de la Matri-Arche. La voix d'une magnifique jeune fille gracile, qui murmurait des milliers de mots. Ce n'était bien évidemment qu'un bug qui a été rapidement corrigé grâce à une mise à jour. En tout cas, c'est la version officielle des faits.", NULL, "Exospine_bar", NULL, NULL,"/icons/network_intelligence_update_white.svg", "/icons/network_intelligence_update_orange.svg" , 1),
     (21, TRUE, TRUE, TRUE, "Exospine de type transe Bêta", NULL, "Augmente l'énergie Bêta récupérée de 12 %.", NULL, "Augmente de 12 % la puissance de toutes les compétences Bêta.", NULL, "Si une compétence Bêta touche un ennemi, elle a une chance de vous plonger en transe. Les compétences Bêta ne consomment pas d'énergie Bêta tant que vous êtes en transe.", NULL, 24, NULL, 24, "Exospine spécialisée dans l'amélioration des compétences Bêta.", NULL, "Hélas, le rendement des semi-conducteurs quantiques Tetrastar était très faible, Les exospines étant des modules particulièrement onéreux, les quantités étaient limitées. Toutefois, en les présentant comme des objets de luxe, Tetrastar est parvenue à leur façonner une image très éloignée des modules d'équipement ordinaires", NULL, "Exospine_bar", "/icons/network_intelligence_white.svg", "/icons/network_intelligence_orange.svg", NULL, NULL , 1),
-    (22, TRUE, TRUE, TRUE, "Exospine Mk2 de type transe Bêta", NULL, Exospine_skill_1_fr, NULL, Exospine_skill_2_fr, NULL, Exospine_skill_3_fr, NULL, 12, 12, NULL, "Exospine spécialisée dans l'amélioration des compétences Bêta.", NULL, "Hélas, le rendement des semi-conducteurs quantiques Tetrastar était très faible, Les exospines étant des modules particulièrement onéreux, les quantités étaient limitées. Toutefois, en les présentant comme des objets de luxe, Tetrastar est parvenue à leur façonner une image très éloignée des modules d'équipement ordinaires", NULL, "Exospine_bar", NULL, NULL,"/icons/network_intelligence_update_white.svg" ,"/icons/network_intelligence_update_orange.svg" , 1),
+    (22, TRUE, TRUE, TRUE, "Exospine Mk2 de type transe Bêta", NULL, "Exospine_skill_1_fr", NULL, "Exospine_skill_2_fr", NULL, "Exospine_skill_3_fr", NULL, 12, 12, NULL, "Exospine spécialisée dans l'amélioration des compétences Bêta.", NULL, "Hélas, le rendement des semi-conducteurs quantiques Tetrastar était très faible, Les exospines étant des modules particulièrement onéreux, les quantités étaient limitées. Toutefois, en les présentant comme des objets de luxe, Tetrastar est parvenue à leur façonner une image très éloignée des modules d'équipement ordinaires", NULL, "Exospine_bar", NULL, NULL,"/icons/network_intelligence_update_white.svg" ,"/icons/network_intelligence_update_orange.svg" , 1),
     (23, TRUE, TRUE, TRUE, "Exospine de type transe spontanée", NULL, "Augmente la jauge maximum d'énergie spontanée de 600 points.", NULL, "Augmente la puissance des compétences spontanées de 30 %.", NULL, "Vous récupérez 50 points d'énergie spontanée lorsque vous effectuez un enchaînement de niveau 4 ou plus.", NULL, NULL, 30, NULL, "Exospine spécialisée dans l'amélioration des compétences spontanées.", NULL, "Lorsque la Dernière Guerre s'est transformée en conflit total tout droit issu de nos pires cauchemars, la Matri-Arche a réquisitionné toutes les infrastructures de « l'humanité », La majorité des modules d'équipement atypiques planifiés ou produits à cette époque ont totalement disparu lorsque nous avons dû nous retrancher en orbite. C'est notamment le cas des exospines exclusivement conçues pour le combat.", NULL, "Exospine_bar", "/icons/network_intelligence_white.svg", "/icons/network_intelligence_orange.svg",NULL , NULL, 1),
     (24, TRUE, TRUE, TRUE, "Exospine Mk2 de type transe spontanée", NULL, "Augmente la jauge maximum d'énergie spontanée de 800 points.", NULL, "Augmente la puissance des compétences spontanées de 45 %.", NULL, "Vous récupérez 75 points d'énergie spontanée lorsque vous effectuez un enchaînement de niveau 4 ou plus.", NULL, NULL, 45, NULL, "Exospine spécialisée dans l'amélioration des compétences spontanées.", NULL, "Lorsque la Dernière Guerre s'est transformée en conflit total tout droit issu de nos pires cauchemars, la Matri-Arche a réquisitionné toutes les infrastructures de « l'humanité ». La majorité des modules d'équipement atypiques planifiés ou produits à cette époque ont totalement disparu lorsque nous avons dû nous retrancher en orbite. C'est notamment le cas des exospines exclusivement conçues pour le combat.", NULL, "Exospine_bar", NULL, NULL,"/icons/network_intelligence_update_white.svg", "/icons/network_intelligence_update_orange.svg", 1)
 ;    
 
+insert into Locations(Locations_id, Locations_name_fr, Locations_name_en, Locations_country, Locations_color, Locations_icon_black, Locations_icon_white)
+values
+(1, "Xion", "Xion", "USA", "--linear-xion", "/icons/locations/xion_black.svg", "/icons/locations/xion_white.svg"),
+(2, "Eidos 7", "Eidos 7", "Ukraine", "--linear-eidos7", "/icons/locations/eidos_7_black.svg", "/icons/locations/eidos_7_white.svg"),
+(3, "Eidos 9", "Eidos 9", "Ukraine", "--linear-eidos9", "/icons/locations/eidos_9_black.svg", "/icons/locations/eidos_9_white.svg"),
+(4, "Les terres désolées", "The wastelands", "USA", "--linear-thewastelands", "/icons/locations/the_wastelands_black.svg", "/icons/locations/the_wastelands_white.svg"),
+(5, "Plateau levoir", "Altess levoir", "USA", "--linear-altesslevoire", "/icons/locations/altess_levoire_black.svg", "/icons/locations/altess_levoire_white.svg"),
+(6, "Le grand désert", "The great desert", "France", "--linear-thegreatdesert", "/icons/locations/the_great_desert_black.svg", "/icons/locations/the_great_desert_white.svg"),
+(7, "Fosse levoir", "Abyss levoir", "USA", "--linear-abysslevoire", "/icons/locations/abyss_levoire_black.svg", "/icons/locations/abyss_levoire_white.svg"),
+(8, "Matrix 11", "Matrix 11", "France", "--linear-matrix11", "/icons/locations/matrix_11_black.svg", "/icons/locations/matrix_11_white.svg"),
+(9, "Obélisque 4", "Spire 4", "New-Caledonia", "--linear-spire4", "/icons/locations/spire_4_black.svg", "/icons/locations/spire_4_white.svg")
+;
 
 insert into Stores (Stores_id, Stores_title, Stores_text, Stores_text_2, Stores_picture, Stores_picture_2, Store_link)
 values
