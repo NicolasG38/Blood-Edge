@@ -15,10 +15,14 @@ interface ExospineProps {
 }
 
 interface ExospineListProps {
-	onSelect: (id: number) => void;
+	selectedId: number | null;
+	onSelect: (id: number | null) => void;
 }
 
-export default function ExospineList({ onSelect }: ExospineListProps) {
+export default function ExospineList({
+	selectedId,
+	onSelect,
+}: ExospineListProps) {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const toUrl = (p: string) => (p?.startsWith("http") ? p : `${baseURL}${p}`);
 

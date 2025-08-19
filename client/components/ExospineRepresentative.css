@@ -1,0 +1,78 @@
+.exospineRepresentative {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	width: 700px;
+	height: fit-content;
+}
+
+.exospineRepresentativeTitle {
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 3rem;
+	color: var(--lightblack10);
+	text-shadow: 0 0 1px var(--black), 0 0 4px var(--orange);
+}
+
+.bar-on {
+	background: var(--radial-orange);
+	box-shadow: 0 0 4px var(--orange);
+	width: 40px;
+	height: 5px;
+}
+
+.bar-off {
+	background: var(--radial-gray);
+	box-shadow: 0 0 4px var(--gray);
+	width: 40px;
+	height: 5px;
+}
+
+.exospine-bar {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	width: 136px;
+}
+
+.exospineRepresentativeSkill {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-content: start;
+	font-size: 1.5rem;
+	color: var(--black);
+	margin: 1.5rem 0 5rem 0;
+	& > div {
+		display: flex;
+		margin: 1rem 0 0 0;
+		& > .exospineSquareRounded {
+			min-width: 20px;
+			max-height: 20px;
+			border-radius: 3px;
+			background: var(--radial-orange);
+			box-shadow: 0 0 4px var(--orange);
+			margin: 0 1rem;
+		}
+		& > .exospineRepresentativeSkill_1,
+		.exospineRepresentativeSkill_2,
+		.exospineRepresentativeSkill_3 {
+			font-family: "Quan-Regular", sans-serif;
+			height: 5rem;
+			width: 600px;
+		}
+	}
+}
+
+.exospineRepresentativeText {
+	margin: 0 0 3rem 0;
+	& > p {
+		font-family: "QuanRounded-Light", sans-serif;
+		font-size: 1.5rem;
+		color: var(--black);
+		margin: 1.5rem 0 0 0;
+	}
+	& > .exospineRepresentativeText_2 {
+		width: 700px;
+		height: 10rem;
+	}
+}

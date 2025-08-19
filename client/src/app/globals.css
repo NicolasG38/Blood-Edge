@@ -11,6 +11,7 @@
 	--white: #fdfdfd;
 	--black: #000;
 	--blackLight: #4d4d4d;
+	--gray: #8c8c8c;
 
 	--orange: #ff9e00;
 
@@ -43,6 +44,7 @@
 	);
 	--linear-search: linear-gradient(90deg, #56cfe1, #5e60ce);
 
+	/* Locations - barre de navigation entre les différents lieux */
 	--linear-xion: linear-gradient(90deg, #b18864, #32271b);
 	--linear-eidos7: linear-gradient(90deg, #a59683, #1f1719);
 	--linear-eidos9: linear-gradient(90deg, #a97d5e, #564342);
@@ -52,6 +54,9 @@
 	--linear-altesslevoire: linear-gradient(90deg, #9cafb7, #2a3d45);
 	--linear-abysslevoire: linear-gradient(90deg, #c57b57, #251605);
 	--linear-matrix11: linear-gradient(90deg, #81b23b, #545643);
+
+	--radial-orange: radial-gradient(circle, #ffd899, #ff9e00);
+	--radial-gray: radial-gradient(circle, #d9d9d9, #8c8c8c);
 }
 * {
 	margin: 0;
