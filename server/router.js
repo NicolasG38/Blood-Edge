@@ -1,13 +1,16 @@
 import express from "express";
 
 import exospineActions from "./action/exospineActions.js";
-import nanoSuitsActions from "./action/nanoSuitsActions.js";
 import favoriteController from "./controller/favoriteController.js";
-import signupActions from "./action/signupActions.js";
+import locationsActions from "./action/locationsActions.js";
 import loginController from "./action/loginActions.js";
+import nanoSuitsActions from "./action/nanoSuitsActions.js";
 import sectionActions from "./action/sectionActions.js";
-import subSectionActions from "./action/subSectionActions.js";
+import signupActions from "./action/signupActions.js";
 import storesActions from "./action/storesActions.js";
+
+import subSectionActions from "./action/subSectionActions.js";
+
 import { requireAuth, requireAdmin } from "./middleware/auth.js";
 import { loginLimiter } from "./middleware/rateLimiters.js";
 
@@ -40,6 +43,9 @@ router.post("/api/login", loginLimiter, loginController.login);
 // Sections
 router.get("/api/sections", sectionActions.browse);
 router.get("/api/subsections", subSectionActions.browseArsenal);
+
+// Locations
+router.get("/api/locations", locationsActions.browse);
 
 // Stores
 router.get("/api/stores", storesActions.browse);

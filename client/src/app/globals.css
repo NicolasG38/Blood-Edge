@@ -42,6 +42,16 @@
 		#fdfdfd00 100%
 	);
 	--linear-search: linear-gradient(90deg, #56cfe1, #5e60ce);
+
+	--linear-xion: linear-gradient(90deg, #b18864, #32271b);
+	--linear-eidos7: linear-gradient(90deg, #a59683, #1f1719);
+	--linear-eidos9: linear-gradient(90deg, #a97d5e, #564342);
+	--linear-thewastelands: linear-gradient(90deg, #c98756, #322113);
+	--linear-thegreatdesert: linear-gradient(90deg, #ecba95, #b35d42);
+	--linear-spire4: linear-gradient(90deg, #aa9ba0, #0f467e);
+	--linear-altesslevoire: linear-gradient(90deg, #9cafb7, #2a3d45);
+	--linear-abysslevoire: linear-gradient(90deg, #c57b57, #251605);
+	--linear-matrix11: linear-gradient(90deg, #81b23b, #545643);
 }
 * {
 	margin: 0;

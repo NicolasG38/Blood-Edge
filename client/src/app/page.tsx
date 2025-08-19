@@ -8,6 +8,7 @@ import Login from "../../components/Login";
 import SubSection from "../../uiux/SubSection";
 
 import { useState } from "react";
+import LocationsBtn from "../../uiux/LocationsBtn";
 
 export default function Homepage() {
 	const [openLogin, setOpenLogin] = useState(false);
@@ -22,6 +23,7 @@ export default function Homepage() {
 					/>
 				</Modal>
 				<Carrousel />
+				<LocationsBtn />
 				<SectionBtn />
 				<SubSection />
 			</main>
