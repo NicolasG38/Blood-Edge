@@ -11,6 +11,7 @@ type AddFavoriteProps = {
 export default function AddFavorite({ exo, equip, ns }: AddFavoriteProps) {
 	const [isLogged, setIsLogged] = useState(false);
 	const [step, setStep] = useState<0 | 1 | 2 | 3>(0);
+	// 0: favorite, 1: heart_check, 2: favorite_fill, 3:heart_minus
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [userId, setUserId] = useState<string | null>(null);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;

@@ -56,7 +56,6 @@ export default function StatsEVE() {
 			.catch((error) => console.error("Error fetching stats:", error));
 	}, [baseURL]);
 
-	console.log("Stats EVE:", statsEVE);
 	return (
 		<div className="statsEVEContainer">
 			<div id="statsEVEHeader">
