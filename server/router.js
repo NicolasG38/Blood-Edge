@@ -7,6 +7,7 @@ import loginController from "./action/loginActions.js";
 import nanoSuitsActions from "./action/nanoSuitsActions.js";
 import sectionActions from "./action/sectionActions.js";
 import signupActions from "./action/signupActions.js";
+import statsEVEActions from "./action/StatsEVEActions.js";
 import storesActions from "./action/storesActions.js";
 
 import subSectionActions from "./action/subSectionActions.js";
@@ -46,6 +47,9 @@ router.get("/api/subsections", subSectionActions.browseArsenal);
 
 // Locations
 router.get("/api/locations", locationsActions.browse);
+
+// Stats EVE
+router.get("/api/stats-eve", statsEVEActions.browse);
 
 // Stores
 router.get("/api/stores", storesActions.browse);

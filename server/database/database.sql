@@ -102,17 +102,8 @@ CREATE TABLE `User` (
     User_email VARCHAR(100) NOT NULL UNIQUE,
     User_hashed_password VARCHAR(255) NOT NULL,
     User_is_accept_cgu BOOLEAN DEFAULT TRUE,
-    User_Type_account INT UNSIGNED NOT NULL
-);
-
-CREATE TABLE Locations (
-    Locations_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    Locations_name_fr VARCHAR(30) NOT NULL,
-    Locations_name_en VARCHAR(30) NOT NULL,
-    Locations_country VARCHAR(20) NOT NULL,
-    Locations_color VARCHAR(30) NOT NULL,
-    Locations_icon_black VARCHAR(50) NOT NULL,
-    Locations_icon_white VARCHAR(50) NOT NULL
+    User_Type_account INT UNSIGNED NOT NULL,
+    User_timestamp TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE Favorite (
@@ -130,6 +121,27 @@ CREATE TABLE Favorite (
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_fav_ns FOREIGN KEY (Favorite_NS_id) REFERENCES Nano_suits(NS_id)
         ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Locations (
+    Locations_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    Locations_name_fr VARCHAR(30) NOT NULL,
+    Locations_name_en VARCHAR(30) NOT NULL,
+    Locations_country VARCHAR(20) NOT NULL,
+    Locations_color VARCHAR(30) NOT NULL,
+    Locations_icon_black VARCHAR(50) NOT NULL,
+    Locations_icon_white VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE StatsEVE (
+    Stats_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    Stats_title_fr VARCHAR(255) NOT NULL,
+    Stats_title_en VARCHAR(255) NOT NULL,
+    Stats_bar BOOLEAN,
+    Stats_value INT,
+    Stats_value_max INT,
+    Stats_decimal DECIMAL(6,1) CHECK (Stats_decimal BETWEEN -1000 AND 1000),
+    Stats_icon VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Stores(
@@ -218,6 +230,25 @@ values
 (8, "Matrix 11", "Matrix 11", "France", "--linear-matrix11", "/icons/locations/matrix_11_black.svg", "/icons/locations/matrix_11_white.svg"),
 (9, "Obélisque 4", "Spire 4", "New-Caledonia", "--linear-spire4", "/icons/locations/spire_4_black.svg", "/icons/locations/spire_4_white.svg")
 ;
+
+insert into StatsEVE (Stats_id, Stats_title_fr ,Stats_title_en, Stats_bar, Stats_value, Stats_value_max, Stats_decimal, Stats_icon)
+values
+    (1, "PV max", "Max HP", TRUE, 2500, 6500, NULL, "/icons/stats_eve/stats_eve_black.svg"),
+    (2, "Bouclier max", "Max Shield", TRUE, 500, 2000, NULL, "/icons/stats_eve/stats_eve_black.svg"),
+    (3, "Énergie Bêta max", "Max Beta Energy", TRUE, 300, 2800, NULL, "/icons/stats_eve/stats_eve_black.svg"),
+    (4, "Énergie Somptanée max", "Max Somptanée Energy", TRUE, 1600, 3000, NULL, "/icons/stats_eve/stats_eve_black.svg"),
+    (5, "Puissance", "Attack Power", TRUE, 530, 1300, NULL, "/icons/stats_eve/stats_eve_black.svg"),
+    (6, "Dégâts sur boucliers", "Damage to shields", TRUE, 100, 250, NULL, "/icons/stats_eve/stats_eve_black.svg"),
+    (7, "Taux de coups critiques", "Critical Rate", TRUE, NULL, NULL, 5, "/icons/stats_eve/stats_eve_black.svg"),
+    (8, "Dégâts critiques", "Critical Damage", TRUE,  NULL, NULL, 150, "/icons/stats_eve/stats_eve_black.svg"),
+    (9, "Bonus de puissance des compétences Bêta", "Beta Skill Power Bonus", FALSE, NULL, NULL, 15, "/icons/stats_eve/stats_eve_black.svg"),
+    (10, "Vitesse d'attaque", "Attack Speed", FALSE, NULL, NULL, 118, "/icons/stats_eve/stats_eve_black.svg"),
+    (11, "Réduction des dégâts au corps à corps", "Melee Damage Reduction", FALSE, NULL, NULL, 118, "/icons/stats_eve/stats_eve_black.svg"),
+    (12, "Réduction des dégâts à distance", "Ranged Damage Reduction", FALSE, NULL, NULL, -38, "/icons/stats_eve/stats_eve_black.svg"),
+    (13, "Bonus de recharge d’énergie Bêta", "Beta Energy Recharge Bonus", FALSE, NULL, NULL, 15, "/icons/stats_eve/stats_eve_black.svg"),
+    (14, "Dépense d’énergie tachyonique réduite", "Tachyon Energy Cost Reduction", FALSE, NULL, NULL, 20, "/icons/stats_eve/stats_eve_black.svg")
+    ;
+
 
 insert into Stores (Stores_id, Stores_title, Stores_text, Stores_text_2, Stores_picture, Stores_picture_2, Store_link)
 values

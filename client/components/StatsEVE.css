@@ -1,0 +1,99 @@
+#statsEVEHeader > p {
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 3rem;
+}
+.statsEVEContent {
+	height: 650px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.statsEVEIconContainer {
+	position: relative;
+	display: flex;
+	width: 520px;
+	z-index: 2;
+}
+.statsEVEIcon {
+	width: 32px;
+	height: 32px;
+	margin-right: 0.5rem;
+	vertical-align: middle;
+}
+
+.statsEVEIconTitle {
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 2rem;
+}
+.statsEVEValue,
+.statsEVEDecimal {
+	position: relative;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 3rem;
+	z-index: 2;
+}
+
+.statsEVEValue {
+	color: inherit;
+}
+
+/* Conteneur des barres */
+.statsEVEBar {
+	position: relative;
+	height: 5px;
+	width: 520px;
+	margin: 0.5rem 0;
+	z-index: 2;
+}
+
+/* Barres superposées */
+.statsEVEBarStatsGray,
+.statsEVEBarStatsOrange {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 5px;
+	border-radius: 4px;
+}
+
+.statsEVEBarStatsGray {
+	width: 100%;
+	background: var(--radial-gray);
+	box-shadow: 0 0 5px var(--gray);
+}
+
+.statsEVEBarStatsOrange {
+	width: 0; /* sera défini en inline style */
+	background: var(--radial-orange);
+	box-shadow: 0 0 5px var(--orange);
+	z-index: 3;
+}
+
+#statsEVEImageContainer {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translateY(78%) translateX(-28%);
+	width: 520px;
+	height: 673px;
+	overflow: hidden;
+	z-index: 0;
+}
+
+#statsEVEImage,
+#statsEVEImageOverlay {
+	position: absolute;
+	inset: 0; /* top/right/bottom/left:0 */
+	width: 100%;
+	height: 100%;
+}
+
+#statsEVEImageOverlay {
+	background: var(--linear-whiteToTransparent);
+	z-index: 1;
+	pointer-events: none;
+}
+#statsEVEImage {
+	object-fit: cover;
+	opacity: 0.25;
+	z-index: 0;
+}
