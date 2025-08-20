@@ -24,6 +24,7 @@
 
 	--greenLight: #ccff33;
 	--redLight: #da1e37;
+	--redNegative: #e74f63;
 	--redLight90: #da1e3715;
 
 	--linear-login: linear-gradient(90deg, #ccff33, #7a991f);
@@ -57,6 +58,12 @@
 
 	--radial-orange: radial-gradient(circle, #ffd899, #ff9e00);
 	--radial-gray: radial-gradient(circle, #d9d9d9, #8c8c8c);
+	--linear-whiteToTransparent: radial-gradient(
+		ellipse,
+		#ffffff00 00%,
+		#ffffff 65%,
+		#ffffff 100%
+	);
 }
 * {
 	margin: 0;
@@ -233,20 +240,23 @@ footer {
 }
 /*=== SCROLLBAR NANO SUITS INVISIBLE===*/
 #containerListNanoSuits::-webkit-scrollbar,
-#containerListExospine::-webkit-scrollbar {
+#containerListExospine::-webkit-scrollbar,
+.statsEVEContent::-webkit-scrollbar {
 	width: 8px; /* largeur de l’ascenseur */
 	background: none; /* couleur du fond */
 	border-radius: 4px;
 }
 
 #containerListNanoSuits::-webkit-scrollbar-thumb,
-#containerListExospine::-webkit-scrollbar-thumb {
+#containerListExospine::-webkit-scrollbar-thumb,
+.statsEVEContent::-webkit-scrollbar-thumb {
 	background: none; /* couleur du curseur */
 	border-radius: 4px;
 }
 
 #containerListNanoSuits::-webkit-scrollbar-thumb:hover,
-#containerListExospine::-webkit-scrollbar-thumb:hover {
+#containerListExospine::-webkit-scrollbar-thumb:hover,
+.statsEVEContent::-webkit-scrollbar-thumb:hover {
 	background: none; /* couleur au survol */
 }
 /*=== SCROLLBAR NANO SUITS INVISIBLE===*/

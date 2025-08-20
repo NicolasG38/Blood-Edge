@@ -3,6 +3,7 @@ import Header from "../../../../../components/Header";
 import Footer from "../../../../../components/Footer";
 import ExospineList from "../../../../../components/ExospineList";
 import ExospineRepresentative from "../../../../../components/ExospineRepresentative";
+import StatsEVE from "../../../../../components/StatsEVE";
 import SubSection from "../../../../../uiux/SubSection";
 import { useState } from "react";
 
@@ -15,6 +16,7 @@ export default function ExospinePage() {
 				<div id="row">
 					<ExospineList selectedId={selectedId} onSelect={setSelectedId} />
 					<ExospineRepresentative selectedId={selectedId} />
+					<StatsEVE />
 				</div>
 				<SubSection />
 			</main>

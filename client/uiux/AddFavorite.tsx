@@ -17,7 +17,6 @@ export default function AddFavorite({ nanoSuitId }: { nanoSuitId: string }) {
 	// Logique d'ajout aux favoris dans la base de données selon l'utilisateur et la nanoSuits
 	const handleAddFavorite = () => {
 		if (!isFavorite) {
-			const storedUserId = localStorage.getItem("userId") || "";
 			fetch(`${baseURL}/api/favorites`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
