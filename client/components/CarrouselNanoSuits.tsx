@@ -41,8 +41,7 @@ export default function CarrouselNanoSuits({
 				console.error("Erreur côté client :", err);
 			});
 	}, [baseURL]);
-	console.log("nanoSuitsServer:", nanoSuitsServer);
-	console.log("selectedId:", selectedId);
+
 	const suit =
 		nanoSuitsServer.find((s) => s.id === Number(selectedId)) ||
 		nanoSuitsServer[0];

@@ -23,7 +23,6 @@ export default function StoresBtn() {
 		fetch(`${baseURL}/api/stores`)
 			.then((response) => response.json())
 			.then((data) => {
-				console.info("Données reçues du fetch /api/stores :", data);
 				interface Store {
 					Stores_id: number;
 					Stores_title: string;

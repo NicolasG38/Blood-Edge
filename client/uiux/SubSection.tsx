@@ -35,10 +35,6 @@ export default function SubSection() {
 					icons_black: baseURL + section.Arsenal_icons_black,
 					link: section.Arsenal_link,
 				}));
-				console.log(
-					"ids:",
-					mapped.map((s) => s.link),
-				);
 				setSubSections(mapped);
 			})
 			.catch((error) => {
