@@ -103,7 +103,7 @@ export default function ExospineList({
 								/>
 								<p className="exospineName">{exospine.Exospine_title_fr}</p>
 							</button>
-							<AddFavorite nanoSuitId={exospine.id.toString()} />
+							<AddFavorite exo={exospine.id.toString()} />
 						</li>
 					))}
 				</ul>
