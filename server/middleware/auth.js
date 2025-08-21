@@ -1,15 +1,22 @@
 import jwt from "jsonwebtoken";
 
 export function requireAuth(req, res, next) {
+	let token;
 	const auth = req.headers.authorization;
-	if (!auth?.startsWith("Bearer "))
-		return res.status(401).json({ error: "UNAUTHORIZED" });
-	const token = auth.slice(7);
+	if (auth?.startsWith("Bearer ")) {
+		token = auth.slice(7);
+	} else if (req.cookies?.token) {
+		token = req.cookies.token;
+	}
+
+	if (!token) return res.status(401).json({ error: "UNAUTHORIZED" });
 	try {
 		const payload = jwt.verify(token, process.env.JWT_SECRET);
+
 		req.user = payload;
 		next();
-	} catch {
+	} catch (err) {
+		console.error("Erreur JWT:", err);
 		return res.status(401).json({ error: "UNAUTHORIZED" });
 	}
 }

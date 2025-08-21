@@ -41,7 +41,31 @@ const login = async (req, res) => {
 			{ expiresIn: "1h" },
 		);
 
+		res.cookie("userId", user.User_id, {
+			httpOnly: false, // false pour pouvoir le lire côté client si besoin
+			sameSite: "lax",
+			secure: false, // true en prod HTTPS
+			maxAge: 24 * 60 * 60 * 1000,
+		});
+		res.cookie("pseudo", user.User_pseudo, {
+			httpOnly: false,
+			sameSite: "lax",
+			secure: false,
+			path: "/",
+			maxAge: 24 * 60 * 60 * 1000,
+		});
+
+		// Stocke le token dans un cookie sécurisé
+		res.cookie("token", token, {
+			httpOnly: true,
+			secure: false, // true en prod, false en dev
+			sameSite: "strict",
+			maxAge: 24 * 60 * 60 * 1000, // 1 jour
+		});
+
+		// Tu peux aussi renvoyer des infos utiles au client
 		return res.json({
+			success: true,
 			user: {
 				User_id: user.User_id,
 				User_pseudo: user.User_pseudo,
@@ -56,4 +80,11 @@ const login = async (req, res) => {
 	}
 };
 
-export default { login };
+const logout = (req, res) => {
+	res.clearCookie("token");
+	res.clearCookie("userId");
+	res.clearCookie("pseudo");
+	return res.json({ success: true, message: "Déconnexion réussie" });
+};
+
+export default { login, logout };

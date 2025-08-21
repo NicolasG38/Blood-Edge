@@ -48,7 +48,7 @@ const create = async (req, res) => {
 					return res.status(400).json({ error: result.code || "INVALID" });
 			}
 		}
-		res.cookie("auth", result.token, {
+		res.cookie("token", result.token, {
 			httpOnly: true,
 			sameSite: "lax",
 			secure: process.env.NODE_ENV === "production",

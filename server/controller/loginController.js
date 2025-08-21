@@ -1,3 +1,4 @@
+import { path } from "motion/react-client";
 import { authenticate } from "../action/loginAction.js";
 
 export async function login(req, res) {
@@ -25,8 +26,20 @@ export async function login(req, res) {
 			// Pré‑validation (si tu utilises un flux en deux temps)
 			return res.json({ pending: true });
 		}
-
-		res.cookie("auth", result.token, {
+		res.cookie("userId", user.User_id, {
+			httpOnly: false, // false pour pouvoir le lire côté client si besoin
+			sameSite: "lax",
+			secure: false, // true en prod HTTPS
+			maxAge: 24 * 60 * 60 * 1000,
+		});
+		res.cookie("pseudo", user.User_pseudo, {
+			httpOnly: false,
+			sameSite: "lax",
+			secure: false,
+			path: "/",
+			maxAge: 24 * 60 * 60 * 1000,
+		});
+		res.cookie("token", result.token, {
 			httpOnly: true,
 			sameSite: "lax",
 			maxAge: 3600000,
