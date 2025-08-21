@@ -7,7 +7,8 @@ import loginController from "./action/loginActions.js";
 import nanoSuitsActions from "./action/nanoSuitsActions.js";
 import sectionActions from "./action/sectionActions.js";
 import signupActions from "./action/signupActions.js";
-import statsEVEActions from "./action/StatsEVEActions.js";
+import statsActions from "./action/statsActions.js"; // données brut
+import StatsEVEActions from "./action/StatsEVEActions.js"; // graphique visuelle
 import storesActions from "./action/storesActions.js";
 
 import subSectionActions from "./action/subSectionActions.js";
@@ -24,6 +25,13 @@ router.use(express.urlencoded({ extended: true }));
 
 // Healthcheck
 router.get("/health", (req, res) => res.json({ status: "ok" }));
+
+// Stats EVE
+router.get("/api/stats", statsActions.getAllStats);
+router.get("/api/stats/:id", statsActions.getStatById);
+router.post("/api/stats", statsActions.createStat);
+router.put("/api/stats/:id", statsActions.updateStat);
+router.delete("/api/stats-eve/:id", statsActions.deleteStat);
 
 //Exospine
 router.get("/api/exospine", exospineActions.browse);
@@ -52,7 +60,7 @@ router.get("/api/subsections", subSectionActions.browseArsenal);
 router.get("/api/locations", locationsActions.browse);
 
 // Stats EVE
-router.get("/api/stats-eve", statsEVEActions.browse);
+router.get("/api/stats-eve", StatsEVEActions.browse);
 
 // Stores
 router.get("/api/stores", storesActions.browse);
