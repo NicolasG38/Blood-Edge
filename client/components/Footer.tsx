@@ -1,4 +1,5 @@
 import Image from "next/image";
+import StoresBtn from "../uiux/StoresBtn";
 
 import "./Footer.css";
 
@@ -85,6 +86,7 @@ export default function Footer() {
 					</article>
 				</section>
 			</section>
+			<StoresBtn />
 			<span id="Footer">
 				<p id="copyrightFooter">
 					STELLAR BLADE© 2024 SHIFT UP Corporation. All rights reserved.
