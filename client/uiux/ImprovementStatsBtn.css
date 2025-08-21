@@ -1,0 +1,38 @@
+#improvement-stats-btn {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 1rem;
+	background: transparent;
+	color: var(--black);
+	border: 1px solid var(--btnborder);
+	border-radius: 25px;
+	padding-right: 2px;
+	width: 188px;
+	height: 50px;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+#improvement-stats-btn:hover #improvement-stats-btn-icon {
+	background: var(--radial-orange);
+	box-shadow: 0 0 4px var(--orange);
+}
+
+#improvement-stats-btn:active #improvement-stats-btn-icon {
+	background: var(--radial-orangeDarker);
+	box-shadow: 0 0 4px var(--orange);
+}
+
+#improvement-stats-btn-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 10px;
+	border: 1px solid var(--btnborder);
+	border-radius: 25px;
+
+	width: 95px;
+	height: 44px;
+}
