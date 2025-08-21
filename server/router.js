@@ -12,6 +12,7 @@ import storesActions from "./action/storesActions.js";
 
 import subSectionActions from "./action/subSectionActions.js";
 
+import { getMe } from "./controller/userController.js";
 import { requireAuth, requireAdmin } from "./middleware/auth.js";
 import { loginLimiter } from "./middleware/rateLimiters.js";
 
@@ -36,10 +37,12 @@ router.get("/api/nanosuits/id-title", nanoSuitsActions.getIdAndTitle);
 router.post("/api/favorites", favoriteController.addFavorite);
 router.delete("/api/favorites", favoriteController.removeFavorite);
 router.post("/api/favorites/status", favoriteController.isFavorite);
+router.post("/api/logout", loginController.logout);
 
 // Auth
 router.post("/api/users", signupActions.create);
 router.post("/api/login", loginLimiter, loginController.login);
+router.get("/api/me", requireAuth, getMe);
 
 // Sections
 router.get("/api/sections", sectionActions.browse);
@@ -56,5 +59,12 @@ router.get("/api/stores", storesActions.browse);
 
 // Users
 router.get("/api/users", requireAuth, requireAdmin, signupActions.browse);
+
+// route de test
+router.get("/api/test-cookie", (req, res) => {
+	const token = req.cookies.token;
+
+	res.json({ token });
+});
 
 export default router;

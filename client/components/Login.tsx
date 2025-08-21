@@ -26,7 +26,6 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [showFail, setShowFail] = useState(false);
 	const [internalMode, setInternalMode] = useState<"login" | "signup">("login");
-	const router = useRouter();
 
 	const effectiveSwitch =
 		onSwitch ??
@@ -52,6 +51,7 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 			const response = await fetch(`${baseURL}/api/login`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
+				credentials: "include",
 				body: JSON.stringify(payload),
 			});
 
@@ -73,9 +73,7 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 			}
 
 			if (response.ok && data?.token && data.user) {
-				localStorage.setItem("token", data.token);
 				localStorage.setItem("pseudoStorage", data.user.User_pseudo);
-				localStorage.setItem("userId", String(data.user.User_id));
 
 				const payload: Payload = {
 					token: data.token,
@@ -206,7 +204,6 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 					type="button"
 					className="loginAndsignUpFunctionnal signup"
 					onClick={() => {
-						console.info("[CLICK SIGNUP]");
 						effectiveSwitch();
 					}}
 					disabled={loading || status === "success"}

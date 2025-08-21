@@ -1,11 +1,15 @@
 import "dotenv/config";
 import express from "express";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import router from "./router.js";
 
 const app = express();
 const PORT = process.env.PORT || 3310;
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
+const CLIENT_URL = process.env.CLIENT_URL;
+
+// Ajoute cookie-parser comme middleware
+app.use(cookieParser());
 
 // CORS: on ne met pas d’URL comme chemin, seulement comme origin
 app.use(

@@ -19,10 +19,13 @@ export default function DashboardPage() {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 	useEffect(() => {
-		if (typeof window !== "undefined") {
-			const storedPseudo = localStorage.getItem("pseudoStorage");
-			if (storedPseudo) setPseudo(storedPseudo);
-		}
+		fetch("http://localhost:3310/api/me", { credentials: "include" })
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.user?.pseudo) {
+					setPseudo(data.user.pseudo);
+				}
+			});
 	}, []);
 
 	useEffect(() => {
@@ -32,7 +35,7 @@ export default function DashboardPage() {
 				setNanoSuits(data);
 			});
 	}, [baseURL]);
-
+	console.log("pseudo:", pseudo);
 	return (
 		<>
 			<Header />

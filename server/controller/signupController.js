@@ -66,10 +66,24 @@ export async function signup(req, res) {
 			return res.status(400).json({ error: "Requête invalide" });
 		}
 
-		res.cookie("auth", result.token, {
+		res.cookie("token", result.token, {
 			httpOnly: true,
 			sameSite: "lax",
 			maxAge: 3600000,
+		});
+
+		res.cookie("pseudo", user.User_pseudo, {
+			httpOnly: false,
+			sameSite: "lax",
+			secure: false,
+			maxAge: 24 * 60 * 60 * 1000, // 24 hours
+		});
+
+		res.cookie("userId", result.user.User_id, {
+			httpOnly: false,
+			sameSite: "lax",
+			secure: false,
+			maxAge: 24 * 60 * 60 * 1000,
 		});
 
 		return res.json({

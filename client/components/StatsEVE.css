@@ -10,7 +10,7 @@
 .statsEVEIconContainer {
 	position: relative;
 	display: flex;
-	width: 520px;
+	width: 540px;
 	z-index: 2;
 }
 .statsEVEIcon {
@@ -52,6 +52,7 @@
 	top: 0;
 	left: 0;
 	height: 5px;
+	margin-left: 0.5rem;
 	border-radius: 4px;
 }
 

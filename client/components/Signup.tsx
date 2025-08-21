@@ -113,13 +113,10 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 			}
 
 			if (response.ok && data?.token && data.user) {
-				localStorage.setItem("token", data.token);
-				localStorage.setItem("pseudoStorage", data.user.User_pseudo);
-				localStorage.setItem("userId", String(data.user.User_id));
 				setAuth({
-					token: data.token,
 					userId: String(data.user.User_id),
 					pseudo: data.user.User_pseudo,
+					isLogged: true,
 				});
 
 				setShowSuccess(true);
