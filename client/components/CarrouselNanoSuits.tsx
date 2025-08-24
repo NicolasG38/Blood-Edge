@@ -8,11 +8,15 @@ import type { JSX } from "react";
 interface NanoSuitProps {
 	id: number;
 	NS_id: number;
-	NS_title: string;
-	NS_text: string;
-	NS_text_2: string;
-	NS_Where_title: string;
-	NS_Where_text: string;
+	NS_title_fr: string;
+	NS_text_1_fr: string;
+	NS_text_1_en: string;
+	NS_text_2_fr: string;
+	NS_text_2_en: string;
+	NS_Where_title_fr: string;
+	NS_Where_title_en: string;
+	NS_Where_text_fr: string;
+	NS_Where_text_en: string;
 	NS_picture: string;
 	NS_stars: string;
 }
@@ -57,35 +61,35 @@ export default function CarrouselNanoSuits({
 						<Image
 							id="nanoSuitCarrouselStars"
 							src={baseURL + suit.NS_stars}
-							alt={`Étoiles pour ${suit.NS_title}`}
+							alt={`Étoiles pour ${suit.NS_title_fr}`}
 							width={30}
 							height={30}
 						/>
 						<Image
 							id="nanoSuitCarrouselStars"
 							src={baseURL + suit.NS_stars}
-							alt={`Étoiles pour ${suit.NS_title}`}
+							alt={`Étoiles pour ${suit.NS_title_fr}`}
 							width={30}
 							height={30}
 						/>
 						<Image
 							id="nanoSuitCarrouselStars"
 							src={baseURL + suit.NS_stars}
-							alt={`Étoiles pour ${suit.NS_title}`}
+							alt={`Étoiles pour ${suit.NS_title_fr}`}
 							width={30}
 							height={30}
 						/>
 					</div>
-					<p id="nanoSuitCarrouselName">{suit.NS_title}</p>
-					<p id="nanoSuitCarrouselText1">{suit.NS_text}</p>
-					<p id="nanoSuitCarrouselText2">{suit.NS_text_2}</p>
-					<p id="nanoSuitCarrouselWhere">{suit.NS_Where_title}</p>
-					<p id="nanoSuitCarrouselPlace">{suit.NS_Where_text}</p>
+					<p id="nanoSuitCarrouselName">{suit.NS_title_fr}</p>
+					<p id="nanoSuitCarrouselText1">{suit.NS_text_1_fr}</p>
+					<p id="nanoSuitCarrouselText2">{suit.NS_text_2_fr}</p>
+					<p id="nanoSuitCarrouselWhere">{suit.NS_Where_title_fr}</p>
+					<p id="nanoSuitCarrouselPlace">{suit.NS_Where_text_fr}</p>
 				</div>
 				<Image
 					id="nanoSuitCarrouselImage"
 					src={`${baseURL}${suit.NS_picture.startsWith("/") ? "" : "/"}${suit.NS_picture}`}
-					alt={suit.NS_title}
+					alt={suit.NS_title_fr}
 					width={623}
 					height={623}
 				/>

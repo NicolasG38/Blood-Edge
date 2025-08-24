@@ -15,7 +15,7 @@ class NanoSuitsRepository {
 	}
 	async getIdAndTitle() {
 		const [rows] = await databaseClient.query(
-			"SELECT NS_title, NS_id AS id FROM Nano_suits",
+			"SELECT NS_title_fr, NS_title_en, NS_id AS id FROM Nano_suits",
 		);
 		return rows;
 	}
