@@ -10,7 +10,6 @@ import signupActions from "./action/signupActions.js";
 import statsActions from "./action/statsActions.js"; // données brut
 import StatsEVEActions from "./action/StatsEVEActions.js"; // graphique visuelle
 import storesActions from "./action/storesActions.js";
-
 import subSectionActions from "./action/subSectionActions.js";
 
 import { getMe } from "./controller/userController.js";
