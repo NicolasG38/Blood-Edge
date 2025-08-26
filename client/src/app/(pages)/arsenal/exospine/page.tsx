@@ -5,6 +5,7 @@ import ExospineList from "../../../../../components/ExospineList";
 import ExospineRepresentative from "../../../../../components/ExospineRepresentative";
 import StatsEVE from "../../../../../components/StatsEVE";
 import SubSection from "../../../../../uiux/SubSection";
+import ImprovementStatsBtn from "../../../../../uiux/ImprovementStatsBtn";
 import { useState } from "react";
 
 export default function ExospinePage() {
@@ -18,6 +19,7 @@ export default function ExospinePage() {
 					<ExospineRepresentative selectedId={selectedId} />
 					<StatsEVE />
 				</div>
+				<ImprovementStatsBtn />
 				<SubSection />
 			</main>
 			<Footer />

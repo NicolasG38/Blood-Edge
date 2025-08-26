@@ -6,7 +6,7 @@ import AddFavorite from "../uiux/AddFavorite";
 
 interface NanoSuitProps {
 	id: number;
-	NS_title: string;
+	NS_title_fr: string;
 }
 interface ListNanoSuitsProps {
 	onSelect: (id: number) => void;
@@ -20,14 +20,19 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 		fetch(`${baseURL}/api/nanosuits/id-title`)
 			.then((response) => response.json())
 			.then((data) => {
-				setNanoSuits(data);
+				if (Array.isArray(data)) {
+					setNanoSuits(data);
+				} else if (Array.isArray(data.nanoSuits)) {
+					setNanoSuits(data.nanoSuits);
+				} else {
+					setNanoSuits([]);
+					console.error("La réponse n'est pas un tableau :", data);
+				}
 			})
 			.catch((error) => {
 				console.error("Error fetching nano suits:", error);
 			});
-		// Note: If you want to set the fetched data to a state, you can
 	}, [baseURL]);
-
 	const [hoveredId, setHoveredId] = useState<number | null>(null);
 	return (
 		<div>
@@ -70,7 +75,7 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 									width={70}
 									height={70}
 								/>
-								<p className="nanoSuitName">{suit.NS_title}</p>
+								<p className="nanoSuitName">{suit.NS_title_fr}</p>
 							</button>
 							<AddFavorite ns={suit.id.toString()} />
 						</li>
