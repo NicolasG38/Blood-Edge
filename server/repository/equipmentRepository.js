@@ -14,7 +14,7 @@ class EquipmentRepository {
 	}
 	async getIdAndTitle() {
 		const [rows] = await databaseClient.query(
-			"SELECT Equipment_id, Equipment_title_fr FROM Equipment",
+			"SELECT Equipment_id, Equipment_star_1, Equipment_star_2, Equipment_star_3, Equipment_title_fr, Equipment_title_en, Equipment_star, Equipment_star_fill, Equipment_icon, Equipment_icon_colored, Equipment_icon_Mk2, Equipment_icon_Mk2_colored FROM Equipment",
 		);
 		return rows;
 	}
