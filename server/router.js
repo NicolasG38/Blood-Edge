@@ -1,5 +1,6 @@
 import express from "express";
 
+import equipmentActions from "./action/equipmentActions.js";
 import exospineActions from "./action/exospineActions.js";
 import favoriteController from "./controller/favoriteController.js";
 import locationsActions from "./action/locationsActions.js";
@@ -35,6 +36,10 @@ router.delete("/api/stats-eve/:id", statsActions.deleteStat);
 //Exospine
 router.get("/api/exospine", exospineActions.browse);
 router.get("/api/exospine/id-title", exospineActions.getIdAndTitle);
+
+//Equipment
+router.get("/api/equipment", equipmentActions.browse);
+router.get("/api/equipment/id-title", equipmentActions.getIdAndTitle);
 
 // Nano suits
 router.get("/api/nanosuits", nanoSuitsActions.browse);
