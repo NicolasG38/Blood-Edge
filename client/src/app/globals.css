@@ -243,6 +243,7 @@ footer {
 /*=== SCROLLBAR NANO SUITS INVISIBLE===*/
 #containerListNanoSuits::-webkit-scrollbar,
 #containerListExospine::-webkit-scrollbar,
+#containerListGears::-webkit-scrollbar,
 .statsEVEContent::-webkit-scrollbar {
 	width: 8px; /* largeur de l’ascenseur */
 	background: none; /* couleur du fond */
@@ -251,6 +252,7 @@ footer {
 
 #containerListNanoSuits::-webkit-scrollbar-thumb,
 #containerListExospine::-webkit-scrollbar-thumb,
+#containerListGears::-webkit-scrollbar-thumb,
 .statsEVEContent::-webkit-scrollbar-thumb {
 	background: none; /* couleur du curseur */
 	border-radius: 4px;
@@ -258,6 +260,7 @@ footer {
 
 #containerListNanoSuits::-webkit-scrollbar-thumb:hover,
 #containerListExospine::-webkit-scrollbar-thumb:hover,
+#containerListGears::-webkit-scrollbar-thumb:hover,
 .statsEVEContent::-webkit-scrollbar-thumb:hover {
 	background: none; /* couleur au survol */
 }
