@@ -1,22 +1,22 @@
 "use client";
+import GearsList from "../../../../../components/EquipmentList";
+import GearsRepresentative from "../../../../../components/EquipementRepresentative";
 import Header from "../../../../../components/Header";
 import Footer from "../../../../../components/Footer";
-import ExospineList from "../../../../../components/ExospineList";
-import ExospineRepresentative from "../../../../../components/ExospineRepresentative";
-import StatsEVE from "../../../../../components/StatsEVE";
 import SubSection from "../../../../../uiux/SubSection";
-import ImprovementStatsBtn from "../../../../../uiux/ImprovementStatsBtn";
 import { useState } from "react";
+import StatsEVE from "../../../../../components/StatsEVE";
+import ImprovementStatsBtn from "../../../../../uiux/ImprovementStatsBtn";
 
-export default function ExospinePage() {
+export default function EquipmentPage() {
 	const [selectedId, setSelectedId] = useState<number | null>(null);
 	return (
 		<>
 			<Header />
 			<main className="parameter">
 				<div className="row">
-					<ExospineList selectedId={selectedId} onSelect={setSelectedId} />
-					<ExospineRepresentative selectedId={selectedId} />
+					<GearsList selectedId={selectedId} onSelect={setSelectedId} />
+					<GearsRepresentative selectedId={selectedId} />
 					<StatsEVE />
 				</div>
 				<ImprovementStatsBtn />

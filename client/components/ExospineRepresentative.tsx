@@ -1,26 +1,6 @@
 import { div } from "motion/react-client";
 import "./ExospineRepresentative.css";
-import { useState, useEffect, use } from "react";
-
-type ExospineItem = {
-	Exospine_id: number;
-	Exospine_bar_1: boolean;
-	Exospine_bar_2: boolean;
-	Exospine_bar_3: boolean;
-	Exospine_title_fr: string;
-	Exospine_title_en: string;
-	Exospine_skill_1_fr: string;
-	Exospine_skill_1_en: string;
-	Exospine_skill_2_fr: string;
-	Exospine_skill_2_en: string;
-	Exospine_skill_3_fr: string;
-	Exospine_skill_3_en: string;
-	Exospine_text_1_fr: string;
-	Exospine_text_1_en: string;
-	Exospine_text_2_fr: string;
-	Exospine_text_2_en: string;
-	Exospine_bar: string;
-};
+import { useState, useEffect } from "react";
 
 type ExospineMap = {
 	id: number;
