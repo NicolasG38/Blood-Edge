@@ -232,7 +232,7 @@ footer {
 	margin: 0rem 0;
 }
 
-#row {
+.row {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;

@@ -12,7 +12,7 @@ export default function NanoSuitsPage() {
 		<>
 			<Header />
 			<main className="parameter">
-				<div id="row">
+				<div className="row">
 					<ListNanoSuits onSelect={setSelectedId} />
 					<CarrouselNanoSuits selectedId={selectedId} />
 				</div>

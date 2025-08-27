@@ -35,7 +35,6 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 		fetch(`${baseUrl}/api/equipment/id-title`)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
 				setGears(data);
 			});
 	}, [baseUrl]);
