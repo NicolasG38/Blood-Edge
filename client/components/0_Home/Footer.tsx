@@ -1,5 +1,5 @@
 import Image from "next/image";
-import StoresBtn from "../uiux/StoresBtn";
+import StoresBtn from "../../uiux/StoresBtn";
 
 import "./Footer.css";
 

@@ -1,5 +1,6 @@
-import "./ExospineList.css";
-import AddFavorite from "../uiux/AddFavorite";
+"use client";
+import "../List.css";
+import AddFavorite from "../../../uiux/AddFavorite";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -63,25 +64,25 @@ export default function ExospineList({
 
 	return (
 		<div>
-			<p className="titleSubSection_2">
+			<p className="titleSubSection_orange">
 				EXOSPINE <span>&gt;</span>
 			</p>
-			<div id="containerListExospine">
-				<ul id="exospineListUl">
+			<div className="containerList">
+				<ul>
 					{exospines.map((exospine) => (
 						<li
 							key={exospine.id}
-							className="exospineListLi"
+							className="ListLi_orange"
 							onMouseEnter={() => setHoveredId(exospine.id)}
 							onMouseLeave={() => setHoveredId(null)}
 						>
 							<button
 								type="button"
-								className="exospineButton"
+								className="listButton"
 								onClick={() => onSelect(exospine.id)}
 							>
 								<span
-									className="exospineDeco_1"
+									className="deco_1_orange"
 									style={{
 										background:
 											hoveredId === exospine.id
@@ -90,7 +91,7 @@ export default function ExospineList({
 									}}
 								/>
 								<Image
-									className="apparelIcon"
+									className="apparelIcon_orange"
 									src={toUrl(
 										hoveredId === exospine.id
 											? exospine.Exospine_icon_colored ||
@@ -101,15 +102,14 @@ export default function ExospineList({
 									width={70}
 									height={70}
 								/>
-								<p className="exospineName">{exospine.Exospine_title_fr}</p>
+								<p className="listName">{exospine.Exospine_title_fr}</p>
 							</button>
 							<AddFavorite exo={exospine.id.toString()} />
 						</li>
 					))}
 				</ul>
-				<div id="exospineListArrow">
+				<div className="listArrow">
 					<Image
-						id="exospineListArrowTop"
 						src="/assets/icons/stat_2_orange.svg"
 						alt="Nano suits list arrow top"
 						width={300}
@@ -117,7 +117,6 @@ export default function ExospineList({
 					/>
 
 					<Image
-						id="exospineListArrowBottom"
 						src="/assets/icons/stat_minus_2_orange.svg"
 						alt="Nano suits list arrow bottom"
 						width={300}

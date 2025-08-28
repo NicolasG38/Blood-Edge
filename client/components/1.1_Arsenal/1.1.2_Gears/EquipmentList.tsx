@@ -1,6 +1,6 @@
 "use client";
-import "./EquipmentList.css";
-import AddFavorite from "../uiux/AddFavorite";
+import "../List.css";
+import AddFavorite from "../../../uiux/AddFavorite";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -40,26 +40,26 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 	}, [baseUrl]);
 
 	return (
-		<div className="gears-list">
-			<p className="titleSubSection_2">
+		<div>
+			<p className="titleSubSection_orange">
 				GEARS <span>&gt;</span>
 			</p>
-			<div id="containerListGears">
-				<ul id="gearsListUl">
+			<div className="containerList">
+				<ul>
 					{gears.map((item) => (
 						<li
 							key={item.Equipment_id}
-							className="gearsListLi"
+							className="ListLi_orange"
 							onMouseEnter={() => setHoveredId(item.Equipment_id)}
 							onMouseLeave={() => setHoveredId(null)}
 						>
 							<button
 								type="button"
-								className="gearsButton"
+								className="listButton"
 								onClick={() => onSelect(item.Equipment_id)}
 							>
 								<span
-									className="gearsDeco_1"
+									className="deco_1_orange"
 									style={{
 										background:
 											hoveredId === item.Equipment_id
@@ -68,7 +68,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 									}}
 								/>
 								<Image
-									className="apparelIcon"
+									className="apparelIcon_orange"
 									src={toUrl(
 										hoveredId === item.Equipment_id
 											? item.Equipment_icon_colored ||
@@ -79,23 +79,20 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 									width={24}
 									height={24}
 								/>
-								<p className="gearsName">{item.Equipment_title_fr}</p>
+								<p className="listName">{item.Equipment_title_fr}</p>
 							</button>
 							<AddFavorite equip={item.Equipment_id.toString()} />
 						</li>
 					))}
 				</ul>
-				<div id="gearsListArrow">
+				<div className="listArrow">
 					<Image
-						id="gearsListArrowTop"
 						src="/assets/icons/stat_2_orange.svg"
 						alt="Nano suits list arrow top"
 						width={300}
 						height={300}
 					/>
-
 					<Image
-						id="gearsListArrowBottom"
 						src="/assets/icons/stat_minus_2_orange.svg"
 						alt="Nano suits list arrow bottom"
 						width={300}

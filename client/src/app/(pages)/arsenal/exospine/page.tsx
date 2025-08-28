@@ -1,8 +1,8 @@
 "use client";
-import Header from "../../../../../components/Header";
-import Footer from "../../../../../components/Footer";
-import ExospineList from "../../../../../components/ExospineList";
-import ExospineRepresentative from "../../../../../components/ExospineRepresentative";
+import Header from "../../../../../components/0_Home/Header";
+import Footer from "../../../../../components/0_Home/Footer";
+import ExospineList from "../../../../../components/1.1_Arsenal/1.1.1_Exospine/ExospineList";
+import ExospineRepresentative from "../../../../../components/1.1_Arsenal/1.1.1_Exospine/ExospineRepresentative";
 import StatsEVE from "../../../../../components/StatsEVE";
 import SubSection from "../../../../../uiux/SubSection";
 import ImprovementStatsBtn from "../../../../../uiux/ImprovementStatsBtn";

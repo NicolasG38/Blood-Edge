@@ -1,8 +1,8 @@
 "use client";
-import Header from "../../../../../components/Header";
-import Footer from "../../../../../components/Footer";
-import ListNanoSuits from "../../../../../components/ListNanoSuits";
-import CarrouselNanoSuits from "../../../../../components/CarrouselNanoSuits";
+import Header from "../../../../../components/0_Home/Header";
+import Footer from "../../../../../components/0_Home/Footer";
+import ListNanoSuits from "../../../../../components/1.1_Arsenal/1.1.3_Nano-suits/ListNanoSuits";
+import CarrouselNanoSuits from "../../../../../components/1.1_Arsenal/1.1.3_Nano-suits/CarrouselNanoSuits";
 import { useState } from "react";
 import SubSection from "../../../../../uiux/SubSection";
 

@@ -1,11 +1,11 @@
 "use client";
 import "./Header.css";
-import "./Modal.css";
+import "../0.1_Auth/Modal.css";
 
-import Login from "./Login";
-import Modal from "./Modal";
+import Login from "../0.1_Auth/Login";
+import Modal from "../0.1_Auth/Modal";
 import SearchBar from "./SearchBar";
-import SignupLoginBtn from "../uiux/SignUpLoginBtn";
+import SignupLoginBtn from "../../uiux/SignUpLoginBtn";
 
 import Link from "next/link";
 import Image from "next/image";

@@ -1,8 +1,8 @@
 "use client";
-import "./ListNanoSuits.css";
+import "../List.css";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import AddFavorite from "../uiux/AddFavorite";
+import AddFavorite from "../../../uiux/AddFavorite";
 
 interface NanoSuitProps {
 	id: number;
@@ -36,27 +36,27 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 	const [hoveredId, setHoveredId] = useState<number | null>(null);
 	return (
 		<div>
-			<p className="titleSubSection_1">
+			<p className="titleSubSection_blue">
 				NANO-COMBINAISON <span>&gt;</span>
 			</p>
-			<div id="containerListNanoSuits">
-				<ul id="nanoSuitsListUl">
+			<div className="containerList">
+				<ul>
 					{nanoSuits.map((suit) => (
 						<li
 							key={suit.id}
-							className="nanoSuitlistLi"
+							className="listLi_blue"
 							onMouseEnter={() => setHoveredId(suit.id)}
 							onMouseLeave={() => setHoveredId(null)}
 						>
 							<button
 								type="button"
-								className="nanoSuitButton"
+								className="listButton"
 								onClick={() => {
 									onSelect(suit.id);
 								}}
 							>
 								<span
-									className="nanoSuitDeco_1"
+									className="deco_1_blue"
 									style={{
 										background:
 											hoveredId === suit.id
@@ -65,7 +65,7 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 									}}
 								/>
 								<Image
-									className="apparelIcon"
+									className="apparelIcon_blue"
 									src={
 										hoveredId === suit.id
 											? "/assets/icons/apparel_black.svg"
@@ -75,15 +75,14 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 									width={70}
 									height={70}
 								/>
-								<p className="nanoSuitName">{suit.NS_title_fr}</p>
+								<p className="listName">{suit.NS_title_fr}</p>
 							</button>
 							<AddFavorite ns={suit.id.toString()} />
 						</li>
 					))}
 				</ul>
-				<div id="nanoSuitsListArrow">
+				<div className="listArrow">
 					<Image
-						id="nanoSuitsListArrowTop"
 						src="/assets/icons/stat_2_blue.svg"
 						alt="Nano suits list arrow top"
 						width={300}
@@ -91,7 +90,6 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 					/>
 
 					<Image
-						id="nanoSuitsListArrowBottom"
 						src="/assets/icons/stat_minus_2_blue.svg"
 						alt="Nano suits list arrow bottom"
 						width={300}

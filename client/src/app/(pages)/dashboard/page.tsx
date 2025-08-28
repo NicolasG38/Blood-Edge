@@ -1,6 +1,6 @@
 "use client";
-import Header from "../../../../components/Header";
-import Footer from "../../../../components/Footer";
+import Header from "../../../../components/0_Home/Header";
+import Footer from "../../../../components/0_Home/Footer";
 import "./DashboardPage.css";
 import { useState, useEffect } from "react";
 import Image from "next/image";

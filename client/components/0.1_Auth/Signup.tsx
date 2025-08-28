@@ -3,7 +3,7 @@ import "./Signup.css";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 type SignupProps = { onSuccess?: () => void; onSwitch: () => void };
 
