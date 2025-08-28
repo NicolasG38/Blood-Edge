@@ -108,7 +108,7 @@ export default function ExospineList({
 						</li>
 					))}
 				</ul>
-				<div className="listArrow">
+				<div className="listArrow orange">
 					<Image
 						src="/assets/icons/stat_2_orange.svg"
 						alt="Nano suits list arrow top"

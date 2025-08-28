@@ -3,27 +3,6 @@ import "../Representative.css";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-type GearsMap = {
-	Equipement_id: number;
-	Equipement_star_1: boolean;
-	Equipement_star_2: boolean;
-	Equipement_star_3: boolean;
-	Equipement_title_fr: string;
-	Equipement_title_en: string;
-	Equipement_skill_1_fr: string;
-	Equipement_skill_1_en: string;
-	Equipement_skill_2_fr: string;
-	Equipement_skill_2_en: string;
-	Equipement_stat_1: number;
-	Equipement_stat_2?: number;
-	Equipement_text_1_fr: string;
-	Equipement_text_1_en: string;
-	Equipement_text_2_fr: string;
-	Equipement_text_2_en: string;
-	Equipement_star: string;
-	Equipement_star_fill: string;
-};
-
 type GearsUI = {
 	id: number;
 	star_1: boolean;
@@ -93,50 +72,52 @@ export default function EquipementRepresentative({
 	}
 
 	return (
-		<div className="representative">
-			<div className="stars">
-				<Image
-					src={toUrl(current.star_1 ? current.star_fill : current.star)}
-					alt="Star 1"
-					className="star-icon"
-					width={32}
-					height={32}
-				/>
-				<Image
-					src={toUrl(current.star_2 ? current.star_fill : current.star)}
-					alt="Star 2"
-					className="star-icon"
-					width={32}
-					height={32}
-				/>
-				<Image
-					src={toUrl(current.star_3 ? current.star_fill : current.star)}
-					alt="Star 3"
-					className="star-icon"
-					width={32}
-					height={32}
-				/>
-			</div>
-			<p className="representativeTitle">{current.title_fr}</p>
-			<section className="representativeSkill">
-				<p className="gearsRepresentativeSkilltext">
-					{current.skill_1_fr}{" "}
-					<span className="gearsRepresentativeSkillValue">
-						+{current.stat_1}%
-					</span>
-				</p>
-				<p className="gearsRepresentativeSkilltext">
-					{current.skill_2_fr}{" "}
-					<span className="gearsRepresentativeSkillValue">
-						+{current.stat_2}%
-					</span>
-				</p>
-			</section>
+		<div className="containerRepresentative">
+			<section className="representative">
+				<div className="stars">
+					<Image
+						src={toUrl(current.star_1 ? current.star_fill : current.star)}
+						alt="Star 1"
+						className="star-icon"
+						width={32}
+						height={32}
+					/>
+					<Image
+						src={toUrl(current.star_2 ? current.star_fill : current.star)}
+						alt="Star 2"
+						className="star-icon"
+						width={32}
+						height={32}
+					/>
+					<Image
+						src={toUrl(current.star_3 ? current.star_fill : current.star)}
+						alt="Star 3"
+						className="star-icon"
+						width={32}
+						height={32}
+					/>
+				</div>
+				<p className="representativeTitle">{current.title_fr}</p>
+				<section className="representativeSkill gears">
+					<p className="gearsRepresentativeSkilltext">
+						{current.skill_1_fr}{" "}
+						<span className="gearsRepresentativeSkillValue">
+							+{current.stat_1}%
+						</span>
+					</p>
+					<p className="gearsRepresentativeSkilltext">
+						{current.skill_2_fr}{" "}
+						<span className="gearsRepresentativeSkillValue">
+							+{current.stat_2}%
+						</span>
+					</p>
+				</section>
 
-			<div className="representativeText">
-				<p className="representativeText_1">{current.text_1_fr}</p>
-				<p className="representativeText_2">{current.text_2_fr}</p>
-			</div>
+				<div className="representativeText">
+					<p className="representativeText_1">{current.text_1_fr}</p>
+					<p className="representativeText_2">{current.text_2_fr}</p>
+				</div>
+			</section>
 		</div>
 	);
 }

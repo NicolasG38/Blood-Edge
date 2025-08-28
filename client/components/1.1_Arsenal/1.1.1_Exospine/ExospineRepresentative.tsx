@@ -70,7 +70,7 @@ export default function ExospineRepresentative({
 	}
 	const isOn = (bar: boolean) => (bar ? "bar-on" : "bar-off");
 	return (
-		<div>
+		<div className="containerRepresentative">
 			<section className="representative">
 				<p className="representativeTitle">{current.title_fr}</p>
 
