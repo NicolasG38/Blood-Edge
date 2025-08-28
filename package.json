@@ -1,52 +1,49 @@
 {
-  "name": "p3",
-  "version": "0.0.1",
-  "description": "",
-  "homepage": "https://github.com/NicolasG38/Blood-Edge/blob/main/README.md",
-  "bugs": {
-    "url": "https://github.com/NicolasG38/Blood-Edge/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NicolasG38/Blood-Edge"
-  },
-  "workspaces": [
-    "client",
-    "server"
-  ],
-  "scripts": {
-    "build": "npm run build --workspaces --if-present",
-    "clean": "node ./bin/clean",
-    "db:migrate": "npm run db:migrate --workspace=server",
-    "db:seed": "npm run db:seed --workspace=server",
-    "dev:client": "npm run dev --workspace=client",
-    "dev:server": "npm run dev --workspace=server",
-    "prepare": "git config core.hooksPath .git-hooks || true",
-    "start": "npm run start --workspace=server",
-    "test": "jest"
-  },
-  "keywords": [],
-  "author": "Nicolas G.",
-  "license": "MIT",
-  "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
-    "@types/express": "^5.0.3",
-    "dotenv-cli": "^9.0.0",
-    "jest": "^30.0.5"
-  },
-  "dependencies": {
-    "argon2": "^0.43.1",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.0",
-    "express-rate-limit": "^8.0.1",
-    "jsonwebtoken": "^9.0.2",
-    "motion": "^12.23.7",
-    "mysql2": "^3.14.2",
-    "router": "^2.2.0",
-    "vite": "^7.0.6",
-    "zod": "^4.0.17"
-  }
+	"name": "p3",
+	"version": "0.0.1",
+	"description": "",
+	"homepage": "https://github.com/NicolasG38/Blood-Edge/blob/main/README.md",
+	"bugs": {
+		"url": "https://github.com/NicolasG38/Blood-Edge/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NicolasG38/Blood-Edge"
+	},
+	"workspaces": ["client", "server"],
+	"scripts": {
+		"build": "npm run build --workspaces --if-present",
+		"clean": "node ./bin/clean",
+		"db:migrate": "npm run db:migrate --workspace=server",
+		"db:seed": "npm run db:seed --workspace=server",
+		"dev:client": "npm run dev",
+		"dev:server": "npm run server",
+		"prepare": "git config core.hooksPath .git-hooks || true",
+		"start": "npm run start --workspace=server",
+		"test": "jest"
+	},
+	"keywords": [],
+	"author": "Nicolas G.",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@commitlint/cli": "^19.8.0",
+		"@commitlint/config-conventional": "^19.8.0",
+		"@types/express": "^5.0.3",
+		"dotenv-cli": "^9.0.0",
+		"jest": "^30.0.5"
+	},
+	"dependencies": {
+		"argon2": "^0.43.1",
+		"cookie-parser": "^1.4.7",
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.0",
+		"express-rate-limit": "^8.0.1",
+		"jsonwebtoken": "^9.0.2",
+		"motion": "^12.23.7",
+		"mysql2": "^3.14.2",
+		"router": "^2.2.0",
+		"vite": "^7.0.6",
+		"zod": "^4.0.17"
+	}
 }
