@@ -49,7 +49,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 					{gears.map((item) => (
 						<li
 							key={item.Equipment_id}
-							className="ListLi_orange"
+							className="ListLi_orange gears"
 							onMouseEnter={() => setHoveredId(item.Equipment_id)}
 							onMouseLeave={() => setHoveredId(null)}
 						>
@@ -59,7 +59,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 								onClick={() => onSelect(item.Equipment_id)}
 							>
 								<span
-									className="deco_1_orange"
+									className="deco_1_orange gears"
 									style={{
 										background:
 											hoveredId === item.Equipment_id
@@ -68,7 +68,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 									}}
 								/>
 								<Image
-									className="apparelIcon_orange"
+									className="apparelIcon_orange gears"
 									src={toUrl(
 										hoveredId === item.Equipment_id
 											? item.Equipment_icon_colored ||
@@ -79,7 +79,44 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 									width={24}
 									height={24}
 								/>
-								<p className="listName">{item.Equipment_title_fr}</p>
+								<div className="starIconsTitleContainer">
+									<div className="starIconsContainer">
+										<Image
+											className="starIcon"
+											src={toUrl(
+												item.Equipment_star_1
+													? item.Equipment_star_fill
+													: item.Equipment_star,
+											)}
+											alt="Star 1"
+											width={32}
+											height={32}
+										/>
+										<Image
+											className="starIcon"
+											src={toUrl(
+												item.Equipment_star_2
+													? item.Equipment_star_fill
+													: item.Equipment_star,
+											)}
+											alt="Star 1"
+											width={32}
+											height={32}
+										/>
+										<Image
+											className="starIcon"
+											src={toUrl(
+												item.Equipment_star_3
+													? item.Equipment_star_fill
+													: item.Equipment_star,
+											)}
+											alt="Star 1"
+											width={32}
+											height={32}
+										/>
+									</div>
+									<p className="listName">{item.Equipment_title_fr}</p>
+								</div>
 							</button>
 							<AddFavorite equip={item.Equipment_id.toString()} />
 						</li>
