@@ -21,13 +21,8 @@ const browse = async (_req, res) => {
 
 const create = async (req, res) => {
 	try {
-		const {
-			email,
-			pseudo,
-			password,
-			is_accept_cgu = 1,
-			type_account = 1,
-		} = req.body || {};
+		const { email, pseudo, password, is_accept_cgu, type_account } =
+			req.body || {};
 		const result = await signupAndAuth({
 			email,
 			pseudo,
@@ -35,17 +30,26 @@ const create = async (req, res) => {
 			is_accept_cgu,
 			type_account,
 		});
+		console.log("type_account reçu :", req.body.type_account);
 		if (!result.ok) {
 			switch (result.code) {
 				case "INVALID_PAYLOAD":
 				case "WEAK_PASSWORD":
-					return res.status(400).json({ error: result.code });
+					return res
+						.status(400)
+						.json({ error: result.code, message: result.message });
 				case "PSEUDO_OR_EMAIL_TAKEN":
-					return res.status(409).json({ error: result.code });
+					return res
+						.status(409)
+						.json({ error: result.code, message: result.message });
 				case "CONFIG_ERROR":
-					return res.status(500).json({ error: result.code });
+					return res
+						.status(500)
+						.json({ error: result.code, message: result.message });
 				default:
-					return res.status(400).json({ error: result.code || "INVALID" });
+					return res
+						.status(400)
+						.json({ error: result.code, message: result.message || "INVALID" });
 			}
 		}
 		res.cookie("token", result.token, {
@@ -70,12 +74,35 @@ export async function signupAndAuth({
 	email,
 	pseudo,
 	password,
-	is_accept_cgu = 1,
+	is_accept_cgu,
 	type_account = 1,
 }) {
-	if (!email || !pseudo || !password)
-		return { ok: false, code: "INVALID_PAYLOAD" };
-	if (password.length < 8) return { ok: false, code: "WEAK_PASSWORD" };
+	if (!email || !pseudo || !password) {
+		const missing = [];
+		if (!email) missing.push("email");
+		if (!pseudo) missing.push("pseudo");
+		if (!password) missing.push("password");
+		return {
+			ok: false,
+			code: "INVALID_PAYLOAD",
+			message: `Champs manquants : ${missing.join(", ")}`,
+		};
+	}
+	if (password.length < 8) {
+		return {
+			ok: false,
+			code: "WEAK_PASSWORD",
+			message: "Le mot de passe doit contenir au moins 8 caractères.",
+		};
+	}
+
+	if (Number(is_accept_cgu) !== 1) {
+		return {
+			ok: false,
+			code: "CGU_NOT_ACCEPTED",
+			message: "Les CGU doivent être acceptées.",
+		};
+	}
 
 	const existing = await signupRepository.findByEmailOrPseudo(email, pseudo);
 	if (existing) return { ok: false, code: "PSEUDO_OR_EMAIL_TAKEN" };
