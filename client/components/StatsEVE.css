@@ -1,23 +1,35 @@
 #statsEVEHeader > p {
 	font-family: "QuanRounded-Bold", sans-serif;
 	font-size: 3rem;
+	margin-top: 0rem;
+	position: relative;
+	z-index: 5;
 }
 .statsEVEContent {
-	height: 650px;
+	height: 75vh;
 	overflow-y: auto;
 	overflow-x: hidden;
+	width: 25vw;
 }
-.statsEVEIconContainer {
-	position: relative;
-	display: flex;
-	width: 340px;
-	z-index: 2;
+
+.statsEVELi {
+	margin: 1rem 0;
+
+	width: 23vw;
 }
+
 .statsEVEIcon {
 	width: 32px;
 	height: 32px;
 	margin-right: 0.5rem;
 	vertical-align: middle;
+}
+
+.statsEVEIconContainer {
+	position: relative;
+	display: flex;
+	width: 25vw;
+	z-index: 2;
 }
 
 .statsEVEIconTitle {
@@ -40,7 +52,7 @@
 .statsEVEBar {
 	position: relative;
 	height: 5px;
-	width: 320px;
+	width: 22vw;
 	margin: 0.5rem 0;
 	z-index: 2;
 }
@@ -70,12 +82,12 @@
 }
 
 #statsEVEImageContainer {
+	display: none;
 	position: absolute;
-	top: 0;
-	right: 0;
-	transform: translateY(78%) translateX(-28%);
-	width: 320px;
-	height: 673px;
+	top: 55vh;
+	right: 5vw;
+	width: 347px;
+	height: 70vh;
 	overflow: hidden;
 	z-index: 0;
 }

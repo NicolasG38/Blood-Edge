@@ -57,7 +57,7 @@ export default function StatsEVE() {
 	}, [baseURL]);
 
 	return (
-		<div className="statsEVEContainer">
+		<div id="statsEVEContainer">
 			<div id="statsEVEHeader">
 				<p>Stats EVE</p>
 			</div>
@@ -68,7 +68,7 @@ export default function StatsEVE() {
 					<ul>
 						{statsEVE.map((s) => {
 							return (
-								<li key={s.Stats_id}>
+								<li key={s.Stats_id} className="statsEVELi">
 									<div className="statsEVEIconContainer">
 										<Image
 											src={`${baseURL}${s.Stats_icon}`}

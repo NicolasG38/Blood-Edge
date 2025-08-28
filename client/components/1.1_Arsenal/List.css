@@ -1,7 +1,7 @@
 .titleSubSection_blue {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: start;
 	align-items: center;
 	width: 100%;
 	height: 100%;
@@ -17,7 +17,7 @@
 .titleSubSection_orange {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: start;
 	align-items: center;
 	width: 100%;
 	height: 100%;
@@ -33,8 +33,8 @@
 .containerList {
 	display: flex;
 	width: fit-content;
-	height: 500px;
-	margin: 5rem 0rem 6rem 6rem;
+	height: 70vh;
+	margin: 2rem 0rem 6rem 0;
 	overflow: scroll;
 	overflow-x: hidden;
 }
@@ -44,12 +44,13 @@
 	justify-content: flex-start;
 	align-items: center;
 	overflow: scroll;
-	height: 70px;
-	width: 300px;
+	height: 4vw;
+	min-height: 70px;
+	width: 40vh;
+	min-width: 300px;
 	border-top: var(--btnborder) 1px solid;
 	transition: 0.3s ease-in-out;
 	overflow: hidden;
-
 	&:hover {
 		border: var(--lightblack) 1px solid;
 		border-radius: 5px;
@@ -61,18 +62,16 @@
 	justify-content: flex-start;
 	align-items: center;
 	overflow: scroll;
-	height: 80px;
-	width: 380px;
+	height: 8vh;
+	min-height: 90px;
+	width: 20vw;
+	min-width: 400px;
 	border-top: var(--btnborder) 1px solid;
 	transition: 0.3s ease-in-out;
 	overflow: hidden;
-
 	&:hover {
 		border: var(--lightblack) 1px solid;
 		border-radius: 5px;
-	}
-	&.gears {
-		height: 100px;
 	}
 }
 
@@ -92,7 +91,7 @@
 
 .deco_1_blue {
 	width: 45px;
-	height: 70px;
+	height: 100vh;
 	position: relative;
 	border-radius: 5px 0 0 5px;
 	z-index: -1;
@@ -101,11 +100,14 @@
 
 .deco_1_orange {
 	width: 45px;
-	height: 80px;
+	height: 100vh;
 	position: relative;
 	border-radius: 5px 0 0 5px;
 	z-index: -1;
 	align-self: flex-start;
+	&.gears {
+		height: 100px;
+	}
 }
 
 .apparelIcon_blue {
@@ -155,13 +157,12 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: center;
-	height: 700px;
+	height: 90vh;
 	width: 300px;
 	opacity: 0.15;
 	position: absolute;
 	margin-top: -100px;
-	margin-left: 20px;
+	margin-left: 5vw;
 	z-index: -3;
 }
 

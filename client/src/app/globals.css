@@ -225,20 +225,19 @@ footer {
 .parameter {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	align-items: center;
 	height: 100%;
-	width: 100%;
-	margin: 0rem 0;
+	width: 99vw;
+	margin: 0rem 0; /* A supprimer/paramétrer une fois la barre de recherche faite */
 }
 
 .row {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	align-items: center;
 	width: 100%;
-	margin: 10rem 0 0;
+	height: 100vh;
 }
 
 @media screen and (max-width: 1024px) {

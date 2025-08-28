@@ -5,9 +5,8 @@
 }
 #nanoSuitCarrouselCard {
 	display: flex;
-	width: 1005px;
-	height: 623px;
-	margin: 0 0 0 2rem;
+	width: 70vw;
+	height: 90vh;
 }
 .nanoSuitCarrouselDetails {
 	display: flex;
@@ -23,33 +22,37 @@
 	margin: 0.5rem 0;
 }
 
-#nanoSuitCarrouselWhere {
-	display: flex;
-	justify-self: start;
-	margin-top: auto;
-	font-family: "Quan-Regular", sans-serif;
-	font-size: 1.5rem;
-	color: var(--black);
-}
-
 #nanoSuitCarrouselPlace {
 	margin-bottom: 1rem;
 }
 
 #nanoSuitCarrouselText1,
 #nanoSuitCarrouselText2,
+#nanoSuitCarrouselWhere,
 #nanoSuitCarrouselPlace {
 	font-family: "Quan-light", sans-serif;
 	font-size: 1.5rem;
 	color: var(--black);
+	margin-left: 1rem;
+}
+#nanoSuitCarrouselWhere {
+	display: flex;
+	justify-self: start;
+	margin-top: auto;
+	margin-left: 1rem;
+	font-family: "Quan-Regular", sans-serif;
+	font-size: 1.5rem;
+	color: var(--black);
 }
 #nanoSuitCarrouselText1 {
-	margin: 3rem 0 1rem 0;
+	margin: 3rem 0 1rem 1rem;
 }
 #nanoSuitCarrouselImage {
-	width: 50%;
+	width: 30vw;
 	height: 100%;
 	object-fit: cover;
+	border-radius: 25px;
+	rotate: 2deg;
 }
 
 .nanoSuitCarrouselStars {

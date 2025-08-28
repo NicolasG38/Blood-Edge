@@ -42,7 +42,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 	return (
 		<div>
 			<p className="titleSubSection_orange">
-				GEARS <span>&gt;</span>
+				ÉQUIPEMENT <span>&gt;</span>
 			</p>
 			<div className="containerList">
 				<ul>
@@ -59,7 +59,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 								onClick={() => onSelect(item.Equipment_id)}
 							>
 								<span
-									className="deco_1_orange gears"
+									className="deco_1_orange"
 									style={{
 										background:
 											hoveredId === item.Equipment_id
@@ -68,7 +68,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 									}}
 								/>
 								<Image
-									className="apparelIcon_orange gears"
+									className="apparelIcon_orange"
 									src={toUrl(
 										hoveredId === item.Equipment_id
 											? item.Equipment_icon_colored ||
@@ -122,7 +122,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 						</li>
 					))}
 				</ul>
-				<div className="listArrow">
+				<div className="listArrow orange">
 					<Image
 						src="/assets/icons/stat_2_orange.svg"
 						alt="Nano suits list arrow top"
