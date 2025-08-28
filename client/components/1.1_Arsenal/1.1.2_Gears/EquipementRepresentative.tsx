@@ -1,4 +1,5 @@
-import "./EquipementRepresentative.css";
+"use client";
+import "../Representative.css";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
@@ -57,7 +58,6 @@ export default function EquipementRepresentative({
 		fetch(`${baseURL}/api/equipment`)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log("Réponse brute :", data); // ← Ajoute ce log
 				const normalized = (Array.isArray(data) ? data : []).map((d) => ({
 					id: d.Equipment_id,
 					star_1: Boolean(Number(d.Equipment_star_1)),
@@ -91,9 +91,9 @@ export default function EquipementRepresentative({
 	if (!current) {
 		return <div>Chargement des données...</div>;
 	}
-	console.log("GearsServer:", GearsServer);
+
 	return (
-		<div className="gearsRepresentative">
+		<div className="representative">
 			<div className="stars">
 				<Image
 					src={toUrl(current.star_1 ? current.star_fill : current.star)}
@@ -117,15 +117,15 @@ export default function EquipementRepresentative({
 					height={32}
 				/>
 			</div>
-			<p className="gearsRepresentativeTitle">{current.title_en}</p>
-			<section className="gearsRepresentativeSkill">
-				<p>
+			<p className="representativeTitle">{current.title_fr}</p>
+			<section className="representativeSkill">
+				<p className="gearsRepresentativeSkilltext">
 					{current.skill_1_fr}{" "}
 					<span className="gearsRepresentativeSkillValue">
 						+{current.stat_1}%
 					</span>
 				</p>
-				<p>
+				<p className="gearsRepresentativeSkilltext">
 					{current.skill_2_fr}{" "}
 					<span className="gearsRepresentativeSkillValue">
 						+{current.stat_2}%
@@ -133,9 +133,9 @@ export default function EquipementRepresentative({
 				</p>
 			</section>
 
-			<div className="gearsRepresentativeText">
-				<p className="gearsRepresentativeText_1">{current.text_1_fr}</p>
-				<p className="gearsRepresentativeText_2">{current.text_2_fr}</p>
+			<div className="representativeText">
+				<p className="representativeText_1">{current.text_1_fr}</p>
+				<p className="representativeText_2">{current.text_2_fr}</p>
 			</div>
 		</div>
 	);
