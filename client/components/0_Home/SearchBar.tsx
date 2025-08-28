@@ -4,7 +4,11 @@ import Image from "next/image";
 export default function SearchBar() {
 	return (
 		<div id="search-bar-main">
-			<input type="text" placeholder="Looking for something..." />
+			<input
+				type="text"
+				placeholder="Looking for something..."
+				spellCheck={false}
+			/>
 			<button id="search-button" type="submit">
 				Search
 				<Image
