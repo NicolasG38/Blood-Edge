@@ -1,6 +1,6 @@
 "use client";
-import GearsList from "../../../../../components/1.1_Arsenal/1.1.2_Gears/EquipmentList";
-import GearsRepresentative from "../../../../../components/1.1_Arsenal/1.1.2_Gears/EquipementRepresentative";
+import GearsList from "../../../../../components/1.1_Arsenal/1.1.2_Gears/GearsList";
+import GearsRepresentative from "../../../../../components/1.1_Arsenal/1.1.2_Gears/GearsRepresentative";
 import Header from "../../../../../components/0_Home/Header";
 import Footer from "../../../../../components/0_Home/Footer";
 import SubSection from "../../../../../uiux/SubSection";

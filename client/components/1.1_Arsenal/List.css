@@ -1,5 +1,5 @@
-.titleSubSection_blue{	
-    display: flex;
+.titleSubSection_blue {
+	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
@@ -11,10 +11,11 @@
 	& span {
 		color: var(--denim);
 		margin-left: 1rem;
-	}}
+	}
+}
 
-.titleSubSection_orange{
-    display: flex;
+.titleSubSection_orange {
+	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
@@ -70,10 +71,13 @@
 		border: var(--lightblack) 1px solid;
 		border-radius: 5px;
 	}
+	&.gears {
+		height: 100px;
+	}
 }
 
-.listButton{
-    display: flex;
+.listButton {
+	display: flex;
 	justify-content: start;
 	align-items: center;
 	font-family: "Quan-Bold", sans-serif;
@@ -86,8 +90,8 @@
 	color: var(--black);
 }
 
-.deco_1_blue{
-    width: 45px;
+.deco_1_blue {
+	width: 45px;
 	height: 70px;
 	position: relative;
 	border-radius: 5px 0 0 5px;
@@ -95,8 +99,8 @@
 	align-self: flex-start;
 }
 
-.deco_1_orange{
-    width: 45px;
+.deco_1_orange {
+	width: 45px;
 	height: 80px;
 	position: relative;
 	border-radius: 5px 0 0 5px;
@@ -120,10 +124,24 @@
 	position: relative;
 	left: -70px;
 	opacity: 0.8;
+
+	&.gears {
+		height: 100px;
+	}
 }
 
-.listName{
-    	display: flex;
+.starIconsTitleContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+}
+.starIconsContainer {
+	position: relative;
+	left: -30px;
+}
+
+.listName {
+	display: flex;
 	align-content: center;
 	justify-content: flex-start;
 	width: 100%;
@@ -133,8 +151,8 @@
 	text-align: left;
 }
 
-.listArrow{
-    display: flex;
+.listArrow {
+	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
@@ -146,7 +164,6 @@
 	margin-left: 20px;
 	z-index: -3;
 }
-
 
 /*=== SCROLLBAR NANO SUITS INVISIBLE===*/
 .containerList::-webkit-scrollbar,
