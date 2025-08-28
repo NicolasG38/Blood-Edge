@@ -1,5 +1,5 @@
 "use client";
-import Login from "../../../../components/Login";
+import Login from "../../../../components/0.1_Auth/Login";
 
 export default function TestLoginPage() {
 	return (

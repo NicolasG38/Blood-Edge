@@ -1,19 +1,21 @@
-.exospineRepresentative {
+
+.representative {
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
 	align-items: start;
-	width: 700px;
+	width: 500px;
 	height: fit-content;
 }
 
-.exospineRepresentativeTitle {
+.representativeTitle {
 	font-family: "QuanRounded-Bold", sans-serif;
 	font-size: 3rem;
 	color: var(--lightblack10);
 	text-shadow: 0 0 1px var(--black), 0 0 4px var(--orange);
 }
 
+/*=== BAR STYLES ===*/
 .bar-on {
 	background: var(--radial-orange);
 	box-shadow: 0 0 4px var(--orange);
@@ -33,8 +35,10 @@
 	grid-template-columns: repeat(3, 1fr);
 	width: 136px;
 }
+/*=== BAR STYLES FIN ===*/
 
-.exospineRepresentativeSkill {
+/*=== REPRESENTATIVE SKILL STYLES ===*/
+.representativeSkill {
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
@@ -42,6 +46,7 @@
 	font-size: 1.5rem;
 	color: var(--black);
 	margin: 1.5rem 0 5rem 0;
+    width: 500px;
 	& > div {
 		display: flex;
 		margin: 1rem 0 0 0;
@@ -58,21 +63,25 @@
 		.exospineRepresentativeSkill_3 {
 			font-family: "Quan-Regular", sans-serif;
 			height: 5rem;
-			width: 600px;
 		}
+
 	}
+            & > .gearsRepresentativeSkilltext > .gearsRepresentativeSkillValue {
+		font-family: "Quan-Bold", sans-serif;
+		color: var(--orange);
+	    }
 }
 
-.exospineRepresentativeText {
+.representativeText {
 	margin: 0 0 3rem 0;
+    width: 500px;
 	& > p {
 		font-family: "QuanRounded-Light", sans-serif;
 		font-size: 1.5rem;
 		color: var(--black);
 		margin: 1.5rem 0 0 0;
 	}
-	& > .exospineRepresentativeText_2 {
-		width: 700px;
+	& > .representativeText_2 {
 		height: 10rem;
 	}
 }

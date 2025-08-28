@@ -1,5 +1,5 @@
-import { div } from "motion/react-client";
-import "./ExospineRepresentative.css";
+"use client";
+import "../Representative.css";
 import { useState, useEffect } from "react";
 
 type ExospineMap = {
@@ -70,9 +70,9 @@ export default function ExospineRepresentative({
 	}
 	const isOn = (bar: boolean) => (bar ? "bar-on" : "bar-off");
 	return (
-		<div id="exospineRepresentativeContainer">
-			<section className="exospineRepresentative">
-				<p className="exospineRepresentativeTitle">{current.title_fr}</p>
+		<div>
+			<section className="representative">
+				<p className="representativeTitle">{current.title_fr}</p>
 
 				<section className="exospine-bar">
 					<div className={isOn(current.bar_1)} />
@@ -80,7 +80,7 @@ export default function ExospineRepresentative({
 					<div className={isOn(current.bar_3)} />
 				</section>
 
-				<section className="exospineRepresentativeSkill">
+				<section className="representativeSkill">
 					<div>
 						<div className="exospineSquareRounded" />
 						<p className="exospineRepresentativeSkill_1">
@@ -100,9 +100,9 @@ export default function ExospineRepresentative({
 						</p>
 					</div>
 				</section>
-				<section className="exospineRepresentativeText">
-					<p className="exospineRepresentativeText_1">{current.text_1_fr}</p>
-					<p className="exospineRepresentativeText_2">{current.text_2_fr}</p>
+				<section className="representativeText">
+					<p className="representativeText_1">{current.text_1_fr}</p>
+					<p className="representativeText_2">{current.text_2_fr}</p>
 				</section>
 			</section>
 		</div>
