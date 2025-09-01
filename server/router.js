@@ -12,6 +12,7 @@ import statsActions from "./action/statsActions.js"; // données brut
 import StatsEVEActions from "./action/StatsEVEActions.js"; // graphique visuelle
 import storesActions from "./action/storesActions.js";
 import subSectionActions from "./action/subSectionActions.js";
+import usersActions from "./action/usersActions.js";
 
 import { getMe } from "./controller/userController.js";
 import { requireAuth, requireAdmin } from "./middleware/auth.js";
@@ -71,6 +72,7 @@ router.get("/api/stores", storesActions.browse);
 
 // Users
 router.get("/api/users", requireAuth, requireAdmin, signupActions.browse);
+router.get("/api/users/:pseudo", usersActions.readByPseudo);
 
 // route de test
 router.get("/api/test-cookie", (req, res) => {

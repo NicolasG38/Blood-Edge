@@ -1,8 +1,9 @@
 "use client";
-import Header from "../../../../components/0_Home/Header";
-import Footer from "../../../../components/0_Home/Footer";
-import "./DashboardPage.css";
+import Header from "../../../../../components/0_Home/Header";
+import Footer from "../../../../../components/0_Home/Footer";
+import "../DashboardPage.css";
 import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 
 interface NanoSuit {
@@ -12,21 +13,29 @@ interface NanoSuit {
 	name: string;
 }
 
+interface User {
+	User_id: number;
+	User_pseudo: string;
+	User_email: string;
+}
+
 export default function DashboardPage() {
-	const [pseudo, setPseudo] = useState("");
+	const params = useParams();
+	const pseudo = typeof params === "object" ? params.pseudo : params;
+	const [user, setUser] = useState<User | null>(null);
+
 	const [hoveredId, setHoveredId] = useState<number | null>(null);
 	const [nanoSuits, setNanoSuits] = useState<NanoSuit[]>([]);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 	useEffect(() => {
-		fetch("http://localhost:3310/api/me", { credentials: "include" })
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.user?.pseudo) {
-					setPseudo(data.user.pseudo);
-				}
-			});
-	}, []);
+		if (!pseudo) return;
+		fetch(`${baseURL}/api/users/${pseudo}`)
+			.then((response) => response.json())
+			.then(setUser);
+	}, [pseudo, baseURL]);
+
+	console.log("pseudo:", user);
 
 	useEffect(() => {
 		fetch(`${baseURL}/api/nanosuits`)
@@ -35,12 +44,17 @@ export default function DashboardPage() {
 				setNanoSuits(data);
 			});
 	}, [baseURL]);
-	console.log("pseudo:", pseudo);
+
 	return (
 		<>
 			<Header />
 			<main>
-				<h1 id="dashboardTitle">Hello, {pseudo}</h1>
+				<h1 id="dashboardTitle">Hello, {user?.User_pseudo} </h1>
+				<div>
+					<p>Pseudo : {user?.User_pseudo}</p>
+					<p>Email : {user?.User_email}</p>
+					{/* autres infos */}
+				</div>
 				<p id="favoritesTitle">Vos favoris</p>
 				<div id="favoritesList">
 					{" "}
