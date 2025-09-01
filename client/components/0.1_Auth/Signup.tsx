@@ -123,7 +123,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 				setTimeout(() => {
 					onSuccess?.();
 					if (window.location.pathname !== "/dashboard") {
-						router.push("/dashboard");
+						router.push(`/dashboard/${data.user?.User_pseudo}`);
 					}
 				}, 800);
 			} else {
