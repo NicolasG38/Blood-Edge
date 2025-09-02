@@ -1,14 +1,26 @@
 "use client";
 import "./home.css";
-import { useState } from "react";
+import SectionBtn from "./SectionBtn";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function NavMobile() {
 	const [open, setOpen] = useState(false);
+	const [showSection, setShowSection] = useState(false);
+
+	useEffect(() => {
+		if (open) {
+			setShowSection(true);
+		} else {
+			// Attend la fin de la transition avant de retirer le composant
+			const timer = setTimeout(() => setShowSection(false), 350); // 350ms = durée de la transition CSS
+			return () => clearTimeout(timer);
+		}
+	}, [open]);
 
 	return (
-		<nav className="nav-mobile">
-			<ul className={open ? "open" : ""}>
+		<nav id="nav-mobile" className={open ? "open" : ""}>
+			<ul>
 				<li>
 					<Image
 						src="assets/icons/mobile/store.svg"
@@ -64,6 +76,7 @@ export default function NavMobile() {
 					Recherche
 				</li>
 			</ul>
+			{showSection && <SectionBtn className="section-btn-mobile" />}
 		</nav>
 	);
 }

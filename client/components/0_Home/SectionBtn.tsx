@@ -1,5 +1,5 @@
 "use client";
-import "./SectionBtn.css";
+import "./home.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -8,9 +8,14 @@ interface Section {
 	title: string;
 	icons_gray: string;
 	icons_black: string;
+	arrow: string;
 }
 
-export default function SectionArsenalBtn() {
+interface SectionBtnProps {
+	className?: string;
+}
+
+export default function SectionArsenalBtn({ className }: SectionBtnProps) {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [sections, setSections] = useState<Section[]>([]);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -24,12 +29,14 @@ export default function SectionArsenalBtn() {
 					Section_title: string;
 					Section_icons_gray: string;
 					Section_icons_black: string;
+					Section_arrow: string;
 				}
 				const mapped = (data as ApiSection[]).map((section) => ({
 					id: section.Section_id,
 					title: section.Section_title,
 					icons_gray: baseURL + section.Section_icons_gray,
 					icons_black: baseURL + section.Section_icons_black,
+					arrow: baseURL + section.Section_arrow,
 				}));
 
 				// Traitez les données des sections ici
@@ -41,37 +48,53 @@ export default function SectionArsenalBtn() {
 	}, [baseURL]);
 
 	return (
-		<section id="containerSectionArsenal">
+		<section className={`containerSectionArsenal mobile ${className}`}>
 			{sections.map((section: Section, idx: number) => (
 				<div
 					onMouseEnter={() => setHoveredIndex(idx)}
 					onMouseLeave={() => setHoveredIndex(null)}
-					className="sectionArsenal"
+					className="sectionArsenal mobile"
 					key={section.id}
 				>
-					<div className="arsenaldeco">
-						<span className="arsenaldeco_1" />
-						<span className="arsenaldeco_2" />
+					<div className="arsenaldeco mobile">
+						<span className="arsenaldeco_1 mobile" />
+						<span className="arsenaldeco_2 mobile" />
 					</div>
 					{/*<div id="arsenalborder">*/}
-					<div className="btnArsenal">
+					<div className="btnArsenal mobile">
 						<p
-							style={{
-								color: hoveredIndex === idx ? "var(--white)" : "var(--black)",
-							}}
+							style={
+								window.innerWidth >= 768
+									? {
+											color:
+												hoveredIndex === idx ? "var(--white)" : "var(--black)",
+										}
+									: undefined
+							}
 						>
 							{section.title}
 						</p>
 					</div>
-					{/*</div>*/}
+
 					<Image
-						className="arsenalIcon"
+						className="arsenalIcon mobile"
 						src={
-							hoveredIndex === idx ? section.icons_black : section.icons_gray
+							window.innerWidth >= 768
+								? hoveredIndex === idx
+									? section.icons_black
+									: section.icons_gray
+								: section.icons_gray
 						}
 						alt="Arsenal Icon"
 						width={96}
 						height={96}
+					/>
+					<Image
+						className="arsenalarrow mobile"
+						src={section.arrow}
+						alt="Arsenal Icon"
+						width={64}
+						height={64}
 					/>
 				</div>
 			))}

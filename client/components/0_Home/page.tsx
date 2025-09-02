@@ -4,7 +4,7 @@ import Header from "../../components/0_Home/Header";
 import Footer from "../../components/0_Home/Footer";
 import Carrousel from "./Carrousel";
 import Modal from "../../components/0.1_Auth/Modal";
-import SectionBtn from "../../uiux/SectionBtn";
+import SectionBtn from "./SectionBtn";
 import Login from "../../components/0.1_Auth/Login";
 import SubSection from "../../uiux/SubSection";
 
