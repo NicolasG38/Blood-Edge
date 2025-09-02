@@ -6,7 +6,8 @@ CREATE TABLE Section (
     Section_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     Section_title VARCHAR(20) NOT NULL,
     Section_icons_gray VARCHAR(50) NOT NULL,
-    Section_icons_black VARCHAR(50) NOT NULL
+    Section_icons_black VARCHAR(50) NOT NULL,
+    Section_arrow VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Arsenal(
@@ -163,13 +164,13 @@ CREATE TABLE Stores(
     Store_link VARCHAR(60) NOT NULL
 );
 
-insert into Section (Section_id, Section_title, Section_icons_gray, Section_icons_black)
+insert into Section (Section_id, Section_title, Section_icons_gray, Section_icons_black, Section_arrow)
 values
-    (1, "ARSENAL", "/icons/manufacturing_gray.svg", "/icons/manufacturing_black.svg"),
-    (2, "MISSIONS", "/icons/rocket_launch_gray.svg", "/icons/rocket_launch_black.svg"),
-    (3, "CARTES", "/icons/map_search_gray.svg", "/icons/map_search_black.svg"),
-    (4, "COMPÉTENCES", "/icons/person_celebrate_gray.svg", "/icons/person_celebrate_black.svg"),
-    (5, "BASE DE DONNÉES", "/icons/database_gray.svg", "/icons/database_black.svg");
+    (1, "ARSENAL", "/icons/manufacturing_gray.svg", "/icons/manufacturing_black.svg", "/icons/mobile/arrow_down.svg"),
+    (2, "MISSIONS", "/icons/rocket_launch_gray.svg", "/icons/rocket_launch_black.svg", "/icons/mobile/arrow_down.svg"),
+    (3, "CARTES", "/icons/map_search_gray.svg", "/icons/map_search_black.svg", "/icons/mobile/arrow_down.svg"),
+    (4, "COMPÉTENCES", "/icons/person_celebrate_gray.svg", "/icons/person_celebrate_black.svg", "/icons/mobile/arrow_down.svg"),
+    (5, "BASE DE DONNÉES", "/icons/database_gray.svg", "/icons/database_black.svg", "/icons/mobile/arrow_down.svg");
 
 insert into Arsenal (Arsenal_id, Arsenal_title, Arsenal_icons_gray, Arsenal_icons_black, Arsenal_link, Arsenal_id_fk)
 values
