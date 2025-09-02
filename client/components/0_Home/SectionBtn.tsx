@@ -95,6 +95,7 @@ export default function SectionArsenalBtn({ className }: SectionBtnProps) {
 						alt="Arsenal Icon"
 						width={64}
 						height={64}
+						style={window.innerWidth <= 768 ? {} : { display: "none" }}
 					/>
 				</div>
 			))}

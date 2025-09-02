@@ -49,16 +49,9 @@
 			-webkit-mask: linear-gradient(#fff 0 0) content-box,
 				linear-gradient(#fff 0 0);
 			-webkit-mask-composite: xor;
+			mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
 			mask-composite: exclude;
 			z-index: -1;
-		}
-
-		& > div.sectionArsenal:nth-child(4) {
-			width: 250px;
-		}
-		& > div.sectionArsenal:nth-child(5) {
-			width: 350px;
-			background-color: aqua;
 		}
 
 		.btnArsenal {
@@ -123,6 +116,12 @@
 		#signupLink_2:visited {
 			color: var(--black);
 		}
+	}
+	div.sectionArsenal:nth-child(4) {
+		width: 250px;
+	}
+	div.sectionArsenal:nth-child(5) {
+		width: 350px;
 	}
 	/*=== SECTION ARSENAL FIN ===*/
 }
@@ -242,27 +241,4 @@
 		transition: .35s ease-in-out;
 		opacity: 0.5;
 	}
-	/* .arsenaldeco_1.mobile,
-	.arsenaldeco.mobile {
-		position: relative;
-		width: 120px;
-		height: 120px;
-	}
-	.arsenaldeco_2.mobile {
-		position: absolute;
-		width: 40px;
-		height: 120px;
-		background: var(--lightgrey50);
-		transition: 0.3s;
-	}
-	.arsenaldeco_1.mobile {
-		transform: rotate(35deg);
-	}
-	.arsenaldeco_2.mobile {
-		transform: rotate(-35deg);
-	}
-	.sectionArsenal.mobile:hover .arsenaldeco_1.mobile,
-	.sectionArsenal.mobile:hover .arsenaldeco_2.mobile {
-		background: var(--lightblack50);
-	} */
 }
