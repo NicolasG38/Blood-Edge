@@ -21,6 +21,7 @@ export const AuthContext = React.createContext<AuthContextType | undefined>(
 );
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const [auth, setAuth] = useState<{
 		userId: string | null;
 		pseudo: string | null;
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	});
 
 	useEffect(() => {
-		fetch("http://localhost:3310/api/me", { credentials: "include" })
+		fetch(`${baseURL}/api/me`, { credentials: "include" })
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.user) {
@@ -45,11 +46,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 					setAuth({ userId: null, pseudo: null, isLogged: false });
 				}
 			});
-	}, []);
+	}, [baseURL]);
 
 	const router = useRouter();
 	const handleLogout = async () => {
-		await fetch("http://localhost:3310/api/logout", {
+		await fetch(`${baseURL}/api/logout`, {
 			method: "POST",
 			credentials: "include",
 		});
