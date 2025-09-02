@@ -17,3 +17,12 @@
 	bottom: 1rem;
 	right: 2rem;
 }
+
+@media screen and (max-width: 768px) {
+	#containerSignUplogin {
+		display: none;
+	}
+	#search-bar-main {
+		display: none;
+	}
+}

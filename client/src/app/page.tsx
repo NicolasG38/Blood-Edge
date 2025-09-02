@@ -4,6 +4,7 @@ import Header from "../../components/0_Home/Header";
 import Footer from "../../components/0_Home/Footer";
 import Carrousel from "../../components/0_Home/Carrousel";
 import Modal from "../../components/0.1_Auth/Modal";
+import NavMobile from "../../components/0_Home/NavMobile";
 import SectionBtn from "../../uiux/SectionBtn";
 import Login from "../../components/0.1_Auth/Login";
 import SubSection from "../../uiux/SubSection";
@@ -29,6 +30,7 @@ export default function Homepage() {
 				<SubSection />
 			</main>
 			<Footer />
+			<NavMobile />
 		</>
 	);
 }
