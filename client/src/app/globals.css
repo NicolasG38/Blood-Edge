@@ -12,7 +12,6 @@
 	--black: #000;
 	--blackLight: #4d4d4d;
 	--gray: #8c8c8c;
-
 	--orange: #ff9e00;
 
 	--lightgrey50: #d9d9d950;
@@ -58,6 +57,13 @@
 
 	--radial-orange: radial-gradient(circle, #ffd899, #ff9e00);
 	--radial-orangeDarker: radial-gradient(circle, #ffc566, #ff9e00);
+	--radial-blueLight: radial-gradient(
+		circle,
+		#1959b0 0%,
+		#4c8de6 72%,
+		#79a9ec 75%,
+		#508fe6 100%
+	);
 
 	--radial-gray: radial-gradient(circle, #d9d9d9, #8c8c8c);
 	--linear-whiteToTransparent: radial-gradient(
@@ -75,7 +81,7 @@
 
 html {
 	scroll-behavior: smooth;
-	height: 100%;
+	height: 100vh;
 	margin: 0;
 	padding: 0;
 }
@@ -89,69 +95,133 @@ main {
 }
 
 @font-face {
-	font-family: "Quan-Thin", sans-serif;
-	src: url("/font/TTF/Quan-Thin.ttf") format("truetype"),
-		url("/font/WOFF2/Quan-Thin.woff2") format("woff2");
+	font-family: "Quan-Thin";
+	src: url("/font/WOFF2/Quan-Thin.woff2") format("woff2"),
+		url("/font/TTF/Quan-Thin.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "Quan-ExtraLight", sans-serif;
-	src: url("/font/TTF/Quan-ExtraLight.ttf") format("truetype"),
-		url("/font/WOFF2/Quan-ExtraLight.woff2") format("woff2");
+@font-face {
+	font-family: "Quan-ExtraLight";
+	src: url("/font/WOFF2/Quan-ExtraLight.woff2") format("woff2"),
+		url("/font/TTF/Quan-ExtraLight.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "Quan-SemiLight", sans-serif;
-	src: url("/font/TTF/Quan-SemiLight.ttf") format("truetype"),
-		url("/font/WOFF2/Quan-SemiLight.woff2") format("woff2");
+@font-face {
+	font-family: "Quan-SemiLight";
+	src: url("/font/WOFF2/Quan-SemiLight.woff2") format("woff2"),
+		url("/font/TTF/Quan-SemiLight.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "Quan-Light", sans-serif;
-	src: url("/font/TTF/Quan-Light.ttf") format("truetype"),
-		url("/font/WOFF2/Quan-Light.woff2") format("woff2");
+@font-face {
+	font-family: "Quan-Light";
+	src: url("/font/WOFF2/Quan-Light.woff2") format("woff2"),
+		url("/font/TTF/Quan-Light.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "Quan-Regular", sans-serif;
-	src: url("/font/TTF/Quan-Regular.ttf") format("truetype"),
-		url("/font/WOFF2/Quan-Regular.woff2") format("woff2");
+@font-face {
+	font-family: "Quan-Regular";
+	src: url("/font/WOFF2/Quan-Regular.woff2") format("woff2"),
+		url("/font/TTF/Quan-Regular.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "Quan-Bold", sans-serif;
-	src: url("/font/TTF/Quan-Bold.ttf") format("truetype"),
-		url("/font/WOFF2/Quan-Bold.woff2") format("woff2");
+@font-face {
+	font-family: "Quan-Bold";
+	src: url("/font/WOFF2/Quan-Bold.woff2") format("woff2"),
+		url("/font/TTF/Quan-Bold.ttf") format("truetype");
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "Quan-ExtraBold", sans-serif;
-	src: url("/font/TTF/Quan-ExtraBold.ttf") format("truetype"),
-		url("/font/WOFF2/Quan-ExtraBold.woff2") format("woff2");
+@font-face {
+	font-family: "Quan-ExtraBold";
+	src: url("/font/WOFF2/Quan-ExtraBold.woff2") format("woff2"),
+		url("/font/TTF/Quan-ExtraBold.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "Quan-Black", sans-serif;
-	src: url("/font/TTF/Quan-Black.ttf") format("truetype"),
-		url("/font/WOFF2/Quan-Black.woff2") format("woff2");
+@font-face {
+	font-family: "Quan-Black";
+	src: url("/font/WOFF2/Quan-Black.woff2") format("woff2"),
+		url("/font/TTF/Quan-Black.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "QuanRounded-Thin", sans-serif;
-	src: url("/font/TTF/QuanRounded-Thin.ttf") format("truetype"),
-		url("/font/WOFF2/QuanRounded-Thin.woff2") format("woff2");
+@font-face {
+	font-family: "QuanRounded-Thin";
+	src: url("/font/WOFF2/QuanRounded-Thin.woff2") format("woff2"),
+		url("/font/TTF/QuanRounded-Thin.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "QuanRounded-ExtraLight", sans-serif;
-	src: url("/font/TTF/QuanRounded-ExtraLight.ttf") format("truetype"),
-		url("/font/WOFF2/QuanRounded-ExtraLight.woff2") format("woff2");
+@font-face {
+	font-family: "QuanRounded-ExtraLight";
+	src: url("/font/WOFF2/QuanRounded-ExtraLight.woff2") format("woff2"),
+		url("/font/TTF/QuanRounded-ExtraLight.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "QuanRounded-SemiLight", sans-serif;
-	src: url("/font/TTF/QuanRounded-SemiLight.ttf") format("truetype"),
-		url("/font/WOFF2/QuanRounded-SemiLight.woff2") format("woff2");
+@font-face {
+	font-family: "QuanRounded-SemiLight";
+	src: url("/font/WOFF2/QuanRounded-SemiLight.woff2") format("woff2"),
+		url("/font/TTF/QuanRounded-SemiLight.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "QuanRounded-Light", sans-serif;
-	src: url("/font/TTF/QuanRounded-Light.ttf") format("truetype"),
-		url("/font/WOFF2/QuanRounded-Light.woff2") format("woff2");
+@font-face {
+	font-family: "QuanRounded-Light";
+	src: url("/font/WOFF2/QuanRounded-Light.woff2") format("woff2"),
+		url("/font/TTF/QuanRounded-Light.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "QuanRounded-Regular", sans-serif;
-	src: url("/font/TTF/QuanRounded-Regular.ttf") format("truetype"),
-		url("/font/WOFF2/QuanRounded-Regular.woff2") format("woff2");
+@font-face {
+	font-family: "QuanRounded-Regular";
+	src: url("/font/WOFF2/QuanRounded-Regular.woff2") format("woff2"),
+		url("/font/TTF/QuanRounded-Regular.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "QuanRounded-Bold", sans-serif;
-	src: url("/font/TTF/QuanRounded-Bold.ttf") format("truetype"),
-		url("/font/WOFF2/QuanRounded-Bold.woff2") format("woff2");
+@font-face {
+	font-family: "QuanRounded-Bold";
+	src: url("/font/WOFF2/QuanRounded-Bold.woff2") format("woff2"),
+		url("/font/TTF/QuanRounded-Bold.ttf") format("truetype");
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "QuanRounded-ExtraBold", sans-serif;
-	src: url("/font/TTF/QuanRounded-ExtraBold.ttf") format("truetype"),
-		url("/font/WOFF2/QuanRounded-ExtraBold.woff2") format("woff2");
+@font-face {
+	font-family: "QuanRounded-ExtraBold";
+	src: url("/font/WOFF2/QuanRounded-ExtraBold.woff2") format("woff2"),
+		url("/font/TTF/QuanRounded-ExtraBold.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
+}
 
-	font-family: "QuanRounded-Black", sans-serif;
-	src: url("/font/TTF/QuanRounded-Black.ttf") format("truetype"),
-		url("/font/WOFF2/QuanRounded-Black.woff2") format("woff2");
+@font-face {
+	font-family: "QuanRounded-Black";
+	src: url("/font/WOFF2/QuanRounded-Black.woff2") format("woff2"),
+		url("/font/TTF/QuanRounded-Black.ttf") format("truetype");
+	font-style: normal;
+	font-display: swap;
 }
 a {
 	text-decoration: none;
