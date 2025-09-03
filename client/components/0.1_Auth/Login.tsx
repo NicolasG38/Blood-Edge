@@ -120,11 +120,11 @@ export default function Login({
 	};
 
 	useEffect(() => {
-		const handleResize = () => setIsMobile(isMobile);
+		const handleResize = () => setIsMobile(window.innerWidth < 768);
 		handleResize();
 		window.addEventListener("resize", handleResize);
 		return () => window.removeEventListener("resize", handleResize);
-	}, [isMobile]);
+	}, []);
 
 	if (internalMode === "signup" && !onSwitch) {
 		return (
@@ -171,7 +171,7 @@ export default function Login({
 									? showFail
 										? "/assets/icons/waving_hand_white.svg"
 										: "/assets/icons/waving_hand_black.svg"
-									: "/assets/icons/waving_hand_white.svg"
+									: "/assets/icons/waving_hand_black.svg"
 							}
 							alt="Logo"
 							width={24}
