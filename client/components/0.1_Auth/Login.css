@@ -195,3 +195,129 @@
 		box-shadow: 0 0 0 18px rgba(63, 181, 108, 0);
 	}
 }
+
+@media screen and (max-width: 768px) {
+	#containerLogin {
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		width: 100vw;
+		height: 60vh;
+		margin: 3.1rem 0 4rem 0;
+	}
+	#loginLogo {
+		display: none;
+	}
+	#loginForm {
+		width: 100vw;
+		height: 100%;
+		background: transparent;
+		border-radius: 0;
+		box-shadow: none;
+	}
+	#loginTitle {
+		font-family: "QuanRounded-Bold", sans-serif;
+		font-size: 3rem;
+		margin-right: .5rem;
+	}
+	#loginText {
+		font-family: "Quan-SemiLight", sans-serif;
+		font-size: 2rem;
+		color: var(--black);
+		margin: 3rem 0;
+		text-align: center;
+	}
+
+	.loginLabel {
+		font-family: "Quan-Regular", sans-serif;
+		font-size: 1.4rem;
+		color: var(--black);
+		margin-left: 2.5rem;
+	}
+	.loginInput {
+		width: 90vw;
+		margin: 0 auto 1rem auto;
+	}
+	.loginAndsignUpFunctionnal {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 90vw;
+		height: 40px;
+		font-family: "Quan-Bold", sans-serif;
+		font-size: 1.5rem;
+		border-radius: 35px;
+		border: none;
+		margin: 0 auto 1.5rem auto;
+		gap: 1rem;
+		color: var(--white);
+		transition: 0.35s ease-in-out;
+	}
+	.connection {
+		background-color: var(--lightdenim);
+		&:hover {
+			background-color: var(--denimhalf);
+		}
+		&:active {
+			background-color: var(--denimDark);
+		}
+	}
+
+	.loginAndsignUpFunctionnal.signup:hover #loginIcon {
+		transform: translateX(4px);
+		filter: invert(1);
+	}
+
+	#loginMessageContainer {
+		position: absolute;
+		margin: 1rem 0;
+		z-index: -2;
+		height: 550px;
+		transition: .5s ease-in-out;
+		animation: fadeIn .35s ease-in-out;
+		background-color: aquamarine;
+	}
+
+	.loginMessage {
+		display: flex;
+		justify-content: center;
+		width: 100vw;
+		height: 630px;
+		border-radius: 0;
+		font-family: "Quan-Regular", sans-serif;
+		font-size: 1.5rem;
+		color: var(--white);
+		opacity: 0;
+		padding: 1rem;
+	}
+
+	/* Variantes */
+	.loginMessage.success {
+		background: var(--linear-login);
+		box-shadow: 0;
+		color: var(--white);
+		font-size: 2rem;
+	}
+
+	.loginMessage.fail {
+		background: var(--linear-loginDark);
+		box-shadow: 0;
+	}
+
+	/* Container hauteur étendue seulement si message présent */
+	#containerLogin.showFail,
+	#containerLogin.showSuccess {
+		height: 100%;
+	}
+
+	#containerLogin.showFail #loginTitle,
+	#containerLogin.showFail #loginText,
+	#containerLogin.showFail .loginLabel,
+	#containerLogin.showFail #loginPasswordHint,
+	#containerLogin.showFail #loginLink,
+	#containerLogin.showFail #loginLink_2,
+	#containerLogin.showFail .loginLabelCheckbox,
+	#containerLogin.showFail #loginText2 {
+		color: var(--white) !important;
+	}
+}

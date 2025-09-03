@@ -1,8 +1,7 @@
 "use client";
 import "./Login.css";
 import Image from "next/image";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Signup from "./Signup";
 
 export type Payload = {
@@ -16,9 +15,14 @@ export type Payload = {
 type LoginProps = {
 	onSuccess?: (payload: Payload) => void; // changé
 	onSwitch?: () => void;
+	setOpenLogin?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Login({ onSuccess, onSwitch }: LoginProps) {
+export default function Login({
+	onSuccess,
+	onSwitch,
+	setOpenLogin,
+}: LoginProps) {
 	const baseURL = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
 	const [loading, setLoading] = useState(false);
 	const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
@@ -26,6 +30,7 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [showFail, setShowFail] = useState(false);
 	const [internalMode, setInternalMode] = useState<"login" | "signup">("login");
+	const [isMobile, setIsMobile] = useState(false);
 
 	const effectiveSwitch =
 		onSwitch ??
@@ -114,6 +119,13 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 		}
 	};
 
+	useEffect(() => {
+		const handleResize = () => setIsMobile(isMobile);
+		handleResize();
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, [isMobile]);
+
 	if (internalMode === "signup" && !onSwitch) {
 		return (
 			<Signup
@@ -154,7 +166,13 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 						<h1 id="loginTitle">CONNEXION</h1>
 						<Image
 							id="wavingHand"
-							src="/assets/icons/waving_hand.svg"
+							src={
+								isMobile
+									? showFail
+										? "/assets/icons/waving_hand_white.svg"
+										: "/assets/icons/waving_hand_black.svg"
+									: "/assets/icons/waving_hand_white.svg"
+							}
 							alt="Logo"
 							width={24}
 							height={24}
