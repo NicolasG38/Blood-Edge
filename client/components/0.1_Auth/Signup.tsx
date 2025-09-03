@@ -1,7 +1,7 @@
 "use client";
 import "./Signup.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
 
@@ -12,6 +12,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 	const [showFail, setShowFail] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 
 	const router = useRouter();
 	const { setAuth } = useAuth(); // au lieu de const { auth } = useAuth();
@@ -125,7 +126,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 					if (window.location.pathname !== "/dashboard") {
 						router.push(`/dashboard/${data.user?.User_pseudo}`);
 					}
-				}, 800);
+				}, 4000);
 			} else {
 				const serverMsg =
 					data?.details?.is_accept_cgu?._errors?.[0] ||
@@ -148,11 +149,19 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 		}
 	};
 
+	useEffect(() => {
+		// Cette partie ne s’exécute que côté client
+		const handleResize = () => setIsMobile(isMobile);
+		handleResize();
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, [isMobile]);
+
 	return (
 		<>
 			<div
 				id="containerSignup"
-				className={showSuccess ? "showSuccess" : "showFail"}
+				className={showSuccess ? "showSuccess" : showFail ? "showFail" : ""}
 				aria-live="polite"
 			>
 				{showSuccess && (
@@ -214,7 +223,13 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 								<h1 id="signupTitle">INSCRIPTION</h1>
 								<Image
 									id="wavingHand"
-									src="/assets/icons/emoji_people_black.svg"
+									src={
+										isMobile
+											? showFail
+												? "/assets/icons/emoji_people_white.svg"
+												: "/assets/icons/emoji_people_black.svg"
+											: "/assets/icons/emoji_people_white.svg"
+									}
 									alt=""
 									width={24}
 									height={24}

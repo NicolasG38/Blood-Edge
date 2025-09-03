@@ -24,6 +24,7 @@ export default function Homepage() {
 						onSwitch={() => setOpenLogin(false)}
 					/>
 				</Modal>
+				{openLogin && <Login setOpenLogin={setOpenLogin} />}
 				<Carrousel />
 				<LocationsBtn />
 				<SectionBtn className="section-btn-desktop" />
