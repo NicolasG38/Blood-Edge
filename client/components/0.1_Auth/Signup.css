@@ -299,27 +299,6 @@
 	margin: 0 6rem;
 }
 
-@media screen and (max-width: 1024px) {
-	#containerSignup {
-		background: none;
-		height: 550px;
-		width: 400px;
-		margin-top: 8rem;
-	}
-	#signupForm {
-		width: 100%;
-	}
-	#signupInputs {
-		width: 100%;
-	}
-	.signupInput {
-		width: 90%;
-	}
-	.loginAndsignUpFunctionnal {
-		width: 90%;
-	}
-}
-
 #signupTerms {
 	display: flex;
 	flex-direction: row;

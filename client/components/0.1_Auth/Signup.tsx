@@ -151,11 +151,11 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 
 	useEffect(() => {
 		// Cette partie ne s’exécute que côté client
-		const handleResize = () => setIsMobile(isMobile);
+		const handleResize = () => setIsMobile(window.innerWidth < 768);
 		handleResize();
 		window.addEventListener("resize", handleResize);
 		return () => window.removeEventListener("resize", handleResize);
-	}, [isMobile]);
+	}, []);
 
 	return (
 		<>
@@ -228,7 +228,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 											? showFail
 												? "/assets/icons/emoji_people_white.svg"
 												: "/assets/icons/emoji_people_black.svg"
-											: "/assets/icons/emoji_people_white.svg"
+											: "/assets/icons/emoji_people_black.svg"
 									}
 									alt=""
 									width={24}

@@ -1,6 +1,5 @@
 "use client";
-import { useRef, useCallback } from "react";
-
+import { useEffect, useRef, useCallback } from "react";
 interface ModalProps {
 	open: boolean;
 	onClose: () => void;
@@ -23,6 +22,19 @@ export default function Modal({ open, onClose, children }: ModalProps) {
 		},
 		[onClose],
 	);
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth < 768) {
+				onClose();
+			}
+		};
+		// Vérifie au chargement
+		handleResize();
+		// Surveille le resize
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, [onClose]);
 
 	if (!open) return null;
 
