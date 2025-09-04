@@ -3,13 +3,14 @@ import "./home.css";
 
 import SectionBtn from "./SectionBtn";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 import Link from "next/link";
 import Image from "next/image";
-import next from "next";
 
 export default function NavMobile() {
 	const [openNav, setOpenNav] = useState(false);
 	const [showSection, setShowSection] = useState(false);
+	const { userId, pseudo, isLogged, setAuth } = useAuth();
 
 	useEffect(() => {
 		if (openNav) {
@@ -62,7 +63,7 @@ export default function NavMobile() {
 						</button>
 					</li>
 					<li>
-						<Link href="/signupandlogin">
+						<Link href={isLogged ? `/dashboard/${pseudo}` : "/signupandlogin"}>
 							<button type="button" id="login-mobile-account">
 								<Image
 									src="assets/icons/mobile/account.svg"
@@ -70,7 +71,7 @@ export default function NavMobile() {
 									width={24}
 									height={24}
 								/>{" "}
-								Compte
+								<p>{isLogged ? "Dashboard" : "Compte"}</p>
 							</button>
 						</Link>
 					</li>

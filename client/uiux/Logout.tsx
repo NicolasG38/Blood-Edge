@@ -1,13 +1,11 @@
 import "./Logout.css";
-import { AuthContext } from "../context/AuthContext";
-import { useContext } from "react";
+import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function Logout() {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
-	const context = useContext(AuthContext);
-	const { isLogged, setAuth } = context;
+	const { isLogged, setAuth } = useAuth();
 	const router = useRouter();
 
 	const handleLogout = async () => {
@@ -25,9 +23,7 @@ export default function Logout() {
 				<button
 					type="button"
 					id="logoutBtn"
-					onClick={() => {
-						handleLogout();
-					}}
+					onClick={handleLogout}
 					tabIndex={0}
 				>
 					Déconnexion
@@ -43,5 +39,3 @@ export default function Logout() {
 		</div>
 	);
 }
-
-// ajouter la logique de déconnexion ici
