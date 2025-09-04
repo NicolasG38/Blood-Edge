@@ -2,6 +2,8 @@
 import "./Login.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../../context/AuthContext";
 import Signup from "./Signup";
 
 export type Payload = {
@@ -24,6 +26,8 @@ export default function Login({
 	setOpenLogin,
 }: LoginProps) {
 	const baseURL = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
+	const router = useRouter();
+	const { setAuth } = useAuth();
 	const [loading, setLoading] = useState(false);
 	const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 	const [message, setMessage] = useState<string | null>(null);
@@ -96,7 +100,16 @@ export default function Login({
 
 				setTimeout(() => {
 					onSuccess?.(payload);
-					window.location.reload();
+					setAuth({
+						userId: data.user?.User_id ?? "",
+						pseudo: data.user?.User_pseudo ?? "",
+						isLogged: true,
+					});
+					if (!isMobile) {
+						window.location.reload();
+					} else {
+						router.push(`/dashboard/${data.user?.User_pseudo ?? ""}`);
+					}
 				}, 2000);
 			} else {
 				const msg =
