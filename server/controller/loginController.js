@@ -1,4 +1,3 @@
-import { path } from "motion/react-client";
 import { authenticate } from "../action/loginAction.js";
 
 export async function login(req, res) {

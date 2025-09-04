@@ -1,12 +1,23 @@
 import "dotenv/config";
 import express from "express";
+import router from "./router.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import router from "./router.js";
 
 const app = express();
+
 const PORT = process.env.PORT || 3310;
 const CLIENT_URL = process.env.CLIENT_URL;
+
+import session from "express-session";
+app.use(
+	session({
+		secret: "tonSecret",
+		resave: false,
+		saveUninitialized: true,
+		cookie: { secure: false }, // ou true en production HTTPS
+	}),
+);
 
 // Ajoute cookie-parser comme middleware
 app.use(cookieParser());
