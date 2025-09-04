@@ -1,6 +1,7 @@
 "use client";
-import Header from "../../../../../components/0_Home/Header";
 import Footer from "../../../../../components/0_Home/Footer";
+import Logout from "../../../../../uiux/Logout";
+import Header from "../../../../../components/0_Home/Header";
 import "../DashboardPage.css";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
@@ -49,6 +50,7 @@ export default function DashboardPage() {
 		<>
 			<Header />
 			<main>
+				<Logout />
 				<h1 id="dashboardTitle">Hello, {user?.User_pseudo} </h1>
 				<div>
 					<p>Pseudo : {user?.User_pseudo}</p>
