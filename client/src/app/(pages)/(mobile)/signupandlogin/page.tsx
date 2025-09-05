@@ -26,7 +26,6 @@ export default function SignUpAndLoginPage() {
 		<>
 			<Header />
 			<Login />
-			<NavMobile />
 			<Footer />
 		</>
 	);

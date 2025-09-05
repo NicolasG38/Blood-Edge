@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "../../context/AuthContext";
+import { MenuMobileProvider } from "../../context/MenuMobileContext";
+import NavMobile from "../../components/0_Home/NavMobile";
+import SubSection from "../../components/0_Home/SubSection";
 
 export const metadata: Metadata = {
 	title: "Blood-Edge.com",
@@ -15,7 +18,14 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<AuthProvider>{children}</AuthProvider>
+				<AuthProvider>
+					<MenuMobileProvider>
+						<NavMobile>
+							<SubSection key={1} />
+						</NavMobile>
+						{children}
+					</MenuMobileProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	);

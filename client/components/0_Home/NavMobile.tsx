@@ -7,7 +7,15 @@ import { useAuth } from "../../context/AuthContext";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function NavMobile() {
+interface NavMobileProps {
+	children?: React.ReactNode;
+	setOpenNavProps?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function NavMobile({
+	children,
+	setOpenNavProps,
+}: NavMobileProps) {
 	const [openNav, setOpenNav] = useState(false);
 	const [showSection, setShowSection] = useState(false);
 	const { userId, pseudo, isLogged, setAuth } = useAuth();
@@ -64,7 +72,11 @@ export default function NavMobile() {
 					</li>
 					<li>
 						<Link href={isLogged ? `/dashboard/${pseudo}` : "/signupandlogin"}>
-							<button type="button" id="login-mobile-account">
+							<button
+								type="button"
+								id="login-mobile-account"
+								onClick={() => setOpenNav(false)}
+							>
 								<Image
 									src="assets/icons/mobile/account.svg"
 									alt="Compte"
@@ -85,7 +97,14 @@ export default function NavMobile() {
 						Recherche
 					</li>
 				</ul>
-				{showSection && <SectionBtn className="section-btn-mobile" />}
+				{showSection && (
+					<SectionBtn
+						className="section-btn-mobile"
+						setOpenNavProps={setOpenNav}
+					>
+						{children}
+					</SectionBtn>
+				)}
 			</nav>
 		</>
 	);
