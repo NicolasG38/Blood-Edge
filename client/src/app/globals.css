@@ -317,3 +317,8 @@ footer {
 		align-items: center;
 	}
 }
+@media screen and (max-width: 768px) {
+	main {
+		padding-bottom: 80px; /* hauteur du menu mobile fermé */
+	}
+}

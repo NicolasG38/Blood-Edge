@@ -1,5 +1,5 @@
 "use client";
-import "./SubSection.css";
+import "./home.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -12,10 +12,20 @@ interface Section {
 	link: string;
 }
 
-export default function SubSection() {
+interface subSectionProps {
+	className?: string;
+	setOpenNavProps?: (open: boolean) => void;
+}
+
+export default function SubSection({
+	className,
+	setOpenNavProps,
+	...props
+}: subSectionProps) {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [subSections, setSubSections] = useState<Section[]>([]);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
+	const [isMobile, setIsMobile] = useState(false);
 
 	useEffect(() => {
 		fetch(`${baseURL}/api/subsections`)
@@ -45,19 +55,40 @@ export default function SubSection() {
 			});
 	}, [baseURL]);
 
+	useEffect(() => {
+		setIsMobile(window.innerWidth < 768);
+		const handleResize = () => setIsMobile(window.innerWidth < 768);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
 	return (
-		<section id="containerSubSection">
+		<section className={`containerSubSection mobile ${className}`}>
 			{subSections.map((subSection: Section, idx: number) => (
-				<div className="subSection" key={subSection.id}>
+				<div
+					className="subSection mobile"
+					key={subSection.id}
+					onClick={() => isMobile && setOpenNavProps && setOpenNavProps(false)}
+					onKeyDown={(e) => {
+						if (
+							(e.key === "Enter" || e.key === " ") &&
+							isMobile &&
+							setOpenNavProps
+						) {
+							e.preventDefault();
+							setOpenNavProps(false);
+						}
+					}}
+				>
 					<Link href={`/arsenal/${subSection.link}`}>
 						<div
 							onMouseEnter={() => setHoveredIndex(idx)}
 							onMouseLeave={() => setHoveredIndex(null)}
-							className="sectionNanoSuits"
+							className="sectionNanoSuits mobile"
 						>
-							<div className="nanoSuitsdeco">
+							<div className="nanoSuitsdeco mobile">
 								<span
-									className="nanoSuitsdeco_0"
+									className="nanoSuitsdeco_0 mobile"
 									style={{
 										background:
 											hoveredIndex === idx
@@ -65,26 +96,32 @@ export default function SubSection() {
 												: "var(--lightdenim)",
 									}}
 								/>
-								<span className="nanoSuitsdeco_1" />
-								<span className="nanoSuitsdeco_2" />
+								<span className="nanoSuitsdeco_1 mobile" />
+								<span className="nanoSuitsdeco_2 mobile" />
 							</div>
 							<Image
-								className="nanoSuitsIcon"
+								className="nanoSuitsIcon mobile"
 								src={
-									hoveredIndex === idx
-										? subSection.icons_gray
-										: subSection.icons_black
+									isMobile
+										? subSection.icons_black
+										: hoveredIndex === idx
+											? subSection.icons_gray
+											: subSection.icons_black
 								}
 								alt="Arsenal Icon"
 								width={24}
 								height={24}
 							/>
-							<div className="btnNanoSuits">
+							<div className="btnNanoSuits mobile">
 								<p
-									className="subSectionTitle"
+									className="subSectionTitle mobile"
 									style={{
 										color:
-											hoveredIndex === idx ? "var(--white)" : "var(--black)",
+											window.innerWidth < 768
+												? "var(--black)"
+												: hoveredIndex === idx
+													? "var(--white)"
+													: "var(--black)",
 									}}
 								>
 									{subSection.title}
