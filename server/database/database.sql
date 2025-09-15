@@ -16,9 +16,9 @@ CREATE TABLE Arsenal(
     Arsenal_icons_gray VARCHAR(50) NOT NULL,
     Arsenal_icons_black VARCHAR(50) NOT NULL,
     Arsenal_link VARCHAR(50) NOT NULL,
-    Arsenal_id_fk INT UNSIGNED NOT NULL,
+    Arsenal_section_id_fk INT UNSIGNED NOT NULL,
     CONSTRAINT fk_arsenal_section
-        FOREIGN KEY (Arsenal_id_fk) REFERENCES Section(Section_id)
+        FOREIGN KEY (Arsenal_section_id_fk) REFERENCES Section(Section_id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -50,9 +50,9 @@ CREATE TABLE Exospine(
     Exospine_icon_colored VARCHAR(40),
     Exospine_icon_Mk2 VARCHAR(50),
     Exospine_icon_Mk2_colored VARCHAR(50),
-    Exospine_id_fk INT UNSIGNED NOT NULL,
+    Exospine_arsenal_id_fk INT UNSIGNED NOT NULL,
     CONSTRAINT fk_exospine_arsenal
-        FOREIGN KEY (Exospine_id_fk) REFERENCES Arsenal(Arsenal_id)
+        FOREIGN KEY (Exospine_arsenal_id_fk) REFERENCES Arsenal(Arsenal_id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -79,9 +79,9 @@ CREATE TABLE Equipment(
     Equipment_icon_colored VARCHAR(50),
     Equipment_icon_Mk2 VARCHAR(50),
     Equipment_icon_Mk2_colored VARCHAR(50),
-    Equipment_id_fk INT UNSIGNED NOT NULL,
+    Equipment_arsenal_id_fk INT UNSIGNED NOT NULL,
     CONSTRAINT fk_equipment_arsenal
-        FOREIGN KEY (Equipment_id_fk) REFERENCES Arsenal(Arsenal_id)
+        FOREIGN KEY (Equipment_arsenal_id_fk) REFERENCES Arsenal(Arsenal_id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -99,9 +99,9 @@ CREATE TABLE Nano_suits (
     NS_Where_text_en VARCHAR(255) NOT NULL,
     NS_picture VARCHAR(255) NOT NULL,
     NS_stars VARCHAR(30) NOT NULL,
-    NS_id_fk INT UNSIGNED NOT NULL,
+    NS_arsenal_id_fk INT UNSIGNED NOT NULL,
     CONSTRAINT fk_ns_arsenal
-        FOREIGN KEY (NS_id_fk) REFERENCES Arsenal(Arsenal_id)
+        FOREIGN KEY (NS_arsenal_id_fk) REFERENCES Arsenal(Arsenal_id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -172,7 +172,7 @@ values
     (4, "COMPÉTENCES", "/icons/person_celebrate_gray.svg", "/icons/person_celebrate_black.svg", "/icons/mobile/arrow_down.svg"),
     (5, "BASE DE DONNÉES", "/icons/database_gray.svg", "/icons/database_black.svg", "/icons/mobile/arrow_down.svg");
 
-insert into Arsenal (Arsenal_id, Arsenal_title, Arsenal_icons_gray, Arsenal_icons_black, Arsenal_link, Arsenal_id_fk)
+insert into Arsenal (Arsenal_id, Arsenal_title, Arsenal_icons_gray, Arsenal_icons_black, Arsenal_link, Arsenal_section_id_fk)
 values
     (1, "Exospine", "/icons/orthopedics_gray.svg", "/icons/orthopedics_black.svg", "exospine", 1),
     (2, "Équipement", "/icons/engineering_gray.svg", "/icons/engineering_black.svg", "gears", 1),
@@ -184,7 +184,7 @@ values
     (8, "Nano-combinaison - Lily", "/icons/apparel_gray.svg", "/icons/apparel_black.svg", "nano-suits-lily", 1),
     (9, "Nano-combinaison - Adam", "/icons/apparel_gray.svg", "/icons/apparel_black.svg", "nano-suits-adam", 1);
 
-insert into Exospine (Exospine_id,Exospine_bar_1,Exospine_bar_2,Exospine_bar_3, Exospine_title_fr, Exospine_title_en, Exospine_skill_1_fr, Exospine_skill_1_en, Exospine_skill_2_fr, Exospine_skill_2_en, Exospine_skill_3_fr, Exospine_skill_3_en, Exospine_stat_1, Exospine_stat_2, Exospine_stat_3, Exospine_stat_value_1, Exospine_stat_value_2, Exospine_stat_value_3, Exospine_text_1_fr, Exospine_text_1_en, Exospine_text_2_fr, Exospine_text_2_en, Exospine_bar, Exospine_icon, Exospine_icon_colored, Exospine_icon_Mk2, Exospine_icon_Mk2_colored, Exospine_id_fk)
+insert into Exospine (Exospine_id,Exospine_bar_1,Exospine_bar_2,Exospine_bar_3, Exospine_title_fr, Exospine_title_en, Exospine_skill_1_fr, Exospine_skill_1_en, Exospine_skill_2_fr, Exospine_skill_2_en, Exospine_skill_3_fr, Exospine_skill_3_en, Exospine_stat_1, Exospine_stat_2, Exospine_stat_3, Exospine_stat_value_1, Exospine_stat_value_2, Exospine_stat_value_3, Exospine_text_1_fr, Exospine_text_1_en, Exospine_text_2_fr, Exospine_text_2_en, Exospine_bar, Exospine_icon, Exospine_icon_colored, Exospine_icon_Mk2, Exospine_icon_Mk2_colored, Exospine_arsenal_id_fk)
 values
     (1, TRUE, TRUE, TRUE, "Exospine de type camouflage", NULL, "Réduit le champ de vision des ennemis.", NULL, "En cas d'exécution réussie, augmente de 17,5% la puissance des attaques au corps à corps pendant 10 secondes.", NULL, "Restaure 15 % des PV maximum en cas d'exécution réussie.", NULL, NULL, 17.5, 15, NULL, NULL, NULL, "Exospine spécialisée dans la furtivité et l'exécution.", NULL, "Comme tous les modules d'équipement, chaque nouveau modèle d'exospine propose des fonctionnalités innovantes. Suite à sa refonte, cette exospine a été équipée d'une IA autonome.", NULL, "Exospine_bar", "/icons/network_intelligence_white.svg", "/icons/network_intelligence_orange.svg",NULL, NULL , 1),
     (2, TRUE, TRUE, TRUE, "Exospine Mk2 de type camouflage", NULL, "Réduit le champ de vision des ennemis.", NULL, "En cas d'exécution réussie, augmente de 25% la puissance des attaques au corps à corps pendant 10 secondes.", NULL, "Restaure 22,5 % des PV maximum en cas d'exécution réussie.", NULL, NULL, 25, 22.5, NULL, NULL, NULL, "Exospine spécialisée dans la furtivité et l'exécution,", NULL, "Comme tous les modules d'équipement, chaque nouveau modèle d'exospine propose des fonctionnalités innovantes. Suite à sa refonte, cette exospine a été équipée d'une IA autonome.", NULL, "Exospine_bar", NULL, NULL,"/icons/network_intelligence_update_white.svg", "/icons/network_intelligence_update_orange.svg" , 1),
@@ -212,7 +212,7 @@ values
     (24, TRUE, TRUE, TRUE, "Exospine Mk2 de type transe spontanée", NULL, "Augmente la jauge maximum d'énergie spontanée de 800 points.", NULL, "Augmente la puissance des compétences spontanées de 45 %.", NULL, "Vous récupérez 75 points d'énergie spontanée lorsque vous effectuez un enchaînement de niveau 4 ou plus.", NULL, NULL, 45, NULL, 800, NULL, 75, "Exospine spécialisée dans l'amélioration des compétences spontanées.", NULL, "Lorsque la Dernière Guerre s'est transformée en conflit total tout droit issu de nos pires cauchemars, la Matri-Arche a réquisitionné toutes les infrastructures de « l'humanité ». La majorité des modules d'équipement atypiques planifiés ou produits à cette époque ont totalement disparu lorsque nous avons dû nous retrancher en orbite. C'est notamment le cas des exospines exclusivement conçues pour le combat.", NULL, "Exospine_bar", NULL, NULL, "/icons/network_intelligence_update_white.svg", "/icons/network_intelligence_update_orange.svg", 1)
 ; 
 
-insert into Equipment (Equipment_id, Equipment_star_1, Equipment_star_2, Equipment_star_3, Equipment_title_fr, Equipment_title_en, Equipment_skill_1_fr, Equipment_skill_1_en, Equipment_skill_2_fr, Equipment_skill_2_en, Equipment_stat_1, Equipment_stat_2, Equipment_text_1_fr, Equipment_text_1_en, Equipment_text_2_fr, Equipment_text_2_en, Equipment_star, Equipment_star_fill, Equipment_icon, Equipment_icon_colored, Equipment_icon_Mk2, Equipment_icon_Mk2_colored, Equipment_id_fk)
+insert into Equipment (Equipment_id, Equipment_star_1, Equipment_star_2, Equipment_star_3, Equipment_title_fr, Equipment_title_en, Equipment_skill_1_fr, Equipment_skill_1_en, Equipment_skill_2_fr, Equipment_skill_2_en, Equipment_stat_1, Equipment_stat_2, Equipment_text_1_fr, Equipment_text_1_en, Equipment_text_2_fr, Equipment_text_2_en, Equipment_star, Equipment_star_fill, Equipment_icon, Equipment_icon_colored, Equipment_icon_Mk2, Equipment_icon_Mk2_colored, Equipment_arsenal_id_fk)
 values
     (1, TRUE, FALSE, FALSE, "Équipement à double tranchant", "Double Edged Gear", "Puissance", "Attack Power", "Dégâts subis", "Damage Taken", 15, 23, "Augmente considérablement votre puissance, mais vous subissez plus de dégâts.", "Greatly increases Attack Power, but you'll take more Damage.", "La doctrine de l'Épée à double tranchant est largement adoptée par les Sentinelles de Xion. Dans l'état actuel des choses, la cité ne peut pas se permettre de petites escarmouches et doit donc éliminer les Naytibas au plus vite. Par conséquent, bon nombre de Sentinelles optent pour cette configuration de modules plutôt extrême.", "The Double Edged Sword is a major doctrine of Xion's sentry. Xion cannot afford to fight small battles at this time, so the Naytibas must be defeated quickly. As such, the Sentinels have their gear modules set up in very extreme configurations.", "/icons/star_gray.svg", "/icons/star_fill_orange.webp", "/icons/network_intelligence_white.svg", "/icons/network_intelligence_orange.svg", NULL, NULL, 1),
     (2, TRUE, TRUE, FALSE, "Équipement à double tranchant", "Double Edged Gear", "Puissance", "Attack Power", "Dégâts subis", "Damage Taken", 20, 30, "Augmente considérablement votre puissance, mais vous subissez plus de dégâts.", "Greatly increases Attack Power, but you'll take more Damage.", "La doctrine de l'Épée à double tranchant est largement adoptée par les Sentinelles de Xion. Dans l'état actuel des choses, la cité ne peut pas se permettre de petites escarmouches et doit donc éliminer les Naytibas au plus vite. Par conséquent, bon nombre de Sentinelles optent pour cette configuration de modules plutôt extrême.", "The Double Edged Sword is a major doctrine of Xion's sentry. Xion cannot afford to fight small battles at this time, so the Naytibas must be defeated quickly. As such, the Sentinels have their gear modules set up in very extreme configurations.", "/icons/star_gray.svg", "/icons/star_fill_orange.webp", "/icons/network_intelligence_white.svg", "/icons/network_intelligence_orange.svg", NULL, NULL, 1),
@@ -378,7 +378,7 @@ values
     (162, TRUE, TRUE, FALSE, "Equipement téméraire Mk2", "Risk Taking Gear Mk2", "Bonus de puissance (santé faible)", "Attack Power when Low HP", NULL, NULL, 21, NULL, "Augmente votre puissance lorsque vos PV sont faibles.", "Increases Attack Power when HP is low.", "Les modules d'équipement communiquent directement avec l'intelligence artificielle par l'intermédiaire du port dédié de leur emplacement d'extension. Bien que ces modules soient conçus pour être ergonomiques et performants, ils souffrent d'un défaut majeur. Si l'équipement est retiré de force de son emplacement, cela peut entraîner une corruption des données et même une défaillance complète du système.", "Gear modules communicate directly with the artificial intelligence through a dedicated port on an expansion socket. While the modules are designed with performance benefits and ease of expansion in mind, there is one problem. If the gears are forced out of the sockets, it could cause data corruption or even bring down the entire system.", "/icons/star_gray.svg", "/icons/star_fill_orange.webp", NULL, NULL,  "/icons/network_intelligence_update_white.svg", "/icons/network_intelligence_update_orange.svg", 1)
 ;
 
-insert into Nano_suits (NS_id, NS_title_fr, NS_title_en, NS_text_1_fr,NS_text_1_en, NS_text_2_fr, NS_text_2_en, NS_Where_title_fr, NS_Where_title_en, NS_Where_text_fr, NS_Where_text_en, NS_picture, NS_Stars, NS_id_fk)
+insert into Nano_suits (NS_id, NS_title_fr, NS_title_en, NS_text_1_fr,NS_text_1_en, NS_text_2_fr, NS_text_2_en, NS_Where_title_fr, NS_Where_title_en, NS_Where_text_fr, NS_Where_text_en, NS_picture, NS_Stars, NS_arsenal_id_fk)
 values
     (1, "Ailes écarlates", "Crimson Wings", "Permet de modifier l'apparence d'EVE.", "Changes the appearance of EVE.", "Façonnée comme de délicates ailes écarlates, cette robe a été conçue pour briller dans les moments les plus heureux.", "A dress to shine in your most beautiful moments, crafted as delicately as crimson wings.", "Où la trouver ?", "Where to find it ?", "Inconnu", "Unknown", "/images/nano_suits/Crimson_Wings.webp", "/icons/star_fill_blue.webp", 1),
     (2, "Alice ensoleillée", "Midsummer Alice", "Permet de modifier l'apparence d'EVE", "Changes the appearance of EVE.", "Découvrez la collection de maillots de bain ensoleillée de Tetrastar C&T: partez en vacances au Pays des merveilles !", "Introducing Tetrastar C&T's Midsummer Collection swimwear. Step into Wonderland's vacation spot and make it your own.", "Où la trouver ?", "Where to find it ?", "Dans la boutique Tetrastar C&T", "Unknown", "/images/nano_suits/Midsummer_Alice.webp", "/icons/star_fill_blue.webp", 1),

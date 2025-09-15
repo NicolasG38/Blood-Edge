@@ -4,8 +4,16 @@ import { z } from "zod";
 export const validateSignup = (req, res, next) => {
 	const schema = z
 		.object({
-			email: z.string().trim().toLowerCase().email(),
-			email_confirm: z.string().trim().toLowerCase().email(),
+			email: z
+				.string()
+				.trim()
+				.toLowerCase()
+				.email({ message: "Format d'email invalide" }),
+			email_confirm: z
+				.string()
+				.trim()
+				.toLowerCase()
+				.email({ message: "Format d'email invalide" }),
 			pseudo: z
 				.string()
 				.trim()

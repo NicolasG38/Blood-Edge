@@ -14,6 +14,7 @@ import storesActions from "./action/storesActions.js";
 import subSectionActions from "./action/subSectionActions.js";
 import usersActions from "./action/usersActions.js";
 
+import { validateSignup } from "./controller/signupController.js";
 import { getMe } from "./controller/userController.js";
 import { requireAuth, requireAdmin } from "./middleware/auth.js";
 import { loginLimiter } from "./middleware/rateLimiters.js";
@@ -28,11 +29,22 @@ router.use(express.urlencoded({ extended: true }));
 router.get("/health", (req, res) => res.json({ status: "ok" }));
 
 // Stats EVE
+router.get("/api/stats-eve", StatsEVEActions.browse);
 router.get("/api/stats", statsActions.getAllStats);
 router.get("/api/stats/:id", statsActions.getStatById);
-router.post("/api/stats", statsActions.createStat);
-router.put("/api/stats/:id", statsActions.updateStat);
-router.delete("/api/stats-eve/:id", statsActions.deleteStat);
+router.post("/api/stats", requireAuth, requireAdmin, statsActions.createStat);
+router.put(
+	"/api/stats/:id",
+	requireAuth,
+	requireAdmin,
+	statsActions.updateStat,
+);
+router.delete(
+	"/api/stats/:id",
+	requireAuth,
+	requireAdmin,
+	statsActions.deleteStat,
+);
 
 //Exospine
 router.get("/api/exospine", exospineActions.browse);
@@ -47,15 +59,19 @@ router.get("/api/nanosuits", nanoSuitsActions.browse);
 router.get("/api/nanosuits/id-title", nanoSuitsActions.getIdAndTitle);
 
 // Favoris
-router.post("/api/favorites", favoriteController.addFavorite);
-router.delete("/api/favorites", favoriteController.removeFavorite);
-router.post("/api/favorites/status", favoriteController.isFavorite);
-router.post("/api/logout", loginController.logout);
+router.post("/api/favorites", requireAuth, favoriteController.addFavorite);
+router.delete("/api/favorites", requireAuth, favoriteController.removeFavorite);
+router.post(
+	"/api/favorites/status",
+	requireAuth,
+	favoriteController.isFavorite,
+);
 
 // Auth
-router.post("/api/users", signupActions.create);
+router.post("/api/users", validateSignup, signupActions.create);
 router.post("/api/login", loginLimiter, loginController.login);
 router.get("/api/me", requireAuth, getMe);
+router.post("/api/logout", requireAuth, loginController.logout);
 
 // Sections
 router.get("/api/sections", sectionActions.browse);
@@ -63,9 +79,6 @@ router.get("/api/subsections", subSectionActions.browseArsenal);
 
 // Locations
 router.get("/api/locations", locationsActions.browse);
-
-// Stats EVE
-router.get("/api/stats-eve", StatsEVEActions.browse);
 
 // Stores
 router.get("/api/stores", storesActions.browse);

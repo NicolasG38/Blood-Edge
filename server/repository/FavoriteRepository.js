@@ -28,7 +28,7 @@ class FavoriteRepository {
 			normalizedType === "equipment" ? targetId : null,
 			normalizedType === "ns" ? targetId : null,
 		];
-		const result = await databaseClient.query(sql, values);
+		await databaseClient.query(sql, values);
 
 		// Utilise normalizedType ici aussi !
 		return await this.getFavoritesWithUsers(userId, normalizedType, targetId);

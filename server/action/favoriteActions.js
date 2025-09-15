@@ -18,11 +18,6 @@ function resolveType(exo, equip, ns) {
 
 const addFavorite = async (userId, targetId, type) => {
 	try {
-		console.log("[favoriteActions] addFavorite params:", {
-			userId,
-			targetId,
-			type,
-		});
 		await FavoriteRepository.addFavorite(userId, targetId, type);
 		return await FavoriteRepository.getFavoritesWithUsers(
 			userId,
@@ -36,7 +31,12 @@ const addFavorite = async (userId, targetId, type) => {
 };
 
 const removeFavorite = async (userId, targetId, type) => {
-	return await FavoriteRepository.removeFavorite(userId, targetId, type);
+	try {
+		return await FavoriteRepository.removeFavorite(userId, targetId, type);
+	} catch (error) {
+		console.error("Erreur lors de la suppression du favori :", error);
+		throw error;
+	}
 };
 
 const isFavorite = async (userId, targetId, type) => {
