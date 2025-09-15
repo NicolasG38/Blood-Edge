@@ -61,18 +61,33 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 
 		const form = new FormData(event.currentTarget);
 
-		const password = (form.get("password") as string) || "";
-		const pwErrs = buildPasswordErrors(password);
-		if (pwErrs.length) {
-			setError(`Mot de passe invalide, il doit contenir: ${pwErrs.join(", ")}`);
+		const emptyForm = Object.values(Object.fromEntries(form)).every(
+			(v) => v === "" || v === undefined || v === null,
+		);
+		if (emptyForm) {
+			setError("Le formulaire ne peut pas être vide.");
 			setShowFail(true);
 			return;
 		}
 
 		const email = (form.get("email") as string)?.trim();
 		const emailConfirm = (form.get("email_confirm") as string)?.trim();
-		if (email !== emailConfirm) {
-			setError("Les emails ne correspondent pas");
+		const pseudo = (form.get("pseudo") as string)?.trim();
+		const password = (form.get("password") as string) || "";
+		const terms = form.get("terms") === "on";
+
+		const errors: string[] = [];
+
+		if (!email || !emailConfirm) errors.push("Email manquant");
+		if (email !== emailConfirm) errors.push("Les emails ne correspondent pas");
+		if (!pseudo || pseudo.length < 3) errors.push("Pseudo trop court");
+		if (!terms) errors.push("CGU non acceptées");
+		const pwErrs = buildPasswordErrors(password);
+		if (pwErrs.length)
+			errors.push(`Mot de passe invalide: ${pwErrs.join(", ")}`);
+
+		if (errors.length) {
+			setError(`Veuillez corriger les champs suivants : ${errors.join(" | ")}`);
 			setShowFail(true);
 			return;
 		}

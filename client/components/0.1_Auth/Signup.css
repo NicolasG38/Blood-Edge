@@ -8,7 +8,7 @@
 	width: 800px;
 	border-radius: 35px;
 	box-shadow: 0 0 10px var(--lightblack50);
-	margin-top: 2rem;
+	margin-top: 5rem;
 	animation: fadeIn .5s ease-in-out;
 }
 @keyframes fadeIn {
@@ -109,7 +109,7 @@
 	align-items: center;
 }
 .signupError_1 {
-	margin: 0 0.5rem 0 0;
+	margin: 0 0.5rem -0.3rem 0;
 	font-family: "Quan-Bold", sans-serif;
 	font-size: 2rem;
 	color: var(--white);
@@ -119,6 +119,8 @@
 	margin: 0 0;
 	font-family: "Quan-Bold", sans-serif;
 	font-size: 1rem;
+	text-align: center;
+	width: 500px;
 	color: var(--white);
 }
 
