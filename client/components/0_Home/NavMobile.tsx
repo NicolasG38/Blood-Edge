@@ -18,7 +18,7 @@ export default function NavMobile({
 }: NavMobileProps) {
 	const [openNav, setOpenNav] = useState(false);
 	const [showSection, setShowSection] = useState(false);
-	const { userId, pseudo, isLogged, setAuth } = useAuth();
+	const { pseudo, isLogged } = useAuth();
 
 	useEffect(() => {
 		if (openNav) {

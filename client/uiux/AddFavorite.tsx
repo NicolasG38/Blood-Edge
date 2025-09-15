@@ -10,7 +10,7 @@ type AddFavoriteProps = {
 };
 
 export default function AddFavorite({ exo, equip, ns }: AddFavoriteProps) {
-	const { isLogged, userId, pseudo } = useAuth();
+	const { isLogged, userId } = useAuth();
 	const [step, setStep] = useState<0 | 1 | 2 | 3>(0);
 	// 0: favorite, 1: heart_check, 2: favorite_fill, 3:heart_minus
 	const [isFavorite, setIsFavorite] = useState(false);
@@ -19,8 +19,9 @@ export default function AddFavorite({ exo, equip, ns }: AddFavoriteProps) {
 	// Exemple d'utilisation dans AddFavorite :
 
 	const buildPayload = useCallback(() => {
+		if (!userId) return null; // Ajout d'une vérification
 		const payload: {
-			userId: string | null;
+			userId: string;
 			exo?: string;
 			equip?: string;
 			ns?: string;
@@ -32,8 +33,8 @@ export default function AddFavorite({ exo, equip, ns }: AddFavoriteProps) {
 	}, [userId, exo, equip, ns]);
 
 	const handleAddFavorite = () => {
-		if (!userId) return;
 		const payload = buildPayload();
+		if (!payload) return; // Empêche l'utilisation d'un userId null
 		const keys = ["exo", "equip", "ns"].filter(
 			(k) => (payload as Record<string, unknown>)[k],
 		);
@@ -86,8 +87,8 @@ export default function AddFavorite({ exo, equip, ns }: AddFavoriteProps) {
 		return "/assets/icons/favorite.svg";
 	};
 	return (
-		<div className="add-favorite">
-			{isLogged && (
+		isLogged && (
+			<div className="add-favorite">
 				<button
 					type="button"
 					id="add-favorite-button"
@@ -105,7 +106,7 @@ export default function AddFavorite({ exo, equip, ns }: AddFavoriteProps) {
 						}}
 					/>
 				</button>
-			)}
-		</div>
+			</div>
+		)
 	);
 }
