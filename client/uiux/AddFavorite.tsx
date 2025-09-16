@@ -43,6 +43,7 @@ export default function AddFavorite({ exo, equip, ns }: AddFavoriteProps) {
 			fetch(`${baseURL}/api/favorites`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
+				credentials: "include",
 				body: JSON.stringify(payload),
 			}).then(() => {
 				setStep(1);
@@ -53,6 +54,7 @@ export default function AddFavorite({ exo, equip, ns }: AddFavoriteProps) {
 			fetch(`${baseURL}/api/favorites`, {
 				method: "DELETE",
 				headers: { "Content-Type": "application/json" },
+				credentials: "include",
 				body: JSON.stringify(payload),
 			}).then(() => {
 				setStep(3);
@@ -70,6 +72,7 @@ export default function AddFavorite({ exo, equip, ns }: AddFavoriteProps) {
 		fetch(`${baseURL}/api/favorites/status`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
+			credentials: "include",
 			body: JSON.stringify(payload),
 		})
 			.then((res) => res.json())
