@@ -321,4 +321,8 @@ footer {
 	main {
 		padding-bottom: 80px; /* hauteur du menu mobile fermé */
 	}
+
+	.row {
+		flex-direction: column;
+	}
 }
