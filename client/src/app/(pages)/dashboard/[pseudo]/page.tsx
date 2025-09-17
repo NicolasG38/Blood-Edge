@@ -1,7 +1,8 @@
 "use client";
+import FavoriteCircle from "../../../../../uiux/FavoriteCircle";
 import Footer from "../../../../../components/0_Home/Footer";
 import Logout from "../../../../../uiux/Logout";
-import Pseudo from "../../../../../components/0.2_Dashboard/DashboardHeader";
+import DashboardHeader from "../../../../../components/0.2_Dashboard/DashboardHeader";
 import Header from "../../../../../components/0_Home/Header";
 
 export default function DashboardPage() {
@@ -9,8 +10,9 @@ export default function DashboardPage() {
 		<>
 			<Header />
 			<main>
-				<Pseudo />
+				<DashboardHeader />
 				<Logout />
+				<FavoriteCircle />
 			</main>
 			<Footer />
 		</>

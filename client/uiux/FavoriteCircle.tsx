@@ -1,5 +1,4 @@
-"use client";
-import "../../../../uiux/FavoriteCircle.css";
+import "./FavoriteCircle.css";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -12,7 +11,7 @@ interface Favorite {
 	type: string;
 }
 
-export default function TestLoginPage() {
+export default function FavoriteCircle() {
 	const params = useParams();
 	const pseudo = typeof params === "object" ? params.pseudo : params;
 	const [favorites, setFavorites] = useState<Favorite[]>([]);
@@ -22,7 +21,6 @@ export default function TestLoginPage() {
 		fetch(`${baseURL}/api/favorites/${pseudo}`)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log("Réponse API favoris :", data);
 				if (Array.isArray(data)) {
 					setFavorites(data);
 				} else {
@@ -31,16 +29,12 @@ export default function TestLoginPage() {
 			});
 	}, [baseURL, pseudo]);
 	return (
-		<div
-			style={{
-				display: "flex",
-				margin: "auto",
-			}}
-		>
-			<div>
-				<h2>Test affichage</h2>
-				<div>{JSON.stringify(favorites)}</div>
-				<div>Nombre : {favorites.length}</div>
+		<div id="containerFavoriteCircle">
+			<div id="favoriteCircle">
+				<p id="favoriteCircleTitle">TOTAL</p>
+				<div id="circle">
+					<p>{favorites.length}</p>
+				</div>
 			</div>
 		</div>
 	);

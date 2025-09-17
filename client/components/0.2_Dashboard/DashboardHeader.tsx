@@ -35,15 +35,6 @@ export default function DashboardHeader() {
 		fetch(`${baseURL}/api/users/${pseudo}`)
 			.then((response) => response.json())
 			.then(setUser);
-	}, [pseudo, baseURL]);
-
-	useEffect(() => {
-		fetch(`${baseURL}/api/favorites/${pseudo}`)
-			.then((response) => response.json())
-			.then((data) => {
-				setNanoSuits(data);
-				console.log("nanosuits", data);
-			});
 	}, [baseURL, pseudo]);
 
 	return (
@@ -54,7 +45,9 @@ export default function DashboardHeader() {
 				<p id="dashboardMembershipDate">
 					Membre depuis : {user?.inscriptionDuration}
 				</p>
-				{/* autres infos */}
+				<div id="containerFavorites">
+					<h2 id="favoritesTitle">Vos favoris</h2>
+				</div>
 			</div>
 		</div>
 	);

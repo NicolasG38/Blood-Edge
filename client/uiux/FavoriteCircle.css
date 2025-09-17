@@ -1,0 +1,37 @@
+#containerFavoriteCircle {
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	margin-left: 2rem;
+	margin-bottom: 2rem;
+}
+#favoriteCircle {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#favoriteCircleTitle {
+	font-family: "Quan-Regular", sans-serif;
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+#circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 8px solid var(--greenCircle);
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	position: relative;
+	overflow: hidden;
+	background-color: transparent;
+	& > p {
+		margin: 0;
+		font-family: "QuanRounded-Bold", sans-serif;
+		font-size: 4rem;
+		color: black;
+		font-weight: bold;
+	}
+}
