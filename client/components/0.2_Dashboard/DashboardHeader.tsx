@@ -26,8 +26,6 @@ export default function DashboardHeader() {
 	const pseudo = typeof params === "object" ? params.pseudo : params;
 	const [user, setUser] = useState<User | null>(null);
 	const { isLogged } = useAuth();
-	const [nanoSuits, setNanoSuits] = useState<NanoSuit[]>([]);
-	const [hoveredId, setHoveredId] = useState<number | null>(null);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3310";
 
 	useEffect(() => {

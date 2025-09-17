@@ -1,5 +1,6 @@
 "use client";
 import FavoriteCircle from "../../../../../uiux/FavoriteCircle";
+import FavoriteCircleSubSection from "../../../../../uiux/FavoriteCircleSubSection";
 import Footer from "../../../../../components/0_Home/Footer";
 import Logout from "../../../../../uiux/Logout";
 import DashboardHeader from "../../../../../components/0.2_Dashboard/DashboardHeader";
@@ -13,6 +14,7 @@ export default function DashboardPage() {
 				<DashboardHeader />
 				<Logout />
 				<FavoriteCircle />
+				<FavoriteCircleSubSection />
 			</main>
 			<Footer />
 		</>
