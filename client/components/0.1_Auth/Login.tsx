@@ -25,7 +25,8 @@ export default function Login({
 	onSwitch,
 	setOpenLogin,
 }: LoginProps) {
-	const baseURL = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
+	const baseURL = (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, "");
+
 	const router = useRouter();
 	const { setAuth } = useAuth();
 	const [loading, setLoading] = useState(false);

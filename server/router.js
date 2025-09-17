@@ -85,7 +85,7 @@ router.get("/api/stores", storesActions.browse);
 
 // Users
 router.get("/api/users", requireAuth, requireAdmin, signupActions.browse);
-router.get("/api/users/:pseudo", usersActions.readByPseudo);
+router.get("/api/users/:pseudo", usersActions.readByPseudo); // accès public
 
 // route de test
 router.get("/api/test-cookie", (req, res) => {

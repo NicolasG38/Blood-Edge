@@ -4,13 +4,13 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: "http",
-				hostname: "192.168.1.14",
+				hostname: "localhost",
 				port: "3310",
 				pathname: "/icons/**",
 			},
 			{
 				protocol: "http",
-				hostname: "192.168.1.14",
+				hostname: "localhost",
 				port: "3310",
 				pathname: "/images/**",
 			},
@@ -28,8 +28,8 @@ const nextConfig = {
 					{
 						key: "Content-Security-Policy",
 						value:
-							"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://192.168.1.14:3310;" +
-							"img-src 'self' http://192.168.1.14:3310 data: blob:; ",
+							"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3310;" +
+							"img-src 'self' http://localhost:3310 data: blob:; ",
 					},
 					{
 						key: "Strict-Transport-Security",

@@ -7,7 +7,7 @@ import cors from "cors";
 const app = express();
 
 const PORT = process.env.PORT || 3310;
-const CLIENT_URL = process.env.CLIENT_URL;
+const allowedOrigins = ["http://localhost:3000"];
 
 import session from "express-session";
 app.use(
@@ -25,7 +25,7 @@ app.use(cookieParser());
 // CORS: on ne met pas d’URL comme chemin, seulement comme origin
 app.use(
 	cors({
-		origin: CLIENT_URL,
+		origin: allowedOrigins,
 		credentials: true,
 		methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 		allowedHeaders: ["Content-Type", "Authorization"],
@@ -41,6 +41,14 @@ app.use("/icons", express.static("public/icons"));
 
 // Monte le router sur un chemin relatif (pas d’URL absolue)
 app.use("/", router);
+
+app.use((req, res, next) => {
+	res.setHeader(
+		"Content-Security-Policy",
+		"connect-src 'self' http://192.168.1.14:3310 http://192.168.1.14:3000 http://localhost:3000",
+	);
+	next();
+});
 
 app.listen(PORT, () => {
 	console.log("Server running at PORT: ", PORT);

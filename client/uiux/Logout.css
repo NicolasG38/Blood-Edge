@@ -2,7 +2,9 @@
 	display: flex;
 	justify-content: end;
 	align-items: center;
-	margin: 2rem 2rem 0 0;
+	position: absolute;
+	top: 21rem;
+	right: 2rem;
 }
 
 #logoutBtn {

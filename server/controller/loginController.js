@@ -25,13 +25,13 @@ export async function login(req, res) {
 			// Pré‑validation (si tu utilises un flux en deux temps)
 			return res.json({ pending: true });
 		}
-		res.cookie("userId", user.User_id, {
+		res.cookie("userId", result.user.User_id, {
 			httpOnly: false, // false pour pouvoir le lire côté client si besoin
 			sameSite: "lax",
 			secure: false, // true en prod HTTPS
 			maxAge: 24 * 60 * 60 * 1000,
 		});
-		res.cookie("pseudo", user.User_pseudo, {
+		res.cookie("pseudo", result.user.User_pseudo, {
 			httpOnly: false,
 			sameSite: "lax",
 			secure: false,
@@ -41,6 +41,7 @@ export async function login(req, res) {
 		res.cookie("token", result.token, {
 			httpOnly: true,
 			sameSite: "lax",
+			secure: false,
 			maxAge: 3600000,
 		});
 
