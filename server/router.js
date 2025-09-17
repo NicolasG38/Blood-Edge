@@ -66,6 +66,7 @@ router.post(
 	requireAuth,
 	favoriteController.isFavorite,
 );
+router.get("/api/favorites/:pseudo", favoriteController.getUserFavorites);
 
 // Auth
 router.post("/api/users", validateSignup, signupActions.create);

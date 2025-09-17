@@ -36,14 +36,16 @@ export default function DashboardHeader() {
 			.then((response) => response.json())
 			.then(setUser);
 	}, [pseudo, baseURL]);
-	console.log(user);
+
 	useEffect(() => {
-		fetch(`${baseURL}/api/nanosuits`)
+		fetch(`${baseURL}/api/favorites/${pseudo}`)
 			.then((response) => response.json())
 			.then((data) => {
 				setNanoSuits(data);
+				console.log("nanosuits", data);
 			});
-	}, [baseURL]);
+	}, [baseURL, pseudo]);
+
 	return (
 		<div id="dashboardHeader">
 			<h1 id="dashboardTitle">Hello, {user?.User_pseudo} </h1>
