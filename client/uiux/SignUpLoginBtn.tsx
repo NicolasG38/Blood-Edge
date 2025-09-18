@@ -24,6 +24,8 @@ export default function SignUpLoginBtn({
 			<button
 				type="button"
 				id="signuplogin"
+				onMouseEnter={() => setHovered(true)}
+				onMouseLeave={() => setHovered(false)}
 				onClick={() => {
 					if (!isLogged) openLogin();
 					else {
@@ -34,8 +36,7 @@ export default function SignUpLoginBtn({
 			>
 				<div
 					id="btnSignup"
-					onClick={(e) => {
-						e.stopPropagation();
+					onClick={() => {
 						if (!isLogged) openLogin();
 					}}
 					onKeyDown={(e) => {
@@ -52,8 +53,6 @@ export default function SignUpLoginBtn({
 				</div>
 				<div
 					id="btnLogin"
-					onMouseEnter={() => setHovered(true)}
-					onMouseLeave={() => setHovered(false)}
 					style={{
 						transition: "0.35s ease-in-out",
 						background: hovered
@@ -78,7 +77,9 @@ export default function SignUpLoginBtn({
 								? isLogged
 									? "/assets/icons/dashboard_yellow.svg"
 									: "/assets/icons/contacts_product_blue.svg"
-								: "/assets/icons/contacts_product.svg"
+								: isLogged
+									? "/assets/icons/dashboard_white.svg"
+									: "/assets/icons/contacts_product.svg"
 						}
 						alt="Login Icon"
 						width={24}
