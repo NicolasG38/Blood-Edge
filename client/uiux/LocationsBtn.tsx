@@ -1,4 +1,3 @@
-import { color } from "motion";
 import "./LocationsBtn.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";

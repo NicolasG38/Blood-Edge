@@ -40,7 +40,6 @@ function PercentageCircle({
 	percent,
 	className,
 	type,
-	favorite,
 }: { percent: number; className: string; type: string; favorite: Favorite }) {
 	const radius = 50;
 	const stroke = 4;
@@ -68,7 +67,8 @@ function PercentageCircle({
 
 	return (
 		<div className={`circle ${className}`}>
-			<svg height={100} width={100}>
+			<svg height={100} width={100} aria-label="Progress Circle">
+				<title>Cercle quantité</title>
 				<circle
 					stroke="#eee"
 					fill="transparent"
