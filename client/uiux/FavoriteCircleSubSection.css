@@ -15,23 +15,7 @@
 	font-size: 1rem;
 	margin-bottom: 1rem;
 }
-.circle.exospine,
-.circle.gears,
-.circle.nanoSuits {
-	border: 4px solid var(--orange);
-}
-.circle.nanoSuits,
-.circle.nanoSuitsLily,
-.circle.nanoSuitsAdam,
-.circle.drones {
-	border: 4px solid var(--denim);
-}
 
-.circle.glasses,
-.circle.earrings,
-.circle.hairstyle {
-	border: 4px solid var(--brown);
-}
 .circle {
 	display: flex;
 	align-items: center;
