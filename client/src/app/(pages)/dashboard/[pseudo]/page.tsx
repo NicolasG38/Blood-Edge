@@ -13,8 +13,10 @@ export default function DashboardPage() {
 			<main>
 				<DashboardHeader />
 				<Logout />
-				<FavoriteCircle />
-				<FavoriteCircleSubSection />
+				<div className="dashboardContentFavoriteCircles">
+					<FavoriteCircle />
+					<FavoriteCircleSubSection />
+				</div>
 			</main>
 			<Footer />
 		</>

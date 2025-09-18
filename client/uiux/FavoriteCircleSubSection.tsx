@@ -34,7 +34,7 @@ export default function FavoriteCircleSubSection() {
 			<div id="favoriteCircleSubSectionGrid">
 				<div>
 					<div id="favoriteCircleSubSection">
-						<p id="favoriteCircleSubSectionTitle ">Exospine</p>
+						<p id="favoriteCircleSubSectionTitle">Exospine</p>
 						<div className="circle exospine">
 							<p>{favorites.filter((f) => f.type === "exospine").length}</p>
 						</div>
@@ -42,7 +42,7 @@ export default function FavoriteCircleSubSection() {
 				</div>
 				<div>
 					<div id="favoriteCircleSubSection">
-						<p id="favoriteCircleSubSectionTitle ">Équipement</p>
+						<p id="favoriteCircleSubSectionTitle">Équipement</p>
 						<div className="circle gears">
 							<p>{favorites.filter((f) => f.type === "equipment").length}</p>
 						</div>
@@ -50,7 +50,7 @@ export default function FavoriteCircleSubSection() {
 				</div>
 				<div>
 					<div id="favoriteCircleSubSection">
-						<p id="favoriteCircleSubSectionTitle ">Nano-Combinaison</p>
+						<p id="favoriteCircleSubSectionTitle">Nano-Combinaison</p>
 						<div className="circle nanoSuits">
 							<p>{favorites.filter((f) => f.type === "ns").length}</p>
 						</div>

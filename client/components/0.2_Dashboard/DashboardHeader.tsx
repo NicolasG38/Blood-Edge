@@ -3,15 +3,6 @@ import { useAuth } from "../../context/AuthContext";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
-import Image from "next/image";
-
-interface NanoSuit {
-	NS_id: number;
-	NS_title: string;
-	image: string;
-	name: string;
-}
-
 interface User {
 	User_id: number;
 	User_pseudo: string;
@@ -19,33 +10,41 @@ interface User {
 	User_timestamp: string;
 	inscriptionDuration: string;
 }
+interface AuthContextType {
+	isLogged: boolean;
+	pseudo?: string | null;
+}
 
 export default function DashboardHeader() {
 	const params = useParams();
 
-	const pseudo = typeof params === "object" ? params.pseudo : params;
-	const [user, setUser] = useState<User | null>(null);
-	const { isLogged } = useAuth();
+	const pseudos = typeof params === "object" ? params.pseudo : params;
+	const [users, setUsers] = useState<User | null>(null);
+	const { isLogged, pseudo: authPseudo } = useAuth() as AuthContextType;
 	const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3310";
 
 	useEffect(() => {
-		if (!pseudo) return;
-		fetch(`${baseURL}/api/users/${pseudo}`)
+		if (!pseudos) return;
+		fetch(`${baseURL}/api/users/${pseudos}`)
 			.then((response) => response.json())
-			.then(setUser);
-	}, [baseURL, pseudo]);
+			.then(setUsers);
+	}, [baseURL, pseudos]);
 
 	return (
 		<div id="dashboardHeader">
-			<h1 id="dashboardTitle">Hello, {user?.User_pseudo} </h1>
+			<h1 className="dashboardTitle">
+				{isLogged && authPseudo === pseudos
+					? `Hello, ${users?.User_pseudo}`
+					: users?.User_pseudo}
+			</h1>
+
 			<div id="containerInfos">
-				<p id="dashboardEmail">{user?.User_email}</p>
+				{isLogged && authPseudo === pseudos && (
+					<p id="dashboardEmail">{users?.User_email}</p>
+				)}
 				<p id="dashboardMembershipDate">
-					Membre depuis : {user?.inscriptionDuration}
+					Membre depuis : {users?.inscriptionDuration}
 				</p>
-				<div id="containerFavorites">
-					<h2 id="favoritesTitle">Vos favoris</h2>
-				</div>
 			</div>
 		</div>
 	);

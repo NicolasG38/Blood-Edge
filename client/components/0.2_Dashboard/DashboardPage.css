@@ -1,4 +1,12 @@
-#dashboardTitle {
+.dashboardContentFavoriteCircles {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 5rem;
+	margin-top: 3rem;
+}
+
+.dashboardTitle {
 	font-family: "Quan-Bold", sans-serif;
 	font-size: 3rem;
 	margin: 2rem 0 0 2rem;

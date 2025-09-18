@@ -8,7 +8,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 0 1rem;
+	margin: 1rem;
 }
 #favoriteCircleSubSectionTitle {
 	font-family: "Quan-Light", sans-serif;
@@ -18,7 +18,19 @@
 .circle.exospine,
 .circle.gears,
 .circle.nanoSuits {
-	border: 6px solid var(--orange);
+	border: 4px solid var(--orange);
+}
+.circle.nanoSuits,
+.circle.nanoSuitsLily,
+.circle.nanoSuitsAdam,
+.circle.drones {
+	border: 4px solid var(--denim);
+}
+
+.circle.glasses,
+.circle.earrings,
+.circle.hairstyle {
+	border: 4px solid var(--brown);
 }
 .circle {
 	display: flex;
