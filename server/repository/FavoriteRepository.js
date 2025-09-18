@@ -92,6 +92,31 @@ class FavoriteRepository {
 		const [rows] = await databaseClient.query(sql, [userId, targetId]);
 		return rows[0] ?? null;
 	}
+
+	async getUserFavorites(pseudo) {
+		const sql = `
+	  SELECT
+		f.Favorite_id,
+		f.Favorite_user_id,
+		COALESCE(f.Favorite_exospine_id, f.Favorite_equipment_id, f.Favorite_NS_id) AS target_id,
+		CASE
+		  WHEN f.Favorite_exospine_id IS NOT NULL THEN 'exospine'
+		  WHEN f.Favorite_equipment_id IS NOT NULL THEN 'equipment'
+		  WHEN f.Favorite_NS_id IS NOT NULL THEN 'ns'
+		  ELSE 'unknown'
+		END AS type,
+		u.User_id,
+		COALESCE(e.Exospine_id, eq.Equipment_id, ns.NS_id) AS id
+	  FROM Favorite f
+	  JOIN \`User\` u ON u.User_id = f.Favorite_user_id
+	  LEFT JOIN Exospine e ON e.Exospine_id = f.Favorite_exospine_id
+	  LEFT JOIN Equipment eq ON eq.Equipment_id = f.Favorite_equipment_id
+	  LEFT JOIN Nano_suits ns ON ns.NS_id = f.Favorite_NS_id
+	  WHERE f.Favorite_user_id = ?
+	`;
+		const [rows] = await databaseClient.query(sql, [pseudo]);
+		return rows;
+	}
 }
 
 export default new FavoriteRepository();

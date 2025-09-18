@@ -1,0 +1,32 @@
+.dashboardContentFavoriteCircles {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 5rem;
+	margin-top: 3rem;
+}
+
+.dashboardTitle {
+	font-family: "Quan-Bold", sans-serif;
+	font-size: 3rem;
+	margin: 2rem 0 0 2rem;
+	width: fit-content;
+}
+
+#favoritesTitle {
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 2rem;
+	margin: 3rem 6rem;
+}
+#containerInfos {
+	display: flex;
+	font-family: "Quan-Semilight", sans-serif;
+	font-size: 1.3rem;
+	margin: 0rem 0 0 2rem;
+	width: fit-content;
+	& #dashboardEmail,
+	#dashboardMembershipDate {
+		margin-right: 2rem;
+		font-family: "Quan-Semilight", sans-serif;
+	}
+}

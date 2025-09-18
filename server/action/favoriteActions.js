@@ -43,4 +43,8 @@ const isFavorite = async (userId, targetId, type) => {
 	return await FavoriteRepository.isFavorite(userId, type, targetId);
 };
 
-export default { addFavorite, removeFavorite, isFavorite };
+const getUserFavorites = async (pseudo) => {
+	return await FavoriteRepository.getUserFavorites(pseudo);
+};
+
+export default { addFavorite, removeFavorite, isFavorite, getUserFavorites };

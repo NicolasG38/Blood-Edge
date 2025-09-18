@@ -63,4 +63,23 @@ const isFavorite = async (req, res) => {
 	}
 };
 
-export default { addFavorite, removeFavorite, isFavorite };
+const getUserFavorites = async (req, res) => {
+	const { pseudo } = req.params;
+	if (!pseudo) return res.status(400).json({ error: "Paramètres invalides" });
+	try {
+		// On récupère l'utilisateur par pseudo
+		const usersRepository = await import("../repository/usersRepository.js");
+		const user = await usersRepository.default.findByPseudo(pseudo);
+		if (!user || !user.User_id) {
+			return res.status(404).json({ error: "Utilisateur non trouvé" });
+		}
+		const result = await favoriteActions.getUserFavorites(user.User_id);
+		res.json(result);
+	} catch (error) {
+		console.error("[getUserFavorites]", error);
+		res
+			.status(500)
+			.json({ error: "Erreur lors de la récupération des favoris" });
+	}
+};
+export default { addFavorite, removeFavorite, isFavorite, getUserFavorites };
