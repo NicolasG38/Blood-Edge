@@ -1,4 +1,3 @@
-import Image from "next/image";
 import StoresBtn from "../../uiux/StoresBtn";
 
 import "./Footer.css";
@@ -11,83 +10,92 @@ export default function Footer() {
 					<article id="Shiftup">
 						<h1 id="ShiftupTitle">SHIFT UP</h1>
 						<section id="ShiftupLinks">
-							<p>
-								<a
-									href="https://www.shiftup.co.kr/"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Official Website
-								</a>
-							</p>
-							<p>
-								<a
-									href="https://www.stellar-blade.com/"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Stellar-blade.com
-								</a>
-							</p>
-							<p>
-								<a
-									href="https://nikke-en.com/"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Goddess of Victory: NIKKE
-								</a>
-							</p>
+							<a
+								href="https://www.shiftup.co.kr/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Official Website
+							</a>
+							<a
+								href="https://www.stellar-blade.com/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Stellar-blade.com
+							</a>
+							<a
+								href="https://nikke-en.com/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Goddess of Victory: NIKKE
+							</a>
 						</section>
 					</article>
 					<article id="SIE">
 						<h1 id="SIETitle">SONY INTERACTIVE ENTERTAINMENT</h1>
 						<section id="SIELinks">
-							<p>
-								<a
-									href="https://sonyinteractive.com/en/"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Official Website
-								</a>
-							</p>
+							<a
+								href="https://sonyinteractive.com/en/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Official Website
+							</a>
 						</section>
 					</article>
 				</section>
 				<section id="containerTwo">
-					<article id="Steam">
-						<h1 id="SteamTitle">STEAM</h1>
-						<section id="SteamLinks">
-							<p>
+					<section id="legal">
+						<article id="terms">
+							<h1 id="LegalTitle">LÉGAL</h1>
+							<section id="legalLinks">
 								<a
-									href="https://www.shiftup.co.kr/"
+									href="https://www.google.fr"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									Official Website
+									Mentions Légales
 								</a>
-							</p>
-						</section>
-					</article>
-					<article id="PSStore">
-						<h1 id="PSStoreTitle">PS STORE</h1>
-						<section id="PSStoreLinks">
-							<p>
 								<a
-									href="https://www.shiftup.co.kr/"
+									href="https://www.google.fr"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									Official Website
+									Politique de cookies
 								</a>
-							</p>
-						</section>
-					</article>
+								<a
+									href="https://www.google.fr"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									CGU
+								</a>
+							</section>
+						</article>
+					</section>
+				</section>
+				<section id="containerThree">
+					<section id="Support">
+						<article id="contact">
+							<h1 id="ContactTitle">SUPPORT</h1>
+							<section id="ContactLinks">
+								<a
+									href="https://www.google.fr"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									Contact
+								</a>
+							</section>
+						</article>
+					</section>
 				</section>
 			</section>
+
 			<StoresBtn />
-			<span id="Footer">
+			<span id="footerBottom">
 				<p id="copyrightFooter">
 					STELLAR BLADE© 2024 SHIFT UP Corporation. All rights reserved.
 					Published by Sony Interactive Entertainment
