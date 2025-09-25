@@ -48,7 +48,7 @@ router.delete(
 
 //Exospine
 router.get("/api/exospine", exospineActions.browse);
-router.get("/api/exospine/id-title", exospineActions.getIdAndTitle);
+router.get("/api/exospine/id-title", exospineActions.browse);
 
 //Equipment
 router.get("/api/equipment", equipmentActions.browse);

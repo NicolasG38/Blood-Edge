@@ -20,8 +20,8 @@ async function remove(id) {
 	return exospineRepository.delete(id);
 }
 
-async function getIdAndTitle() {
-	return exospineRepository.getIdAndTitle();
+async function readAll() {
+	return exospineRepository.readAll();
 }
 
-export default { list, readById, create, update, remove, getIdAndTitle };
+export default { list, readById, create, update, remove, readAll };

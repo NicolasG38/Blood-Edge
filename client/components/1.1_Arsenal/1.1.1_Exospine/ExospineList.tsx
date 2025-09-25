@@ -25,7 +25,12 @@ export default function ExospineList({
 	onSelect,
 }: ExospineListProps) {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
-	const toUrl = (p: string) => (p?.startsWith("http") ? p : `${baseURL}${p}`);
+	const toUrl = (p: string) => {
+		if (!p) return "/assets/images/placeholder.png"; // image par défaut
+		if (p.startsWith("http")) return p;
+		if (!baseURL) return p; // ou retourne une image par défaut
+		return `${baseURL}${p}`;
+	};
 
 	const [exospines, setExospines] = useState<ExospineProps[]>([]);
 	const [hoveredId, setHoveredId] = useState<number | null>(null);
@@ -34,33 +39,13 @@ export default function ExospineList({
 		fetch(`${baseURL}/api/exospine/id-title`)
 			.then((response) => response.json())
 			.then((data) => {
-				const normalized = (Array.isArray(data) ? data : [])
-					.map(
-						(d: {
-							Exospine_id: number;
-							Exospine_title_fr: string;
-							Exospine_title_en: string;
-							Exospine_icon: string;
-							Exospine_icon_colored: string;
-							Exospine_icon_Mk2: string;
-							Exospine_icon_Mk2_colored: string;
-						}) => ({
-							id: d.Exospine_id,
-							Exospine_title_fr: d.Exospine_title_fr,
-							Exospine_title_en: d.Exospine_title_en,
-							Exospine_icon: d.Exospine_icon,
-							Exospine_icon_colored: d.Exospine_icon_colored,
-							Exospine_icon_Mk2: d.Exospine_icon_Mk2,
-							Exospine_icon_Mk2_colored: d.Exospine_icon_Mk2_colored,
-						}),
-					)
-					.filter((d) => Number.isFinite(d.id));
-				setExospines(normalized);
+				setExospines(data);
 			})
 			.catch((error) => {
 				console.error("Error fetching exospines:", error);
 			});
 	}, [baseURL]);
+	console.log(exospines);
 
 	return (
 		<div>
@@ -70,39 +55,22 @@ export default function ExospineList({
 			<div className="containerList">
 				<ul>
 					{exospines.map((exospine) => (
-						<li
-							key={exospine.id}
-							className="ListLi_orange"
-							onMouseEnter={() => setHoveredId(exospine.id)}
-							onMouseLeave={() => setHoveredId(null)}
-						>
+						<li key={exospine.id} className="ListLi_orange">
 							<button
 								type="button"
 								className="listButton"
 								onClick={() => onSelect(exospine.id)}
 							>
-								<span
-									className="deco_1_orange"
-									style={{
-										background:
-											hoveredId === exospine.id
-												? "var(--lightblack)"
-												: "var(--white)",
-									}}
-								/>
 								<Image
 									className="apparelIcon_orange"
-									src={toUrl(
-										hoveredId === exospine.id
-											? exospine.Exospine_icon_colored ||
-													exospine.Exospine_icon_Mk2_colored
-											: exospine.Exospine_icon || exospine.Exospine_icon_Mk2,
-									)}
+									src={toUrl(exospine.Exospine_icon)}
 									alt="Arsenal Icon"
 									width={70}
 									height={70}
 								/>
-								<p className="listName">{exospine.Exospine_title_fr}</p>
+								<p className="listName">
+									{exospine.Exospine_title_fr || "Titre manquant"}
+								</p>
 							</button>
 							<AddFavorite exo={exospine.id.toString()} />
 						</li>
