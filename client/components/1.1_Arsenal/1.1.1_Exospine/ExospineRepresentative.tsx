@@ -7,18 +7,18 @@ type ExospineMap = {
 	bar_1: boolean;
 	bar_2: boolean;
 	bar_3: boolean;
-	title_fr: string;
-	title_en: string;
-	skill_1_fr: string;
-	skill_1_en: string;
-	skill_2_fr: string;
-	skill_2_en: string;
-	skill_3_fr: string;
-	skill_3_en: string;
-	text_1_fr: string;
-	text_1_en: string;
-	text_2_fr: string;
-	text_2_en: string;
+	Exospine_bar_1: boolean;
+	Exospine_bar_2: boolean;
+	Exospine_bar_3: boolean;
+	title: string;
+	skill_1: string;
+	skill_2: string;
+	skill_3: string;
+	Skill_1: string;
+	Skill_2: string;
+	Skill_3: string;
+	text_1: string;
+	text_2: string;
 	bar: string;
 };
 
@@ -35,24 +35,19 @@ export default function ExospineRepresentative({
 		fetch(`${baseURL}/api/exospine`)
 			.then((response) => response.json())
 			.then((data) => {
-				const normalized = (Array.isArray(data) ? data : []).map((d) => ({
-					id: d.Exospine_id,
+				console.log("data for representative:", data);
+				const normalized = data.map((d: ExospineMap) => ({
+					id: d.id,
+					title: d.title,
 					bar_1: d.Exospine_bar_1,
 					bar_2: d.Exospine_bar_2,
 					bar_3: d.Exospine_bar_3,
-					title_fr: d.Exospine_title_fr,
-					title_en: d.Exospine_title_en,
-					skill_1_fr: d.Exospine_skill_1_fr,
-					skill_1_en: d.Exospine_skill_1_en,
-					skill_2_fr: d.Exospine_skill_2_fr,
-					skill_2_en: d.Exospine_skill_2_en,
-					skill_3_fr: d.Exospine_skill_3_fr,
-					skill_3_en: d.Exospine_skill_3_en,
-					text_1_fr: d.Exospine_text_1_fr,
-					text_1_en: d.Exospine_text_1_en,
-					text_2_fr: d.Exospine_text_2_fr,
-					text_2_en: d.Exospine_text_2_en,
-					bar: d.Exospine_bar,
+					skill_1: d.Skill_1,
+					skill_2: d.Skill_2,
+					skill_3: d.Skill_3,
+					text_1: d.text_1,
+					text_2: d.text_2,
+					// ...autres champs
 				}));
 				setExospineServer(normalized);
 			})
@@ -69,10 +64,12 @@ export default function ExospineRepresentative({
 		return <div>Chargement des données...</div>;
 	}
 	const isOn = (bar: boolean) => (bar ? "bar-on" : "bar-off");
+
+	console.log("current before the return:", current);
 	return (
 		<div className="containerRepresentative">
 			<section className="representative">
-				<p className="representativeTitle">{current.title_fr}</p>
+				<p className="representativeTitle">{current.title}</p>
 
 				<section className="exospine-bar">
 					<div className={isOn(current.bar_1)} />
@@ -83,26 +80,20 @@ export default function ExospineRepresentative({
 				<section className="representativeSkill">
 					<div>
 						<div className="exospineSquareRounded" />
-						<p className="exospineRepresentativeSkill_1">
-							{current.skill_1_fr}
-						</p>
+						<p className="exospineRepresentativeSkill_1">{current.skill_1}</p>
 					</div>
 					<div>
 						<div className="exospineSquareRounded" />
-						<p className="exospineRepresentativeSkill_2">
-							{current.skill_2_fr}
-						</p>
+						<p className="exospineRepresentativeSkill_2">{current.skill_2}</p>
 					</div>
 					<div>
 						<div className="exospineSquareRounded" />
-						<p className="exospineRepresentativeSkill_3">
-							{current.skill_3_fr}
-						</p>
+						<p className="exospineRepresentativeSkill_3">{current.skill_3}</p>
 					</div>
 				</section>
 				<section className="representativeText">
-					<p className="representativeText_1">{current.text_1_fr}</p>
-					<p className="representativeText_2">{current.text_2_fr}</p>
+					<p className="representativeText_1">{current.text_1}</p>
+					<p className="representativeText_2">{current.text_2}</p>
 				</section>
 			</section>
 		</div>
