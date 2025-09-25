@@ -11,8 +11,8 @@ const hashingOptions = {
 
 const browse = async (_req, res) => {
 	try {
-		const users = (await signupRepository.readAll?.()) || [];
-		return res.json(users);
+		const user = (await signupRepository.readAll?.()) || [];
+		return res.json(user);
 	} catch (e) {
 		console.error("[SIGNUP] browse error:", e);
 		return res.status(500).json({ error: "INTERNAL_ERROR" });
@@ -121,7 +121,7 @@ export async function signupAndAuth({
 	if (!secret) return { ok: false, code: "CONFIG_ERROR" };
 
 	const token = jwt.sign(
-		{ sub: newUser.User_id, pseudo: newUser.User_pseudo },
+		{ sub: newUser.Users_id, pseudo: newUser.Users_pseudo },
 		secret,
 		{ expiresIn: "1h" },
 	);
@@ -129,9 +129,9 @@ export async function signupAndAuth({
 	return {
 		ok: true,
 		user: {
-			User_id: newUser.User_id,
-			User_pseudo: newUser.User_pseudo,
-			User_email: newUser.User_email,
+			Users_id: newUser.Users_id,
+			Users_pseudo: newUser.Users_pseudo,
+			Users_email: newUser.Users_email,
 		},
 		token,
 	};

@@ -28,7 +28,11 @@ const nextConfig = {
 					{
 						key: "Content-Security-Policy",
 						value:
-							"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3310;" +
+							"default-src 'self'; " +
+							"script-src 'self' 'unsafe-inline' https://platform.twitter.com https://cdn.syndication.twimg.com; " +
+							"frame-src https://platform.twitter.com https://syndication.twitter.com; " +
+							"style-src 'self' 'unsafe-inline'; " +
+							"connect-src 'self' http://localhost:3310 http://192.168.1.14:3000; " +
 							"img-src 'self' http://localhost:3310 data: blob:; ",
 					},
 					{

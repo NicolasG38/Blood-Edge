@@ -20,9 +20,13 @@ const login = async (req, res) => {
 				.status(401)
 				.json({ error: "Identifiants/Mot de passe incorrects" });
 		}
-
+		console.log("Hash récupéré :", user.Users_hashed_password);
+		console.log(
+			"Nombre de segments :",
+			user.Users_hashed_password.split("$").length,
+		);
 		const isPasswordValid = await argon2.verify(
-			user.User_hashed_password,
+			user.Users_hashed_password,
 			password,
 		);
 		if (!isPasswordValid) {
@@ -33,22 +37,22 @@ const login = async (req, res) => {
 
 		const token = jwt.sign(
 			{
-				sub: user.User_id,
-				pseudo: user.User_pseudo,
-				role: user.User_role || "user",
+				sub: user.Users_id,
+				pseudo: user.Users_pseudo,
+				role: user.Users_role || "user",
 			},
 			process.env.JWT_SECRET,
 			{ expiresIn: "1h" },
 		);
 
-		res.cookie("userId", user.User_id, {
+		res.cookie("userId", user.Users_id, {
 			httpOnly: false, // false pour pouvoir le lire côté client si besoin
 			sameSite: "lax",
 			secure: false, // true en prod HTTPS
 			path: "/",
 			maxAge: 24 * 60 * 60 * 1000,
 		});
-		res.cookie("pseudo", user.User_pseudo, {
+		res.cookie("pseudo", user.Users_pseudo, {
 			httpOnly: false,
 			sameSite: "lax",
 			secure: false,
@@ -69,9 +73,9 @@ const login = async (req, res) => {
 		return res.json({
 			success: true,
 			user: {
-				User_id: user.User_id,
-				User_pseudo: user.User_pseudo,
-				User_role: user.User_role || "user",
+				Users_id: user.Users_id,
+				Users_pseudo: user.Users_pseudo,
+				Users_role: user.Users_role || "user",
 			},
 			token,
 			message: "Bon retour ! Ton Tetrapod est prêt !",

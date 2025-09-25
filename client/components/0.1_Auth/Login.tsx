@@ -9,8 +9,8 @@ import Signup from "./Signup";
 export type Payload = {
 	token: string;
 	user: {
-		User_id: string | number;
-		User_pseudo: string;
+		Users_id: string | number;
+		Users_pseudo: string;
 	};
 };
 
@@ -70,8 +70,8 @@ export default function Login({
 				message?: string;
 				token?: string;
 				user?: {
-					User_pseudo: string;
-					User_id: string;
+					Users_pseudo: string;
+					Users_id: string;
 					// add other user fields if needed
 				};
 			};
@@ -83,13 +83,13 @@ export default function Login({
 			}
 
 			if (response.ok && data?.token && data.user) {
-				localStorage.setItem("pseudoStorage", data.user.User_pseudo);
+				localStorage.setItem("pseudoStorage", data.user.Users_pseudo);
 
 				const payload: Payload = {
 					token: data.token,
 					user: {
-						User_id: data.user.User_id,
-						User_pseudo: data.user.User_pseudo,
+						Users_id: data.user.Users_id,
+						Users_pseudo: data.user.Users_pseudo,
 					},
 				};
 
@@ -102,14 +102,14 @@ export default function Login({
 				setTimeout(() => {
 					onSuccess?.(payload);
 					setAuth({
-						userId: data.user?.User_id ?? "",
-						pseudo: data.user?.User_pseudo ?? "",
+						userId: data.user?.Users_id ?? "",
+						pseudo: data.user?.Users_pseudo ?? "",
 						isLogged: true,
 					});
 					if (!isMobile) {
 						window.location.reload();
 					} else {
-						router.push(`/dashboard/${data.user?.User_pseudo ?? ""}`);
+						router.push(`/dashboard/${data.user?.Users_pseudo ?? ""}`);
 					}
 				}, 2000);
 			} else {

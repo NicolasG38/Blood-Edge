@@ -28,8 +28,8 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 		[key: string]: FieldValidation | undefined;
 	}
 	interface SignupUser {
-		User_id: number;
-		User_pseudo: string;
+		Users_id: number;
+		Users_pseudo: string;
 		// Add other user fields if needed
 	}
 
@@ -130,8 +130,8 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 
 			if (response.ok && data?.token && data.user) {
 				setAuth({
-					userId: String(data.user.User_id),
-					pseudo: data.user.User_pseudo,
+					userId: String(data.user.Users_id),
+					pseudo: data.user.Users_pseudo,
 					isLogged: true,
 				});
 
@@ -139,7 +139,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 				setTimeout(() => {
 					onSuccess?.();
 					if (window.location.pathname !== "/dashboard") {
-						router.push(`/dashboard/${data.user?.User_pseudo}`);
+						router.push(`/dashboard/${data.user?.Users_pseudo}`);
 					}
 				}, 4000);
 			} else {
