@@ -13,6 +13,8 @@
 	--blackLight: #4d4d4d;
 	--gray: #8c8c8c;
 	--orange: #ff9e00;
+	--greenCircle: #2dc653;
+	--brown: #986c5b;
 
 	--lightgrey50: #d9d9d950;
 	--lightblack: #333333;
@@ -24,6 +26,7 @@
 	--greenLight: #ccff33;
 	--redLight: #da1e37;
 	--redNegative: #e74f63;
+	--logout: #e01e37;
 	--redLight90: #da1e3715;
 
 	--linear-login: linear-gradient(90deg, #ccff33, #7a991f);
@@ -314,5 +317,14 @@ footer {
 	#mainSignUpLogin {
 		flex-direction: column;
 		align-items: center;
+	}
+}
+@media screen and (max-width: 768px) {
+	main {
+		padding-bottom: 80px; /* hauteur du menu mobile fermé */
+	}
+
+	.row {
+		flex-direction: column;
 	}
 }

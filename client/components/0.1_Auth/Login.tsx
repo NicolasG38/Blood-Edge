@@ -1,8 +1,9 @@
 "use client";
 import "./Login.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../../context/AuthContext";
 import Signup from "./Signup";
 
 export type Payload = {
@@ -16,16 +17,25 @@ export type Payload = {
 type LoginProps = {
 	onSuccess?: (payload: Payload) => void; // changé
 	onSwitch?: () => void;
+	setOpenLogin?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Login({ onSuccess, onSwitch }: LoginProps) {
-	const baseURL = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
+export default function Login({
+	onSuccess,
+	onSwitch,
+	setOpenLogin,
+}: LoginProps) {
+	const baseURL = (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, "");
+
+	const router = useRouter();
+	const { setAuth } = useAuth();
 	const [loading, setLoading] = useState(false);
 	const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 	const [message, setMessage] = useState<string | null>(null);
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [showFail, setShowFail] = useState(false);
 	const [internalMode, setInternalMode] = useState<"login" | "signup">("login");
+	const [isMobile, setIsMobile] = useState(false);
 
 	const effectiveSwitch =
 		onSwitch ??
@@ -91,7 +101,16 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 
 				setTimeout(() => {
 					onSuccess?.(payload);
-					window.location.reload();
+					setAuth({
+						userId: data.user?.User_id ?? "",
+						pseudo: data.user?.User_pseudo ?? "",
+						isLogged: true,
+					});
+					if (!isMobile) {
+						window.location.reload();
+					} else {
+						router.push(`/dashboard/${data.user?.User_pseudo ?? ""}`);
+					}
 				}, 2000);
 			} else {
 				const msg =
@@ -113,6 +132,13 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 			setLoading(false);
 		}
 	};
+
+	useEffect(() => {
+		const handleResize = () => setIsMobile(window.innerWidth < 768);
+		handleResize();
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 	if (internalMode === "signup" && !onSwitch) {
 		return (
@@ -154,7 +180,13 @@ export default function Login({ onSuccess, onSwitch }: LoginProps) {
 						<h1 id="loginTitle">CONNEXION</h1>
 						<Image
 							id="wavingHand"
-							src="/assets/icons/waving_hand.svg"
+							src={
+								isMobile
+									? showFail
+										? "/assets/icons/waving_hand_white.svg"
+										: "/assets/icons/waving_hand_black.svg"
+									: "/assets/icons/waving_hand_black.svg"
+							}
 							alt="Logo"
 							width={24}
 							height={24}

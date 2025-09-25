@@ -4,7 +4,7 @@
 		display: none;
 	}
 	/*=== BARRE DE NAVIGATION MASQUÉE===*/
-	/*=== SECTION ARSENAL ===*/
+	/*=== SECTIONBTN ===*/
 
 	.section-btn-mobile {
 		display: none;
@@ -123,7 +123,99 @@
 	div.sectionArsenal:nth-child(5) {
 		width: 350px;
 	}
-	/*=== SECTION ARSENAL FIN ===*/
+	/*=== SECTIONBTN ===*/
+	/*=== SUBSECTION ===*/
+	.containerSubSection {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+		grid-auto-flow: column;
+		gap: 4rem;
+		justify-items: center;
+		align-items: center;
+		margin: 3rem;
+		width: 100%;
+	}
+
+	.subSection {
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		width: 240px;
+		height: 40px;
+		border-radius: 0 5px 5px 0;
+		border: 1px solid var(--lightgrey);
+		font-family: "QuanRounded-SemiLight", sans-serif;
+		margin: 0rem;
+		overflow: hidden;
+		transition: .35s ease-in-out;
+		&:hover {
+			background: var(--lightdenim);
+		}
+	}
+
+	.sectionNanoSuits {
+		display: flex;
+		align-items: center;
+	}
+
+	.btnNanoSuits {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		padding-left: 8px;
+		height: 100%;
+	}
+
+	.nanoSuitsIcon {
+		width: 24px;
+		height: 24px;
+		transition: .35s ease-in-out;
+		opacity: 0.5;
+		margin: auto 0;
+		z-index: 1;
+	}
+
+	.nanoSuitsdeco {
+		position: relative;
+		width: 120px;
+		height: 120px;
+	}
+
+	.nanoSuitsdeco_0 {
+		position: absolute;
+		top: 50%;
+		left: 10%;
+		transform: translate(-50%, -50%);
+		margin: 0; /* retire le margin: auto; */
+		width: 5px;
+		height: 26px;
+		transition: background 0.3s;
+		z-index: 1;
+	}
+
+	.nanoSuitsdeco_1,
+	.nanoSuitsdeco_2 {
+		position: absolute;
+		width: 40px;
+		height: 120px;
+		background: var(--lightgrey50);
+		transition: background 0.3s;
+	}
+
+	.nanoSuitsdeco_1 {
+		transform: rotate(50deg);
+	}
+	.nanoSuitsdeco_2 {
+		transform: rotate(-50deg);
+	}
+
+	.sectionNanoSuits:hover .nanoSuitsdeco_1,
+	.sectionNanoSuits:hover .nanoSuitsdeco_2 {
+		background: var(--lightblack50);
+	}
+	/*=== SUBSECTION FIN ===*/
 }
 
 @media screen and (max-width: 768px) {
@@ -133,27 +225,46 @@
 			bottom: env(safe-area-inset-bottom);
 		}
 	}
+	main {
+		padding-bottom: 80px;
+	}
 	#nav-mobile,
 	#nav-mobile.open {
-		transition: max-height 0.35s ease-in-out;
+		transition: max-height 0.35s ease-in-out, top 0.35s ease-in-out, bottom
+			0.35s ease-in-out;
 	}
 
 	#nav-mobile.open {
 		max-height: 100vh;
 		& > ul > li > #menu-mobile-btn {
 			position: relative;
-			top: .2rem;
+			top: -0.5rem;
 		}
 	}
-
+	/* suppression des styles pour les liens */
+	nav#nav-mobile a,
+	nav#nav-mobile a:visited,
+	nav#nav-mobile a:active,
+	nav#nav-mobile a:focus {
+		color: var(--white);
+		text-decoration: none;
+	}
+	.section-btn-desktop,
+	.containerSectionArsenal.section-btn-desktop,
+	.containerSubSection.subsection-btn-desktop {
+		display: none !important;
+	}
 	#nav-mobile {
 		position: fixed;
 		bottom: 0;
+
 		left: 0;
 		width: 100vw;
-		max-height: 72px;
+		max-height: 80px;
 		margin: 0;
 		background-color: var(--denim);
+		overflow-y: auto;
+		overflow-x: visible;
 		z-index: 1000;
 		& > ul {
 			display: flex;
@@ -180,65 +291,176 @@
 					display: flex;
 					align-items: center;
 					position: relative;
-					bottom: 1.8rem;
+					bottom: 1rem;
 					background: var(--radial-blueLight);
 					border: 1px solid var(--white);
 					border-radius: 100px;
 				}
+				& > a > #login-mobile-account {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					background: transparent;
+					border: none;
+					font-family: "Quan-Bold", sans-serif;
+					font-size: 1rem;
+					height: 100%;
+					color: var(--white);
+					text-decoration: none;
+					&.open {
+						max-height: 100vh;
+					}
+					& > p {
+						color: var(--white);
+					}
+				}
 			}
 		}
-	}
-	/*=== BARRE DE NAVIGATION MOBILE  FIN===*/
-	/*=== SECTION ARSENAL MOBILE ===*/
-	.section-btn-desktop,
-	.containerSectionArsenal.section-btn-desktop {
-		display: none !important;
-	}
-	.section-btn-mobile {
-		display: flex;
-		position: relative;
-		top: 0;
-		height: 100vh;
-		background-color: var(--white);
-		z-index: 1000;
-	}
-	.containerSectionArsenal.mobile {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-	}
-	.sectionArsenal.mobile {
-		display: flex;
-		align-items: center;
-		width: 100%;
-		height: 64px;
-		font-family: "QuanRounded-Bold", sans-serif;
-		color: var(--white);
-		border: 1px solid var(--lightgrey);
-		font-size: 2rem;
-		transition: 0.35s ease-in-out;
-		overflow: hidden;
-		position: relative;
-		z-index: 1;
-		background: var(--denim);
-	}
-	.btnArsenal.mobile {
-		display: flex;
-		align-items: center;
-		width: fit-content;
-		height: 38px;
-		padding-left: 1rem;
-		transition: 0.35s ease-in-out;
-		& > p {
-			color: var(--white);
+		/*=== BARRE DE NAVIGATION MOBILE FIN===*/
+		/*=== SECTIONBTN MOBILE ===*/
+
+		.section-btn-mobile {
+			display: flex;
+			position: relative;
+			top: 0;
+			height: 100vh;
+			width: 100vw;
+			background-color: var(--white);
+			z-index: 1000;
 		}
-	}
-	.arsenalIcon.mobile {
-		display: block;
-		margin-left: auto;
-		width: 96px;
-		height: 96px;
-		transition: .35s ease-in-out;
-		opacity: 0.5;
+		.containerSectionArsenal.mobile {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+		}
+		.sectionArsenal.mobile {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 64px;
+			padding: 32px;
+			font-family: "QuanRounded-Bold", sans-serif;
+			color: var(--white);
+			border: 1px solid var(--lightgrey);
+			font-size: 2rem;
+			transition: 0.35s ease-in-out;
+			overflow: hidden;
+			position: relative;
+			z-index: 1;
+			background: var(--denim);
+		}
+		.btnArsenal.mobile {
+			display: flex;
+			align-items: center;
+			width: fit-content;
+			height: 38px;
+			padding-left: 1rem;
+			transition: 0.35s ease-in-out;
+			& > p {
+				color: var(--white);
+			}
+		}
+
+		.arsenalIcon.mobile {
+			display: block;
+			margin-left: auto;
+			width: 96px;
+			height: 96px;
+			transition: .35s ease-in-out;
+			opacity: 0.5;
+		}
+		/*=== SECTIONBTN MOBILE FIN ===*/
+		/*=== SUBSECTION MOBILE ===*/
+		.containerSubSection.mobile {
+			display: flex;
+			flex-direction: column;
+			grid-template-columns: none;
+			grid-template-rows: none;
+			justify-items: center;
+			align-items: center;
+			margin: 0rem;
+			width: 100%;
+		}
+
+		.subSection.mobile {
+			display: flex;
+			justify-content: start;
+			align-items: center;
+			width: 100%;
+			height: 70px;
+			border-radius: 0 5px 5px 0;
+			border: 1px solid var(--lightgrey);
+			font-family: "QuanRounded-SemiLight", sans-serif;
+			margin: .1rem 0;
+			overflow: hidden;
+		}
+
+		.sectionNanoSuits.mobile {
+			display: flex;
+			align-items: center;
+		}
+
+		.btnNanoSuits.mobile {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			padding-left: 8px;
+			height: 100%;
+		}
+
+		.nanoSuitsIcon.mobile {
+			width: 24px;
+			height: 24px;
+			transition: .35s ease-in-out;
+			opacity: 0.5;
+			margin: auto 0;
+			z-index: 1;
+		}
+
+		.nanoSuitsdeco.mobile {
+			position: relative;
+			width: 120px;
+			height: 120px;
+		}
+
+		.nanoSuitsdeco_0.mobile {
+			position: absolute;
+			top: 50%;
+			left: 20%;
+			transform: translate(-50%, -50%);
+			margin: 0;
+			width: 5px;
+			height: 5vh;
+			transition: background 0.3s;
+			z-index: 1;
+		}
+
+		.nanoSuitsdeco_1.mobile,
+		.nanoSuitsdeco_2.mobile {
+			display: flex;
+			position: absolute;
+			top: -24%;
+			left: -50%;
+			width: 40px;
+			height: 180px;
+			background: var(--lightgrey50);
+			transition: background 0.3s;
+		}
+
+		.nanoSuitsdeco_1.mobile {
+			transform: rotate(50deg);
+		}
+		.nanoSuitsdeco_2.mobile {
+			transform: rotate(-50deg);
+		}
+
+		.sectionNanoSuits:hover .nanoSuitsdeco_1.mobile,
+		.sectionNanoSuits:hover .nanoSuitsdeco_2.mobile {
+			background: var(--lightblack50);
+		}
+
+		/*=== SUBSECTION FIN ===*/
 	}
 }

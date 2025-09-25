@@ -1,0 +1,45 @@
+.ListBtnContainer {
+	display: none;
+}
+@media screen and (max-width: 768px) {
+	.ListBtnContainer {
+		display: flex;
+		justify-content: start;
+		align-items: start;
+		width: 100%;
+	}
+	.ListBtn {
+		display: flex;
+		justify-content: center;
+		align-items: start;
+		position: relative;
+		right: 16vw;
+		width: 150px;
+		height: 50px;
+		margin: 0 1rem;
+		border: 1px solid var(--denim);
+		border-radius: 5px 5px 0 0;
+		clip-path: polygon(
+			15% 0%,
+			85% 0% /* haut gauche, haut droite */,
+			100% 50% /* droite haut */,
+			100% 100% /* droite bas */,
+			0% 100%,
+			0% 100% /* bas droite, bas gauche */,
+			0% 100% /* gauche bas */,
+			0% 50% /* gauche haut */
+		);
+		font-family: "Quan-Bold", sans-serif;
+		font-size: 1.5rem;
+		color: var(--white);
+		rotate: 90deg;
+	}
+	.ListBtn.orange {
+		background: var(--denim);
+		box-shadow: 0 0 10px var(--denim);
+	}
+	/* .ListBtn.blue {
+	background: var(--radial-blue);
+	box-shadow: 0 0 4px var(--blue);
+} */
+}

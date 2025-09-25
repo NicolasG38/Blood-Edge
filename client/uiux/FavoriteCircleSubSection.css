@@ -1,0 +1,36 @@
+#favoriteCircleSubSectionGrid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+}
+#favoriteCircleSubSection {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 1rem;
+}
+#favoriteCircleSubSectionTitle {
+	font-family: "Quan-Light", sans-serif;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+}
+
+.circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	position: relative;
+	overflow: hidden;
+	background-color: transparent;
+	& > p {
+		margin: 0;
+		font-family: "QuanRounded-Bold", sans-serif;
+		font-size: 2rem;
+		color: black;
+		font-weight: bold;
+	}
+}

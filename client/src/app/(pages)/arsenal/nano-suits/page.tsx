@@ -4,7 +4,7 @@ import Footer from "../../../../../components/0_Home/Footer";
 import ListNanoSuits from "../../../../../components/1.1_Arsenal/1.1.3_Nano-suits/ListNanoSuits";
 import CarrouselNanoSuits from "../../../../../components/1.1_Arsenal/1.1.3_Nano-suits/CarrouselNanoSuits";
 import { useState } from "react";
-import SubSection from "../../../../../uiux/SubSection";
+import SubSection from "../../../../../components/0_Home/SubSection";
 
 export default function NanoSuitsPage() {
 	const [selectedId, setSelectedId] = useState<number | null>(null);

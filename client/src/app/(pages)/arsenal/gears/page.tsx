@@ -3,7 +3,7 @@ import GearsList from "../../../../../components/1.1_Arsenal/1.1.2_Gears/GearsLi
 import GearsRepresentative from "../../../../../components/1.1_Arsenal/1.1.2_Gears/GearsRepresentative";
 import Header from "../../../../../components/0_Home/Header";
 import Footer from "../../../../../components/0_Home/Footer";
-import SubSection from "../../../../../uiux/SubSection";
+import SubSection from "../../../../../components/0_Home/SubSection";
 import { useState } from "react";
 import StatsEVE from "../../../../../components/StatsEVE";
 import ImprovementStatsBtn from "../../../../../uiux/ImprovementStatsBtn";

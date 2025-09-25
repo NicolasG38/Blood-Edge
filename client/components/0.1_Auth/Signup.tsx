@@ -1,7 +1,7 @@
 "use client";
 import "./Signup.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
 
@@ -12,6 +12,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 	const [showFail, setShowFail] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 
 	const router = useRouter();
 	const { setAuth } = useAuth(); // au lieu de const { auth } = useAuth();
@@ -60,18 +61,33 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 
 		const form = new FormData(event.currentTarget);
 
-		const password = (form.get("password") as string) || "";
-		const pwErrs = buildPasswordErrors(password);
-		if (pwErrs.length) {
-			setError(`Mot de passe invalide, il doit contenir: ${pwErrs.join(", ")}`);
+		const emptyForm = Object.values(Object.fromEntries(form)).every(
+			(v) => v === "" || v === undefined || v === null,
+		);
+		if (emptyForm) {
+			setError("Le formulaire ne peut pas être vide.");
 			setShowFail(true);
 			return;
 		}
 
 		const email = (form.get("email") as string)?.trim();
 		const emailConfirm = (form.get("email_confirm") as string)?.trim();
-		if (email !== emailConfirm) {
-			setError("Les emails ne correspondent pas");
+		const pseudo = (form.get("pseudo") as string)?.trim();
+		const password = (form.get("password") as string) || "";
+		const terms = form.get("terms") === "on";
+
+		const errors: string[] = [];
+
+		if (!email || !emailConfirm) errors.push("Email manquant");
+		if (email !== emailConfirm) errors.push("Les emails ne correspondent pas");
+		if (!pseudo || pseudo.length < 3) errors.push("Pseudo trop court");
+		if (!terms) errors.push("CGU non acceptées");
+		const pwErrs = buildPasswordErrors(password);
+		if (pwErrs.length)
+			errors.push(`Mot de passe invalide: ${pwErrs.join(", ")}`);
+
+		if (errors.length) {
+			setError(`Veuillez corriger les champs suivants : ${errors.join(" | ")}`);
 			setShowFail(true);
 			return;
 		}
@@ -125,7 +141,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 					if (window.location.pathname !== "/dashboard") {
 						router.push(`/dashboard/${data.user?.User_pseudo}`);
 					}
-				}, 800);
+				}, 4000);
 			} else {
 				const serverMsg =
 					data?.details?.is_accept_cgu?._errors?.[0] ||
@@ -148,11 +164,19 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 		}
 	};
 
+	useEffect(() => {
+		// Cette partie ne s’exécute que côté client
+		const handleResize = () => setIsMobile(window.innerWidth < 768);
+		handleResize();
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
 	return (
 		<>
 			<div
 				id="containerSignup"
-				className={showSuccess ? "showSuccess" : "showFail"}
+				className={showSuccess ? "showSuccess" : showFail ? "showFail" : ""}
 				aria-live="polite"
 			>
 				{showSuccess && (
@@ -214,7 +238,13 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 								<h1 id="signupTitle">INSCRIPTION</h1>
 								<Image
 									id="wavingHand"
-									src="/assets/icons/emoji_people_black.svg"
+									src={
+										isMobile
+											? showFail
+												? "/assets/icons/emoji_people_white.svg"
+												: "/assets/icons/emoji_people_black.svg"
+											: "/assets/icons/emoji_people_black.svg"
+									}
 									alt=""
 									width={24}
 									height={24}

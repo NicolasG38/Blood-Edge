@@ -45,6 +45,7 @@ const login = async (req, res) => {
 			httpOnly: false, // false pour pouvoir le lire côté client si besoin
 			sameSite: "lax",
 			secure: false, // true en prod HTTPS
+			path: "/",
 			maxAge: 24 * 60 * 60 * 1000,
 		});
 		res.cookie("pseudo", user.User_pseudo, {
@@ -60,6 +61,7 @@ const login = async (req, res) => {
 			httpOnly: true,
 			secure: false, // true en prod, false en dev
 			sameSite: "strict",
+			path: "/",
 			maxAge: 24 * 60 * 60 * 1000, // 1 jour
 		});
 
@@ -81,9 +83,26 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-	res.clearCookie("token");
-	res.clearCookie("userId");
-	res.clearCookie("pseudo");
+	req.session.destroy();
+	res.clearCookie("token", {
+		httpOnly: true,
+		secure: false,
+		sameSite: "strict",
+		path: "/",
+		expires: new Date(0),
+	});
+	res.clearCookie("userId", {
+		httpOnly: false,
+		sameSite: "lax",
+		secure: false,
+		path: "/",
+	});
+	res.clearCookie("pseudo", {
+		httpOnly: false,
+		sameSite: "lax",
+		secure: false,
+		path: "/",
+	});
 	return res.json({ success: true, message: "Déconnexion réussie" });
 };
 

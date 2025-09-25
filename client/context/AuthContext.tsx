@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface AuthContextType {
@@ -21,7 +21,7 @@ export const AuthContext = React.createContext<AuthContextType | undefined>(
 );
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-	const baseURL = process.env.NEXT_PUBLIC_API_URL;
+	const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3310";
 	const [auth, setAuth] = useState<{
 		userId: string | null;
 		pseudo: string | null;

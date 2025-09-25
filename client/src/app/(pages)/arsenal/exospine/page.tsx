@@ -4,8 +4,9 @@ import Footer from "../../../../../components/0_Home/Footer";
 import ExospineList from "../../../../../components/1.1_Arsenal/1.1.1_Exospine/ExospineList";
 import ExospineRepresentative from "../../../../../components/1.1_Arsenal/1.1.1_Exospine/ExospineRepresentative";
 import StatsEVE from "../../../../../components/StatsEVE";
-import SubSection from "../../../../../uiux/SubSection";
+import SubSection from "../../../../../components/0_Home/SubSection";
 import ImprovementStatsBtn from "../../../../../uiux/ImprovementStatsBtn";
+import ListBtn from "../../../../../uiux/ListBtn";
 import { useState } from "react";
 
 export default function ExospinePage() {
@@ -17,6 +18,7 @@ export default function ExospinePage() {
 				<div className="row">
 					<ExospineList selectedId={selectedId} onSelect={setSelectedId} />
 					<ExospineRepresentative selectedId={selectedId} />
+					<ListBtn />
 					<StatsEVE />
 				</div>
 				<ImprovementStatsBtn />
