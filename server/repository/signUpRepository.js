@@ -9,14 +9,14 @@ class SignUpRepository {
 		type_account = 1,
 	}) {
 		const [result] = await databaseClient.query(
-			`INSERT INTO User (User_email, User_pseudo, User_hashed_password, User_is_accept_cgu, User_Type_account)
+			`INSERT INTO Users (Users_email, Users_pseudo, Users_hashed_password, Users_is_accept_cgu, Users_Type_account)
              VALUES (?, ?, ?, ?, ?)`,
 			[email, pseudo, hashedPassword, is_accept_cgu, type_account],
 		);
 		return {
-			User_id: result.insertId,
-			User_pseudo: pseudo,
-			User_email: email,
+			Users_id: result.insertId,
+			Users_pseudo: pseudo,
+			Users_email: email,
 		};
 	}
 
@@ -27,13 +27,13 @@ class SignUpRepository {
 
 	async readAll() {
 		const [rows] = await databaseClient.query(
-			"SELECT User_id, User_email, User_pseudo FROM User",
+			"SELECT Users_id, Users_email, Users_pseudo FROM Users",
 		);
 		return rows;
 	}
 	async findByEmailOrPseudo(email, pseudo) {
 		const [rows] = await databaseClient.query(
-			"SELECT User_id, User_email, User_pseudo, User_hashed_password FROM User WHERE User_email = ? OR User_pseudo = ? LIMIT 1",
+			"SELECT Users_id, Users_email, Users_pseudo, Users_hashed_password FROM Users WHERE Users_email = ? OR Users_pseudo = ? LIMIT 1",
 			[email, pseudo],
 		);
 		return rows[0] || null;
@@ -41,7 +41,7 @@ class SignUpRepository {
 
 	async findByPseudo(pseudo) {
 		const [rows] = await databaseClient.query(
-			"SELECT User_id, User_pseudo, User_hashed_password, User_role FROM User WHERE User_pseudo = ? LIMIT 1",
+			"SELECT Users_id, Users_pseudo, Users_hashed_password, Users_role FROM Users WHERE Users_pseudo = ? LIMIT 1",
 			[pseudo],
 		);
 		return rows[0] || null;

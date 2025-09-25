@@ -3,6 +3,7 @@ import Header from "../../../../../components/0_Home/Header";
 import Footer from "../../../../../components/0_Home/Footer";
 import ExospineList from "../../../../../components/1.1_Arsenal/1.1.1_Exospine/ExospineList";
 import ExospineRepresentative from "../../../../../components/1.1_Arsenal/1.1.1_Exospine/ExospineRepresentative";
+import ExospineSearchBar from "../../../../../components/1.1_Arsenal/1.1.1_Exospine/ExospineSearchBar";
 import StatsEVE from "../../../../../components/StatsEVE";
 import SubSection from "../../../../../components/0_Home/SubSection";
 import ImprovementStatsBtn from "../../../../../uiux/ImprovementStatsBtn";
@@ -15,6 +16,7 @@ export default function ExospinePage() {
 		<>
 			<Header />
 			<main className="parameter">
+				<ExospineSearchBar />
 				<div className="row">
 					<ExospineList selectedId={selectedId} onSelect={setSelectedId} />
 					<ExospineRepresentative selectedId={selectedId} />

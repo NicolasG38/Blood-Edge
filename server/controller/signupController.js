@@ -80,14 +80,14 @@ export async function signup(req, res) {
 			maxAge: 3600000,
 		});
 
-		res.cookie("pseudo", user.User_pseudo, {
+		res.cookie("pseudo", user.Users_pseudo, {
 			httpOnly: false,
 			sameSite: "lax",
 			secure: false,
 			maxAge: 24 * 60 * 60 * 1000, // 24 hours
 		});
 
-		res.cookie("userId", result.user.User_id, {
+		res.cookie("userId", result.user.Users_id, {
 			httpOnly: false,
 			sameSite: "lax",
 			secure: false,
