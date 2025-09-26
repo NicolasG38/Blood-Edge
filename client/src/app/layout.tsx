@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "../../context/AuthContext";
 import { MenuMobileProvider } from "../../context/MenuMobileContext";
+import { LanguageProvider } from "../../context/LangContext";
 import NavMobile from "../../components/0_Home/NavMobile";
 import SubSection from "../../components/0_Home/SubSection";
 
@@ -20,10 +21,12 @@ export default function RootLayout({
 			<body>
 				<AuthProvider>
 					<MenuMobileProvider>
-						<NavMobile>
-							<SubSection key={1} />
-						</NavMobile>
-						{children}
+						<LanguageProvider>
+							<NavMobile>
+								<SubSection key={1} />
+							</NavMobile>
+							{children}
+						</LanguageProvider>
 					</MenuMobileProvider>
 				</AuthProvider>
 			</body>
