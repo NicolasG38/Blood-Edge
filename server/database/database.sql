@@ -31,7 +31,6 @@ CREATE TABLE Objet (
     Objet_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     Objet_arsenal_id_fk INT UNSIGNED NOT NULL,
     Objet_type_id_fk INT UNSIGNED NOT NULL,
-    Objet_image VARCHAR(50)NULL,
     CONSTRAINT fk_objet_arsenal
         FOREIGN KEY (Objet_arsenal_id_fk) REFERENCES Arsenal(Arsenal_id)
         ON DELETE CASCADE ON UPDATE CASCADE,
@@ -144,32 +143,35 @@ values
     (8, "Nano-suit Lily"),
     (9, "Nano-suit Adam");
 
-insert into Objet (Objet_id, Objet_arsenal_id_fk, Objet_type_id_fk, Objet_image)
+insert into Objet (Objet_id, Objet_arsenal_id_fk, Objet_type_id_fk)
 values
-    (1, 1, 1, NULL),
-    (2, 1, 1, NULL),
-    (3, 1, 1, NULL),
-    (4, 1, 1, NULL),
-    (5, 1, 1, NULL),
-    (6, 1, 1, NULL),
-    (7, 1, 1, NULL),
-    (8, 1, 1, NULL),
-    (9, 1, 1, NULL),
-    (10, 1, 1, NULL),
-    (11, 1, 1, NULL),
-    (12, 1, 1, NULL),
-    (13, 1, 1, NULL),
-    (14, 1, 1, NULL),
-    (15, 1, 1, NULL),
-    (16, 1, 1, NULL),
-    (17, 1, 1, NULL),
-    (18, 1, 1, NULL),
-    (19, 1, 1, NULL),
-    (20, 1, 1, NULL),
-    (21, 1, 1, NULL),
-    (22, 1, 1, NULL),
-    (23, 1, 1, NULL),
-    (24, 1, 1, NULL)
+    (1, 1, 1),
+    (2, 1, 1),
+    (3, 1, 1),
+    (4, 1, 1),
+    (5, 1, 1),
+    (6, 1, 1),
+    (7, 1, 1),
+    (8, 1, 1),
+    (9, 1, 1),
+    (10, 1, 1),
+    (11, 1, 1),
+    (12, 1, 1),
+    (13, 1, 1),
+    (14, 1, 1),
+    (15, 1, 1),
+    (16, 1, 1),
+    (17, 1, 1),
+    (18, 1, 1),
+    (19, 1, 1),
+    (20, 1, 1),
+    (21, 1, 1),
+    (22, 1, 1),
+    (23, 1, 1),
+    (24, 1, 1),
+    (25, 1, 2),
+    (26, 1, 2)
+
    ;
 
 insert into TraductionObjet (TraductionObjet_id, TraductionObjet_id_objet_fk, TraductionObjet_Langages, TraductionObjet_fields, TraductionObjet_value)
@@ -317,7 +319,17 @@ values
     (141, 24, "fr", "Skill_2", "Augmente la puissance des compétences spontanées de 45 %."),
     (142, 24, "fr", "Skill_3", "Vous récupérez 75 points d'énergie spontanée lorsque vous effectuez un enchaînement de niveau 4 ou plus."),
     (143, 24, "fr", "Text_1", "Exospine spécialisée dans l'amélioration des compétences spontanées."),
-    (144, 24, "fr", "Text_2", "Lorsque la Dernière Guerre s'est transformée en conflit total tout droit issu de nos pires cauchemars, la Matri-Arche a réquisitionné toutes les infrastructures de « l'humanité », La majorité des modules d'équipement atypiques planifiés ou produits à cette époque ont totalement disparu lorsque nous avons dû nous retrancher en orbite. C'est notamment le cas des exospines exclusivement conçues pour le combat.")
+    (144, 24, "fr", "Text_2", "Lorsque la Dernière Guerre s'est transformée en conflit total tout droit issu de nos pires cauchemars, la Matri-Arche a réquisitionné toutes les infrastructures de « l'humanité », La majorité des modules d'équipement atypiques planifiés ou produits à cette époque ont totalement disparu lorsque nous avons dû nous retrancher en orbite. C'est notamment le cas des exospines exclusivement conçues pour le combat."),
+    (145, 25, "fr", "Titre", "Équipement à double tranchant"),
+    (146, 25, "fr", "Skill_1", "Puissance"),
+    (147, 25, "fr", "Skill_2", "Dégâts subis"),
+    (148, 25, "fr", "Text_1", "Augmente considérablement votre puissance, mais vous subissez plus de dégâts."),
+    (149, 25, "fr", "Text_2", "La doctrine de l'Épée à double tranchant est largement adoptée par les Sentinelles de Xion. Dans l'état actuel des choses, la cité ne peut pas se permettre de petites escarmouches et doit donc éliminer les Naytibas au plus vite. Par conséquent, bon nombre de Sentinelles optent pour cette configuration de modules plutôt extrême."),
+    (150, 26, "en", "Titre", "Double Edged Gear"),
+    (151, 26, "en", "Skill_1", "Attack Power"),
+    (152, 26, "en", "Skill_2", "Damage Taken"),
+    (153, 26, "en", "Text_1", "Greatly increases Attack Power, but you'll take more Damage."),
+    (154, 26, "en", "Text_2", "The Double Edged Sword is a major doctrine of Xion's sentry. Xion cannot afford to fight small battles at this time, so the Naytibas must be defeated quickly. As such, the Sentinels have their gear modules set up in very extreme configurations.")
     ;
 
 insert into AttributObjet (AttributObjet, AttributObjet_id_objet_fk, AttributObjet_name, AttributObjet_value)
@@ -507,7 +519,25 @@ values
     (183, 24, "Exospine_stat_1_eng_brust", "75"),
     (184, 24, "Exospine_bar", "Exospine_bar"),
     (185, 24, "Exospine_icon_Mk2", "/icons/network_intelligence_update_white.svg"),
-    (186, 24, "Exospine_icon_colored_Mk2", "/icons/network_intelligence_update_orange.svg")
+    (186, 24, "Exospine_icon_colored_Mk2", "/icons/network_intelligence_update_orange.svg"),
+    (187, 25, "Gears_star_1", "true"),
+    (188, 25, "Gears_star_2", "false"),
+    (189, 25, "Gears_star_3", "false"),
+    (190, 25, "Gears_stat_1", "15"),
+    (191, 25, "Gears_stat_2", "23"),
+    (192, 25, "Gears_star", "/icons/star_gray.svg"),
+    (193, 25, "Gears_star_colored", "/icons/star_fill_orange.webp"),
+    (194, 25, "Gears_icon", "/icons/network_intelligence_white.svg"),
+    (195, 25, "Gears_icon_colored", "/icons/network_intelligence_orange.svg"),
+    (196, 26, "Gears_star_1", "true"),
+    (197, 26, "Gears_star_2", "false"),
+    (198, 26, "Gears_star_3", "false"),
+    (199, 26, "Gears_stat_1", "15"),
+    (200, 26, "Gears_stat_2", "23"),
+    (201, 26, "Gears_star", "/icons/star_gray.svg"),
+    (202, 26, "Gears_star_colored", "/icons/star_fill_orange.webp"),
+    (203, 26, "Gears_icon", "/icons/network_intelligence_white.svg"),
+    (204, 26, "Gears_icon_colored", "/icons/network_intelligence_orange.svg")
     ;
 
 

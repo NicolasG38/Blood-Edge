@@ -16,7 +16,7 @@ class ObjetRepository {
             t_fr.TraductionObjet_value AS title,
             t_fr.TraductionObjet_value AS Exospine_title_fr,
             t_en.TraductionObjet_value AS Exospine_title_en,
-            o.Objet_image AS Exospine_icon,
+            
             a_colored.AttributObjet_value AS Exospine_icon_colored,
             a_mk2.AttributObjet_value AS Exospine_icon_Mk2,
             a_mk2_colored.AttributObjet_value AS Exospine_icon_Mk2_colored,
