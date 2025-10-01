@@ -13,11 +13,11 @@ export default function StellarBladeTimeline() {
 				script.async = true;
 				document.body.appendChild(script);
 				script.onload = () => {
-					// @ts-ignore
+					// @ts-expect-error: twttr n'est pas typé dans window (Twitter widget)
 					window.twttr?.widgets?.load(timelineRef.current);
 				};
 			} else {
-				// @ts-ignore
+				// @ts-expect-error: twttr n'est pas typé dans window (Twitter widget)
 				window.twttr?.widgets?.load(timelineRef.current);
 			}
 		}

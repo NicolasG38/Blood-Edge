@@ -1,8 +1,8 @@
 import express from "express";
 
-import equipmentActions from "./action/equipmentActions.js";
 import exospineActions from "./action/exospineActions.js";
 import favoriteController from "./controller/favoriteController.js";
+import gearsActions from "./action/gearsActions.js";
 import locationsActions from "./action/locationsActions.js";
 import loginController from "./action/loginActions.js";
 import nanoSuitsActions from "./action/nanoSuitsActions.js";
@@ -50,9 +50,9 @@ router.delete(
 router.get("/api/exospine", exospineActions.browse);
 router.get("/api/exospine/id-title", exospineActions.browse);
 
-//Equipment
-router.get("/api/equipment", equipmentActions.browse);
-router.get("/api/equipment/id-title", equipmentActions.getIdAndTitle);
+//Gears
+router.get("/api/gears", gearsActions.browse);
+router.get("/api/gears/id-title", gearsActions.browse);
 
 // Nano suits
 router.get("/api/nanosuits", nanoSuitsActions.browse);
