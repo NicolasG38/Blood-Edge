@@ -192,10 +192,10 @@ export default function Login({
 							height={24}
 						/>
 					</div>
-					<p id="loginText">Se connecter via son nom d'utilisateur</p>
+					<p id="loginText">Se connecter via son nom d&#39;utilisateur</p>
 					<div id="loginInputs">
 						<label htmlFor="username" className="loginLabel">
-							Nom d'utilisateur :
+							Nom d&#39;utilisateur :
 						</label>
 						<input
 							type="text"
@@ -231,7 +231,7 @@ export default function Login({
 					</div>
 				</form>
 				<hr />
-				<p id="loginText2">Vous n'avez pas de compte ?</p>
+				<p id="loginText2">Vous n&#39;avez pas de compte ?</p>
 				<button
 					type="button"
 					className="loginAndsignUpFunctionnal signup"

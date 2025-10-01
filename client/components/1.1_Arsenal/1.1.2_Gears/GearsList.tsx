@@ -66,10 +66,9 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 						Text_2: d.Gears_text_2,
 					})),
 				);
-				console.log("Fetched Gears:", data);
 			});
 	}, [baseUrl, lang]);
-	console.log("Current Gear from list:", gears);
+
 	return (
 		<div>
 			<p className="titleSubSection_orange">

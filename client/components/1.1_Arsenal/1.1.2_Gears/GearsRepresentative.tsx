@@ -78,7 +78,6 @@ export default function EquipementRepresentative({
 	if (!current) {
 		return <div>Chargement des données...</div>;
 	}
-	console.log("Current Gear from representative:", current);
 
 	return (
 		<div className="containerRepresentative">
@@ -126,12 +125,14 @@ export default function EquipementRepresentative({
 							+{current.Gears_stat_1}%
 						</span>
 					</p>
-					<p className="gearsRepresentativeSkilltext">
-						{current.Gears_skill_2}{" "}
-						<span className="gearsRepresentativeSkillValue">
-							+{current.Gears_stat_2}%
-						</span>
-					</p>
+					{current.Gears_skill_2 && current.Gears_stat_2 !== null && (
+						<p className="gearsRepresentativeSkilltext">
+							{current.Gears_skill_2}{" "}
+							<span className="gearsRepresentativeSkillValue">
+								+{current.Gears_stat_2}%
+							</span>
+						</p>
+					)}
 				</section>
 
 				<div className="representativeText">

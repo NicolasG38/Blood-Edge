@@ -253,7 +253,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 							<p id="signupText">Créer un compte avec votre adresse email</p>
 							<div id="signupInputs">
 								<label htmlFor="pseudo" className="signupLabel">
-									Nom d'utilisateur :
+									Nom d&#39;utilisateur :
 								</label>
 								<input
 									type="text"
@@ -273,7 +273,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 									autoComplete="email"
 								/>
 								<label htmlFor="email_confirm" className="signupLabel">
-									Confirmation d'email :
+									Confirmation d&#39;email :
 								</label>
 								<input
 									type="email"
@@ -303,9 +303,9 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 								</p>
 								<div id="signupTerms">
 									<p id="signupLink">
-										J'accepte les{" "}
+										J&#39;accepte les{" "}
 										<a href="/terms" id="signupLink_2">
-											conditions d'utilisation
+											conditions d&#39;utilisation
 										</a>
 									</p>
 									<label htmlFor="terms" className="signupLabelCheckbox">
