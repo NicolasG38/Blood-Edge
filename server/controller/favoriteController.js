@@ -1,25 +1,19 @@
 import favoriteActions from "../action/favoriteActions.js";
 
-const pickOne = ({ exo, equip, ns }) => {
-	const toId = (v) =>
-		v !== undefined && v !== null && v !== "" ? Number(v) : null;
-	if (toId(exo)) return { type: "exospine", targetId: toId(exo) };
-	if (toId(equip)) return { type: "equipment", targetId: toId(equip) };
-	if (toId(ns)) return { type: "ns", targetId: toId(ns) };
-	return null;
-};
-
 const addFavorite = async (req, res) => {
-	const { userId, exo, equip, ns } = req.body;
-	const pick = pickOne({ exo, equip, ns });
-	if (!userId || !pick)
+	console.log("BODY reçu :", req.body); // Ajoute ce log
+	const { userId, objet_id } = req.body;
+	const userIdNum = Number(userId);
+	const objetIdNum = Number(objet_id);
+	if (!userIdNum || !objetIdNum)
 		return res.status(400).json({ error: "Paramètres invalides" });
 	try {
 		const result = await favoriteActions.addFavorite(
 			Number(userId),
-			pick.targetId,
-			pick.type,
+			Number(objet_id),
 		);
+		console.log(result);
+
 		res.json(result);
 	} catch (error) {
 		console.error("[addFavorite]", error);
@@ -28,15 +22,15 @@ const addFavorite = async (req, res) => {
 };
 
 const removeFavorite = async (req, res) => {
-	const { userId, exo, equip, ns } = req.body;
-	const pick = pickOne({ exo, equip, ns });
-	if (!userId || !pick)
+	const { userId, objet_id } = req.body;
+	const userIdNum = Number(userId);
+	const objetIdNum = Number(objet_id);
+	if (!userIdNum || !objetIdNum)
 		return res.status(400).json({ error: "Paramètres invalides" });
 	try {
 		const result = await favoriteActions.removeFavorite(
 			Number(userId),
-			pick.targetId,
-			pick.type,
+			objet_id,
 		);
 		res.json(result);
 	} catch (error) {
@@ -46,16 +40,13 @@ const removeFavorite = async (req, res) => {
 };
 
 const isFavorite = async (req, res) => {
-	const { userId, exo, equip, ns } = req.body;
-	const pick = pickOne({ exo, equip, ns });
-	if (!userId || !pick)
+	const { userId, objet_id } = req.body;
+	const userIdNum = Number(userId);
+	const objetIdNum = Number(objet_id);
+	if (!userIdNum || !objetIdNum)
 		return res.status(400).json({ error: "Paramètres invalides" });
 	try {
-		const result = await favoriteActions.isFavorite(
-			Number(userId),
-			pick.targetId,
-			pick.type,
-		);
+		const result = await favoriteActions.isFavorite(Number(userId), objet_id);
 		res.json({ isFavorite: result });
 	} catch (error) {
 		console.error("[isFavorite]", error);
@@ -70,10 +61,10 @@ const getUserFavorites = async (req, res) => {
 		// On récupère l'utilisateur par pseudo
 		const usersRepository = await import("../repository/usersRepository.js");
 		const user = await usersRepository.default.findByPseudo(pseudo);
-		if (!user || !user.User_id) {
+		if (!user || !user.Users_id) {
 			return res.status(404).json({ error: "Utilisateur non trouvé" });
 		}
-		const result = await favoriteActions.getUserFavorites(user.User_id);
+		const result = await favoriteActions.getUserFavorites(user.Users_id);
 		res.json(result);
 	} catch (error) {
 		console.error("[getUserFavorites]", error);

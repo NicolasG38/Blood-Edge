@@ -29,7 +29,6 @@ export default function DashboardHeader() {
 			.then((response) => response.json())
 			.then(setUsers);
 	}, [baseURL, pseudos]);
-	console.log(users?.inscriptionDuration);
 
 	return (
 		<div id="dashboardHeader">

@@ -35,7 +35,6 @@ export default function ExospineRepresentative({
 		fetch(`${baseURL}/api/exospine`)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log("data for representative:", data);
 				const normalized = data.map((d: ExospineMap) => ({
 					id: d.id,
 					title: d.title,
@@ -64,8 +63,6 @@ export default function ExospineRepresentative({
 		return <div>Chargement des données...</div>;
 	}
 	const isOn = (bar: boolean) => (bar ? "bar-on" : "bar-off");
-
-	console.log("current before the return:", current);
 	return (
 		<div className="containerRepresentative">
 			<section className="representative">

@@ -45,7 +45,6 @@ export default function ExospineList({
 				console.error("Error fetching exospines:", error);
 			});
 	}, [baseURL]);
-	console.log(exospines);
 
 	return (
 		<div>
@@ -72,7 +71,7 @@ export default function ExospineList({
 									{exospine.Exospine_title_fr || "Titre manquant"}
 								</p>
 							</button>
-							<AddFavorite exo={exospine.id.toString()} />
+							<AddFavorite objet_id={exospine.id} />
 						</li>
 					))}
 				</ul>
