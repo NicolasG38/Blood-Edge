@@ -41,10 +41,9 @@ export const validateSignup = (req, res, next) => {
 	next();
 };
 
-export async function signup(req, res) {
+export async function signup(req, res, next) {
 	try {
-		const { pseudo, email, password } = req.body || {};
-		const result = await signupAndAuth({ pseudo, email, password });
+		const result = await signupAndAuth(req.body);
 
 		if (!result.ok) {
 			console.warn("[SIGNUP] signupAndAuth failed:", result);
@@ -94,7 +93,7 @@ export async function signup(req, res) {
 			maxAge: 24 * 60 * 60 * 1000,
 		});
 
-		return res.json({
+		return res.status(201).json({
 			user: result.user,
 			token: result.token,
 			message: "Compte créé et connecté",

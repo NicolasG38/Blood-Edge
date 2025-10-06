@@ -17,7 +17,9 @@ function Box({ src, title }: { src: string; title: string }) {
 			<Image
 				style={{ width: "100%", height: "100%" }}
 				src={`/assets/images/${src}.jpg`}
-				alt={`${title}`}
+				alt={title}
+				width={3840} // ← adapte selon la taille réelle de ton image
+				height={2160} // ← adapte selon la taille réelle de ton image
 			/>
 		</motion.div>
 	);

@@ -4,18 +4,45 @@ import { useEffect, useState } from "react";
 
 interface Favorite {
 	Favorite_id: number;
-	Favorite_user_id: number;
-	User_id: number;
-	id: number;
-	target_id: number;
-	type: string;
+	Favorite_users_id: number;
+	Favorite_objet_id_fk: number;
+	Objet_id: number;
+	Objet_arsenal_id_fk: number;
+	Objet_type_id_fk: number;
+	TypeObjet_name: string;
+	Arsenal_title: string;
+}
+
+function getTypeFromId(typeId: number) {
+	switch (typeId) {
+		case 1:
+			return "exospine";
+		case 2:
+			return "gears";
+		case 3:
+			return "nanoSuits";
+		case 4:
+			return "glasses";
+		case 5:
+			return "earrings";
+		case 6:
+			return "hairstyle";
+		case 7:
+			return "drones";
+		case 8:
+			return "nsLily";
+		case 9:
+			return "nsAdam";
+		default:
+			return "other";
+	}
 }
 
 function getStrokeColor(className: string) {
 	switch (className) {
 		case "exospine":
 			return "var(--orange)";
-		case "equipment":
+		case "gears":
 			return "var(--orange)";
 		case "nanoSuits":
 			return "var(--denim)";
@@ -51,7 +78,9 @@ function PercentageCircle({
 	const params = useParams();
 	const pseudo = typeof params === "object" ? params.pseudo : params;
 	const [favorites, setFavorites] = useState<Favorite[]>([]);
-	const count = favorites.filter((f) => f.type === type).length;
+	const count = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === type,
+	).length;
 
 	useEffect(() => {
 		fetch(`${baseURL}/api/favorites/${pseudo}`)
@@ -118,21 +147,50 @@ export default function FavoriteCircleSubSection() {
 	const [favorites, setFavorites] = useState<Favorite[]>([]);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
+	useEffect(() => {
+		fetch(`${baseURL}/api/favorites/${pseudo}`)
+			.then((response) => response.json())
+			.then((data) => {
+				if (Array.isArray(data)) {
+					setFavorites(data);
+				} else {
+					setFavorites([]);
+				}
+			});
+	}, [baseURL, pseudo]);
+
 	const total = favorites.length;
-	const exospineCount = favorites.filter((f) => f.type === "exospine").length;
-	const equipmentCount = favorites.filter((f) => f.type === "equipment").length;
-	const nanoSuitsCount = favorites.filter((f) => f.type === "ns").length;
-	const glassesCount = favorites.filter((f) => f.type === "glasses").length;
-	const earringsCount = favorites.filter((f) => f.type === "earrings").length;
-	const hairstyleCount = favorites.filter((f) => f.type === "hairstyle").length;
-	const dronesCount = favorites.filter((f) => f.type === "drones").length;
-	const nsLilyCount = favorites.filter((f) => f.type === "nsLily").length;
-	const nsAdamCount = favorites.filter((f) => f.type === "nsAdam").length;
+	const exospineCount = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === "exospine",
+	).length;
+	const gearsCount = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === "gears",
+	).length;
+	const nanoSuitsCount = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === "nanoSuits",
+	).length;
+	const glassesCount = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === "glasses",
+	).length;
+	const earringsCount = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === "earrings",
+	).length;
+	const hairstyleCount = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === "hairstyle",
+	).length;
+	const dronesCount = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === "drones",
+	).length;
+	const nsLilyCount = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === "nsLily",
+	).length;
+	const nsAdamCount = favorites.filter(
+		(f) => getTypeFromId(f.Objet_type_id_fk) === "nsAdam",
+	).length;
 
 	const exospinePercent =
 		total > 0 ? Math.round((exospineCount / total) * 100) : 0;
-	const equipmentPercent =
-		total > 0 ? Math.round((equipmentCount / total) * 100) : 0;
+	const gearsPercent = total > 0 ? Math.round((gearsCount / total) * 100) : 0;
 	const nanoSuitsPercent =
 		total > 0 ? Math.round((nanoSuitsCount / total) * 100) : 0;
 	const glassesPercent =
@@ -145,138 +203,111 @@ export default function FavoriteCircleSubSection() {
 	const nsLilyPercent = total > 0 ? Math.round((nsLilyCount / total) * 100) : 0;
 	const nsAdamPercent = total > 0 ? Math.round((nsAdamCount / total) * 100) : 0;
 
-	useEffect(() => {
-		fetch(`${baseURL}/api/favorites/${pseudo}`)
-			.then((response) => response.json())
-			.then((data) => {
-				if (Array.isArray(data)) {
-					setFavorites(data);
-				} else {
-					setFavorites([]);
-				}
-			});
-	}, [baseURL, pseudo]);
-	console.log(favorites);
 	return (
-		<>
-			<div id="containerFavoriteCircleSubSection">
-				{/* Liste des favoris */}
-				<div id="favoriteCircleSubSectionGrid">
-					<div>
-						<div id="favoriteCircleSubSection">
-							<p id="favoriteCircleSubSectionTitle">Exospine</p>
-							<div className="circle">
-								<PercentageCircle
-									percent={exospinePercent}
-									className="exospine"
-									type="exospine"
-									favorite={favorites[0] || ({} as Favorite)}
-								/>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div id="favoriteCircleSubSection">
-							<p id="favoriteCircleSubSectionTitle">Équipement</p>
+		<div id="containerFavoriteCircleSubSection">
+			<div id="favoriteCircleSubSectionGrid">
+				<div>
+					<div id="favoriteCircleSubSection">
+						<p id="favoriteCircleSubSectionTitle">Exospines</p>
+						<div className="circle">
 							<PercentageCircle
-								percent={equipmentPercent}
-								className="equipment"
-								type="equipment"
+								percent={exospinePercent}
+								className="exospine"
+								type="exospine"
 								favorite={favorites[0] || ({} as Favorite)}
 							/>
-						</div>
-					</div>
-					<div>
-						<div id="favoriteCircleSubSection">
-							<p id="favoriteCircleSubSectionTitle">Nano-Combinaison</p>
-							<PercentageCircle
-								percent={nanoSuitsPercent}
-								className="nanoSuits"
-								type="ns"
-								favorite={favorites[0] || ({} as Favorite)}
-							/>
-						</div>
-					</div>
-					<div>
-						<div id="favoriteCircleSubSection">
-							<p id="favoriteCircleSubSectionTitle">Lunettes</p>
-							<div className="circle">
-								<PercentageCircle
-									percent={glassesPercent}
-									className="glasses"
-									type="glasses"
-									favorite={favorites[0] || ({} as Favorite)}
-								/>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div id="favoriteCircleSubSection">
-							<p id="favoriteCircleSubSectionTitle">Boucles d'oreilles</p>
-							<div className="circle">
-								<PercentageCircle
-									percent={earringsPercent}
-									className="earrings"
-									type="earrings"
-									favorite={favorites[0] || ({} as Favorite)}
-								/>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div id="favoriteCircleSubSection">
-							<p id="favoriteCircleSubSectionTitle">Coiffure</p>
-							<div className="circle hairstyle">
-								<PercentageCircle
-									percent={hairstylePercent}
-									className="hairstyle"
-									type="hairstyle"
-									favorite={favorites[0] || ({} as Favorite)}
-								/>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div id="favoriteCircleSubSection">
-							<p id="favoriteCircleSubSectionTitle">Drônes</p>
-							<div className="circle drones">
-								<PercentageCircle
-									percent={dronesPercent}
-									className="drones"
-									type="drones"
-									favorite={favorites[0] || ({} as Favorite)}
-								/>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div id="favoriteCircleSubSection">
-							<p id="favoriteCircleSubSectionTitle">Nano-Combinaison Lily</p>
-							<div className="circle nanoSuitsLily">
-								<PercentageCircle
-									percent={nsLilyPercent}
-									className="nsLilyPercent"
-									type="nsLilyPercent"
-									favorite={favorites[0] || ({} as Favorite)}
-								/>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div id="favoriteCircleSubSection">
-							<p id="favoriteCircleSubSectionTitle">Nano-Combinaison Adam</p>
-							<div className="circle nanoSuitsAdam">
-								<PercentageCircle
-									percent={nsAdamPercent}
-									className="nsAdamPercent"
-									type="nsAdamPercent"
-									favorite={favorites[0] || ({} as Favorite)}
-								/>
-							</div>
 						</div>
 					</div>
 				</div>
+				<div>
+					<div id="favoriteCircleSubSection">
+						<p id="favoriteCircleSubSectionTitle">Équipements</p>
+						<PercentageCircle
+							percent={gearsPercent}
+							className="gears"
+							type="gears"
+							favorite={favorites[0] || ({} as Favorite)}
+						/>
+					</div>
+				</div>
+				<div>
+					<div id="favoriteCircleSubSection">
+						<p id="favoriteCircleSubSectionTitle">Nano-Combinaisons</p>
+						<PercentageCircle
+							percent={nanoSuitsPercent}
+							className="nanoSuits"
+							type="nanoSuits"
+							favorite={favorites[0] || ({} as Favorite)}
+						/>
+					</div>
+				</div>
+				<div>
+					<div id="favoriteCircleSubSection">
+						<p id="favoriteCircleSubSectionTitle">Lunettes</p>
+						<PercentageCircle
+							percent={glassesPercent}
+							className="glasses"
+							type="glasses"
+							favorite={favorites[0] || ({} as Favorite)}
+						/>
+					</div>
+				</div>
+				<div>
+					<div id="favoriteCircleSubSection">
+						<p id="favoriteCircleSubSectionTitle">Boucles d'oreilles</p>
+						<PercentageCircle
+							percent={earringsPercent}
+							className="earrings"
+							type="earrings"
+							favorite={favorites[0] || ({} as Favorite)}
+						/>
+					</div>
+				</div>
+				<div>
+					<div id="favoriteCircleSubSection">
+						<p id="favoriteCircleSubSectionTitle">Coiffures</p>
+						<PercentageCircle
+							percent={hairstylePercent}
+							className="hairstyle"
+							type="hairstyle"
+							favorite={favorites[0] || ({} as Favorite)}
+						/>
+					</div>
+				</div>
+				<div>
+					<div id="favoriteCircleSubSection">
+						<p id="favoriteCircleSubSectionTitle">Drones</p>
+						<PercentageCircle
+							percent={dronesPercent}
+							className="drones"
+							type="drones"
+							favorite={favorites[0] || ({} as Favorite)}
+						/>
+					</div>
+				</div>
+				<div>
+					<div id="favoriteCircleSubSection">
+						<p id="favoriteCircleSubSectionTitle">Nano-Combinaisons Lily</p>
+						<PercentageCircle
+							percent={nsLilyPercent}
+							className="nsLily"
+							type="nsLily"
+							favorite={favorites[0] || ({} as Favorite)}
+						/>
+					</div>
+				</div>
+				<div>
+					<div id="favoriteCircleSubSection">
+						<p id="favoriteCircleSubSectionTitle">Nano-Combinaisons Adam</p>
+						<PercentageCircle
+							percent={nsAdamPercent}
+							className="nsAdam"
+							type="nsAdam"
+							favorite={favorites[0] || ({} as Favorite)}
+						/>
+					</div>
+				</div>
 			</div>
-		</>
+		</div>
 	);
 }

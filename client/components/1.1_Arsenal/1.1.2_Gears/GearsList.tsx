@@ -147,7 +147,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 										<p className="listName">{item.Gears_title}</p>
 									</div>
 								</button>
-								<AddFavorite equip={item.id.toString()} />
+								<AddFavorite objet_id={item.id} />
 							</li>
 						);
 					})}

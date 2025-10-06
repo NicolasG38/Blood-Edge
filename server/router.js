@@ -14,6 +14,7 @@ import storesActions from "./action/storesActions.js";
 import subSectionActions from "./action/subSectionActions.js";
 import usersActions from "./action/usersActions.js";
 
+import { signup } from "./controller/signupController.js";
 import { validateSignup } from "./controller/signupController.js";
 import { getMe } from "./controller/userController.js";
 import { requireAuth, requireAdmin } from "./middleware/auth.js";
@@ -69,7 +70,7 @@ router.post(
 router.get("/api/favorites/:pseudo", favoriteController.getUserFavorites);
 
 // Auth
-router.post("/api/users", validateSignup, signupActions.create);
+router.post("/api/users", validateSignup, signup);
 router.post("/api/login", loginLimiter, loginController.login);
 router.get("/api/me", requireAuth, getMe);
 router.post("/api/logout", requireAuth, loginController.logout);

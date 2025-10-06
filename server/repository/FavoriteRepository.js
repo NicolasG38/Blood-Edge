@@ -1,121 +1,81 @@
 import databaseClient from "../database/client.js";
 
-function colFor(type) {
-	if (type === "exospine" || type === "exo") return "Favorite_exospine_id";
-	if (type === "equipment" || type === "equip") return "Favorite_equipment_id";
-	if (type === "ns") return "Favorite_NS_id";
-	throw new Error("type invalide");
-}
-
-function normalizeType(type) {
-	if (type === "exo") return "exospine";
-	if (type === "equip") return "equipment";
-	return type;
-}
-
 class FavoriteRepository {
-	async addFavorite(userId, targetId, type) {
-		const normalizedType = normalizeType(type);
-
+	async addFavorite(userId, objetId) {
 		const sql = `
-      INSERT INTO Favorite (Favorite_user_id, Favorite_exospine_id, Favorite_equipment_id, Favorite_NS_id)
-      VALUES (?, ?, ?, ?)
-    `;
-
-		const values = [
-			userId,
-			normalizedType === "exospine" ? targetId : null,
-			normalizedType === "equipment" ? targetId : null,
-			normalizedType === "ns" ? targetId : null,
-		];
-		await databaseClient.query(sql, values);
-
-		// Utilise normalizedType ici aussi !
-		return await this.getFavoritesWithUsers(userId, normalizedType, targetId);
+            INSERT INTO Favorite (Favorite_users_id, Favorite_objet_id_fk)
+            VALUES (?, ?)
+        `;
+		await databaseClient.query(sql, [userId, objetId]);
+		return await this.getFavorites(userId);
 	}
 
-	async removeFavorite(userId, targetId, type) {
-		const normalizedType = normalizeType(type);
-		const col = colFor(normalizedType);
-		const sql = `DELETE FROM Favorite WHERE Favorite_user_id = ? AND ${col} = ?`;
-		const [result] = await databaseClient.query(sql, [userId, targetId]);
+	async removeFavorite(userId, objetId) {
+		const sql = `
+            DELETE FROM Favorite
+            WHERE Favorite_users_id = ? AND Favorite_objet_id_fk = ?
+        `;
+		const [result] = await databaseClient.query(sql, [userId, objetId]);
 		return result;
+	}
+
+	async isFavorite(userId, objetId) {
+		const sql = `
+            SELECT 1 FROM Favorite
+            WHERE Favorite_users_id = ? AND Favorite_objet_id_fk = ? LIMIT 1
+        `;
+		const [rows] = await databaseClient.query(sql, [userId, objetId]);
+		return rows.length > 0;
 	}
 
 	async getFavorites(userId) {
 		const [rows] = await databaseClient.query(
-			"SELECT * FROM Favorite WHERE Favorite_user_id = ?",
+			"SELECT * FROM Favorite WHERE Favorite_users_id = ?",
 			[userId],
 		);
 		return rows;
 	}
 
-	async isFavorite(userId, type, targetId) {
-		const normalizedType =
-			type === "exo" ? "exospine" : type === "equip" ? "equipment" : type;
-		const col = colFor(normalizedType);
-		const sql = `SELECT 1 FROM Favorite WHERE Favorite_user_id = ? AND ${col} = ? LIMIT 1`;
-		const [rows] = await databaseClient.query(sql, [userId, targetId]);
-		return rows.length > 0;
-	}
-
-	async getFavoritesWithUsers(userId, type, targetId) {
-		const normalizedType = normalizeType(type);
-		const cfg = {
-			ns: { col: "Favorite_NS_id", table: "Nano_suits", pk: "NS_id" },
-			exospine: {
-				col: "Favorite_exospine_id",
-				table: "Exospine",
-				pk: "Exospine_id",
-			},
-			equipment: {
-				col: "Favorite_equipment_id",
-				table: "Equipment",
-				pk: "Equipment_id",
-			},
-		}[normalizedType];
-		if (!cfg) throw new Error("type invalide");
-
+	async getUserFavorites(userId) {
 		const sql = `
-      SELECT
-        f.Favorite_id,
-        f.Favorite_user_id,
-        f.${cfg.col} AS target_id,
-        '${normalizedType}'     AS type,
-        u.User_id,
-        t.${cfg.pk}   AS id
-      FROM Favorite f
-      JOIN \`User\` u ON u.User_id = f.Favorite_user_id
-      JOIN ${cfg.table} t ON t.${cfg.pk} = f.${cfg.col}
-      WHERE f.Favorite_user_id = ? AND f.${cfg.col} = ?
+        SELECT
+            f.Favorite_id,
+            f.Favorite_users_id,
+            f.Favorite_objet_id_fk,
+            o.Objet_id,
+            o.Objet_arsenal_id_fk,
+            o.Objet_type_id_fk,
+            t.TypeObjet_name,
+            a.Arsenal_title
+        FROM Favorite f
+        JOIN Users u ON u.Users_id = f.Favorite_users_id
+        JOIN Objet o ON o.Objet_id = f.Favorite_objet_id_fk
+        JOIN TypeObjet t ON t.TypeObjet_id = o.Objet_type_id_fk
+        JOIN Arsenal a ON a.Arsenal_id = o.Objet_arsenal_id_fk
+        WHERE u.Users_id = ?
     `;
-		const [rows] = await databaseClient.query(sql, [userId, targetId]);
-		return rows[0] ?? null;
+		const [rows] = await databaseClient.query(sql, [userId]);
+		return rows;
 	}
 
-	async getUserFavorites(pseudo) {
+	async getFavoritesWithUsers(userId, objetId) {
 		const sql = `
-	  SELECT
-		f.Favorite_id,
-		f.Favorite_user_id,
-		COALESCE(f.Favorite_exospine_id, f.Favorite_equipment_id, f.Favorite_NS_id) AS target_id,
-		CASE
-		  WHEN f.Favorite_exospine_id IS NOT NULL THEN 'exospine'
-		  WHEN f.Favorite_equipment_id IS NOT NULL THEN 'equipment'
-		  WHEN f.Favorite_NS_id IS NOT NULL THEN 'ns'
-		  ELSE 'unknown'
-		END AS type,
-		u.User_id,
-		COALESCE(e.Exospine_id, eq.Equipment_id, ns.NS_id) AS id
-	  FROM Favorite f
-	  JOIN \`User\` u ON u.User_id = f.Favorite_user_id
-	  LEFT JOIN Exospine e ON e.Exospine_id = f.Favorite_exospine_id
-	  LEFT JOIN Equipment eq ON eq.Equipment_id = f.Favorite_equipment_id
-	  LEFT JOIN Nano_suits ns ON ns.NS_id = f.Favorite_NS_id
-	  WHERE f.Favorite_user_id = ?
-	`;
-		const [rows] = await databaseClient.query(sql, [pseudo]);
+        SELECT f.*, u.*, o.*
+        FROM Favorite f
+        JOIN Users u ON f.Favorite_users_id = u.Users_id
+        JOIN Objet o ON f.Favorite_objet_id_fk = o.Objet_id
+        WHERE f.Favorite_users_id = ? AND f.Favorite_objet_id_fk = ?
+    `;
+		const [rows] = await databaseClient.query(sql, [userId, objetId]);
 		return rows;
+	}
+
+	async findByPseudo(pseudo) {
+		const [rows] = await databaseClient.query(
+			"SELECT * FROM Users WHERE Users_pseudo = ?",
+			[pseudo],
+		);
+		return rows[0];
 	}
 }
 

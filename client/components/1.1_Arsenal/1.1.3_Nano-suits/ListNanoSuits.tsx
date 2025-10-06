@@ -77,7 +77,7 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 								/>
 								<p className="listName">{suit.NS_title_fr}</p>
 							</button>
-							<AddFavorite ns={suit.id.toString()} />
+							<AddFavorite objet_id={suit.id} />
 						</li>
 					))}
 				</ul>

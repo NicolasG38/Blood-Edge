@@ -3,12 +3,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface AuthContextType {
-	userId: string | null;
+	userId: number | null;
 	pseudo: string | null;
 	isLogged: boolean;
 	setAuth: React.Dispatch<
 		React.SetStateAction<{
-			userId: string | null;
+			userId: number | null;
 			pseudo: string | null;
 			isLogged: boolean;
 		}>
@@ -23,7 +23,7 @@ export const AuthContext = React.createContext<AuthContextType | undefined>(
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3310";
 	const [auth, setAuth] = useState<{
-		userId: string | null;
+		userId: number | null;
 		pseudo: string | null;
 		isLogged: boolean;
 	}>({
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 			.then((data) => {
 				if (data.user) {
 					setAuth({
-						userId: data.user.sub?.toString() ?? null,
+						userId: data.user.sub ? Number(data.user.sub) : null,
 						pseudo: data.user.pseudo ?? null,
 						isLogged: true,
 					});
