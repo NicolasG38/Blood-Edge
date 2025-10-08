@@ -5,7 +5,7 @@ import favoriteController from "./controller/favoriteController.js";
 import gearsActions from "./action/gearsActions.js";
 import locationsActions from "./action/locationsActions.js";
 import loginController from "./action/loginActions.js";
-import nanoSuitsActions from "./action/nanoSuitsActions.js";
+import nanoSuitsController from "./controller/nanoSuitsController.js";
 import sectionActions from "./action/sectionActions.js";
 import signupActions from "./action/signupActions.js";
 import statsActions from "./action/statsActions.js"; // données brut
@@ -56,8 +56,8 @@ router.get("/api/gears", gearsActions.browse);
 router.get("/api/gears/id-title", gearsActions.browse);
 
 // Nano suits
-router.get("/api/nanosuits", nanoSuitsActions.browse);
-router.get("/api/nanosuits/id-title", nanoSuitsActions.getIdAndTitle);
+router.get("/api/nanosuits", nanoSuitsController.browse);
+router.get("/api/nanosuits/id-title", nanoSuitsController.getIdAndTitle);
 
 // Favoris
 router.post("/api/favorites", requireAuth, favoriteController.addFavorite);

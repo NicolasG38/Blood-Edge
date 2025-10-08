@@ -343,7 +343,7 @@ values
     (195, 1, 2),
     (196, 1, 2),
     (197, 1, 2),
-    (198, 1 ,2),
+    (198, 1, 2),
     (199, 1, 2),
     (200, 1, 2),
     (201, 1, 2),
@@ -409,9 +409,9 @@ values
     (261, 1, 2),
     (262, 1, 2),
     (263, 1, 2),
-    (264, 1, 2)
-   
-    
+    (264, 1, 2),
+    (265, 1, 3),
+    (266, 1, 3)
    ;
 
 insert into TraductionObjet (TraductionObjet_id, TraductionObjet_id_objet_fk, TraductionObjet_Langages, TraductionObjet_fields, TraductionObjet_value)
@@ -1531,7 +1531,18 @@ values
     (1113, 264, "en", "Titre", "Risk Taking Gear Mk2"),
     (1114, 264, "en", "Skill_1", "Attack Power when Low HP"),
     (1115, 264, "en", "Text_1", "Increases Attack Power when HP is low."),
-    (1116, 264, "en", "Text_2", "Gear modules communicate directly with the artificial intelligence through a dedicated port on an expansion socket. While the modules are designed with performance benefits and ease of expansion in mind, there is one problem. If the gears are forced out of the sockets, it could cause data corruption or even bring down the entire system.")
+    (1116, 264, "en", "Text_2", "Gear modules communicate directly with the artificial intelligence through a dedicated port on an expansion socket. While the modules are designed with performance benefits and ease of expansion in mind, there is one problem. If the gears are forced out of the sockets, it could cause data corruption or even bring down the entire system."),
+    
+    (1117, 265, "fr", "Titre", "Ailes écarlates"),
+    (1118, 265, "fr", "Text_1", "Permet de modifier l'apparence d'EVE."),
+    (1119, 265, "fr", "Text_2", "Façonnée comme de délicates ailes écarlates, cette robe a été conçue pour briller dans les moments les plus heureux."),
+    (1120, 265, "fr", "WhereTitre", "Où la trouver ?"),
+    (1121, 265, "fr", "WhereText", ""),
+    (1122, 266, "en", "Titre", "Crimson Wings"),
+    (1123, 266, "en", "Text_1", "Changes the appearance of EVE."),
+    (1124, 266, "en", "Text_2", "A dress to shine in your most beautiful moments, crafted as delicately as crimson wings."),
+    (1125, 266, "en", "WhereTitre", "Where to find it?"),
+    (1126, 266, "en", "WhereText", "")
 
     ;
 
@@ -3654,8 +3665,25 @@ values
     (2115, 264, "Gears_star", "/icons/star_gray.svg", 'string'),
     (2116, 264, "Gears_star_colored", "/icons/star_fill_orange.webp", 'string'),
     (2117, 264, "Gears_icon", "/icons/network_intelligence_update_white.svg", 'string'),
-    (2118, 264, "Gears_icon_colored", "/icons/network_intelligence_update_orange.svg", 'string')
+    (2118, 264, "Gears_icon_colored", "/icons/network_intelligence_update_orange.svg", 'string'),
 
+    (2119, 265, "Nano-Suits_star_1", "true", 'bool'),
+    (2120, 265, "Nano-Suits_star_2", "true", 'bool'),
+    (2121, 265, "Nano-Suits_star_3", "true", 'bool'),
+    (2122, 265, "Nano-Suits_star_colored", "/icons/star_fill_blue.webp", 'string'),
+    (2123, 265, "Nano-Suits_star_gray", "/icons/star_gray.svg", 'string'),
+    (2124, 265, "Nano-Suits_icon_black", "/icons/apparel_black.svg", 'string'),
+    (2125, 265, "Nano-Suits_icon_gray", "/icons/apparel_gray.svg", 'string'),
+    (2126, 265, "Picture", "/images/nano_suits/Crimson_Wings.webp", 'string'),
+
+    (2127, 266, "Nano-Suits_star_1", "true", 'bool'),
+    (2128, 266, "Nano-Suits_star_2", "true", 'bool'),
+    (2129, 266, "Nano-Suits_star_3", "true", 'bool'),
+    (2130, 266, "Nano-Suits_star_colored", "/icons/star_fill_blue.webp", 'string'),
+    (2131, 266, "Nano-Suits_star_gray", "/icons/star_gray.svg", 'string'),
+    (2132, 266, "Nano-Suits_icon_black", "/icons/apparel_black.svg", 'string'),
+    (2133, 266, "Nano-Suits_icon_gray", "/icons/apparel_gray.svg", 'string'),
+    (2134, 266, "Picture", "/images/nano_suits/Crimson_Wings.webp", 'string')
 ;
 
 

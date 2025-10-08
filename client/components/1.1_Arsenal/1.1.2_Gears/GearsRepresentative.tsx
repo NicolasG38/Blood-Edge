@@ -71,7 +71,7 @@ export default function EquipementRepresentative({
 				console.error("Error fetching gears:", error);
 			});
 	}, [baseURL, lang]);
-
+	console.log(GearsServer);
 	const current =
 		GearsServer.find((s) => s.id === Number(selectedId)) || GearsServer[0];
 
