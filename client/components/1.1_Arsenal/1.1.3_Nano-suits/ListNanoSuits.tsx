@@ -2,11 +2,13 @@
 import "../List.css";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useLanguage } from "../../../context/LangContext";
 import AddFavorite from "../../../uiux/AddFavorite";
 
 interface NanoSuitProps {
 	id: number;
-	NS_title_fr: string;
+	title_fr: string;
+	title_en: string; // Ajouté pour le titre en anglais
 }
 interface ListNanoSuitsProps {
 	onSelect: (id: number) => void;
@@ -15,13 +17,21 @@ interface ListNanoSuitsProps {
 export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const [nanoSuits, setNanoSuits] = useState<NanoSuitProps[]>([]);
+	const { lang } = useLanguage();
 
 	useEffect(() => {
 		fetch(`${baseURL}/api/nanosuits/id-title`)
 			.then((response) => response.json())
 			.then((data) => {
+				const nanoSuitsArray = Array.isArray(data) ? data : [];
 				if (Array.isArray(data)) {
-					setNanoSuits(data);
+					setNanoSuits(
+						nanoSuitsArray.map((d: NanoSuitProps) => ({
+							id: d.id,
+							title_fr: d.title_fr,
+							title_en: d.title_en, // Ajouté pour le titre en anglais
+						})),
+					);
 				} else if (Array.isArray(data.nanoSuits)) {
 					setNanoSuits(data.nanoSuits);
 				} else {
@@ -34,14 +44,19 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 			});
 	}, [baseURL]);
 	const [hoveredId, setHoveredId] = useState<number | null>(null);
+
+	const filteredNanoSuits = nanoSuits.filter((suit) =>
+		lang === "fr" ? !!suit.title_fr : !!suit.title_en,
+	);
+
 	return (
 		<div>
 			<p className="titleSubSection_blue">
-				NANO-COMBINAISON <span>&gt;</span>
+				{lang === "fr" ? "NANO-COMBINAISON" : "NANO-SUIT"} <span>&gt;</span>
 			</p>
 			<div className="containerList">
 				<ul>
-					{nanoSuits.map((suit) => (
+					{filteredNanoSuits.map((suit) => (
 						<li
 							key={suit.id}
 							className="listLi_blue"
@@ -75,7 +90,9 @@ export default function ListNanoSuits({ onSelect }: ListNanoSuitsProps) {
 									width={70}
 									height={70}
 								/>
-								<p className="listName">{suit.NS_title_fr}</p>
+								<p className="listName">
+									{lang === "fr" ? suit.title_fr : suit.title_en}
+								</p>
 							</button>
 							<AddFavorite objet_id={suit.id} />
 						</li>

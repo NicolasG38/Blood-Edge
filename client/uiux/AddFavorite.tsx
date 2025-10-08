@@ -20,11 +20,9 @@ export default function AddFavorite({ objet_id }: AddFavoriteProps) {
 		if (!userId || !objet_id) return null;
 		return { userId: Number(userId), objet_id: Number(objet_id) };
 	}, [userId, objet_id]);
-	console.log("userId:", userId, "objet_id:", objet_id);
 
 	const handleAddFavorite = () => {
 		const payload = buildPayload();
-		console.log("Payload envoyé :", { userId, objet_id }); // Ajoute ce log
 		if (!payload) return;
 		if (!isFavorite) {
 			fetch(`${baseURL}/api/favorites`, {
