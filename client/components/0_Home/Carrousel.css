@@ -44,3 +44,9 @@
 	overflow: hidden;
 	outline-offset: 2px;
 }
+
+@media screen and (max-width: 768px) {
+	.ticker-container {
+		display: none;
+	}
+}
