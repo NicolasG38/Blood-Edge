@@ -190,7 +190,7 @@
 	.containerRepresentative,
 	#statsEVEContainer,
 	.containerSectionArsenal {
-		display: none !important;
+		display: flex;
 	}
 	/* == Le code au dessus est à supprimer une fois le travaille effectué == */
 

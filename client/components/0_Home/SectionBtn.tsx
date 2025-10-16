@@ -33,8 +33,18 @@ export default function SectionBtn({
 }: SectionBtnProps) {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [sections, setSections] = useState<Section[]>([]);
+	const [isMobile, setIsMobile] = useState(false);
+	const [mounted, setMounted] = useState(false);
 	const { openMenu, setOpenMenu } = useMenuMobile();
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+	useEffect(() => {
+		setMounted(true);
+		setIsMobile(window.innerWidth < 768);
+		const handleResize = () => setIsMobile(window.innerWidth < 768);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 	useEffect(() => {
 		fetch(`${baseURL}/api/sections`)
@@ -62,6 +72,9 @@ export default function SectionBtn({
 				console.error("Erreur lors de la récupération des sections :", error);
 			});
 	}, [baseURL]);
+
+	// Attendre le montage client avant d'afficher quoi que ce soit
+	if (!mounted) return null;
 
 	return (
 		<section

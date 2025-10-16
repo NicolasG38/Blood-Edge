@@ -57,6 +57,8 @@ export default function Carrousel() {
 		return () => clearInterval(timer);
 	}, []);
 
+	console.log("Carrousel rendu !");
+
 	return (
 		<div className="container">
 			<div className="ticker-container">
