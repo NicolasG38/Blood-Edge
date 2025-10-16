@@ -35,6 +35,7 @@ export default function SectionBtn({
 	const [sections, setSections] = useState<Section[]>([]);
 	const [isMobile, setIsMobile] = useState(false);
 	const [mounted, setMounted] = useState(false);
+	const [arsenalOpen, setArsenalOpen] = useState(false);
 	const { openMenu, setOpenMenu } = useMenuMobile();
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -127,13 +128,15 @@ export default function SectionBtn({
 							alt="Arsenal Icon"
 							width={64}
 							height={64}
-							onClick={() => section.id === 1 && setOpenMenu(!openMenu)}
+							onClick={() =>
+								section.id === 1 && setArsenalOpen((prev) => !prev)
+							}
 							// Ajoute le curseur pour indiquer que c'est cliquable
 							style={window.innerWidth <= 768 ? {} : { display: "none" }}
 						/>
 					</div>
-					{/* Affiche les enfants juste après le bouton Arsenal (id:1) */}
-					{section.id === 1 && openMenu && Array.isArray(children)
+					{/* Affiche les enfants seulement si arsenalOpen est true */}
+					{section.id === 1 && arsenalOpen && Array.isArray(children)
 						? children.map((child) =>
 								React.isValidElement(child)
 									? React.cloneElement(child as ChildWithNavProps, {
@@ -141,7 +144,7 @@ export default function SectionBtn({
 										})
 									: child,
 							)
-						: section.id === 1 && openMenu && React.isValidElement(children)
+						: section.id === 1 && arsenalOpen && React.isValidElement(children)
 							? React.cloneElement(children as ChildWithNavProps, {
 									setOpenNavProps,
 								})
