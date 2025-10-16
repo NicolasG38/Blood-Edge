@@ -7,7 +7,6 @@ import { useAuth } from "../../context/AuthContext";
 import Link from "next/link";
 import Image from "next/image";
 import { useMenuMobile } from "../../context/MenuMobileContext";
-import { usePathname } from "next/navigation";
 
 interface NavMobileProps {
 	children?: React.ReactNode;
@@ -39,86 +38,82 @@ export default function NavMobile({
 		}
 	}, [openMenu]);
 
-	console.log("NavMobile composant chargé !");
-
 	return (
-		<>
-			<nav id="nav-mobile" className={openMenu ? "open" : ""}>
-				<ul>
-					<li>
+		<nav id="nav-mobile" className={openMenu ? "open" : ""}>
+			<ul>
+				<li>
+					<Image
+						src="/assets/icons/mobile/store.svg"
+						alt="Boutique"
+						width={24}
+						height={24}
+					/>{" "}
+					Boutique
+				</li>
+				<li>
+					<Image
+						src="/assets/icons/mobile/languages.svg"
+						alt="Langues"
+						width={24}
+						height={24}
+					/>
+					Langues
+				</li>
+				<li id="menu-mobile">
+					<button
+						type="button"
+						id="menu-mobile-btn"
+						onClick={() => {
+							setOpenMenu(!openMenu);
+						}}
+					>
 						<Image
-							src="/assets/icons/mobile/store.svg"
-							alt="Boutique"
-							width={24}
-							height={24}
-						/>{" "}
-						Boutique
-					</li>
-					<li>
-						<Image
-							src="/assets/icons/mobile/languages.svg"
-							alt="Langues"
-							width={24}
-							height={24}
+							src={
+								openMenu
+									? "/assets/icons/mobile/down.svg"
+									: "/assets/icons/mobile/up.svg"
+							}
+							alt="Menu"
+							width={60}
+							height={60}
 						/>
-						Langues
-					</li>
-					<li id="menu-mobile">
+					</button>
+				</li>
+				<li>
+					<Link href={isLogged ? `/dashboard/${pseudo}` : "/signupandlogin"}>
 						<button
 							type="button"
-							id="menu-mobile-btn"
-							onClick={() => {
-								setOpenMenu(!openMenu);
-							}}
+							id="login-mobile-account"
+							onClick={() => setOpenMenu(false)}
 						>
 							<Image
-								src={
-									openMenu
-										? "/assets/icons/mobile/down.svg"
-										: "/assets/icons/mobile/up.svg"
-								}
-								alt="Menu"
-								width={60}
-								height={60}
-							/>
+								src="/assets/icons/mobile/account.svg"
+								alt="Compte"
+								width={24}
+								height={24}
+							/>{" "}
+							<p>{isLogged ? "Dashboard" : "Compte"}</p>
 						</button>
-					</li>
-					<li>
-						<Link href={isLogged ? `/dashboard/${pseudo}` : "/signupandlogin"}>
-							<button
-								type="button"
-								id="login-mobile-account"
-								onClick={() => setOpenMenu(false)}
-							>
-								<Image
-									src="/assets/icons/mobile/account.svg"
-									alt="Compte"
-									width={24}
-									height={24}
-								/>{" "}
-								<p>{isLogged ? "Dashboard" : "Compte"}</p>
-							</button>
-						</Link>
-					</li>
-					<li>
-						<Image
-							src="/assets/icons/mobile/search.svg"
-							alt="Recherche"
-							width={24}
-							height={24}
-						/>{" "}
-						Recherche
-					</li>
-				</ul>
-				{showSection && (
-					<SectionBtn
-						className="section-btn-mobile"
-						setOpenNavProps={setOpenNavProps}
-					>
-						{children}
-					</SectionBtn>
-				)}
-			</nav>
-		</>
+					</Link>
+				</li>
+				<li>
+					<Image
+						src="/assets/icons/mobile/search.svg"
+						alt="Recherche"
+						width={24}
+						height={24}
+					/>{" "}
+					Recherche
+				</li>
+			</ul>
+			{showSection && (
+				<SectionBtn
+					className="section-btn-mobile"
+					setOpenNavProps={setOpenNavProps}
+				>
+					{children}
+				</SectionBtn>
+			)}
+		</nav>
 	);
 }
