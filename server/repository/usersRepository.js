@@ -7,7 +7,6 @@ async function findByPseudo(pseudo) {
 		"SELECT Users_id, Users_pseudo, Users_email, Users_created_at FROM Users WHERE LOWER(Users_pseudo) = LOWER(?)",
 		[pseudo],
 	);
-	console.log("Résultat SQL :", user);
 
 	if (!user[0]) return null;
 

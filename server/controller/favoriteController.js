@@ -1,7 +1,6 @@
 import favoriteActions from "../action/favoriteActions.js";
 
 const addFavorite = async (req, res) => {
-	console.log("BODY reçu :", req.body); // Ajoute ce log
 	const { userId, objet_id } = req.body;
 	const userIdNum = Number(userId);
 	const objetIdNum = Number(objet_id);
@@ -12,8 +11,6 @@ const addFavorite = async (req, res) => {
 			Number(userId),
 			Number(objet_id),
 		);
-		console.log(result);
-
 		res.json(result);
 	} catch (error) {
 		console.error("[addFavorite]", error);
@@ -47,6 +44,7 @@ const isFavorite = async (req, res) => {
 		return res.status(400).json({ error: "Paramètres invalides" });
 	try {
 		const result = await favoriteActions.isFavorite(Number(userId), objet_id);
+
 		res.json({ isFavorite: result });
 	} catch (error) {
 		console.error("[isFavorite]", error);
@@ -58,7 +56,6 @@ const getUserFavorites = async (req, res) => {
 	const { pseudo } = req.params;
 	if (!pseudo) return res.status(400).json({ error: "Paramètres invalides" });
 	try {
-		// On récupère l'utilisateur par pseudo
 		const usersRepository = await import("../repository/usersRepository.js");
 		const user = await usersRepository.default.findByPseudo(pseudo);
 		if (!user || !user.Users_id) {
@@ -73,4 +70,5 @@ const getUserFavorites = async (req, res) => {
 			.json({ error: "Erreur lors de la récupération des favoris" });
 	}
 };
+
 export default { addFavorite, removeFavorite, isFavorite, getUserFavorites };
