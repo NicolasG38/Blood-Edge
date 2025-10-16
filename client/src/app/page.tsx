@@ -8,7 +8,6 @@ import Modal from "../../components/0.1_Auth/Modal";
 import SectionBtn from "../../components/0_Home/SectionBtn";
 import SubSection from "../../components/0_Home/SubSection";
 import Login from "../../components/0.1_Auth/Login";
-import StellarBladeTimeline from "../../components/X_StellarBlade_Timeline";
 
 import { useState } from "react";
 import LocationsBtn from "../../uiux/LocationsBtn";

@@ -26,8 +26,18 @@ export default function SubSection({
 	const [subSections, setSubSections] = useState<Section[]>([]);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const [isMobile, setIsMobile] = useState(false);
+	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
+		setMounted(true);
+		setIsMobile(window.innerWidth < 768);
+		const handleResize = () => setIsMobile(window.innerWidth < 768);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	useEffect(() => {
+		console.log("baseURL =", baseURL);
 		fetch(`${baseURL}/api/subsections`)
 			.then((response) => response.json())
 			.then((data) => {
@@ -55,15 +65,15 @@ export default function SubSection({
 			});
 	}, [baseURL]);
 
-	useEffect(() => {
-		setIsMobile(window.innerWidth < 768);
-		const handleResize = () => setIsMobile(window.innerWidth < 768);
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
+	// Attendre le montage client avant d'afficher quoi que ce soit
+	if (!mounted) return null;
 
 	return (
-		<section className={`containerSubSection mobile ${className}`}>
+		<section
+			className={`containerSubSection mobile${
+				className ? ` ${className}` : ""
+			}`}
+		>
 			{subSections.map((subSection: Section, idx: number) => (
 				<div
 					className="subSection mobile"

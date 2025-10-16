@@ -4,7 +4,7 @@ import { AuthProvider } from "../../context/AuthContext";
 import { MenuMobileProvider } from "../../context/MenuMobileContext";
 import { LanguageProvider } from "../../context/LangContext";
 import NavMobile from "../../components/0_Home/NavMobile";
-import SubSection from "../../components/0_Home/SubSection";
+import DynamicSubSectionWrapper from "../../wrapper/DynamicSubSectionWrapper";
 
 export const metadata: Metadata = {
 	title: "Blood-Edge.com",
@@ -23,7 +23,7 @@ export default function RootLayout({
 					<MenuMobileProvider>
 						<LanguageProvider>
 							<NavMobile>
-								<SubSection key={1} />
+								<DynamicSubSectionWrapper key={1} />
 							</NavMobile>
 							{children}
 						</LanguageProvider>

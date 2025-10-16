@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import Link from "next/link";
 import Image from "next/image";
+import { useMenuMobile } from "../../context/MenuMobileContext";
+import { usePathname } from "next/navigation";
 
 interface NavMobileProps {
 	children?: React.ReactNode;
@@ -16,27 +18,36 @@ export default function NavMobile({
 	children,
 	setOpenNavProps,
 }: NavMobileProps) {
-	const [openNav, setOpenNav] = useState(false);
+	const { openMenu, setOpenMenu } = useMenuMobile();
 	const [showSection, setShowSection] = useState(false);
 	const { pseudo, isLogged } = useAuth();
 
 	useEffect(() => {
-		if (openNav) {
+		if (openMenu) {
 			setShowSection(true);
 		} else {
 			// Attend la fin de la transition avant de retirer le composant
 			const timer = setTimeout(() => setShowSection(false), 350); // 350ms = durée de la transition CSS
 			return () => clearTimeout(timer);
 		}
-	}, [openNav]);
+	}, [openMenu]);
+
+	useEffect(() => {
+		// À chaque changement de page, si le menu est ouvert, on force l'affichage
+		if (openMenu) {
+			setShowSection(true);
+		}
+	}, [openMenu]);
+
+	console.log("NavMobile composant chargé !");
 
 	return (
 		<>
-			<nav id="nav-mobile" className={openNav ? "open" : ""}>
+			<nav id="nav-mobile" className={openMenu ? "open" : ""}>
 				<ul>
 					<li>
 						<Image
-							src="assets/icons/mobile/store.svg"
+							src="/assets/icons/mobile/store.svg"
 							alt="Boutique"
 							width={24}
 							height={24}
@@ -45,7 +56,7 @@ export default function NavMobile({
 					</li>
 					<li>
 						<Image
-							src="assets/icons/mobile/languages.svg"
+							src="/assets/icons/mobile/languages.svg"
 							alt="Langues"
 							width={24}
 							height={24}
@@ -56,13 +67,15 @@ export default function NavMobile({
 						<button
 							type="button"
 							id="menu-mobile-btn"
-							onClick={() => setOpenNav((v) => !v)}
+							onClick={() => {
+								setOpenMenu(!openMenu);
+							}}
 						>
 							<Image
 								src={
-									openNav
-										? "assets/icons/mobile/down.svg"
-										: "assets/icons/mobile/up.svg"
+									openMenu
+										? "/assets/icons/mobile/down.svg"
+										: "/assets/icons/mobile/up.svg"
 								}
 								alt="Menu"
 								width={60}
@@ -75,10 +88,10 @@ export default function NavMobile({
 							<button
 								type="button"
 								id="login-mobile-account"
-								onClick={() => setOpenNav(false)}
+								onClick={() => setOpenMenu(false)}
 							>
 								<Image
-									src="assets/icons/mobile/account.svg"
+									src="/assets/icons/mobile/account.svg"
 									alt="Compte"
 									width={24}
 									height={24}
@@ -89,7 +102,7 @@ export default function NavMobile({
 					</li>
 					<li>
 						<Image
-							src="assets/icons/mobile/search.svg"
+							src="/assets/icons/mobile/search.svg"
 							alt="Recherche"
 							width={24}
 							height={24}
@@ -100,7 +113,7 @@ export default function NavMobile({
 				{showSection && (
 					<SectionBtn
 						className="section-btn-mobile"
-						setOpenNavProps={setOpenNav}
+						setOpenNavProps={setOpenNavProps}
 					>
 						{children}
 					</SectionBtn>
