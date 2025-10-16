@@ -16,6 +16,7 @@ class FavoriteRepository {
             WHERE Favorite_users_id = ? AND Favorite_objet_id_fk = ?
         `;
 		const [result] = await databaseClient.query(sql, [userId, objetId]);
+		console.log("Résultat de la suppression du favori :", result);
 		return result;
 	}
 

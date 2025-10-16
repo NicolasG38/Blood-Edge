@@ -14,8 +14,6 @@ export default function AddFavorite({ objet_id }: AddFavoriteProps) {
 	const [isFavorite, setIsFavorite] = useState(false);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-	// Exemple d'utilisation dans AddFavorite :
-
 	const buildPayload = useCallback(() => {
 		if (!userId || !objet_id) return null;
 		return { userId: Number(userId), objet_id: Number(objet_id) };

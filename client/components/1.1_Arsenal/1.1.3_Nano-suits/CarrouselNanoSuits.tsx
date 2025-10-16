@@ -51,9 +51,6 @@ export default function CarrouselNanoSuits({
 					where_text: suit.where_text,
 				}));
 				setNanoSuitsServer(mapped);
-				console.log("Données des nano-suits récupérées :", mapped);
-				console.log("Langue courante :", lang);
-				console.log("Réponse backend :", data);
 			})
 			.catch((err) => {
 				console.error("Erreur côté client :", err);

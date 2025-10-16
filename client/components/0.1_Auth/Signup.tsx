@@ -130,7 +130,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 
 			if (response.ok && data?.token && data.user) {
 				setAuth({
-					userId: String(data.user.Users_id),
+					userId: data.user?.Users_id ? Number(data.user.Users_id) : 0,
 					pseudo: data.user.Users_pseudo,
 					isLogged: true,
 				});
