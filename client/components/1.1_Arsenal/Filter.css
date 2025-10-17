@@ -73,3 +73,18 @@
 	font-size: 1rem;
 	cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+	#containerExospineFilter {
+		flex-direction: column;
+		width: 90%;
+		margin: 2rem auto;
+	}
+	.filter {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.filter-title {
+		font-size: 1.2rem;
+	}
+}
