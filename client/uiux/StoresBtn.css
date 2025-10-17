@@ -1,10 +1,8 @@
 .StoresOuter {
 	display: flex;
-	justify-content: end;
-	align-items: center;
 	width: 283px;
 	height: 52px;
-	margin: 2rem 0;
+	margin: 1rem 0;
 	border: 1px solid var(--btnborder);
 	border-radius: 25px;
 	transition: 0.35s ease-in-out;
