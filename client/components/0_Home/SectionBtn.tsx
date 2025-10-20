@@ -27,11 +27,7 @@ interface ChildWithNavProps extends React.ReactElement {
 	};
 }
 
-export default function SectionBtn({
-	className,
-	children,
-	setOpenNavProps,
-}: SectionBtnProps) {
+export default function SectionBtn({ className, children }: SectionBtnProps) {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [sections, setSections] = useState<Section[]>([]);
 	const [isMobile, setIsMobile] = useState(false);

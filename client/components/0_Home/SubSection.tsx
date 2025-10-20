@@ -29,18 +29,15 @@ export default function SubSection({
 	const [subSections, setSubSections] = useState<Section[]>([]);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const [isMobile, setIsMobile] = useState(false);
-	const [isBelow1400, setIsBelow1400] = useState(false);
 	const [isLarge, setIsLarge] = useState(false);
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
 		setMounted(true);
 		setIsMobile(window.innerWidth < 768);
-		setIsBelow1400(window.innerWidth < 1400);
 		setIsLarge(window.innerWidth >= 1400);
 		const handleResize = () => {
 			setIsMobile(window.innerWidth < 768);
-			setIsBelow1400(window.innerWidth < 1400);
 			setIsLarge(window.innerWidth >= 1400);
 		};
 		window.addEventListener("resize", handleResize);
