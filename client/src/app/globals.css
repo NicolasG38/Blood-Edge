@@ -318,6 +318,9 @@ footer {
 		flex-direction: column;
 		align-items: center;
 	}
+	.row {
+		align-items: start;
+	}
 }
 @media screen and (max-width: 768px) {
 	main {

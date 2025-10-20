@@ -2,6 +2,7 @@
 import React from "react";
 import "./home.css";
 import Image from "next/image";
+import SubSection from "./SubSection";
 import { useMenuMobile } from "../../context/MenuMobileContext";
 import { useEffect, useState } from "react";
 
@@ -34,6 +35,7 @@ export default function SectionBtn({
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [sections, setSections] = useState<Section[]>([]);
 	const [isMobile, setIsMobile] = useState(false);
+	const [isBelow1400, setIsBelow1400] = useState(false);
 	const [mounted, setMounted] = useState(false);
 	const [arsenalOpen, setArsenalOpen] = useState(false);
 	const { openMenu, setOpenMenu } = useMenuMobile();
@@ -41,10 +43,13 @@ export default function SectionBtn({
 
 	useEffect(() => {
 		setMounted(true);
-		setIsMobile(window.innerWidth < 768);
-		const handleResize = () => setIsMobile(window.innerWidth < 768);
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
+		const updateSizes = () => {
+			setIsMobile(window.innerWidth < 768);
+			setIsBelow1400(window.innerWidth < 1400);
+		};
+		updateSizes();
+		window.addEventListener("resize", updateSizes);
+		return () => window.removeEventListener("resize", updateSizes);
 	}, []);
 
 	useEffect(() => {
@@ -66,13 +71,27 @@ export default function SectionBtn({
 					arrow: baseURL + section.Section_arrow,
 				}));
 
-				// Traitez les données des sections ici
 				setSections(mapped);
 			})
 			.catch((error) => {
 				console.error("Erreur lors de la récupération des sections :", error);
 			});
 	}, [baseURL]);
+
+	// fermer le sous-menu local quand le menu mobile global se ferme
+	useEffect(() => {
+		if (!openMenu) setArsenalOpen(false);
+	}, [openMenu]);
+
+	// proxy qui accepte boolean | (prev=>boolean) mais n'envoie jamais une fonction à setOpenMenu
+	const proxySetOpenNav = (value: boolean | ((prev: boolean) => boolean)) => {
+		if (typeof value === "function") {
+			// évalue la fonction avec l'état courant au lieu de la passer à setOpenMenu
+			setOpenMenu((value as (prev: boolean) => boolean)(openMenu));
+		} else {
+			setOpenMenu(value);
+		}
+	};
 
 	// Attendre le montage client avant d'afficher quoi que ce soit
 	if (!mounted) return null;
@@ -96,7 +115,7 @@ export default function SectionBtn({
 						<div className="btnArsenal mobile">
 							<p
 								style={
-									window.innerWidth >= 768
+									!isMobile
 										? {
 												color:
 													hoveredIndex === idx
@@ -112,7 +131,7 @@ export default function SectionBtn({
 						<Image
 							className="arsenalIcon mobile"
 							src={
-								window.innerWidth >= 768
+								!isMobile
 									? hoveredIndex === idx
 										? section.icons_black
 										: section.icons_gray
@@ -131,24 +150,31 @@ export default function SectionBtn({
 							onClick={() =>
 								section.id === 1 && setArsenalOpen((prev) => !prev)
 							}
-							// Ajoute le curseur pour indiquer que c'est cliquable
-							style={window.innerWidth <= 768 ? {} : { display: "none" }}
+							// visible uniquement en mode "mobile" tactile (<=768)
+							style={isMobile ? {} : { display: "none" }}
 						/>
 					</div>
-					{/* Affiche les enfants seulement si arsenalOpen est true */}
-					{section.id === 1 && arsenalOpen && Array.isArray(children)
-						? children.map((child) =>
-								React.isValidElement(child)
-									? React.cloneElement(child as ChildWithNavProps, {
-											setOpenNavProps,
-										})
-									: child,
-							)
-						: section.id === 1 && arsenalOpen && React.isValidElement(children)
-							? React.cloneElement(children as ChildWithNavProps, {
-									setOpenNavProps,
-								})
-							: null}
+
+					{/* Affiche les enfants seulement si arsenalOpen est true ET si écran < 1400px */}
+					{section.id === 1 && arsenalOpen && isBelow1400 ? (
+						Array.isArray(children) && children.length > 0 ? (
+							children.map((child, childIdx) => {
+								if (React.isValidElement(child)) {
+									const element = child as React.ReactElement;
+									const childKey: React.Key =
+										element.key ?? `child-${childIdx}`;
+									return React.cloneElement(element as ChildWithNavProps, {
+										setOpenNavProps: proxySetOpenNav,
+										key: childKey,
+									});
+								}
+								return child;
+							})
+						) : (
+							// si pas d'enfant fourni, SectionBtn rend SubSection lui-même
+							<SubSection insideNav={true} setOpenNavProps={proxySetOpenNav} />
+						)
+					) : null}
 				</React.Fragment>
 			))}
 		</section>
