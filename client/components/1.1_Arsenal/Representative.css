@@ -1,24 +1,48 @@
-.containerRepresentative {
-	display: flex;
-	height: 80vh;
-	width: 35vw;
-}
-
-.representative {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	position: relative;
-}
-
 .representativeTitle {
 	font-family: "QuanRounded-Bold", sans-serif;
 	font-size: 3rem;
 	color: var(--lightblack10);
 	text-shadow: 0 0 1px var(--black), 0 0 4px var(--orange);
+	text-align: center;
 }
 
-/*=== BAR STYLES PAGE EXOPSINE===*/
+.representative {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	height: 100%;
+	position: relative;
+}
+
+@media screen and (min-width: 768px) {
+	.containerRepresentative {
+		display: flex;
+		height: 80vh;
+		width: 35vw;
+	}
+
+	.representative {
+		justify-content: start;
+		align-items: start;
+	}
+
+	.representativeTitle {
+		font-family: "QuanRounded-Bold", sans-serif;
+		font-size: 3rem;
+		color: var(--lightblack10);
+		text-shadow: 0 0 1px var(--black), 0 0 4px var(--orange);
+		text-align: start;
+	}
+}
+
+/*=== BAR STYLES PAGE EXOSPINE MOBILE & DESKTOP ===*/
+
+.exospine-bar {
+	grid-template-columns: repeat(1, 1fr);
+	width: 45px;
+}
+
 .bar-on {
 	background: var(--radial-orange);
 	box-shadow: 0 0 4px var(--orange);
@@ -38,7 +62,7 @@
 	grid-template-columns: repeat(3, 1fr);
 	width: 136px;
 }
-/*=== BAR STYLES FIN PAGE EXOPSINE ===*/
+/*=== BAR STYLES FIN PAGE EXOSPINE MOBILE & DESKTOP ===*/
 
 /*=== REPRESENTATIVE SKILL STYLES ===*/
 .representativeSkill {
@@ -48,14 +72,16 @@
 	align-content: start;
 	font-size: 1.5rem;
 	color: var(--black);
-	/* margin: 1.5rem 0 5rem 0; */
-	width: 35vw;
+	width: 90vw;
 	& > div {
 		display: flex;
 		&:nth-child(1) {
 			margin: 3rem 0 0 0;
 		}
-
+		&:nth-child(3) {
+			margin: 3rem 0 0 0;
+			background-color: aquamarine;
+		}
 		& > .exospineSquareRounded {
 			min-width: 20px;
 			max-height: 20px;
@@ -82,7 +108,7 @@
 
 .representativeText {
 	margin: 0 0 3rem 0;
-	width: 35vw;
+	width: 90vw;
 
 	& > p {
 		font-family: "QuanRounded-Light", sans-serif;
@@ -92,5 +118,79 @@
 	}
 	& > .representativeText_2 {
 		height: 15rem;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1400px) {
+	.representative {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
+		height: 100%;
+		width: 90vw;
+		position: relative;
+		background-color: tomato;
+	}
+
+	.representativeSkill {
+		width: 90vw;
+		& > div {
+			display: flex;
+			&:nth-child(3) {
+				margin: 0;
+			}
+			& > .exospineRepresentativeSkill_1,
+			.exospineRepresentativeSkill_2,
+			.exospineRepresentativeSkill_3 {
+				font-family: "Quan-Regular", sans-serif;
+				height: 6rem;
+			}
+		}
+		& > .gearsRepresentativeSkilltext > .gearsRepresentativeSkillValue {
+			font-family: "Quan-Bold", sans-serif;
+			color: var(--orange);
+		}
+		&.gears {
+			margin-top: 3rem;
+		}
+	}
+}
+@media screen and (min-width: 1400px) {
+	.representativeSkill {
+		width: 35vw;
+		& > div {
+			display: flex;
+			&:nth-child(3) {
+				margin: 0;
+			}
+			& > .exospineRepresentativeSkill_1,
+			.exospineRepresentativeSkill_2,
+			.exospineRepresentativeSkill_3 {
+				font-family: "Quan-Regular", sans-serif;
+				height: 6rem;
+			}
+		}
+		& > .gearsRepresentativeSkilltext > .gearsRepresentativeSkillValue {
+			font-family: "Quan-Bold", sans-serif;
+			color: var(--orange);
+		}
+		&.gears {
+			margin-top: 3rem;
+		}
+	}
+
+	.representativeText {
+		margin: 0 0 3rem 0;
+		width: 35vw;
+
+		& > p {
+			font-family: "QuanRounded-Light", sans-serif;
+			font-size: 1.5rem;
+			color: var(--black);
+			margin: 1.5rem 0 0 0;
+		}
+		& > .representativeText_2 {
+			height: 15rem;
+		}
 	}
 }

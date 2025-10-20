@@ -15,12 +15,15 @@ interface Section {
 interface subSectionProps {
 	className?: string;
 	setOpenNavProps?: (open: boolean) => void;
+	insideNav?: boolean; // <-- nouveau: true quand rendu depuis NavMobile>SectionBtn
+	alwaysVisible?: boolean; // <-- optionnel override si besoin
 }
 
 export default function SubSection({
 	className,
 	setOpenNavProps,
-	...props
+	insideNav = false,
+	alwaysVisible = false,
 }: subSectionProps) {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [subSections, setSubSections] = useState<Section[]>([]);
@@ -37,7 +40,6 @@ export default function SubSection({
 	}, []);
 
 	useEffect(() => {
-		console.log("baseURL =", baseURL);
 		fetch(`${baseURL}/api/subsections`)
 			.then((response) => response.json())
 			.then((data) => {
@@ -65,19 +67,18 @@ export default function SubSection({
 			});
 	}, [baseURL]);
 
-	// Attendre le montage client avant d'afficher quoi que ce soit
+	// Défensif : n'affiche rien côté page sauf si insideNav ou override alwaysVisible
 	if (!mounted) return null;
+	if (!insideNav && !alwaysVisible) return null;
 
 	return (
 		<section
-			className={`containerSubSection mobile${
-				className ? ` ${className}` : ""
-			}`}
+			className={`containerSubSection mobile${className ? ` ${className}` : ""}`}
 		>
 			{subSections.map((subSection: Section, idx: number) => (
 				<div
 					className="subSection mobile"
-					key={subSection.id}
+					key={`${subSection.id ?? "sub"}-${idx}`}
 					onClick={() => isMobile && setOpenNavProps && setOpenNavProps(false)}
 					onKeyDown={(e) => {
 						if (
