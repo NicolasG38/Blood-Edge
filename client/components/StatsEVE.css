@@ -88,15 +88,7 @@
 }
 
 #statsEVEImageContainer {
-	display: none; /* Passer en flex pour faire apparaître le background - penser à gérer les autres formats d'écran */
-	position: absolute;
-	top: 55vh;
-	right: 5vw;
-	width: 347px;
-	height: 70vh;
-	overflow: hidden;
-	z-index: 0;
-	background-color: tomato;
+	display: none;
 }
 
 #statsEVEImage,
@@ -116,6 +108,21 @@
 	object-fit: cover;
 	opacity: 0.25;
 	z-index: 0;
+}
+
+/* masquer les scrollbars mais conserver le scroll */
+.statsEVEContent,
+.statsEVEContent > ul {
+	-ms-overflow-style: none; /* IE/Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+/* WebKit (Chrome, Safari, Opera) */
+.statsEVEContent::-webkit-scrollbar,
+.statsEVEContent > ul::-webkit-scrollbar {
+	display: none;
+	width: 0;
+	height: 0;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1200px) {
@@ -146,4 +153,14 @@
 		width: 22vw;
 	}
 	/* Conteneur des barres - Fin*/
+
+	#statsEVEImageContainer {
+		display: block; /* Passer en flex pour faire apparaître le background - penser à gérer les autres formats d'écran */
+		position: absolute;
+		top: 10%;
+		width: 25vw;
+		height: 70vh;
+		overflow: hidden;
+		z-index: 0;
+	}
 }
