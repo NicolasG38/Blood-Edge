@@ -1,4 +1,4 @@
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
 	/*=== BARRE DE NAVIGATION MASQUÉE===*/
 	#nav-mobile {
 		display: none;
@@ -218,7 +218,7 @@
 	/*=== SUBSECTION FIN ===*/
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
 	/*=== BARRE DE NAVIGATION MOBILE ===*/
 	@supports (bottom: env(safe-area-inset-bottom)) {
 		#nav-mobile {
