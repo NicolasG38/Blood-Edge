@@ -110,7 +110,7 @@
 	}
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1200px) {
 	.footer {
 		flex-direction: row;
 		justify-content: space-around;

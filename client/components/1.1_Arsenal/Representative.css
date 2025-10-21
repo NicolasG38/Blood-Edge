@@ -1,11 +1,7 @@
-.representativeTitle {
-	font-family: "QuanRounded-Bold", sans-serif;
-	font-size: 3rem;
-	color: var(--lightblack10);
-	text-shadow: 0 0 1px var(--black), 0 0 4px var(--orange);
-	text-align: center;
+.containerRepresentative {
+	display: flex;
+	align-items: center;
 }
-
 .representative {
 	display: flex;
 	flex-direction: column;
@@ -14,33 +10,21 @@
 	height: 100%;
 	position: relative;
 }
-
-@media screen and (min-width: 768px) {
-	.containerRepresentative {
-		display: flex;
-		height: 80vh;
-		width: 35vw;
-	}
-
-	.representative {
-		justify-content: start;
-		align-items: start;
-	}
-
-	.representativeTitle {
-		font-family: "QuanRounded-Bold", sans-serif;
-		font-size: 3rem;
-		color: var(--lightblack10);
-		text-shadow: 0 0 1px var(--black), 0 0 4px var(--orange);
-		text-align: start;
-	}
+.representativeTitle {
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 3rem;
+	color: var(--lightblack10);
+	text-shadow: 0 0 1px var(--black), 0 0 4px var(--orange);
+	text-align: center;
 }
 
 /*=== BAR STYLES PAGE EXOSPINE MOBILE & DESKTOP ===*/
 
 .exospine-bar {
-	grid-template-columns: repeat(1, 1fr);
-	width: 45px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	width: 136px;
+	/* margin: 1rem auto 2rem auto; */
 }
 
 .bar-on {
@@ -57,12 +41,11 @@
 	height: 5px;
 }
 
-.exospine-bar {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	width: 136px;
-}
 /*=== BAR STYLES FIN PAGE EXOSPINE MOBILE & DESKTOP ===*/
+
+.stars {
+	margin: 0 3rem 0 3rem;
+}
 
 /*=== REPRESENTATIVE SKILL STYLES ===*/
 .representativeSkill {
@@ -71,17 +54,16 @@
 	justify-content: start;
 	align-content: start;
 	font-size: 1.5rem;
+	margin-left: 1rem;
 	color: var(--black);
 	width: 90vw;
+
 	& > div {
 		display: flex;
 		&:nth-child(1) {
 			margin: 3rem 0 0 0;
 		}
-		&:nth-child(3) {
-			margin: 3rem 0 0 0;
-			background-color: aquamarine;
-		}
+
 		& > .exospineSquareRounded {
 			min-width: 20px;
 			max-height: 20px;
@@ -94,7 +76,7 @@
 		.exospineRepresentativeSkill_2,
 		.exospineRepresentativeSkill_3 {
 			font-family: "Quan-Regular", sans-serif;
-			height: 6rem;
+			height: 8rem;
 		}
 	}
 	& > .gearsRepresentativeSkilltext > .gearsRepresentativeSkillValue {
@@ -107,8 +89,8 @@
 }
 
 .representativeText {
-	margin: 0 0 3rem 0;
-	width: 90vw;
+	margin: 3rem 1rem 0rem 1rem;
+	height: 40vh;
 
 	& > p {
 		font-family: "QuanRounded-Light", sans-serif;
@@ -117,28 +99,40 @@
 		margin: 1.5rem 0 0 0;
 	}
 	& > .representativeText_2 {
-		height: 15rem;
+		height: 20rem;
 	}
 }
-@media screen and (min-width: 768px) and (max-width: 1400px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
 	.representative {
 		display: flex;
 		flex-direction: column;
-		justify-content: start;
 		align-items: start;
-		height: 100%;
+		width: 100vw;
+	}
+
+	.representativeTitle {
+		font-family: "QuanRounded-Bold", sans-serif;
+		font-size: 3rem;
+		color: var(--lightblack10);
+		text-shadow: 0 0 1px var(--black), 0 0 4px var(--orange);
+		text-align: left;
 		width: 90vw;
-		position: relative;
-		background-color: tomato;
+		margin: 0 3rem 0 3rem;
 	}
 
 	.representativeSkill {
-		width: 90vw;
+		margin: 0 3rem 0 3rem;
+	}
+
+	.exospine-bar {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		width: 136px;
+		margin: 1rem 3rem 2rem 3rem;
+	}
+
+	.representativeSkill {
 		& > div {
-			display: flex;
-			&:nth-child(3) {
-				margin: 0;
-			}
 			& > .exospineRepresentativeSkill_1,
 			.exospineRepresentativeSkill_2,
 			.exospineRepresentativeSkill_3 {
@@ -154,8 +148,29 @@
 			margin-top: 3rem;
 		}
 	}
+
+	.representativeText {
+		height: 20vh;
+	}
 }
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1200px) {
+	.representative {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
+		height: 100%;
+		width: 38vw;
+		position: relative;
+	}
+
+	.stars {
+		margin: 0;
+	}
+	.representativeTitle {
+		text-align: start;
+	}
+
 	.representativeSkill {
 		width: 35vw;
 		& > div {

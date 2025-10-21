@@ -31,7 +31,7 @@ export default function SectionBtn({ className, children }: SectionBtnProps) {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [sections, setSections] = useState<Section[]>([]);
 	const [isMobile, setIsMobile] = useState(false);
-	const [isBelow1400, setIsBelow1400] = useState(false);
+	const [isBelow1200, setIsBelow1200] = useState(false);
 	const [mounted, setMounted] = useState(false);
 	const [arsenalOpen, setArsenalOpen] = useState(false);
 	const { openMenu, setOpenMenu } = useMenuMobile();
@@ -41,7 +41,7 @@ export default function SectionBtn({ className, children }: SectionBtnProps) {
 		setMounted(true);
 		const updateSizes = () => {
 			setIsMobile(window.innerWidth < 768);
-			setIsBelow1400(window.innerWidth < 1400);
+			setIsBelow1200(window.innerWidth < 1200);
 		};
 		updateSizes();
 		window.addEventListener("resize", updateSizes);
@@ -151,8 +151,8 @@ export default function SectionBtn({ className, children }: SectionBtnProps) {
 						/>
 					</div>
 
-					{/* Affiche les enfants seulement si arsenalOpen est true ET si écran < 1400px */}
-					{section.id === 1 && arsenalOpen && isBelow1400 ? (
+					{/* Affiche les enfants seulement si arsenalOpen est true ET si écran < 1200px */}
+					{section.id === 1 && arsenalOpen && isBelow1200 ? (
 						Array.isArray(children) && children.length > 0 ? (
 							children.map((child, childIdx) => {
 								if (React.isValidElement(child)) {
