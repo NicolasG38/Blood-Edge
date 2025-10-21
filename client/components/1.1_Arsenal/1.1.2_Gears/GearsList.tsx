@@ -29,12 +29,12 @@ interface GearsListProps {
 }
 
 export default function GearsList({ selectedId, onSelect }: GearsListProps) {
-	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const toUrl = (p: string) => {
 		if (!p) return "/assets/images/placeholder.png"; // image par défaut
 		if (p.startsWith("http")) return p;
-		if (!baseUrl) return p; // ou retourne une image par défaut
-		return `${baseUrl}${p}`;
+		if (!baseURL) return p; // ou retourne une image par défaut
+		return `${baseURL}${p}`;
 	};
 	const { lang } = useLanguage();
 
@@ -42,7 +42,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 	const [hoveredId, setHoveredId] = useState<number | null>(null);
 
 	useEffect(() => {
-		fetch(`${baseUrl}/api/gears/id-title`)
+		fetch(`${baseURL}/api/gears/id-title`)
 			.then((response) => response.json())
 			.then((data) => {
 				const gearsArray = data[lang] ?? [];
@@ -67,8 +67,7 @@ export default function GearsList({ selectedId, onSelect }: GearsListProps) {
 					})),
 				);
 			});
-	}, [baseUrl, lang]);
-
+	}, [baseURL, lang]);
 	return (
 		<div>
 			<p className="titleSubSection_orange">

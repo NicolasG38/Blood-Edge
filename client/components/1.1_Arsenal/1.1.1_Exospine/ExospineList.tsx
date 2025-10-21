@@ -12,7 +12,7 @@ interface ExospineProps {
 	Exospine_icon: string;
 	Exospine_icon_colored: string;
 	Exospine_icon_Mk2: string;
-	Exospine_icon_Mk2_colored: string;
+	Exospine_icon_colored_Mk2: string;
 }
 
 interface ExospineListProps {
@@ -46,6 +46,7 @@ export default function ExospineList({
 			});
 	}, [baseURL]);
 
+	console.log("Exospines fetched:", exospines);
 	return (
 		<div>
 			<p className="titleSubSection_orange">
@@ -54,15 +55,34 @@ export default function ExospineList({
 			<div className="containerList">
 				<ul>
 					{exospines.map((exospine) => (
-						<li key={exospine.id} className="ListLi_orange">
+						<li
+							key={exospine.id}
+							onMouseEnter={() => setHoveredId(exospine.id)}
+							onMouseLeave={() => setHoveredId(null)}
+							className="ListLi_orange"
+						>
 							<button
 								type="button"
 								className="listButton"
 								onClick={() => onSelect(exospine.id)}
 							>
+								<span
+									className="deco_1_orange"
+									style={{
+										background:
+											hoveredId === exospine.id
+												? "var(--lightblack)"
+												: "var(--white)",
+									}}
+								/>
 								<Image
 									className="apparelIcon_orange"
-									src={toUrl(exospine.Exospine_icon)}
+									src={toUrl(
+										hoveredId === exospine.id
+											? exospine.Exospine_icon_colored ||
+													exospine.Exospine_icon_colored_Mk2
+											: exospine.Exospine_icon || exospine.Exospine_icon_Mk2,
+									)}
 									alt="Arsenal Icon"
 									width={70}
 									height={70}
