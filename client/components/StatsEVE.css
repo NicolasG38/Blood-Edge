@@ -1,3 +1,11 @@
+#statsEVEContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	margin-bottom: 2rem;
+	width: 100vw;
+}
 #statsEVEHeader > p {
 	font-family: "QuanRounded-Bold", sans-serif;
 	font-size: 3rem;
@@ -9,13 +17,11 @@
 	height: 75vh;
 	overflow-y: auto;
 	overflow-x: hidden;
-	width: 25vw;
+	margin: 0 auto;
 }
 
 .statsEVELi {
 	margin: 1rem 0;
-
-	width: 23vw;
 }
 
 .statsEVEIcon {
@@ -28,7 +34,7 @@
 .statsEVEIconContainer {
 	position: relative;
 	display: flex;
-	width: 25vw;
+	width: 90vw;
 	z-index: 2;
 }
 
@@ -52,7 +58,7 @@
 .statsEVEBar {
 	position: relative;
 	height: 5px;
-	width: 22vw;
+	width: 85vw;
 	margin: 0.5rem 0;
 	z-index: 2;
 }
@@ -83,13 +89,6 @@
 
 #statsEVEImageContainer {
 	display: none;
-	position: absolute;
-	top: 55vh;
-	right: 5vw;
-	width: 347px;
-	height: 70vh;
-	overflow: hidden;
-	z-index: 0;
 }
 
 #statsEVEImage,
@@ -109,4 +108,59 @@
 	object-fit: cover;
 	opacity: 0.25;
 	z-index: 0;
+}
+
+/* masquer les scrollbars mais conserver le scroll */
+.statsEVEContent,
+.statsEVEContent > ul {
+	-ms-overflow-style: none; /* IE/Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+/* WebKit (Chrome, Safari, Opera) */
+.statsEVEContent::-webkit-scrollbar,
+.statsEVEContent > ul::-webkit-scrollbar {
+	display: none;
+	width: 0;
+	height: 0;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+	#statsEVEContainer {
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	#statsEVEContainer {
+		width: 25vw;
+	}
+
+	.statsEVEContent {
+		width: 25vw;
+	}
+
+	.statsEVELi {
+		width: 23vw;
+	}
+
+	.statsEVEIconContainer {
+		width: 25vw;
+	}
+
+	/* Conteneur des barres */
+	.statsEVEBar {
+		width: 22vw;
+	}
+	/* Conteneur des barres - Fin*/
+
+	#statsEVEImageContainer {
+		display: block; /* Passer en flex pour faire apparaître le background - penser à gérer les autres formats d'écran */
+		position: absolute;
+		top: 10%;
+		width: 25vw;
+		height: 70vh;
+		overflow: hidden;
+		z-index: 0;
+	}
 }

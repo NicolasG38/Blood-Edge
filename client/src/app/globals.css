@@ -313,10 +313,15 @@ footer {
 	height: 100vh;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
 	#mainSignUpLogin {
 		flex-direction: column;
 		align-items: center;
+	}
+	.row {
+		flex-direction: column;
+		align-items: start;
+		height: 100%;
 	}
 }
 @media screen and (max-width: 768px) {

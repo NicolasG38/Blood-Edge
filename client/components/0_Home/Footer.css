@@ -1,8 +1,9 @@
 .footer {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 }
-#footerBottom {
+#footerLegalMentions {
 	display: flex;
 	justify-content: space-between;
 	align-items: end;
@@ -55,9 +56,11 @@
 	flex-direction: column;
 }
 #containerStores {
-	position: absolute;
-	right: 2rem;
-	bottom: 3rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: center;
+	margin-bottom: 6rem;
 }
 #containerLegal {
 	display: flex;
@@ -107,7 +110,12 @@
 	}
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1200px) {
+	.footer {
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: start;
+	}
 	#ContainerLinks {
 		flex-direction: row;
 	}

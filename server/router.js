@@ -1,11 +1,11 @@
 import express from "express";
 
-import equipmentActions from "./action/equipmentActions.js";
 import exospineActions from "./action/exospineActions.js";
 import favoriteController from "./controller/favoriteController.js";
+import gearsActions from "./action/gearsActions.js";
 import locationsActions from "./action/locationsActions.js";
 import loginController from "./action/loginActions.js";
-import nanoSuitsActions from "./action/nanoSuitsActions.js";
+import nanoSuitsController from "./controller/nanoSuitsController.js";
 import sectionActions from "./action/sectionActions.js";
 import signupActions from "./action/signupActions.js";
 import statsActions from "./action/statsActions.js"; // données brut
@@ -14,6 +14,7 @@ import storesActions from "./action/storesActions.js";
 import subSectionActions from "./action/subSectionActions.js";
 import usersActions from "./action/usersActions.js";
 
+import { signup } from "./controller/signupController.js";
 import { validateSignup } from "./controller/signupController.js";
 import { getMe } from "./controller/userController.js";
 import { requireAuth, requireAdmin } from "./middleware/auth.js";
@@ -48,15 +49,15 @@ router.delete(
 
 //Exospine
 router.get("/api/exospine", exospineActions.browse);
-router.get("/api/exospine/id-title", exospineActions.getIdAndTitle);
+router.get("/api/exospine/id-title", exospineActions.browse);
 
-//Equipment
-router.get("/api/equipment", equipmentActions.browse);
-router.get("/api/equipment/id-title", equipmentActions.getIdAndTitle);
+//Gears
+router.get("/api/gears", gearsActions.browse);
+router.get("/api/gears/id-title", gearsActions.browse);
 
 // Nano suits
-router.get("/api/nanosuits", nanoSuitsActions.browse);
-router.get("/api/nanosuits/id-title", nanoSuitsActions.getIdAndTitle);
+router.get("/api/nanosuits", nanoSuitsController.browse);
+router.get("/api/nanosuits/id-title", nanoSuitsController.getIdAndTitle);
 
 // Favoris
 router.post("/api/favorites", requireAuth, favoriteController.addFavorite);
@@ -69,7 +70,7 @@ router.post(
 router.get("/api/favorites/:pseudo", favoriteController.getUserFavorites);
 
 // Auth
-router.post("/api/users", validateSignup, signupActions.create);
+router.post("/api/users", validateSignup, signup);
 router.post("/api/login", loginLimiter, loginController.login);
 router.get("/api/me", requireAuth, getMe);
 router.post("/api/logout", requireAuth, loginController.logout);

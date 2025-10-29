@@ -95,7 +95,7 @@ export default function Footer() {
 			</section>
 
 			<StoresBtn />
-			<span id="footerBottom">
+			<span id="footerLegalMentions">
 				<p id="copyrightFooter">
 					STELLAR BLADE© 2024 SHIFT UP Corporation. All rights reserved.
 					Published by Sony Interactive Entertainment

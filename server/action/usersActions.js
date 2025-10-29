@@ -19,12 +19,11 @@ function timeSinceSignup(signupDate) {
 export const readByPseudo = async (req, res, next) => {
 	try {
 		const user = await usersRepository.findByPseudo(req.params?.pseudo);
-		console.log("Pseudo reçu :", req.params?.pseudo);
 		if (!user) return res.status(404).json({ error: "USER_NOT_FOUND" });
 		// Ajout du calcul du temps depuis l'inscription
 		let inscriptionDuration = null;
-		if (user?.User_timestamp) {
-			inscriptionDuration = timeSinceSignup(user.User_timestamp);
+		if (user?.Users_created_at) {
+			inscriptionDuration = timeSinceSignup(user.Users_created_at);
 		}
 		res.json({
 			...user,

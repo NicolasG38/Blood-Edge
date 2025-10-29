@@ -3,7 +3,7 @@ import databaseClient from "../database/client.js";
 class loginRepository {
 	async readUser(pseudo, hashed_password) {
 		const [rows] = await databaseClient.query(
-			"SELECT * FROM User WHERE User_pseudo = ? AND User_hashed_password = ?",
+			"SELECT * FROM Users WHERE Users_pseudo = ? AND Users_hashed_password = ?",
 			[pseudo, hashed_password],
 		);
 		return rows;
@@ -11,7 +11,7 @@ class loginRepository {
 
 	async readPseudo(pseudo) {
 		const [rows] = await databaseClient.query(
-			"SELECT * FROM User WHERE User_pseudo = ?",
+			"SELECT * FROM Users WHERE Users_pseudo = ?",
 			[pseudo],
 		);
 		return rows[0];
@@ -19,7 +19,7 @@ class loginRepository {
 
 	async findUserByPseudo(pseudo) {
 		const [rows] = await databaseClient.query(
-			"SELECT id AS User_id, pseudo AS User_pseudo, hashed_password FROM users WHERE pseudo = ? LIMIT 1",
+			"SELECT Users_id, Users_pseudo, Users_hashed_password FROM Users WHERE Users_pseudo = ? LIMIT 1",
 			[pseudo],
 		);
 		return rows[0] || null;

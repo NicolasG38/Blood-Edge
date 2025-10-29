@@ -15,17 +15,34 @@ interface Section {
 interface subSectionProps {
 	className?: string;
 	setOpenNavProps?: (open: boolean) => void;
+	insideNav?: boolean; // <-- nouveau: true quand rendu depuis NavMobile>SectionBtn
+	alwaysVisible?: boolean; // <-- optionnel override si besoin
 }
 
 export default function SubSection({
 	className,
 	setOpenNavProps,
-	...props
+	insideNav = false,
+	alwaysVisible = false,
 }: subSectionProps) {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [subSections, setSubSections] = useState<Section[]>([]);
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const [isMobile, setIsMobile] = useState(false);
+	const [isLarge, setIsLarge] = useState(false);
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+		setIsMobile(window.innerWidth < 768);
+		setIsLarge(window.innerWidth >= 1200);
+		const handleResize = () => {
+			setIsMobile(window.innerWidth < 768);
+			setIsLarge(window.innerWidth >= 1200);
+		};
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 	useEffect(() => {
 		fetch(`${baseURL}/api/subsections`)
@@ -55,19 +72,18 @@ export default function SubSection({
 			});
 	}, [baseURL]);
 
-	useEffect(() => {
-		setIsMobile(window.innerWidth < 768);
-		const handleResize = () => setIsMobile(window.innerWidth < 768);
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
+	// Défensif : n'affiche rien côté page sauf si insideNav ou override alwaysVisible
+	if (!mounted) return null;
+	if (!insideNav && !alwaysVisible && !isLarge) return null;
 
 	return (
-		<section className={`containerSubSection mobile ${className}`}>
+		<section
+			className={`containerSubSection mobile${className ? ` ${className}` : ""}`}
+		>
 			{subSections.map((subSection: Section, idx: number) => (
 				<div
 					className="subSection mobile"
-					key={subSection.id}
+					key={`${subSection.id ?? "sub"}-${idx}`}
 					onClick={() => isMobile && setOpenNavProps && setOpenNavProps(false)}
 					onKeyDown={(e) => {
 						if (

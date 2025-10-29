@@ -3,22 +3,21 @@
 import "./CarrouselNanoSuits.css";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import type { JSX } from "react";
+import { useLanguage } from "../../../context/LangContext";
 
 interface NanoSuitProps {
 	id: number;
-	NS_id: number;
-	NS_title_fr: string;
-	NS_text_1_fr: string;
-	NS_text_1_en: string;
-	NS_text_2_fr: string;
-	NS_text_2_en: string;
-	NS_Where_title_fr: string;
-	NS_Where_title_en: string;
-	NS_Where_text_fr: string;
-	NS_Where_text_en: string;
-	NS_picture: string;
-	NS_stars: string;
+	picture: string;
+	stars: string;
+	star_gray: string;
+	star_1: boolean | string;
+	star_2: boolean | string;
+	star_3: boolean | string;
+	title: string;
+	text_1: string;
+	text_2: string;
+	where_title: string;
+	where_text: string;
 }
 
 interface CarrouselNanoSuitsProps {
@@ -29,22 +28,34 @@ export default function CarrouselNanoSuits({
 	selectedId,
 }: CarrouselNanoSuitsProps) {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
+	const { lang } = useLanguage();
 	const [nanoSuitsServer, setNanoSuitsServer] = useState<NanoSuitProps[]>([]);
 
 	useEffect(() => {
 		fetch(`${baseURL}/api/nanosuits`)
 			.then((response) => response.json())
 			.then((data) => {
-				const mapped = data.map((suit: NanoSuitProps) => ({
-					...suit,
-					id: suit.id ?? suit.NS_id,
+				const suitsArray = data[lang] ?? [];
+				const mapped = suitsArray.map((suit: NanoSuitProps) => ({
+					id: suit.id,
+					picture: suit.picture,
+					stars: suit.stars,
+					star_gray: suit.star_gray,
+					star_1: suit.star_1 === "true" || suit.star_1 === true,
+					star_2: suit.star_2 === "true" || suit.star_2 === true,
+					star_3: suit.star_3 === "true" || suit.star_3 === true,
+					title: suit.title,
+					text_1: suit.text_1,
+					text_2: suit.text_2,
+					where_title: suit.where_title,
+					where_text: suit.where_text,
 				}));
 				setNanoSuitsServer(mapped);
 			})
 			.catch((err) => {
 				console.error("Erreur côté client :", err);
 			});
-	}, [baseURL]);
+	}, [baseURL, lang]);
 
 	const suit =
 		nanoSuitsServer.find((s) => s.id === Number(selectedId)) ||
@@ -58,41 +69,38 @@ export default function CarrouselNanoSuits({
 			<div id="nanoSuitCarrouselCard" key={suit.id}>
 				<div className="nanoSuitCarrouselDetails">
 					<div className="nanoSuitCarrouselStars">
-						<Image
-							id="nanoSuitCarrouselStars"
-							src={baseURL + suit.NS_stars}
-							alt={`Étoiles pour ${suit.NS_title_fr}`}
-							width={30}
-							height={30}
-						/>
-						<Image
-							id="nanoSuitCarrouselStars"
-							src={baseURL + suit.NS_stars}
-							alt={`Étoiles pour ${suit.NS_title_fr}`}
-							width={30}
-							height={30}
-						/>
-						<Image
-							id="nanoSuitCarrouselStars"
-							src={baseURL + suit.NS_stars}
-							alt={`Étoiles pour ${suit.NS_title_fr}`}
-							width={30}
-							height={30}
-						/>
+						{[1, 2, 3].map((i) => (
+							<Image
+								key={i}
+								id="nanoSuitCarrouselStars"
+								src={
+									(i === 1 && suit.star_1) ||
+									(i === 2 && suit.star_2) ||
+									(i === 3 && suit.star_3)
+										? `${baseURL}${suit.stars}`
+										: `${baseURL}${suit.star_gray}`
+								}
+								alt={`Étoile ${i} pour ${suit.title}`}
+								width={30}
+								height={30}
+							/>
+						))}
 					</div>
-					<p id="nanoSuitCarrouselName">{suit.NS_title_fr}</p>
-					<p id="nanoSuitCarrouselText1">{suit.NS_text_1_fr}</p>
-					<p id="nanoSuitCarrouselText2">{suit.NS_text_2_fr}</p>
-					<p id="nanoSuitCarrouselWhere">{suit.NS_Where_title_fr}</p>
-					<p id="nanoSuitCarrouselPlace">{suit.NS_Where_text_fr}</p>
+					<p id="nanoSuitCarrouselName">{suit.title}</p>
+					<p id="nanoSuitCarrouselText1">{suit.text_1}</p>
+					<p id="nanoSuitCarrouselText2">{suit.text_2}</p>
+					<p id="nanoSuitCarrouselWhere">{suit.where_title}</p>
+					<p id="nanoSuitCarrouselPlace">{suit.where_text}</p>
 				</div>
-				<Image
-					id="nanoSuitCarrouselImage"
-					src={`${baseURL}${suit.NS_picture.startsWith("/") ? "" : "/"}${suit.NS_picture}`}
-					alt={suit.NS_title_fr}
-					width={623}
-					height={623}
-				/>
+				{suit.picture && (
+					<Image
+						id="nanoSuitCarrouselImage"
+						src={`${baseURL}${suit.picture}`}
+						alt={suit.title}
+						width={623}
+						height={623}
+					/>
+				)}
 			</div>
 		</div>
 	);

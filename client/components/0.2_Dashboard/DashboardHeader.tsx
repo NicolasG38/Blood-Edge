@@ -3,11 +3,11 @@ import { useAuth } from "../../context/AuthContext";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
-interface User {
-	User_id: number;
-	User_pseudo: string;
-	User_email: string;
-	User_timestamp: string;
+interface Users {
+	Users_id: number;
+	Users_pseudo: string;
+	Users_email: string;
+	Users_created_at: string;
 	inscriptionDuration: string;
 }
 interface AuthContextType {
@@ -19,7 +19,7 @@ export default function DashboardHeader() {
 	const params = useParams();
 
 	const pseudos = typeof params === "object" ? params.pseudo : params;
-	const [users, setUsers] = useState<User | null>(null);
+	const [users, setUsers] = useState<Users | null>(null);
 	const { isLogged, pseudo: authPseudo } = useAuth() as AuthContextType;
 	const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3310";
 
@@ -34,13 +34,13 @@ export default function DashboardHeader() {
 		<div id="dashboardHeader">
 			<h1 className="dashboardTitle">
 				{isLogged && authPseudo === pseudos
-					? `Hello, ${users?.User_pseudo}`
-					: users?.User_pseudo}
+					? `Hello, ${users?.Users_pseudo}`
+					: users?.Users_pseudo}
 			</h1>
 
 			<div id="containerInfos">
 				{isLogged && authPseudo === pseudos && (
-					<p id="dashboardEmail">{users?.User_email}</p>
+					<p id="dashboardEmail">{users?.Users_email}</p>
 				)}
 				<p id="dashboardMembershipDate">
 					Membre depuis : {users?.inscriptionDuration}

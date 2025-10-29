@@ -8,7 +8,7 @@ client
 
 		connection.release();
 	})
-	.catch((error: Error) => {
+	.catch((error) => {
 		console.warn(
 			"Warning:",
 			"Failed to establish a database connection.",

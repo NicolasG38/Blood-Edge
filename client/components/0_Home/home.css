@@ -1,4 +1,4 @@
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
 	/*=== BARRE DE NAVIGATION MASQUÉE===*/
 	#nav-mobile {
 		display: none;
@@ -218,7 +218,7 @@
 	/*=== SUBSECTION FIN ===*/
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
 	/*=== BARRE DE NAVIGATION MOBILE ===*/
 	@supports (bottom: env(safe-area-inset-bottom)) {
 		#nav-mobile {
@@ -235,7 +235,10 @@
 	}
 
 	#nav-mobile.open {
+		height: 100vh;
 		max-height: 100vh;
+		overflow: auto;
+		background: var(--denim);
 		& > ul > li > #menu-mobile-btn {
 			position: relative;
 			top: -0.5rem;
@@ -257,7 +260,6 @@
 	#nav-mobile {
 		position: fixed;
 		bottom: 0;
-
 		left: 0;
 		width: 100vw;
 		max-height: 80px;
@@ -381,6 +383,7 @@
 			align-items: center;
 			margin: 0rem;
 			width: 100%;
+			background: var(--white);
 		}
 
 		.subSection.mobile {

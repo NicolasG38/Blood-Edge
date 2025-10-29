@@ -13,6 +13,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
+	const [fieldErr, setFieldErr] = useState<Record<string, string>>({});
 
 	const router = useRouter();
 	const { setAuth } = useAuth(); // au lieu de const { auth } = useAuth();
@@ -28,8 +29,8 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 		[key: string]: FieldValidation | undefined;
 	}
 	interface SignupUser {
-		User_id: number;
-		User_pseudo: string;
+		Users_id: number;
+		Users_pseudo: string;
 		// Add other user fields if needed
 	}
 
@@ -58,6 +59,7 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 		setShowSuccess(false);
 		setError(null);
 		setShowFail(false);
+		setFieldErr({}); // reset erreurs par champ
 
 		const form = new FormData(event.currentTarget);
 
@@ -76,18 +78,23 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 		const password = (form.get("password") as string) || "";
 		const terms = form.get("terms") === "on";
 
-		const errors: string[] = [];
+		const newFieldErr: Record<string, string> = {};
 
-		if (!email || !emailConfirm) errors.push("Email manquant");
-		if (email !== emailConfirm) errors.push("Les emails ne correspondent pas");
-		if (!pseudo || pseudo.length < 3) errors.push("Pseudo trop court");
-		if (!terms) errors.push("CGU non acceptées");
+		if (!pseudo || pseudo.length < 3) newFieldErr.pseudo = "Pseudo trop court";
+		if (!email) newFieldErr.email = "Email manquant";
+		if (!emailConfirm) newFieldErr.email_confirm = "Confirmation manquante";
+		if (email && emailConfirm && email !== emailConfirm) {
+			newFieldErr.email = "Emails différents";
+			newFieldErr.email_confirm = "Emails différents";
+		}
 		const pwErrs = buildPasswordErrors(password);
 		if (pwErrs.length)
-			errors.push(`Mot de passe invalide: ${pwErrs.join(", ")}`);
+			newFieldErr.password = `Mot de passe invalide (${pwErrs.join(", ")})`;
+		if (!terms) newFieldErr.terms = "Acceptez les CGU";
 
-		if (errors.length) {
-			setError(`Veuillez corriger les champs suivants : ${errors.join(" | ")}`);
+		if (Object.keys(newFieldErr).length) {
+			setFieldErr(newFieldErr);
+			setError(`Veuillez corriger : ${Object.values(newFieldErr).join(" | ")}`);
 			setShowFail(true);
 			return;
 		}
@@ -130,8 +137,8 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 
 			if (response.ok && data?.token && data.user) {
 				setAuth({
-					userId: String(data.user.User_id),
-					pseudo: data.user.User_pseudo,
+					userId: data.user?.Users_id ? Number(data.user.Users_id) : 0,
+					pseudo: data.user.Users_pseudo,
 					isLogged: true,
 				});
 
@@ -139,10 +146,23 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 				setTimeout(() => {
 					onSuccess?.();
 					if (window.location.pathname !== "/dashboard") {
-						router.push(`/dashboard/${data.user?.User_pseudo}`);
+						router.push(`/dashboard/${data.user?.Users_pseudo}`);
 					}
 				}, 4000);
 			} else {
+				// mappe les erreurs serveur vers les champs
+				const next: Record<string, string> = { ...fieldErr };
+				const det = data?.details;
+				if (det?.email_confirm?._errors?.[0])
+					next.email_confirm = det.email_confirm._errors[0];
+				if (det?.password?._errors?.[0])
+					next.password = det.password._errors[0];
+				if (det?.pseudo?._errors?.[0]) next.pseudo = det.pseudo._errors[0];
+				if (det?.is_accept_cgu?._errors?.[0])
+					next.terms = det.is_accept_cgu._errors[0];
+				if (det?.email?._errors?.[0]) next.email = det.email._errors[0];
+				setFieldErr(next);
+
 				const serverMsg =
 					data?.details?.is_accept_cgu?._errors?.[0] ||
 					data?.details?.email_confirm?._errors?.[0] ||
@@ -210,9 +230,6 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 										height={24}
 									/>
 								</div>
-								<p className="signupError_2" role="alert">
-									{error}
-								</p>
 							</div>
 						)}
 					</div>
@@ -252,47 +269,85 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 							</div>
 							<p id="signupText">Créer un compte avec votre adresse email</p>
 							<div id="signupInputs">
-								<label htmlFor="pseudo" className="signupLabel">
-									Nom d'utilisateur :
-								</label>
-								<input
-									type="text"
-									id="pseudo"
-									name="pseudo"
-									className="signupInput"
-									autoComplete="username"
-								/>
-								<label htmlFor="email" className="signupLabel">
-									Email :
-								</label>
-								<input
-									type="email"
-									id="email"
-									name="email"
-									className="signupInput"
-									autoComplete="email"
-								/>
-								<label htmlFor="email_confirm" className="signupLabel">
-									Confirmation d'email :
-								</label>
-								<input
-									type="email"
-									id="email_confirm"
-									name="email_confirm"
-									className="signupInput"
-									autoComplete="email"
-								/>
-								<label htmlFor="password" className="signupLabel">
-									Mot de passe :
-								</label>
-								<input
-									type="password"
-									id="password"
-									name="password"
-									className="signupInput"
-									autoComplete="new-password"
-								/>
-								<p id="signupPasswordHint">
+								<div className="signupWithContainer">
+									<label htmlFor="pseudo" className="signupLabel">
+										Nom d&#39;utilisateur :
+									</label>
+									<input
+										type="text"
+										id="pseudo"
+										name="pseudo"
+										className={`signupInput ${fieldErr.pseudo ? "error" : ""}`}
+										aria-invalid={!!fieldErr.pseudo}
+										aria-describedby={
+											fieldErr.pseudo ? "err-pseudo" : undefined
+										}
+									/>
+									{fieldErr.pseudo && (
+										<p id="err-pseudo" className="fieldError">
+											{fieldErr.pseudo}
+										</p>
+									)}
+								</div>
+								<div className="signupWithContainer">
+									<label htmlFor="email" className="signupLabel">
+										Email :
+									</label>
+									<input
+										type="email"
+										id="email"
+										name="email"
+										className={`signupInput ${fieldErr.email ? "error" : ""}`}
+										aria-invalid={!!fieldErr.email}
+										aria-describedby={fieldErr.email ? "err-email" : undefined}
+									/>
+									{fieldErr.email && (
+										<p id="err-email" className="fieldError">
+											{fieldErr.email}
+										</p>
+									)}
+								</div>
+								<div className="signupWithContainer">
+									<label htmlFor="email_confirm" className="signupLabel">
+										Confirmation d&#39;email :
+									</label>
+									<input
+										type="email"
+										id="email_confirm"
+										name="email_confirm"
+										className={`signupInput ${fieldErr.email_confirm ? "error" : ""}`}
+										aria-invalid={!!fieldErr.email_confirm}
+										aria-describedby={
+											fieldErr.email_confirm ? "err-email-confirm" : undefined
+										}
+									/>
+									{fieldErr.email_confirm && (
+										<p id="err-email-confirm" className="fieldError">
+											{fieldErr.email_confirm}
+										</p>
+									)}
+								</div>
+								<div className="signupWithContainer">
+									<label htmlFor="password" className="signupLabel">
+										Mot de passe :
+									</label>
+									<input
+										type="password"
+										id="password"
+										name="password"
+										className={`signupInput ${fieldErr.password ? "error" : ""}`}
+										aria-invalid={!!fieldErr.password}
+										aria-describedby={
+											fieldErr.password ? "err-password" : undefined
+										}
+									/>
+									{fieldErr.password && (
+										<p id="err-password" className="fieldError">
+											{fieldErr.password}
+										</p>
+									)}
+								</div>
+								{/* <p id="signupPasswordHint">
 									Le mot de passe doit contenir au moins 8 caractères dont:
 									<span>
 										1 MAJUSCULE
@@ -300,19 +355,30 @@ export default function Signup({ onSuccess, onSwitch }: SignupProps) {
 										<br />1 chiffre
 										<br />1 caractères spécial
 									</span>
-								</p>
-								<div id="signupTerms">
-									<p id="signupLink">
-										J'accepte les{" "}
-										<a href="/terms" id="signupLink_2">
-											conditions d'utilisation
-										</a>
-									</p>
-									<label htmlFor="terms" className="signupLabelCheckbox">
-										<input type="checkbox" name="terms" id="terms" />{" "}
-									</label>
+								</p> */}
+								<div className="signupWithContainer terms">
+									<div id="signupTerms">
+										<p id="signupLink">
+											J&#39;accepte les{" "}
+											<a href="/terms" id="signupLink_2">
+												conditions d&#39;utilisation
+											</a>
+										</p>
+										<label htmlFor="terms" className="signupLabelCheckbox">
+											<input
+												type="checkbox"
+												name="terms"
+												id="terms"
+												aria-invalid={!!fieldErr.terms}
+											/>{" "}
+										</label>
+									</div>
+									{fieldErr.terms && (
+										<p className="fieldError" id="err-terms">
+											{fieldErr.terms}
+										</p>
+									)}
 								</div>
-
 								<button
 									type="submit"
 									className="loginAndsignUpFunctionnal signup"

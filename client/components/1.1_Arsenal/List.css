@@ -3,27 +3,28 @@
 	flex-direction: row;
 	justify-content: start;
 	align-items: center;
-	width: 100%;
+	width: 90vw;
 	height: 100%;
 	font-family: "QuanRounded-Bold", sans-serif;
 	font-size: 2rem;
 	color: var(--black);
+	margin: 2rem 0 0 1rem;
 	& span {
 		color: var(--denim);
 		margin-left: 1rem;
 	}
 }
-
 .titleSubSection_orange {
 	display: flex;
 	flex-direction: row;
 	justify-content: start;
 	align-items: center;
-	width: 100%;
+	width: 90vw;
 	height: 100%;
 	font-family: "QuanRounded-Bold", sans-serif;
 	font-size: 2rem;
 	color: var(--black);
+	margin: 2rem 0 0 1rem;
 	& span {
 		color: var(--orange);
 		margin-left: 1rem;
@@ -32,11 +33,13 @@
 
 .containerList {
 	display: flex;
-	width: fit-content;
+	width: 100%;
 	height: 70vh;
 	margin: 2rem 0rem 6rem 0;
-	overflow: scroll;
-	overflow-x: hidden;
+	& > ul {
+		overflow: scroll;
+		overflow-x: hidden;
+	}
 }
 
 .listLi_blue {
@@ -44,10 +47,9 @@
 	justify-content: flex-start;
 	align-items: center;
 	overflow: scroll;
-	height: 4vw;
-	min-height: 70px;
-	width: 40vh;
-	min-width: 300px;
+	height: 10vh;
+	min-height: 90px;
+	width: 100vw;
 	border-top: var(--btnborder) 1px solid;
 	transition: 0.3s ease-in-out;
 	overflow: hidden;
@@ -62,10 +64,9 @@
 	justify-content: flex-start;
 	align-items: center;
 	overflow: scroll;
-	height: 8vh;
+	height: 14vh;
 	min-height: 90px;
-	width: 20vw;
-	min-width: 400px;
+	width: 100vw; /*20 desktop*/
 	border-top: var(--btnborder) 1px solid;
 	transition: 0.3s ease-in-out;
 	overflow: hidden;
@@ -161,48 +162,70 @@
 	width: 300px;
 	opacity: 0.15;
 	position: absolute;
-	margin-top: -100px;
-	margin-left: 5vw;
+	margin: -100px 3rem 0 3rem;
 	z-index: -3;
 }
 
 /*=== SCROLLBAR NANO SUITS INVISIBLE===*/
+/* masquer les scrollbars mais conserver le scroll */
+.containerList,
+.containerList > ul {
+	-ms-overflow-style: none; /* IE/Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+/* WebKit (Chrome, Safari, Opera) */
 .containerList::-webkit-scrollbar,
-.statsEVEContent::-webkit-scrollbar {
-	width: 8px; /* largeur de l’ascenseur */
-	background: none; /* couleur du fond */
-	border-radius: 4px;
-}
-
-.containerList::-webkit-scrollbar-thumb,
-.statsEVEContent::-webkit-scrollbar-thumb {
-	background: none; /* couleur du curseur */
-	border-radius: 4px;
-}
-
-.containerList::-webkit-scrollbar-thumb:hover,
-.statsEVEContent::-webkit-scrollbar-thumb:hover {
-	background: none; /* couleur au survol */
+.containerList > ul::-webkit-scrollbar {
+	display: none;
+	width: 0;
+	height: 0;
 }
 /*=== SCROLLBAR NANO SUITS INVISIBLE===*/
 
-@media screen and (max-width: 768px) {
-	.containerRepresentative,
-	#statsEVEContainer,
-	.containerSectionArsenal {
-		display: none !important;
-	}
-	/* == Le code au dessus est à supprimer une fois le travaille effectué == */
-
+@media screen and (min-width: 768px) and (max-width: 1200px) {
 	.containerList {
 		display: flex;
-		width: fit-content;
-		height: 70vh;
-		margin: 0rem 0rem 6rem 0;
-		overflow: scroll;
-		overflow-x: hidden;
+		flex-direction: column;
+		align-items: center;
+		width: 100vw;
+
+		& > ul {
+			width: 60vw;
+		}
 	}
+	.listLi_blue {
+		width: 60vw;
+		height: 8vh;
+	}
+
+	.ListLi_orange {
+		width: 60vw;
+		height: 8vh;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.containerList {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 21vw;
+		& > ul {
+			width: 21vw;
+		}
+	}
+	.titleSubSection_blue,
 	.titleSubSection_orange {
-		height: auto;
+		width: fit-content;
+	}
+	.listLi_blue {
+		width: 21vw;
+		height: 8vh;
+	}
+
+	.ListLi_orange {
+		width: 21vw;
+		height: 8vh;
 	}
 }

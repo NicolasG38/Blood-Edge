@@ -3,7 +3,7 @@
 }
 @media screen and (max-width: 768px) {
 	.ListBtnContainer {
-		display: flex;
+		display: none;
 		justify-content: start;
 		align-items: start;
 		width: 100%;

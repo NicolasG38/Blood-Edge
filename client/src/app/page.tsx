@@ -27,6 +27,7 @@ export default function Homepage() {
 				{openLogin && <Login setOpenLogin={setOpenLogin} />}
 				<Carrousel />
 				<LocationsBtn />
+
 				<SectionBtn className="section-btn-desktop" />
 				<SubSection className="subsection-btn-desktop" />
 			</main>

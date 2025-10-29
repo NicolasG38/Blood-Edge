@@ -1,0 +1,90 @@
+#containerExospineFilter {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100vh;
+	margin: 4rem 0;
+}
+.filter {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	gap: 1rem;
+}
+.filter-title {
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 1.5rem;
+	color: var(--black);
+	margin: 0;
+}
+.bar-on {
+	background: var(--radial-orange);
+	box-shadow: 0 0 4px var(--orange);
+	width: 40px;
+	height: 5px;
+	border: none;
+	cursor: pointer;
+}
+
+.bar-off {
+	background: var(--radial-gray);
+	box-shadow: 0 0 4px var(--gray);
+	width: 40px;
+	height: 5px;
+	border: none;
+	cursor: pointer;
+}
+
+.select-filter {
+	background: var(--radial-dark);
+
+	color: var(--black);
+	border: 1px solid var(--orange);
+	border-radius: 16px;
+	padding: 0.5rem;
+	font-family: "QuanRounded-Regular", sans-serif;
+	font-size: 1rem;
+}
+.select-filter option {
+	background: var(--orange);
+	color: var(--orange);
+	font-family: "QuanRounded-SemiLight", sans-serif;
+	font-size: 1rem;
+}
+
+#apply-filter {
+	background-color: transparent;
+
+	color: var(--black);
+	border: 1px solid var(--orange);
+	border-radius: 24px;
+	padding: 0.5rem 1rem;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 1rem;
+	cursor: pointer;
+}
+#reset-filter {
+	background-color: transparent;
+	color: var(--black);
+	border: 1px solid var(--gray);
+	border-radius: 24px;
+	padding: 0.5rem 1rem;
+	font-family: "QuanRounded-Bold", sans-serif;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+	#containerExospineFilter {
+		flex-direction: column;
+		width: 90%;
+		margin: 2rem auto;
+	}
+	.filter {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.filter-title {
+		font-size: 1.2rem;
+	}
+}
