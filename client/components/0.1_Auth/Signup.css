@@ -101,6 +101,7 @@
 }
 /* ===== */
 #signupErrorContainer {
+	margin-top: 0.5rem;
 	margin-left: 10rem;
 }
 #signupErrorIconContainer {
@@ -197,16 +198,52 @@
 
 .signupLabel {
 	font-family: "Quan-Regular", sans-serif;
-	font-size: 1rem;
+	font-size: 1.2rem;
 	color: var(--black);
-	margin-left: 2.5rem;
+	margin-left: 1.5rem;
 }
+
+.signupWithContainer {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto 1rem auto;
+	width: 89%;
+	height: 85px;
+}
+
 .signupInput {
 	width: 355px;
 	height: 50px;
-	margin: 0 auto 1rem auto;
+	margin: 0 auto;
 	border-radius: 35px;
 }
+
+.signupInput.error {
+	border: 2px solid var(--redLight);
+	box-shadow: 0 0 5px var(--redLight);
+	animation: shake 0.5s ease-in-out;
+}
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	25%,
+	75% {
+		transform: translateX(-5px);
+	}
+	50% {
+		transform: translateX(5px);
+	}
+}
+
+.fieldError {
+	font-family: "Quan-Bold", sans-serif;
+	font-size: 0.9rem;
+	color: var(--redLight);
+	margin: 0.25rem 2.5rem 0 1.5rem;
+}
+
 .loginAndsignUpFunctionnal {
 	display: flex;
 	justify-content: center;
@@ -263,13 +300,7 @@
 	margin: 1rem 0;
 	text-align: center;
 }
-#signupLink_2 {
-	color: var(--black);
-	font-family: "QuanRounded-Regular", sans-serif;
-	font-size: 1rem;
-	text-decoration: underline;
-	cursor: pointer;
-}
+
 #signupPasswordHint {
 	display: flex;
 	flex-direction: column;
@@ -308,12 +339,29 @@
 	align-items: center;
 	width: 100%;
 	height: 2rem;
-	gap: 1rem;
 }
+
+.signupWithContainer.terms {
+	height: 60px;
+	margin-top: .6rem;
+	margin-bottom: 0.5rem;
+}
+
+#err-terms {
+	margin: -0.5rem 0 0 1.5rem;
+}
+
 #signupLink {
 	color: var(--black);
 	font-family: "QuanRounded-Regular", sans-serif;
-	font-size: 1rem;
+	font-size: 1.2rem;
+}
+#signupLink_2 {
+	color: var(--black);
+	font-family: "QuanRounded-Regular", sans-serif;
+	font-size: 1.2rem;
+	text-decoration: underline;
+	cursor: pointer;
 }
 #signupLabelCheckbox {
 	display: flex;
