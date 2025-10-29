@@ -1,0 +1,70 @@
+# This workflow will build a docker container, publish and deploy it to Tencent Kubernetes Engine (TKE) when there is a push to the "main" branch.
+#
+# To configure this workflow:
+#
+# 1. Ensure that your repository contains the necessary configuration for your Tencent Kubernetes Engine cluster,
+#    including deployment.yml, kustomization.yml, service.yml, etc.
+#
+# 2. Set up secrets in your workspace:
+#    - TENCENT_CLOUD_SECRET_ID with Tencent Cloud secret id
+#    - TENCENT_CLOUD_SECRET_KEY with Tencent Cloud secret key
+#    - TENCENT_CLOUD_ACCOUNT_ID with Tencent Cloud account id
+#    - TKE_REGISTRY_PASSWORD with TKE registry password
+#
+# 3. Change the values for the TKE_IMAGE_URL, TKE_REGION, TKE_CLUSTER_ID and DEPLOYMENT_NAME environment variables (below).
+
+
+name: staging
+
+on:
+  push:
+    branches: [ "staging" ]
+
+env:
+  IMAGE_SERVER: ${{ secrets.REGISTRY }}/blood-edge-server:staging
+  IMAGE_CLIENT: ${{ secrets.REGISTRY }}/blood-edge-client:staging
+  NEXT_PUBLIC_API_URL: https://staging.example.com
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.REGISTRY }}
+          username: ${{ secrets.REG_USER }}
+          password: ${{ secrets.REG_PASSWORD }}
+
+      - name: Build/push server
+        uses: docker/build-push-action@v6
+        with:
+          context: ./server
+          file: ./server/Dockerfile
+          push: true
+          tags: ${{ env.IMAGE_SERVER }}
+
+      - name: Build/push client
+        uses: docker/build-push-action@v6
+        with:
+          context: ./client
+          file: ./client/Dockerfile
+          push: true
+          tags: ${{ env.IMAGE_CLIENT }}
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ env.NEXT_PUBLIC_API_URL }}
+
+      - name: Write kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${KUBE_CONFIG}" > $HOME/.kube/config
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+
+      - name: Deploy manifests
+        run: |
+          kubectl apply -f k8s/staging/
+          # ou: kubectl set image deploy/blood-edge-server server=${IMAGE_SERVER} --record
+          #     kubectl set image deploy/blood-edge-client client=${IMAGE_CLIENT} --record
