@@ -38,6 +38,9 @@ app.use(express.urlencoded({ extended: true }));
 // Statique OK (chemins relatifs seulement)
 app.use("/images", express.static("public/images"));
 app.use("/icons", express.static("public/icons"));
+// Compat: si la BDD stocke des chemins avec le préfixe /public/
+app.use("/public/images", express.static("public/images"));
+app.use("/public/icons", express.static("public/icons"));
 
 // Monte le router sur un chemin relatif (pas d’URL absolue)
 app.use("/", router);

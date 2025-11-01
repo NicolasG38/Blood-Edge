@@ -56,6 +56,74 @@
 	}
 }
 
+/* ...existing code... */
+
+.search-bar-wrapper {
+	position: relative; /* conteneur pour position absolute du dropdown */
+}
+
+.search-input-row {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+/* dropdown placé sous la barre, largeur identique, box shadow, scroll si besoin */
+.search-results {
+	position: absolute;
+	top: calc(100% + 1px); /* juste sous la barre */
+	left: 20px;
+	right: 0;
+	z-index: 1000;
+	border: 1px solid var(--denim);
+	border-radius: 0 0 6px 6px;
+	max-height: 320px;
+	max-width: 360px;
+	overflow: auto;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+	padding: 6px 0;
+	font-family: "QuanRounded-Regular", sans-serif;
+	font-size: 1.2rem;
+	background-color: var(--white);
+	opacity: 0.9;
+}
+
+/* items */
+.search-hit {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	padding: 8px 12px;
+	cursor: pointer;
+	color: var(--denim);
+}
+.search-hit.active {
+	background: rgba(0, 0, 0, 0.04);
+}
+
+/* placeholder for icon */
+.search-hit-icon-placeholder {
+	width: 28px;
+	height: 28px;
+	display: inline-block;
+	background: rgba(0, 0, 0, 0.03);
+	border-radius: 4px;
+}
+
+/* small loading/empty styles */
+.search-loading,
+.search-empty {
+	padding: 8px 12px;
+	color: var(--denim);
+}
+
+/* ensure button/input z-index so dropdown doesn't overlap input if needed */
+.search-bar-wrapper input,
+.search-bar-wrapper button {
+	position: relative;
+	z-index: 2;
+}
+
 @media screen and (max-width: 768px) {
 	#search-bar-main {
 		display: none;
