@@ -1,6 +1,6 @@
 "use client";
 import "./Carrousel.css";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 

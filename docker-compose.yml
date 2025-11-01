@@ -1,0 +1,52 @@
+services:
+  db:
+    image: mysql:8.0
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-bloodedge}
+      MYSQL_USER: ${DB_USER:-bloodedge}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-bloodedge}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./server/database/database.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  server:
+    build: ./server
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    environment:
+      # Override DB host/port to the service name in compose
+      DB_HOST: db
+      DB_PORT: 3306
+      PORT: 3310
+      CLIENT_URL: http://localhost:3000
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3311:3310"
+
+  client:
+    build:
+      context: ./client
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:3311
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3311
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+
+volumes:
+  db_data:

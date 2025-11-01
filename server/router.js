@@ -1,6 +1,7 @@
 import express from "express";
 
 import exospineActions from "./action/exospineActions.js";
+import searchActions from "./action/searchActions.js";
 import favoriteController from "./controller/favoriteController.js";
 import gearsActions from "./action/gearsActions.js";
 import locationsActions from "./action/locationsActions.js";
@@ -28,6 +29,9 @@ router.use(express.urlencoded({ extended: true }));
 
 // Healthcheck
 router.get("/health", (req, res) => res.json({ status: "ok" }));
+
+// Search
+router.get("/api/search", searchActions.search);
 
 // Stats EVE
 router.get("/api/stats-eve", StatsEVEActions.browse);

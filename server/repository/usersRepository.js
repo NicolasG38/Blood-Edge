@@ -1,4 +1,3 @@
-import { s } from "motion/react-client";
 import databaseClient from "../database/client.js";
 
 async function findByPseudo(pseudo) {
@@ -21,6 +20,21 @@ async function findByPseudo(pseudo) {
 	};
 }
 
+async function searchByQuery(q, limit = 10) {
+	const like = `%${String(q ?? "").toLowerCase()}%`;
+	const max = Number(limit) || 10;
+	const [rows] = await databaseClient.query(
+		`SELECT Users_id, Users_pseudo, Users_email
+		 FROM Users
+		 WHERE LOWER(Users_pseudo) LIKE ? OR LOWER(Users_email) LIKE ?
+		 ORDER BY Users_pseudo
+		 LIMIT ?`,
+		[like, like, max],
+	);
+	return rows;
+}
+
 export default {
 	findByPseudo,
+	searchByQuery,
 };
